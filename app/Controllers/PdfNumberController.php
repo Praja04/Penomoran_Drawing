@@ -73,14 +73,12 @@ class PdfNumberController extends BaseController
         // Validasi input dan generasi nomor berdasarkan logika yang diberikan
         $nama_file = $this->request->getPost('nama_file');
         $nama_penulis = $this->request->getPost('nama_penulis');
-        // $group1 = $this->request->getPost('group1');
         $group2 = $this->request->getPost('group2');
         $group3 = $this->request->getPost('group3');
         $type = $this->request->getPost('proses_produksi');
         $no_mesin = $this->request->getPost('no_mesin');
         $subProses = $this->request->getPost('sub_proses');
         $typeSub = $this->request->getPost('type_sub');
-        // $group1String = $this->request->getPost('group1-string');
         $group2String = $this->request->getPost('group2-string');
         $group3String = $this->request->getPost('group3-string');
         $no_mesinString = $this->request->getPost('no_mesin-string');
@@ -91,7 +89,7 @@ class PdfNumberController extends BaseController
         if (is_array($no_mesin)) {
             $no_mesin = implode('', $no_mesin); // Gabungkan elemen array menjadi string
         } elseif (is_null($no_mesin)) {
-            $no_mesin = ''; // Atau atur ke nilai default yang sesuai
+            $no_mesin = ''; // Atur ke nilai default yang sesuai
         }
 
         if (is_array($no_mesinString)) {
@@ -103,41 +101,44 @@ class PdfNumberController extends BaseController
         $no_mesin = str_pad($no_mesin, 3, '0', STR_PAD_LEFT);
         $no_mesinString = str_pad($no_mesinString, 3, '0', STR_PAD_LEFT);
         // Buat string nomor PDF berdasarkan pilihan pengguna
-        $number = "$group2$group3/$subProses/$typeSub/$no_mesin";
-        $String = "$group2String-$group3String/$subProsesString/$typeSubString/$no_mesinString";
+        $baseNumber = "$group2$group3/$subProses/$typeSub/$no_mesin";
+        $baseString = "$group2String-$group3String/$subProsesString/$typeSubString/$no_mesinString";
         $pdfnumber = '';
         $pdfString = '';
 
         // Cari nomor yang tidak ada di tabel
-        for ($i = 0; $i < 100; $i++) {
-            // $pdfnumber = $number . '/' . str_pad($i, 2, '0', STR_PAD_LEFT);
-            // $pdfString = $String . '/' . str_pad($i, 2, '0', STR_PAD_LEFT);
-            $pdfnumber = $number ;
-            $pdfString = $String ;
-            // Cek apakah nomor sudah ada di tabel
-            if (!$this->pdfNumberModel->checkNumberExist($pdfnumber)) {
-                // Jika nomor tidak ada, simpan nomor tersebut di tabel
-                $dataNumber = [
-                    'number' => $pdfnumber,
-                    'pdf_number_string' => $pdfString,
-                    'nama_file' => $nama_file,
-                    'proses_produksi' => $type,
-                    'nama_penulis' => $nama,
-                    'verifikasi_admin'=>0
-                ];
-                $this->pdfNumberModel->insert($dataNumber);
-           
+        $numberFound = false;
+        for ($uniqueNum = 0; $uniqueNum < 100; $uniqueNum++) {
+            $uniqueNumPadded = str_pad($uniqueNum, 2, '0', STR_PAD_LEFT);
+            $number = "$group2$group3/$subProses/$typeSub/$uniqueNumPadded/$no_mesin";
+            $String = "$group2String-$group3String/$subProsesString/$typeSubString/$uniqueNumPadded/$no_mesinString";
+
+            // Periksa apakah nomor ini sudah ada di tabel
+            if (!$this->pdfNumberModel->checkNumberExist($number)) {
+                $pdfnumber = $number;
+                $pdfString = $String;
+                $numberFound = true;
                 break;
             }
-
-            // Jika kita telah mencoba semua kombinasi dan tidak menemukan nomor yang tersedia
-            if ($i == 99) {
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'Tidak dapat menghasilkan nomor yang unik. Coba lagi.'
-                ]);
-            }
         }
+
+        if (!$numberFound) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Tidak dapat menghasilkan nomor yang unik. Coba lagi.'
+            ]);
+        }
+
+        // Simpan nomor di tabel
+        $dataNumber = [
+            'number' => $pdfnumber,
+            'pdf_number_string' => $pdfString,
+            'nama_file' => $nama_file,
+            'proses_produksi' => $type,
+            'nama_penulis' => $nama,
+            'verifikasi_admin' => 0
+        ];
+        $this->pdfNumberModel->insert($dataNumber);
 
         // Simpan nomor di session untuk nanti digunakan saat upload PDF
         session()->set('generated_number', $pdfnumber);
@@ -149,6 +150,7 @@ class PdfNumberController extends BaseController
             'generated_number' => $pdfnumber
         ]);
     }
+
 
 
     public function uploadForm($id)
