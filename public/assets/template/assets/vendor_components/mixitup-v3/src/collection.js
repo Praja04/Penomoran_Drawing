@@ -15,31 +15,30 @@
  * @param       {mixitup.Mixer[]}   instances
  */
 
-mixitup.Collection = function (instances) {
-  var instance = null,
-    i = -1;
+mixitup.Collection = function(instances) {
+    var instance    = null,
+        i           = -1;
 
-  this.callActions("beforeConstruct");
+    this.callActions('beforeConstruct');
 
-  for (i = 0; (instance = instances[i]); i++) {
-    this[i] = instance;
-  }
+    for (i = 0; instance = instances[i]; i++) {
+        this[i] = instance;
+    }
 
-  this.length = instances.length;
+    this.length = instances.length;
 
-  this.callActions("afterConstruct");
+    this.callActions('afterConstruct');
 
-  h.freeze(this);
+    h.freeze(this);
 };
 
 mixitup.BaseStatic.call(mixitup.Collection);
 
 mixitup.Collection.prototype = Object.create(mixitup.Base.prototype);
 
-h.extend(
-  mixitup.Collection.prototype,
-  /** @lends mixitup.Collection */
-  {
+h.extend(mixitup.Collection.prototype,
+/** @lends mixitup.Collection */
+{
     constructor: mixitup.Collection,
 
     /**
@@ -67,26 +66,21 @@ h.extend(
      * @return      {Promise<Array<mixitup.State>>}
      */
 
-    mixitup: function (methodName) {
-      var self = this,
-        instance = null,
-        args = Array.prototype.slice.call(arguments),
-        tasks = [],
-        i = -1;
+    mixitup: function(methodName) {
+        var self        = this,
+            instance    = null,
+            args        = Array.prototype.slice.call(arguments),
+            tasks       = [],
+            i           = -1;
 
-      this.callActions("beforeMixitup");
+        this.callActions('beforeMixitup');
 
-      args.shift();
+        args.shift();
 
-      for (i = 0; (instance = self[i]); i++) {
-        tasks.push(instance[methodName].apply(instance, args));
-      }
+        for (i = 0; instance = self[i]; i++) {
+            tasks.push(instance[methodName].apply(instance, args));
+        }
 
-      return self.callFilters(
-        "promiseMixitup",
-        h.all(tasks, mixitup.libraries),
-        arguments,
-      );
-    },
-  },
-);
+        return self.callFilters('promiseMixitup', h.all(tasks, mixitup.libraries), arguments);
+    }
+});

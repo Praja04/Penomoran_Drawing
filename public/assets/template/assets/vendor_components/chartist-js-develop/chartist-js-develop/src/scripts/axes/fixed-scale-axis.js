@@ -19,53 +19,41 @@
  */
 /* global Chartist */
 (function (globalRoot, Chartist) {
-  "use strict";
+  'use strict';
 
   var window = globalRoot.window;
   var document = globalRoot.document;
 
   function FixedScaleAxis(axisUnit, data, chartRect, options) {
-    var highLow =
-      options.highLow || Chartist.getHighLow(data, options, axisUnit.pos);
+    var highLow = options.highLow || Chartist.getHighLow(data, options, axisUnit.pos);
     this.divisor = options.divisor || 1;
-    this.ticks =
-      options.ticks ||
-      Chartist.times(this.divisor).map(
-        function (value, index) {
-          return (
-            highLow.low + ((highLow.high - highLow.low) / this.divisor) * index
-          );
-        }.bind(this),
-      );
-    this.ticks.sort(function (a, b) {
+    this.ticks = options.ticks || Chartist.times(this.divisor).map(function(value, index) {
+      return highLow.low + (highLow.high - highLow.low) / this.divisor * index;
+    }.bind(this));
+    this.ticks.sort(function(a, b) {
       return a - b;
     });
     this.range = {
       min: highLow.low,
-      max: highLow.high,
+      max: highLow.high
     };
 
-    Chartist.FixedScaleAxis.super.constructor.call(
-      this,
+    Chartist.FixedScaleAxis.super.constructor.call(this,
       axisUnit,
       chartRect,
       this.ticks,
-      options,
-    );
+      options);
 
     this.stepLength = this.axisLength / this.divisor;
   }
 
   function projectValue(value) {
-    return (
-      (this.axisLength *
-        (+Chartist.getMultiValue(value, this.units.pos) - this.range.min)) /
-      (this.range.max - this.range.min)
-    );
+    return this.axisLength * (+Chartist.getMultiValue(value, this.units.pos) - this.range.min) / (this.range.max - this.range.min);
   }
 
   Chartist.FixedScaleAxis = Chartist.Axis.extend({
     constructor: FixedScaleAxis,
-    projectValue: projectValue,
+    projectValue: projectValue
   });
-})(this, Chartist);
+
+}(this, Chartist));

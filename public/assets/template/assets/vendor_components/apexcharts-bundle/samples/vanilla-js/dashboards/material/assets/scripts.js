@@ -1,178 +1,170 @@
 window.Apex = {
   dataLabels: {
-    enabled: false,
-  },
+    enabled: false
+  }
 };
 
 var spark1 = {
   chart: {
-    id: "sparkline1",
-    type: "line",
+    id: 'sparkline1',
+    type: 'line',
     height: 140,
     sparkline: {
-      enabled: true,
+      enabled: true
     },
-    group: "sparklines",
+    group: 'sparklines'
   },
-  series: [
-    {
-      name: "purple",
-      data: [25, 66, 41, 59, 25, 44, 12, 36, 9, 21],
-    },
-  ],
+  series: [{
+    name: 'purple',
+    data: [25, 66, 41, 59, 25, 44, 12, 36, 9, 21]
+  }],
   stroke: {
-    curve: "smooth",
+    curve: 'smooth'
   },
   markers: {
-    size: 0,
+    size: 0
   },
   tooltip: {
     fixed: {
       enabled: true,
-      position: "right",
+      position: 'right'
     },
     x: {
-      show: false,
-    },
+      show: false
+    }
   },
   title: {
-    text: "439",
+    text: '439',
     style: {
-      fontSize: "26px",
-    },
+      fontSize: '26px'
+    }
   },
-  colors: ["#734CEA"],
-};
+  colors: ['#734CEA']
+}
 
 var spark2 = {
   chart: {
-    id: "sparkline2",
-    type: "line",
+    id: 'sparkline2',
+    type: 'line',
     height: 140,
     sparkline: {
-      enabled: true,
+      enabled: true
     },
-    group: "sparklines",
+    group: 'sparklines'
   },
-  series: [
-    {
-      name: "green",
-      data: [12, 14, 2, 47, 32, 44, 14, 55, 41, 69],
-    },
-  ],
+  series: [{
+    name: 'green',
+    data: [12, 14, 2, 47, 32, 44, 14, 55, 41, 69]
+  }],
   stroke: {
-    curve: "smooth",
+    curve: 'smooth'
   },
   markers: {
-    size: 0,
+    size: 0
   },
   tooltip: {
     fixed: {
       enabled: true,
-      position: "right",
+      position: 'right'
     },
     x: {
-      show: false,
-    },
+      show: false
+    }
   },
   title: {
-    text: "387",
+    text: '387',
     style: {
-      fontSize: "26px",
-    },
+      fontSize: '26px'
+    }
   },
-  colors: ["#34bfa3"],
-};
+  colors: ['#34bfa3']
+}
 
 var spark3 = {
   chart: {
-    id: "sparkline3",
-    type: "line",
+    id: 'sparkline3',
+    type: 'line',
     height: 140,
     sparkline: {
-      enabled: true,
+      enabled: true
     },
-    group: "sparklines",
+    group: 'sparklines'
   },
-  series: [
-    {
-      name: "red",
-      data: [47, 45, 74, 32, 56, 31, 44, 33, 45, 19],
-    },
-  ],
+  series: [{
+    name: 'red',
+    data: [47, 45, 74, 32, 56, 31, 44, 33, 45, 19]
+  }],
   stroke: {
-    curve: "smooth",
+    curve: 'smooth'
   },
   markers: {
-    size: 0,
+    size: 0
   },
   tooltip: {
     fixed: {
       enabled: true,
-      position: "right",
+      position: 'right'
     },
     x: {
-      show: false,
-    },
+      show: false
+    }
   },
-  colors: ["#f4516c"],
+  colors: ['#f4516c'],
   title: {
-    text: "577",
+    text: '577',
     style: {
-      fontSize: "26px",
-    },
+      fontSize: '26px'
+    }
   },
   xaxis: {
     crosshairs: {
-      width: 1,
+      width: 1
     },
-  },
-};
+  }
+}
 
 var spark4 = {
   chart: {
-    id: "sparkline4",
-    type: "line",
+    id: 'sparkline4',
+    type: 'line',
     height: 140,
     sparkline: {
-      enabled: true,
+      enabled: true
     },
-    group: "sparklines",
+    group: 'sparklines'
   },
-  series: [
-    {
-      name: "teal",
-      data: [15, 75, 47, 65, 14, 32, 19, 54, 44, 61],
-    },
-  ],
+  series: [{
+    name: 'teal',
+    data: [15, 75, 47, 65, 14, 32, 19, 54, 44, 61]
+  }],
   stroke: {
-    curve: "smooth",
+    curve: 'smooth'
   },
   markers: {
-    size: 0,
+    size: 0
   },
   tooltip: {
     fixed: {
       enabled: true,
-      position: "right",
+      position: 'right'
     },
     x: {
-      show: false,
-    },
+      show: false
+    }
   },
-  colors: ["#00c5dc"],
+  colors: ['#00c5dc'],
   title: {
-    text: "615",
+    text: '615',
     style: {
-      fontSize: "26px",
-    },
+      fontSize: '26px'
+    }
   },
   xaxis: {
     crosshairs: {
-      width: 1,
+      width: 1
     },
-  },
-};
+  }
+}
 
 new ApexCharts(document.querySelector("#spark1"), spark1).render();
 new ApexCharts(document.querySelector("#spark2"), spark2).render();
@@ -181,174 +173,159 @@ new ApexCharts(document.querySelector("#spark4"), spark4).render();
 
 var optionsBar = {
   chart: {
-    type: "bar",
+    type: 'bar',
     height: 250,
-    width: "100%",
+    width: '100%',
     stacked: true,
-    foreColor: "#999",
+    foreColor: '#999',
   },
   plotOptions: {
     bar: {
       dataLabels: {
-        enabled: false,
+        enabled: false
       },
-      columnWidth: "75%",
-      endingShape: "rounded",
-    },
+      columnWidth: '75%',
+      endingShape: 'rounded'
+    }
   },
-  colors: ["#00C5A4", "#F3F2FC"],
-  series: [
-    {
-      name: "Sessions",
-      data: [
-        20, 16, 24, 28, 26, 22, 15, 5, 14, 16, 22, 29, 24, 19, 15, 10, 11, 15,
-        19, 23,
-      ],
-    },
-    {
-      name: "Views",
-      data: [
-        20, 16, 24, 28, 26, 22, 15, 5, 14, 16, 22, 29, 24, 19, 15, 10, 11, 15,
-        19, 23,
-      ],
-    },
-  ],
-  labels: [
-    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 1, 2, 3, 4,
-  ],
+  colors: ["#00C5A4", '#F3F2FC'],
+  series: [{
+    name: "Sessions",
+    data: [20, 16, 24, 28, 26, 22, 15, 5, 14, 16, 22, 29, 24, 19, 15, 10, 11, 15, 19, 23],
+  }, {
+    name: "Views",
+    data: [20, 16, 24, 28, 26, 22, 15, 5, 14, 16, 22, 29, 24, 19, 15, 10, 11, 15, 19, 23],
+  }],
+  labels: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 1, 2, 3, 4],
   xaxis: {
     axisBorder: {
-      show: false,
+      show: false
     },
     axisTicks: {
-      show: false,
+      show: false
     },
     crosshairs: {
-      show: false,
+      show: false
     },
     labels: {
       show: false,
       style: {
-        fontSize: "14px",
-      },
+        fontSize: '14px'
+      }
     },
   },
   grid: {
     xaxis: {
       lines: {
-        show: false,
+        show: false
       },
     },
     yaxis: {
       lines: {
-        show: false,
+        show: false
       },
-    },
+    }
   },
   yaxis: {
     axisBorder: {
-      show: false,
+      show: false
     },
     labels: {
-      show: false,
+      show: false
     },
   },
   legend: {
     floating: true,
-    position: "top",
-    horizontalAlign: "right",
-    offsetY: -36,
+    position: 'top',
+    horizontalAlign: 'right',
+    offsetY: -36
   },
   title: {
-    text: "Web Statistics",
-    align: "left",
+    text: 'Web Statistics',
+    align: 'left',
   },
   subtitle: {
-    text: "Sessions and Views",
+    text: 'Sessions and Views'
   },
   tooltip: {
-    shared: true,
-  },
-};
+    shared: true
+  }
 
-var chartBar = new ApexCharts(document.querySelector("#bar"), optionsBar);
+}
+
+var chartBar = new ApexCharts(document.querySelector('#bar'), optionsBar);
 chartBar.render();
 
 var optionsCircle1 = {
   chart: {
-    type: "radialBar",
+    type: 'radialBar',
     height: 266,
     zoom: {
-      enabled: false,
+      enabled: false
     },
-    offsetY: 20,
+    offsetY: 20
   },
-  colors: ["#E91E63"],
+  colors: ['#E91E63'],
   plotOptions: {
     radialBar: {
       dataLabels: {
         name: {
-          show: false,
+          show: false
         },
         value: {
-          offsetY: 0,
-        },
-      },
-    },
+          offsetY: 0
+        }
+      }
+    }
   },
   series: [65],
   theme: {
     monochrome: {
-      enabled: false,
-    },
+      enabled: false
+    }
   },
   legend: {
-    show: false,
+    show: false
   },
   title: {
-    text: "Bounce Rate",
-    align: "left",
-  },
-};
+    text: 'Bounce Rate',
+    align: 'left'
+  }
+}
 
-var chartCircle1 = new ApexCharts(
-  document.querySelector("#radialBar1"),
-  optionsCircle1,
-);
+var chartCircle1 = new ApexCharts(document.querySelector('#radialBar1'), optionsCircle1);
 chartCircle1.render();
+
 
 var optionsDonutTop = {
   chart: {
     height: 265,
-    type: "donut",
-    offsetY: 20,
+    type: 'donut',
+    offsetY: 20
   },
   plotOptions: {
     pie: {
       customScale: 0.86,
       donut: {
-        size: "72%",
+        size: '72%',
       },
       dataLabels: {
-        enabled: false,
-      },
-    },
+        enabled: false
+      }
+    }
   },
-  colors: ["#775DD0", "#00C8E1", "#FFB900"],
+  colors: ['#775DD0', '#00C8E1', '#FFB900'],
   title: {
-    text: "Visitors Source",
+    text: 'Visitors Source'
   },
   series: [2, 7, 5],
-  labels: ["Social Media", "Blog", "External"],
+  labels: ['Social Media', 'Blog', 'External'],
   legend: {
-    show: false,
-  },
-};
+    show: false
+  }
+}
 
-var chartDonut2 = new ApexCharts(
-  document.querySelector("#donutTop"),
-  optionsDonutTop,
-);
+var chartDonut2 = new ApexCharts(document.querySelector('#donutTop'), optionsDonutTop);
 chartDonut2.render().then(function () {
   // window.setInterval(function () {
   //   chartDonut2.updateSeries([getRandom(), getRandom(), getRandom()])
@@ -358,60 +335,59 @@ chartDonut2.render().then(function () {
 var optionsArea = {
   chart: {
     height: 421,
-    type: "area",
-    background: "#fff",
+    type: 'area',
+    background: '#fff',
     stacked: true,
     offsetY: 39,
     zoom: {
-      enabled: false,
-    },
+      enabled: false
+    }
   },
   plotOptions: {
     line: {
       dataLabels: {
-        enabled: false,
-      },
-    },
+        enabled: false
+      }
+    }
   },
   stroke: {
-    curve: "straight",
+    curve: 'straight'
   },
-  colors: ["#3F51B5", "#2196F3"],
-  series: [
-    {
+  colors: ["#3F51B5", '#2196F3'],
+  series: [{
       name: "Adwords Views",
-      data: [15, 26, 20, 33, 27, 43, 17, 26, 19],
+      data: [15, 26, 20, 33, 27, 43, 17, 26, 19]
     },
     {
       name: "Adwords Clicks",
-      data: [33, 21, 42, 19, 32, 25, 36, 29, 49],
-    },
+      data: [33, 21, 42, 19, 32, 25, 36, 29, 49]
+    }
   ],
   fill: {
-    type: "gradient",
+    type: 'gradient',
     gradient: {
       inverseColors: false,
-      shade: "light",
+      shade: 'light',
       type: "vertical",
       opacityFrom: 0.9,
       opacityTo: 0.6,
-      stops: [0, 100, 100, 100],
-    },
+      stops: [0, 100, 100, 100]
+    }
   },
   title: {
-    text: "Visitor Insights",
-    align: "left",
+    text: 'Visitor Insights',
+    align: 'left',
     offsetY: -5,
-    offsetX: 20,
+    offsetX: 20
   },
   subtitle: {
-    text: "Adwords Statistics",
+    text: 'Adwords Statistics',
     offsetY: 30,
-    offsetX: 20,
+    offsetX: 20
   },
   markers: {
     size: 0,
-    style: "hollow",
+    style: 'hollow',
     strokeWidth: 8,
     strokeColor: "#fff",
     strokeOpacity: 0.25,
@@ -420,86 +396,69 @@ var optionsArea = {
     show: false,
     padding: {
       left: 0,
-      right: 0,
-    },
+      right: 0
+    }
   },
   yaxis: {
-    show: false,
+    show: false
   },
-  labels: [
-    "01/15/2002",
-    "01/16/2002",
-    "01/17/2002",
-    "01/18/2002",
-    "01/19/2002",
-    "01/20/2002",
-    "01/21/2002",
-    "01/22/2002",
-    "01/23/2002",
-  ],
+  labels: ['01/15/2002', '01/16/2002', '01/17/2002', '01/18/2002', '01/19/2002', '01/20/2002', '01/21/2002', '01/22/2002', '01/23/2002'],
   xaxis: {
-    type: "datetime",
+    type: 'datetime',
     tooltip: {
-      enabled: false,
-    },
+      enabled: false
+    }
   },
   legend: {
     offsetY: -50,
-    position: "top",
-    horizontalAlign: "right",
-  },
-};
+    position: 'top',
+    horizontalAlign: 'right'
+  }
+}
 
-var chartArea = new ApexCharts(
-  document.querySelector("#area-adwords"),
-  optionsArea,
-);
+var chartArea = new ApexCharts(document.querySelector('#area-adwords'), optionsArea);
 chartArea.render();
 
 var optionsCircle4 = {
   chart: {
     height: 314,
-    type: "radialBar",
+    type: 'radialBar',
   },
-  colors: ["#775DD0", "#00C8E1", "#FFB900"],
-  labels: ["q4"],
+  colors: ['#775DD0', '#00C8E1', '#FFB900'],
+  labels: ['q4'],
   series: [71, 63, 77],
-  labels: ["June", "May", "April"],
+  labels: ['June', 'May', 'April'],
   theme: {
     monochrome: {
-      enabled: false,
-    },
+      enabled: false
+    }
   },
   plotOptions: {
     radialBar: {
-      offsetY: -30,
-    },
+      offsetY: -30
+    }
   },
   legend: {
     show: true,
-    position: "left",
+    position: 'left',
     containerMargin: {
-      right: 0,
-    },
+      right: 0
+    }
   },
   title: {
-    text: "Growth",
-  },
-};
+    text: 'Growth'
+  }
+}
 
-var chartCircle4 = new ApexCharts(
-  document.querySelector("#radialBarBottom"),
-  optionsCircle4,
-);
+var chartCircle4 = new ApexCharts(document.querySelector('#radialBarBottom'), optionsCircle4);
 chartCircle4.render();
 
 function generateData(baseval, count, yrange) {
   var i = 0;
   var series = [];
   while (i < count) {
-    var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
-    var y =
-      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+    var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;;
+    var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
     var z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
 
     series.push([x, y, z]);
@@ -513,102 +472,101 @@ function getRandom() {
   return Math.floor(Math.random() * (100 - 1 + 1)) + 1;
 }
 
+
 var options = {
   chart: {
     height: 294,
-    type: "bubble",
+    type: 'bubble',
     sparkline: {
-      enabled: true,
+      enabled: true
     },
   },
   plotOptions: {
     bubble: {
       dataLabels: {
-        enabled: false,
-      },
-    },
+        enabled: false
+      }
+    }
   },
   colors: ["#734CEA", "#34bfa3", "#f4516c", "#00c5dc"],
-  series: [
-    {
-      name: "Facebook",
-      data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
+  series: [{
+      name: 'Facebook',
+      data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
         min: 10,
-        max: 60,
-      }),
+        max: 60
+      })
     },
     {
-      name: "Twitter",
-      data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
+      name: 'Twitter',
+      data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
         min: 10,
-        max: 60,
-      }),
+        max: 60
+      })
     },
     {
-      name: "Youtube",
-      data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
+      name: 'Youtube',
+      data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
         min: 10,
-        max: 60,
-      }),
+        max: 60
+      })
     },
     {
-      name: "LinkedIn",
-      data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
+      name: 'LinkedIn',
+      data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
         min: 10,
-        max: 60,
-      }),
-    },
+        max: 60
+      })
+    }
   ],
   fill: {
     opacity: 0.8,
     gradient: {
-      enabled: false,
-    },
+      enabled: false
+    }
   },
   title: {
-    text: "Social Media Reach",
+    text: 'Social Media Reach'
   },
   xaxis: {
     tickAmount: 12,
-    type: "category",
+    type: 'category',
     min: -50,
-    max: 850,
+    max: 850
   },
   yaxis: {
-    max: 70,
-  },
-};
+    max: 70
+  }
+}
 
-var chart = new ApexCharts(document.querySelector("#bubbleChart"), options);
+var chart = new ApexCharts(
+  document.querySelector("#bubbleChart"),
+  options
+);
 
 // a small hack to extend height in website sample dashboard
 chart.render().then(function () {
   var ifr = document.querySelector("#wrapper");
   if (ifr.contentDocument) {
-    ifr.style.height = ifr.contentDocument.body.scrollHeight + 20 + "px";
+    ifr.style.height = ifr.contentDocument.body.scrollHeight + 20 +'px';
   }
 });
 
 /* fusionexport integrations START */
 (() => {
-  const btn = document.getElementById("fusionexport-btn");
-  btn.addEventListener("click", async function () {
-    const endPoint =
-      "https://www.fusioncharts.com/demos/dashboards/fusionexport-apexcharts/api/export-dashboard";
+  const btn = document.getElementById('fusionexport-btn')
+  btn.addEventListener('click', async function() {
+    const endPoint = 'https://www.fusioncharts.com/demos/dashboards/fusionexport-apexcharts/api/export-dashboard'
     const information = {
-      dashboardName: "material",
+      dashboardName: 'material'
     };
 
-    this.setAttribute("disabled", true);
+    this.setAttribute('disabled', true);
     const { data } = await axios.post(endPoint, information, {
-      responseType: "blob",
+      responseType: 'blob'
     });
-    await download(
-      data,
-      "apexCharts-material-dashboard.pdf",
-      "application/pdf",
-    );
-    this.removeAttribute("disabled");
+    await download(data, 'apexCharts-material-dashboard.pdf', 'application/pdf')
+    this.removeAttribute('disabled')
   });
-})();
+}
+)();
 /* fusionexport integrations END */

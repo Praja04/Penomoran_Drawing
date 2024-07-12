@@ -7,24 +7,26 @@
 [![Dependencies Status](https://david-dm.org/rendro/easy-pie-chart/dev-status.png)](https://david-dm.org/rendro/easy-pie-chart)
 [![Analytics](https://ga-beacon.appspot.com/UA-46840672-1/easy-pie-chart/readme)](https://github.com/igrigorik/ga-beacon)
 
-## Features
 
+
+## Features
 [![](https://github.com/rendro/easy-pie-chart/raw/master/demo/img/easy-pie-chart.png)](http://drbl.in/ezuc)
 
-- highly customizable
-- very easy to implement
-- resolution independent (retina optimized)
-- uses `requestAnimationFrame` for smooth animations on modern devices and
-- works in all modern browsers, even in IE7+ with [excanvas](https://code.google.com/p/explorercanvas/wiki/Instructions)
+* highly customizable
+* very easy to implement
+* resolution independent (retina optimized)
+* uses `requestAnimationFrame` for smooth animations on modern devices and
+* works in all modern browsers, even in IE7+ with [excanvas](https://code.google.com/p/explorercanvas/wiki/Instructions)
 
 #### framework support
 
-- Vanilla JS _(no dependencies)_ (~872 bytes)
-- jQuery plugin (~921 bytes)
-- Angular Module (~983 bytes)
+* Vanilla JS *(no dependencies)* (~872 bytes)
+* jQuery plugin (~921 bytes)
+* Angular Module (~983 bytes)
+
+
 
 ## Get started
-
 #### Installation
 
 You can also use [bower](http://bower.io) to install the component:
@@ -43,11 +45,11 @@ To use the easy pie chart plugin you need to load the current version of jQuery 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="/path/to/jquery.easy-pie-chart.js"></script>
 <script>
-  $(function () {
-    $(".chart").easyPieChart({
-      //your options goes here
+    $(function() {
+        $('.chart').easyPieChart({
+            //your options goes here
+        });
     });
-  });
 </script>
 ```
 
@@ -60,10 +62,10 @@ If you don't want to use jQuery, implement the Vanilla JS version without any de
 
 <script src="/path/to/easy-pie-chart.js"></script>
 <script>
-  var element = document.querySelector(".chart");
-  new EasyPieChart(element, {
-    // your options goes here
-  });
+    var element = document.querySelector('.chart');
+    new EasyPieChart(element, {
+        // your options goes here
+    });
 </script>
 ```
 
@@ -71,34 +73,32 @@ If you don't want to use jQuery, implement the Vanilla JS version without any de
 
 ```html
 <div ng-controller="chartCtrl">
-  <div easypiechart options="options" percent="percent"></div>
+    <div easypiechart options="options" percent="percent"></div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
 <script src="../dist/angular.easypiechart.min.js"></script>
 <script>
-  var app = angular.module("app", ["easypiechart"]);
-  app.controller("chartCtrl", [
-    "$scope",
-    function ($scope) {
-      $scope.percent = 65;
-      $scope.options = {
-        animate: {
-          duration: 0,
-          enabled: false,
-        },
-        barColor: "#2C3E50",
-        scaleColor: false,
-        lineWidth: 20,
-        lineCap: "circle",
-      };
-    },
-  ]);
+    var app = angular.module('app', ['easypiechart']);
+    app.controller('chartCtrl', ['$scope', function ($scope) {
+        $scope.percent = 65;
+        $scope.options = {
+            animate:{
+                duration:0,
+                enabled:false
+            },
+            barColor:'#2C3E50',
+            scaleColor:false,
+            lineWidth:20,
+            lineCap:'circle'
+        };
+    }]);
 </script>
 ```
 
-## Options
 
+
+## Options
 You can pass these options to the initialize function to set a custom look and feel for the plugin.
 
 <table>
@@ -159,8 +159,9 @@ You can pass these options to the initialize function to set a custom look and f
     </tr>
 </table>
 
-## Callbacks
 
+
+## Callbacks
 All callbacks will only be called if `animate` is not `false`.
 
 <table>
@@ -182,8 +183,9 @@ All callbacks will only be called if `animate` is not `false`.
     </tr>
 </table>
 
-## Plugin api
 
+
+## Plugin api
 #### jQuery
 
 ```javascript
@@ -218,14 +220,14 @@ chart.enableAnimation();
 
 ```javascript
 new EasyPieChart(element, {
-  barColor: function (percent) {
+  barColor: function(percent) {
     var ctx = this.renderer.getCtx();
     var canvas = this.renderer.getCanvas();
-    var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-    gradient.addColorStop(0, "#ffe57e");
-    gradient.addColorStop(1, "#de5900");
+    var gradient = ctx.createLinearGradient(0,0,canvas.width,0);
+        gradient.addColorStop(0, "#ffe57e");
+        gradient.addColorStop(1, "#de5900");
     return gradient;
-  },
+  }
 });
 ```
 
@@ -237,26 +239,30 @@ For a value binding you need to add the `percent` attribute and bind it to your 
 
 When using [RequireJS](http://requirejs.org) you can define your own name. Examples can be found in the `demo/requirejs.html`.
 
-## Browser Support
 
+
+## Browser Support
 Native support
 
-- Chrome
-- Safari
-- FireFox
-- Opera
-- Internet Explorer 9+
+* Chrome
+* Safari
+* FireFox
+* Opera
+* Internet Explorer 9+
 
 Support for Internet Explorer 7 and 8 with [excanvas](https://code.google.com/p/explorercanvas/wiki/Instructions) polyfill.
 
-## Test
 
+
+## Test
 To run the test just use the karma adapter of grunt: `grunt test`
 
-## Credits
 
+
+## Credits
 Thanks to [Rafal Bromirski](http://www.paranoida.com/) for designing [this dribble shot](http://drbl.in/ezuc) which inspired me building this plugin.
 
-## Copyright
 
+
+## Copyright
 Copyright (c) 2015 Robert Fleischmann, contributors. Released under the MIT, GPL licenses

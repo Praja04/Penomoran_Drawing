@@ -9,16 +9,16 @@
  * @since       3.0.0
  */
 
-mixitup.CommandDataset = function () {
-  mixitup.Base.call(this);
+mixitup.CommandDataset = function() {
+    mixitup.Base.call(this);
 
-  this.callActions("beforeConstruct");
+    this.callActions('beforeConstruct');
 
-  this.dataset = null;
+    this.dataset = null;
 
-  this.callActions("afterConstruct");
+    this.callActions('afterConstruct');
 
-  h.seal(this);
+    h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.CommandDataset);

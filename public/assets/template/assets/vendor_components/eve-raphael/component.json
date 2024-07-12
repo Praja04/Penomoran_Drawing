@@ -7,5 +7,7 @@
   "dependencies": {},
   "development": {},
   "main": "eve.js",
-  "scripts": ["eve.js"]
+  "scripts": [
+    "eve.js"
+  ]
 }

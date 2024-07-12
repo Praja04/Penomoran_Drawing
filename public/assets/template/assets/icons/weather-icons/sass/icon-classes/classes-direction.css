@@ -64,5 +64,4 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: 'Error: Undefined variable: "$direction-up".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-direction.scss\A \A 1: .wi-direction-up:before {content: $direction-up;}\A 2: .wi-direction-up-right:before {content: $direction-up-right;}\A 3: .wi-direction-right:before {content: $direction-right;}\A 4: .wi-direction-down-right:before {content: $direction-down-right;}\A 5: .wi-direction-down:before {content: $direction-down;}\A 6: .wi-direction-down-left:before {content: $direction-down-left;}';
-}
+  content: "Error: Undefined variable: \"$direction-up\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-direction.scss\A \A 1: .wi-direction-up:before {content: $direction-up;}\A 2: .wi-direction-up-right:before {content: $direction-up-right;}\A 3: .wi-direction-right:before {content: $direction-right;}\A 4: .wi-direction-down-right:before {content: $direction-down-right;}\A 5: .wi-direction-down:before {content: $direction-down;}\A 6: .wi-direction-down-left:before {content: $direction-down-left;}"; }

@@ -11,13 +11,13 @@ With MixItUp 3, we can now interact with MixItUp instances ('mixers') directly w
 ```js
 // MixItUp 2
 
-$(".container").mixItUp();
+$('.container').mixItUp();
 ```
 
 ```js
 // MixItUp 3
 
-var mixer = mixitup(".container");
+var mixer = mixitup('.container');
 ```
 
 ###### Example: Passing the configuration object
@@ -25,20 +25,20 @@ var mixer = mixitup(".container");
 ```js
 // MixItUp 2
 
-$(".container").mixItUp({
-  selectors: {
-    target: ".item",
-  },
+$('.container').mixItUp({
+    selectors: {
+        target: '.item'
+    }
 });
 ```
 
 ```js
 // MixItUp 3
 
-var mixer = mixitup(".container", {
-  selectors: {
-    target: ".item",
-  },
+var mixer = mixitup('.container', {
+    selectors: {
+        target: '.item'
+    }
 });
 ```
 
@@ -46,27 +46,26 @@ Note that the `mixitup()` factory function is now all lowercase, as apposed to t
 
 MixItUp 3 adds many new configuration options, and renames or removes some of those from MixItUp 2.
 
-_Further reading: [Configuration Object](/docs/mixitup.Config.md)_
+*Further reading: [Configuration Object](/docs/mixitup.Config.md)*
 
 ## Method Invocation
 
 ```js
 // MixItUp 2
 
-$(".container").mixItUp("filter", ".category-a");
+$('.container').mixItUp('filter', '.category-a');
 ```
-
 ```js
 // MixItUp 3
 
-mixer.filter(".category-a");
+mixer.filter('.category-a');
 ```
 
 As you may have noticed, mixers in MixItUp 3 have many of the same API methods as were available in MixItUp 2, but are called using standard method invocation syntax, with arguments passed in the standard form rather than the jQuery-UI-like syntax of MixItUp 2.
 
 MixItUp 3 adds many new API methods, and renames or removes some of those from MixItUp 2.
 
-_Further reading: [Mixer API Methods](/docs/mixitup.Mixer.md)_
+*Further reading: [Mixer API Methods](/docs/mixitup.Mixer.md)*
 
 ## Promises and Callbacks
 
@@ -77,21 +76,22 @@ With MixItUp 3, all asynchronous methods return a promise resolving with a state
 ```js
 // MixItUp 2 (callbacks)
 
-$(".container").mixItUp("filter", ".category-a", function (state) {
-  // Operation finished, the new state is:
+$('.container').mixItUp('filter', '.category-a', function(state) {
+    // Operation finished, the new state is:
 
-  console.log(state);
+    console.log(state);
 });
 ```
 
 ```js
 // MixItUp 3 (promises)
 
-mixer.filter(".category-a").then(function (state) {
-  // Operation finished, the new state is:
+mixer.filter('.category-a')
+    .then(function(state) {
+        // Operation finished, the new state is:
 
-  console.log(state);
-});
+        console.log(state);
+    });
 ```
 
 ## CSS

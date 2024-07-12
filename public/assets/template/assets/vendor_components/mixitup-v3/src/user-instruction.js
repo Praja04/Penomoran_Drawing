@@ -7,18 +7,18 @@
  * @since       3.0.0
  */
 
-mixitup.UserInstruction = function () {
-  mixitup.Base.call(this);
+mixitup.UserInstruction = function() {
+    mixitup.Base.call(this);
 
-  this.callActions("beforeConstruct");
+    this.callActions('beforeConstruct');
 
-  this.command = {};
-  this.animate = false;
-  this.callback = null;
+    this.command    = {};
+    this.animate    = false;
+    this.callback   = null;
 
-  this.callActions("afterConstruct");
+    this.callActions('afterConstruct');
 
-  h.seal(this);
+    h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.UserInstruction);

@@ -1,14 +1,14 @@
 var data = {
-  series: [60, 20],
+  series: [60, 20]
 };
 
 var options = {
   donut: true,
-  donutWidth: 40,
-  total: 100,
-  labelInterpolationFnc: function (value) {
-    return value + "%";
-  },
+    donutWidth: 40,
+    total: 100,
+    labelInterpolationFnc: function(value) {
+    return value + '%';
+  }
 };
 
 var responsiveOptions = [
@@ -17,17 +17,17 @@ var responsiveOptions = [
     {
       labelOffset: 30,
       chartPadding: 10,
-      labelDirection: "explode",
-    },
+      labelDirection: 'explode'
+    }
   ],
   [
     Foundation.media_queries.large,
     {
       labelOffset: -30,
       chartPadding: 0,
-      labelDirection: "implode",
-    },
-  ],
+      labelDirection: 'implode'
+    }
+  ]
 ];
 
-new Chartist.Pie(".ct-chart", data, options, responsiveOptions);
+new Chartist.Pie('.ct-chart', data, options, responsiveOptions);

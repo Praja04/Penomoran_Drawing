@@ -8,17 +8,19 @@ the developers managing and developing this open source project. In return,
 they should reciprocate that respect in addressing your issue or assessing
 patches and features.
 
+
 ## Using the issue tracker
 
 The issue tracker is the preferred channel for [bug reports](#bug-reports),
 [features requests](#feature-requests) and submitting pull requests, but please
 respect the following restrictions:
 
--   Please **do not** use the issue tracker for personal support requests (use
-    [Stack Overflow](http://stackoverflow.com) or IRC).
+* Please **do not** use the issue tracker for personal support requests (use
+  [Stack Overflow](http://stackoverflow.com) or IRC).
 
--   Please **do not** derail or troll issues. Keep the discussion on topic and
-    respect the opinions of others.
+* Please **do not** derail or troll issues. Keep the discussion on topic and
+  respect the opinions of others.
+
 
 ## Bug reports
 
@@ -66,10 +68,11 @@ Example:
 > causing the bug, and potential solutions (and your opinions on their
 > merits).
 
+
 ## Feature requests
 
 Feature requests are welcome. But take a moment to find out whether your idea
-fits with the scope and aims of the project. It's up to _you_ to make a strong
+fits with the scope and aims of the project. It's up to *you* to make a strong
 case to convince the project's developers of the merits of this feature. Please
 provide as much detail and context as possible.
 
@@ -80,17 +83,17 @@ the authors (and/or leaders) of the project a non-exclusive license to
 re-distribute your code under the current license and possibly re-license the
 code as deemed necessary.
 
--   To instantiate a context or use it, use the variable **that** instead of
-    **\_this**.
--   Please check to make sure that there aren't existing pull requests attempting
-    to address the issue mentioned. We also recommend checking for issues related
-    to the issue on the tracker, as a team member may be working on the issue in
-    a branch or fork.
--   Non-trivial changes should be discussed in an issue first
--   If your change affects the distributed files, re-generate them using the
-    [grunt procedure](#using-grunt)
--   If possible, add relevant tests to cover the change
--   Write a convincing description of your PR and why we should land it
+* To instantiate a context or use it, use the variable **that** instead of
+  **_this**.
+* Please check to make sure that there aren't existing pull requests attempting
+  to address the issue mentioned. We also recommend checking for issues related
+  to the issue on the tracker, as a team member may be working on the issue in
+  a branch or fork.
+* Non-trivial changes should be discussed in an issue first
+* If your change affects the distributed files, re-generate them using the
+  [grunt procedure](#using-grunt)
+* If possible, add relevant tests to cover the change
+* Write a convincing description of your PR and why we should land it
 
 ## Using Grunt
 
@@ -101,9 +104,9 @@ This means that you must setup a local development environment:
 2. Install the grunt CLI: `npm install -g grunt-cli`
 3. Install the project's development dependencies: `npm install`
 4. Run the various grunt tasks as needed:
-    - `grunt`: clean the distribution files and re-build them
-    - `grunt dist`: build the distribution files
-    - `grunt clean`: clean the distribution files
-    - `grunt dist`: build the javascript distribution files
-    - `grunt watch`: watch for changes in the source files and build the
-      distribution files as needed
+   - `grunt`: clean the distribution files and re-build them
+   - `grunt dist`: build the distribution files
+   - `grunt clean`: clean the distribution files
+   - `grunt dist`: build the javascript distribution files
+   - `grunt watch`: watch for changes in the source files and build the
+     distribution files as needed

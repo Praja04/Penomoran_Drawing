@@ -11,9 +11,7 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: inherit;
 }
 
@@ -33,8 +31,8 @@ a {
 ul {
   padding: 0;
 
-  list-style: disc outside none;
-  padding-left: 1em;
+    list-style: disc outside none;
+    padding-left: 1em;
 }
 
 pre {
@@ -45,12 +43,7 @@ pre {
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   text-transform: uppercase;
   line-height: 1.2;
@@ -115,14 +108,12 @@ table {
   text-align: left;
   border-collapse: collapse;
 
-  th,
-  td {
+  th, td {
     padding: 0.5em 1em;
   }
 
   tr {
-    th,
-    td {
+    th, td {
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
   }

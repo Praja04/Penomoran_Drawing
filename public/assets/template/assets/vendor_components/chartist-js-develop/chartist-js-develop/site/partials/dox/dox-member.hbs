@@ -1,13 +1,7 @@
 <article class="module-member {{ctx.type}}">
   <header class="member-header">
-    <h5 class="member-title" id="{{doxHash this}}"><span
-        class="member-tag"
-      >{{ctx.type}}</span>
-      {{ctx.string}}</h5>
-    <button
-      class="api-code-button"
-      data-toggle-visible="#{{concat (doxHash this) '-code'}}"
-    >Show code</button>
+    <h5 class="member-title" id="{{doxHash this}}"><span class="member-tag">{{ctx.type}}</span> {{ctx.string}}</h5>
+    <button class="api-code-button" data-toggle-visible="#{{concat (doxHash this) '-code'}}">Show code</button>
   </header>
   <pre id="{{concat (doxHash this) '-code'}}">
     <code class="javascript">{{code}}</code>
@@ -15,9 +9,9 @@
   <div class="member-content">
     <div class="description">{{{description.summary}}}</div>
 
-    {{#if (doxTagsOfType this "param")}}
+    {{#if (doxTagsOfType this 'param')}}
       <h6>Parameters</h6>
-      {{#each (doxTagsOfType this "param")}}
+      {{#each (doxTagsOfType this 'param')}}
         <div class="param">
           <code>{{name}}</code>
           ({{#each types}}
@@ -28,8 +22,8 @@
       {{/each}}
     {{/if}}
 
-    {{#if (doxTagsOfType this "return")}}
-      {{#with (doxTag this "return")}}
+    {{#if (doxTagsOfType this 'return')}}
+      {{#with (doxTag this 'return')}}
         <h6>Returns</h6>
 
         <div class="return">
@@ -41,9 +35,9 @@
       {{/with}}
     {{/if}}
 
-    {{#if (doxTagsOfType this "example")}}
+    {{#if (doxTagsOfType this 'example')}}
       <h6>Examples</h6>
-      {{#each (doxTagsOfType this "example")}}
+      {{#each (doxTagsOfType this 'example')}}
         <pre class="api-example"><code class="js">{{string}}</code></pre>
       {{/each}}
     {{/if}}

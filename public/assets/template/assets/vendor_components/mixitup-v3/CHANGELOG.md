@@ -1,30 +1,26 @@
-# Change Log
+Change Log
+==========
 
 ## 3.3.0
-
 - Introduces new internal filter hook `testResultEvaluateHideShown` allowing plugins to manipulate the result of every filter test upon a target. Provides an convenient entry point for non-selector based filtering such as range slider inputs.
 - Adds range slider demo.
 
 ## 3.2.2
-
 - Fixes issue where multiple toggle controls are not automatically activated when a compound selector is specified to `load.filter`.
 - Fixes issue where calling `.toggleOff()` and passing a non-existent selector will deactivate all other active toggles.
 - Fixes issue where padding whitespace around a DOM string when calling `.insert()` caused an exception.
 - Adds additional demos for non-standard UI.
 
 ## 3.2.1
-
 - Additional edge-case work relating to Dataset API fix in v3.2.0.
 - Addition of `.forceRender()` mixer API method.
 - Removes `.multiMix()` legacy API alias method.
 
 ## 3.2.0
-
 - Removes support for legacy `$().mixItUp()` jQuery API
 - Fixes issue with Dataset API causing DOM exception when dealing with certain combinations of simultaneous insertion and sorting.
 
 ## 3.1.12
-
 - Fixes issue where `state.targets` does not reflect the updated sort order after a sort operation.
 - Addition of `behavior.liveSort` configuration option.
 
@@ -81,7 +77,7 @@
 ## 3.1.0
 
 - Added `selectors.controls` configuration option to allow for further specificity of control querying
-  in addition to the mandatory data attributes.
+in addition to the mandatory data attributes.
 - Fixed package.json issues.
 
 ## 3.0.1

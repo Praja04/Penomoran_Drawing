@@ -7,36 +7,35 @@
  * @since       3.0.0
  */
 
-mixitup.Control = function () {
-  mixitup.Base.call(this);
+mixitup.Control = function() {
+    mixitup.Base.call(this);
 
-  this.callActions("beforeConstruct");
+    this.callActions('beforeConstruct');
 
-  this.el = null;
-  this.selector = "";
-  this.bound = [];
-  this.pending = -1;
-  this.type = "";
-  this.status = "inactive"; // enum: ['inactive', 'active', 'disabled', 'live']
-  this.filter = "";
-  this.sort = "";
-  this.canDisable = false;
-  this.handler = null;
-  this.classNames = new mixitup.UiClassNames();
+    this.el         = null;
+    this.selector   = '';
+    this.bound      = [];
+    this.pending    = -1;
+    this.type       = '';
+    this.status     = 'inactive'; // enum: ['inactive', 'active', 'disabled', 'live']
+    this.filter     = '';
+    this.sort       = '';
+    this.canDisable = false;
+    this.handler    = null;
+    this.classNames = new mixitup.UiClassNames();
 
-  this.callActions("afterConstruct");
+    this.callActions('afterConstruct');
 
-  h.seal(this);
+    h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.Control);
 
 mixitup.Control.prototype = Object.create(mixitup.Base.prototype);
 
-h.extend(
-  mixitup.Control.prototype,
-  /** @lends mixitup.Control */
-  {
+h.extend(mixitup.Control.prototype,
+/** @lends mixitup.Control */
+{
     constructor: mixitup.Control,
 
     /**
@@ -46,46 +45,46 @@ h.extend(
      * @param {string}      selector
      */
 
-    init: function (el, type, selector) {
-      var self = this;
+    init: function(el, type, selector) {
+        var self = this;
 
-      this.callActions("beforeInit", arguments);
+        this.callActions('beforeInit', arguments);
 
-      self.el = el;
-      self.type = type;
-      self.selector = selector;
+        self.el         = el;
+        self.type       = type;
+        self.selector   = selector;
 
-      if (self.selector) {
-        self.status = "live";
-      } else {
-        self.canDisable = typeof self.el.disable === "boolean";
+        if (self.selector) {
+            self.status = 'live';
+        } else {
+            self.canDisable = typeof self.el.disable === 'boolean';
 
-        switch (self.type) {
-          case "filter":
-            self.filter = self.el.getAttribute("data-filter");
+            switch (self.type) {
+                case 'filter':
+                    self.filter = self.el.getAttribute('data-filter');
 
-            break;
-          case "toggle":
-            self.filter = self.el.getAttribute("data-toggle");
+                    break;
+                case 'toggle':
+                    self.filter = self.el.getAttribute('data-toggle');
 
-            break;
-          case "sort":
-            self.sort = self.el.getAttribute("data-sort");
+                    break;
+                case 'sort':
+                    self.sort   = self.el.getAttribute('data-sort');
 
-            break;
-          case "multimix":
-            self.filter = self.el.getAttribute("data-filter");
-            self.sort = self.el.getAttribute("data-sort");
+                    break;
+                case 'multimix':
+                    self.filter = self.el.getAttribute('data-filter');
+                    self.sort   = self.el.getAttribute('data-sort');
 
-            break;
+                    break;
+            }
         }
-      }
 
-      self.bindClick();
+        self.bindClick();
 
-      mixitup.controls.push(self);
+        mixitup.controls.push(self);
 
-      this.callActions("afterInit", arguments);
+        this.callActions('afterInit', arguments);
     },
 
     /**
@@ -94,15 +93,15 @@ h.extend(
      * @return {boolean}
      */
 
-    isBound: function (mixer) {
-      var self = this,
-        isBound = false;
+    isBound: function(mixer) {
+        var self    = this,
+            isBound = false;
 
-      this.callActions("beforeIsBound", arguments);
+        this.callActions('beforeIsBound', arguments);
 
-      isBound = self.bound.indexOf(mixer) > -1;
+        isBound = self.bound.indexOf(mixer) > -1;
 
-      return self.callFilters("afterIsBound", isBound, arguments);
+        return self.callFilters('afterIsBound', isBound, arguments);
     },
 
     /**
@@ -111,51 +110,51 @@ h.extend(
      * @return {void}
      */
 
-    addBinding: function (mixer) {
-      var self = this;
+    addBinding: function(mixer) {
+        var self = this;
 
-      this.callActions("beforeAddBinding", arguments);
+        this.callActions('beforeAddBinding', arguments);
 
-      if (!self.isBound()) {
-        self.bound.push(mixer);
-      }
-
-      this.callActions("afterAddBinding", arguments);
-    },
-
-    /**
-     * @private
-     * @param  {mixitup.Mixer} mixer
-     * @return {void}
-     */
-
-    removeBinding: function (mixer) {
-      var self = this,
-        removeIndex = -1;
-
-      this.callActions("beforeRemoveBinding", arguments);
-
-      if ((removeIndex = self.bound.indexOf(mixer)) > -1) {
-        self.bound.splice(removeIndex, 1);
-      }
-
-      if (self.bound.length < 1) {
-        // No bindings exist, unbind event click handlers
-
-        self.unbindClick();
-
-        // Remove from `mixitup.controls` list
-
-        removeIndex = mixitup.controls.indexOf(self);
-
-        mixitup.controls.splice(removeIndex, 1);
-
-        if (self.status === "active") {
-          self.renderStatus(self.el, "inactive");
+        if (!self.isBound()) {
+            self.bound.push(mixer);
         }
-      }
 
-      this.callActions("afterRemoveBinding", arguments);
+        this.callActions('afterAddBinding', arguments);
+    },
+
+    /**
+     * @private
+     * @param  {mixitup.Mixer} mixer
+     * @return {void}
+     */
+
+    removeBinding: function(mixer) {
+        var self        = this,
+            removeIndex = -1;
+
+        this.callActions('beforeRemoveBinding', arguments);
+
+        if ((removeIndex = self.bound.indexOf(mixer)) > -1) {
+            self.bound.splice(removeIndex, 1);
+        }
+
+        if (self.bound.length < 1) {
+            // No bindings exist, unbind event click handlers
+
+            self.unbindClick();
+
+            // Remove from `mixitup.controls` list
+
+            removeIndex = mixitup.controls.indexOf(self);
+
+            mixitup.controls.splice(removeIndex, 1);
+
+            if (self.status === 'active') {
+                self.renderStatus(self.el, 'inactive');
+            }
+        }
+
+        this.callActions('afterRemoveBinding', arguments);
     },
 
     /**
@@ -163,18 +162,18 @@ h.extend(
      * @return {void}
      */
 
-    bindClick: function () {
-      var self = this;
+    bindClick: function() {
+        var self = this;
 
-      this.callActions("beforeBindClick", arguments);
+        this.callActions('beforeBindClick', arguments);
 
-      self.handler = function (e) {
-        self.handleClick(e);
-      };
+        self.handler = function(e) {
+            self.handleClick(e);
+        };
 
-      h.on(self.el, "click", self.handler);
+        h.on(self.el, 'click', self.handler);
 
-      this.callActions("afterBindClick", arguments);
+        this.callActions('afterBindClick', arguments);
     },
 
     /**
@@ -182,16 +181,16 @@ h.extend(
      * @return {void}
      */
 
-    unbindClick: function () {
-      var self = this;
+    unbindClick: function() {
+        var self = this;
 
-      this.callActions("beforeUnbindClick", arguments);
+        this.callActions('beforeUnbindClick', arguments);
 
-      h.off(self.el, "click", self.handler);
+        h.off(self.el, 'click', self.handler);
 
-      self.handler = null;
+        self.handler = null;
 
-      this.callActions("afterUnbindClick", arguments);
+        this.callActions('afterUnbindClick', arguments);
     },
 
     /**
@@ -200,130 +199,113 @@ h.extend(
      * @return  {void}
      */
 
-    handleClick: function (e) {
-      var self = this,
-        button = null,
-        mixer = null,
-        isActive = false,
-        returnValue = void 0,
-        command = {},
-        clone = null,
-        commands = [],
-        i = -1;
+    handleClick: function(e) {
+        var self        = this,
+            button      = null,
+            mixer       = null,
+            isActive    = false,
+            returnValue = void(0),
+            command     = {},
+            clone       = null,
+            commands    = [],
+            i           = -1;
 
-      this.callActions("beforeHandleClick", arguments);
+        this.callActions('beforeHandleClick', arguments);
 
-      this.pending = 0;
+        this.pending = 0;
 
-      mixer = self.bound[0];
+        mixer = self.bound[0];
 
-      if (!self.selector) {
-        button = self.el;
-      } else {
-        button = h.closestParent(
-          e.target,
-          mixer.config.selectors.control + self.selector,
-          true,
-          mixer.dom.document,
-        );
-      }
-
-      if (!button) {
-        self.callActions("afterHandleClick", arguments);
-
-        return;
-      }
-
-      switch (self.type) {
-        case "filter":
-          command.filter = self.filter || button.getAttribute("data-filter");
-
-          break;
-        case "sort":
-          command.sort = self.sort || button.getAttribute("data-sort");
-
-          break;
-        case "multimix":
-          command.filter = self.filter || button.getAttribute("data-filter");
-          command.sort = self.sort || button.getAttribute("data-sort");
-
-          break;
-        case "toggle":
-          command.filter = self.filter || button.getAttribute("data-toggle");
-
-          if (self.status === "live") {
-            isActive = h.hasClass(button, self.classNames.active);
-          } else {
-            isActive = self.status === "active";
-          }
-
-          break;
-      }
-
-      for (i = 0; i < self.bound.length; i++) {
-        // Create a clone of the command for each bound mixer instance
-
-        clone = new mixitup.CommandMultimix();
-
-        h.extend(clone, command);
-
-        commands.push(clone);
-      }
-
-      commands = self.callFilters("commandsHandleClick", commands, arguments);
-
-      self.pending = self.bound.length;
-
-      for (i = 0; (mixer = self.bound[i]); i++) {
-        command = commands[i];
-
-        if (!command) {
-          // An extension may set a command null to indicate that the click should not be handled
-
-          continue;
-        }
-
-        if (!mixer.lastClicked) {
-          mixer.lastClicked = button;
-        }
-
-        mixitup.events.fire(
-          "mixClick",
-          mixer.dom.container,
-          {
-            state: mixer.state,
-            instance: mixer,
-            originalEvent: e,
-            control: mixer.lastClicked,
-          },
-          mixer.dom.document,
-        );
-
-        if (typeof mixer.config.callbacks.onMixClick === "function") {
-          returnValue = mixer.config.callbacks.onMixClick.call(
-            mixer.lastClicked,
-            mixer.state,
-            e,
-            mixer,
-          );
-
-          if (returnValue === false) {
-            // User has returned `false` from the callback, so do not handle click
-
-            continue;
-          }
-        }
-
-        if (self.type === "toggle") {
-          isActive
-            ? mixer.toggleOff(command.filter)
-            : mixer.toggleOn(command.filter);
+        if (!self.selector) {
+            button = self.el;
         } else {
-          mixer.multimix(command);
+            button = h.closestParent(e.target, mixer.config.selectors.control + self.selector, true, mixer.dom.document);
         }
-      }
 
-      this.callActions("afterHandleClick", arguments);
+        if (!button) {
+            self.callActions('afterHandleClick', arguments);
+
+            return;
+        }
+
+        switch (self.type) {
+            case 'filter':
+                command.filter = self.filter || button.getAttribute('data-filter');
+
+                break;
+            case 'sort':
+                command.sort = self.sort || button.getAttribute('data-sort');
+
+                break;
+            case 'multimix':
+                command.filter  = self.filter || button.getAttribute('data-filter');
+                command.sort    = self.sort || button.getAttribute('data-sort');
+
+                break;
+            case 'toggle':
+                command.filter  = self.filter || button.getAttribute('data-toggle');
+
+                if (self.status === 'live') {
+                    isActive = h.hasClass(button, self.classNames.active);
+                } else {
+                    isActive = self.status === 'active';
+                }
+
+                break;
+        }
+
+        for (i = 0; i < self.bound.length; i++) {
+            // Create a clone of the command for each bound mixer instance
+
+            clone = new mixitup.CommandMultimix();
+
+            h.extend(clone, command);
+
+            commands.push(clone);
+        }
+
+        commands = self.callFilters('commandsHandleClick', commands, arguments);
+
+        self.pending = self.bound.length;
+
+        for (i = 0; mixer = self.bound[i]; i++) {
+            command = commands[i];
+
+            if (!command) {
+                // An extension may set a command null to indicate that the click should not be handled
+
+                continue;
+            }
+
+            if (!mixer.lastClicked) {
+                mixer.lastClicked = button;
+            }
+
+            mixitup.events.fire('mixClick', mixer.dom.container, {
+                state: mixer.state,
+                instance: mixer,
+                originalEvent: e,
+                control: mixer.lastClicked
+            }, mixer.dom.document);
+
+            if (typeof mixer.config.callbacks.onMixClick === 'function') {
+                returnValue = mixer.config.callbacks.onMixClick.call(mixer.lastClicked, mixer.state, e, mixer);
+
+                if (returnValue === false) {
+                    // User has returned `false` from the callback, so do not handle click
+
+                    continue;
+                }
+            }
+
+            if (self.type === 'toggle') {
+                isActive ? mixer.toggleOff(command.filter) : mixer.toggleOn(command.filter);
+            } else {
+                mixer.multimix(command);
+            }
+        }
+
+        this.callActions('afterHandleClick', arguments);
     },
 
     /**
@@ -332,34 +314,34 @@ h.extend(
      * @return  {void}
      */
 
-    update: function (command, toggleArray) {
-      var self = this,
-        actions = new mixitup.CommandMultimix();
+    update: function(command, toggleArray) {
+        var self    = this,
+            actions = new mixitup.CommandMultimix();
 
-      self.callActions("beforeUpdate", arguments);
+        self.callActions('beforeUpdate', arguments);
 
-      self.pending--;
+        self.pending--;
 
-      self.pending = Math.max(0, self.pending);
+        self.pending = Math.max(0, self.pending);
 
-      if (self.pending > 0) return;
+        if (self.pending > 0) return;
 
-      if (self.status === "live") {
-        // Live control (status unknown)
+        if (self.status === 'live') {
+            // Live control (status unknown)
 
-        self.updateLive(command, toggleArray);
-      } else {
-        // Static control
+            self.updateLive(command, toggleArray);
+        } else {
+            // Static control
 
-        actions.sort = self.sort;
-        actions.filter = self.filter;
+            actions.sort    = self.sort;
+            actions.filter  = self.filter;
 
-        self.callFilters("actionsUpdate", actions, arguments);
+            self.callFilters('actionsUpdate', actions, arguments);
 
-        self.parseStatusChange(self.el, command, actions, toggleArray);
-      }
+            self.parseStatusChange(self.el, command, actions, toggleArray);
+        }
 
-      self.callActions("afterUpdate", arguments);
+        self.callActions('afterUpdate', arguments);
     },
 
     /**
@@ -368,48 +350,48 @@ h.extend(
      * @return  {void}
      */
 
-    updateLive: function (command, toggleArray) {
-      var self = this,
-        controlButtons = null,
-        actions = null,
-        button = null,
-        i = -1;
+    updateLive: function(command, toggleArray) {
+        var self            = this,
+            controlButtons  = null,
+            actions         = null,
+            button          = null,
+            i               = -1;
 
-      self.callActions("beforeUpdateLive", arguments);
+        self.callActions('beforeUpdateLive', arguments);
 
-      if (!self.el) return;
+        if (!self.el) return;
 
-      controlButtons = self.el.querySelectorAll(self.selector);
+        controlButtons = self.el.querySelectorAll(self.selector);
 
-      for (i = 0; (button = controlButtons[i]); i++) {
-        actions = new mixitup.CommandMultimix();
+        for (i = 0; button = controlButtons[i]; i++) {
+            actions = new mixitup.CommandMultimix();
 
-        switch (self.type) {
-          case "filter":
-            actions.filter = button.getAttribute("data-filter");
+            switch (self.type) {
+                case 'filter':
+                    actions.filter = button.getAttribute('data-filter');
 
-            break;
-          case "sort":
-            actions.sort = button.getAttribute("data-sort");
+                    break;
+                case 'sort':
+                    actions.sort = button.getAttribute('data-sort');
 
-            break;
-          case "multimix":
-            actions.filter = button.getAttribute("data-filter");
-            actions.sort = button.getAttribute("data-sort");
+                    break;
+                case 'multimix':
+                    actions.filter  = button.getAttribute('data-filter');
+                    actions.sort    = button.getAttribute('data-sort');
 
-            break;
-          case "toggle":
-            actions.filter = button.getAttribute("data-toggle");
+                    break;
+                case 'toggle':
+                    actions.filter  = button.getAttribute('data-toggle');
 
-            break;
+                    break;
+            }
+
+            actions = self.callFilters('actionsUpdateLive', actions, arguments);
+
+            self.parseStatusChange(button, command, actions, toggleArray);
         }
 
-        actions = self.callFilters("actionsUpdateLive", actions, arguments);
-
-        self.parseStatusChange(button, command, actions, toggleArray);
-      }
-
-      self.callActions("afterUpdateLive", arguments);
+        self.callActions('afterUpdateLive', arguments);
     },
 
     /**
@@ -420,71 +402,68 @@ h.extend(
      * @return  {void}
      */
 
-    parseStatusChange: function (button, command, actions, toggleArray) {
-      var self = this,
-        alias = "",
-        toggle = "",
-        i = -1;
+    parseStatusChange: function(button, command, actions, toggleArray) {
+        var self    = this,
+            alias   = '',
+            toggle  = '',
+            i       = -1;
 
-      self.callActions("beforeParseStatusChange", arguments);
+        self.callActions('beforeParseStatusChange', arguments);
 
-      switch (self.type) {
-        case "filter":
-          if (command.filter === actions.filter) {
-            self.renderStatus(button, "active");
-          } else {
-            self.renderStatus(button, "inactive");
-          }
+        switch (self.type) {
+            case 'filter':
+                if (command.filter === actions.filter) {
+                    self.renderStatus(button, 'active');
+                } else {
+                    self.renderStatus(button, 'inactive');
+                }
 
-          break;
-        case "multimix":
-          if (
-            command.sort === actions.sort &&
-            command.filter === actions.filter
-          ) {
-            self.renderStatus(button, "active");
-          } else {
-            self.renderStatus(button, "inactive");
-          }
+                break;
+            case 'multimix':
+                if (command.sort === actions.sort && command.filter === actions.filter) {
+                    self.renderStatus(button, 'active');
+                } else {
+                    self.renderStatus(button, 'inactive');
+                }
 
-          break;
-        case "sort":
-          if (command.sort.match(/:asc/g)) {
-            alias = command.sort.replace(/:asc/g, "");
-          }
+                break;
+            case 'sort':
+                if (command.sort.match(/:asc/g)) {
+                    alias = command.sort.replace(/:asc/g, '');
+                }
 
-          if (command.sort === actions.sort || alias === actions.sort) {
-            self.renderStatus(button, "active");
-          } else {
-            self.renderStatus(button, "inactive");
-          }
+                if (command.sort === actions.sort || alias === actions.sort) {
+                    self.renderStatus(button, 'active');
+                } else {
+                    self.renderStatus(button, 'inactive');
+                }
 
-          break;
-        case "toggle":
-          if (toggleArray.length < 1) self.renderStatus(button, "inactive");
+                break;
+            case 'toggle':
+                if (toggleArray.length < 1) self.renderStatus(button, 'inactive');
 
-          if (command.filter === actions.filter) {
-            self.renderStatus(button, "active");
-          }
+                if (command.filter === actions.filter) {
+                    self.renderStatus(button, 'active');
+                }
 
-          for (i = 0; i < toggleArray.length; i++) {
-            toggle = toggleArray[i];
+                for (i = 0; i < toggleArray.length; i++) {
+                    toggle = toggleArray[i];
 
-            if (toggle === actions.filter) {
-              // Button matches one active toggle
+                    if (toggle === actions.filter) {
+                        // Button matches one active toggle
 
-              self.renderStatus(button, "active");
+                        self.renderStatus(button, 'active');
 
-              break;
-            }
+                        break;
+                    }
 
-            self.renderStatus(button, "inactive");
-          }
+                    self.renderStatus(button, 'inactive');
+                }
 
-          break;
-      }
+                break;
+        }
 
-      self.callActions("afterParseStatusChange", arguments);
+        self.callActions('afterParseStatusChange', arguments);
     },
 
     /**
@@ -493,44 +472,43 @@ h.extend(
      * @return  {void}
      */
 
-    renderStatus: function (button, status) {
-      var self = this;
+    renderStatus: function(button, status) {
+        var self = this;
 
-      self.callActions("beforeRenderStatus", arguments);
+        self.callActions('beforeRenderStatus', arguments);
 
-      switch (status) {
-        case "active":
-          h.addClass(button, self.classNames.active);
-          h.removeClass(button, self.classNames.disabled);
+        switch (status) {
+            case 'active':
+                h.addClass(button, self.classNames.active);
+                h.removeClass(button, self.classNames.disabled);
 
-          if (self.canDisable) self.el.disabled = false;
+                if (self.canDisable) self.el.disabled = false;
 
-          break;
-        case "inactive":
-          h.removeClass(button, self.classNames.active);
-          h.removeClass(button, self.classNames.disabled);
+                break;
+            case 'inactive':
+                h.removeClass(button, self.classNames.active);
+                h.removeClass(button, self.classNames.disabled);
 
-          if (self.canDisable) self.el.disabled = false;
+                if (self.canDisable) self.el.disabled = false;
 
-          break;
-        case "disabled":
-          if (self.canDisable) self.el.disabled = true;
+                break;
+            case 'disabled':
+                if (self.canDisable) self.el.disabled = true;
 
-          h.addClass(button, self.classNames.disabled);
-          h.removeClass(button, self.classNames.active);
+                h.addClass(button, self.classNames.disabled);
+                h.removeClass(button, self.classNames.active);
 
-          break;
-      }
+                break;
+        }
 
-      if (self.status !== "live") {
-        // Update the control's status propery if not live
+        if (self.status !== 'live') {
+            // Update the control's status propery if not live
 
-        self.status = status;
-      }
+            self.status = status;
+        }
 
-      self.callActions("afterRenderStatus", arguments);
-    },
-  },
-);
+        self.callActions('afterRenderStatus', arguments);
+    }
+});
 
 mixitup.controls = [];

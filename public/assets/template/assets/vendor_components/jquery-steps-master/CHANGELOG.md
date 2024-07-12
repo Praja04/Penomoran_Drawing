@@ -1,21 +1,17 @@
 # Changelog
 
 ## 1.1.0
-
 - Added event `onInit` which is fired when the component is completely initialized. Closes issue [#80](https://github.com/rstaib/jquery-steps/issues/80)
 - Added event `onContentLoaded` which is fired when the step content is loaded (only in async cases relevant) Closes issue [#88](https://github.com/rstaib/jquery-steps/issues/88) and [#97](https://github.com/rstaib/jquery-steps/issues/97)
 
 ## 1.0.8
-
 - Fixed issue [#91](https://github.com/rstaib/jquery-steps/issues/91) (`stepChanged` event is fired before transitions are done)
 
 ## 1.0.7
-
 - Small fix. Closes issue [#58](https://github.com/rstaib/jquery-steps/issues/58)
 - Set the default value of `enableCancelButton` for backward compatibility reasons to `false`
 
 ## 1.0.6
-
 - Small fix. Closes issue [#56](https://github.com/rstaib/jquery-steps/issues/56)
 
 ## 1.0.5

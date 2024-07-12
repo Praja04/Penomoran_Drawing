@@ -1,10 +1,12 @@
-define(["jquery"], function ($) {
+define([
+  'jquery'
+], function ($) {
   var Utils = {};
 
   Utils.Extend = function (ChildClass, SuperClass) {
     var __hasProp = {}.hasOwnProperty;
 
-    function BaseConstructor() {
+    function BaseConstructor () {
       this.constructor = ChildClass;
     }
 
@@ -21,7 +23,7 @@ define(["jquery"], function ($) {
     return ChildClass;
   };
 
-  function getMethods(theClass) {
+  function getMethods (theClass) {
     var proto = theClass.prototype;
 
     var methods = [];
@@ -29,11 +31,11 @@ define(["jquery"], function ($) {
     for (var methodName in proto) {
       var m = proto[methodName];
 
-      if (typeof m !== "function") {
+      if (typeof m !== 'function') {
         continue;
       }
 
-      if (methodName === "constructor") {
+      if (methodName === 'constructor') {
         continue;
       }
 
@@ -47,7 +49,7 @@ define(["jquery"], function ($) {
     var decoratedMethods = getMethods(DecoratorClass);
     var superMethods = getMethods(SuperClass);
 
-    function DecoratedClass() {
+    function DecoratedClass () {
       var unshift = Array.prototype.unshift;
 
       var argCount = DecoratorClass.prototype.constructor.length;
@@ -65,16 +67,17 @@ define(["jquery"], function ($) {
 
     DecoratorClass.displayName = SuperClass.displayName;
 
-    function ctr() {
+    function ctr () {
       this.constructor = DecoratedClass;
     }
 
     DecoratedClass.prototype = new ctr();
 
     for (var m = 0; m < superMethods.length; m++) {
-      var superMethod = superMethods[m];
+        var superMethod = superMethods[m];
 
-      DecoratedClass.prototype[superMethod] = SuperClass.prototype[superMethod];
+        DecoratedClass.prototype[superMethod] =
+          SuperClass.prototype[superMethod];
     }
 
     var calledMethod = function (methodName) {
@@ -142,8 +145,8 @@ define(["jquery"], function ($) {
       this.invoke(this.listeners[event], slice.call(arguments, 1));
     }
 
-    if ("*" in this.listeners) {
-      this.invoke(this.listeners["*"], arguments);
+    if ('*' in this.listeners) {
+      this.invoke(this.listeners['*'], arguments);
     }
   };
 
@@ -156,7 +159,7 @@ define(["jquery"], function ($) {
   Utils.Observable = Observable;
 
   Utils.generateChars = function (length) {
-    var chars = "";
+    var chars = '';
 
     for (var i = 0; i < length; i++) {
       var randomChar = Math.floor(Math.random() * 36);
@@ -174,7 +177,7 @@ define(["jquery"], function ($) {
 
   Utils._convertData = function (data) {
     for (var originalKey in data) {
-      var keys = originalKey.split("-");
+      var keys = originalKey.split('-');
 
       var dataLevel = data;
 
@@ -218,35 +221,32 @@ define(["jquery"], function ($) {
     var overflowY = el.style.overflowY;
 
     //Check both x and y declarations
-    if (
-      overflowX === overflowY &&
-      (overflowY === "hidden" || overflowY === "visible")
-    ) {
+    if (overflowX === overflowY &&
+        (overflowY === 'hidden' || overflowY === 'visible')) {
       return false;
     }
 
-    if (overflowX === "scroll" || overflowY === "scroll") {
+    if (overflowX === 'scroll' || overflowY === 'scroll') {
       return true;
     }
 
-    return (
-      $el.innerHeight() < el.scrollHeight || $el.innerWidth() < el.scrollWidth
-    );
+    return ($el.innerHeight() < el.scrollHeight ||
+      $el.innerWidth() < el.scrollWidth);
   };
 
   Utils.escapeMarkup = function (markup) {
     var replaceMap = {
-      "\\": "&#92;",
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;",
-      "/": "&#47;",
+      '\\': '&#92;',
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      '\'': '&#39;',
+      '/': '&#47;'
     };
 
     // Do not try to escape the markup if it's not a string
-    if (typeof markup !== "string") {
+    if (typeof markup !== 'string') {
       return markup;
     }
 
@@ -259,7 +259,7 @@ define(["jquery"], function ($) {
   Utils.appendMany = function ($element, $nodes) {
     // jQuery 1.7.x does not support $.fn.append() with an array
     // Fall back to a jQuery object collection using $.fn.add()
-    if ($.fn.jquery.substr(0, 3) === "1.7") {
+    if ($.fn.jquery.substr(0, 3) === '1.7') {
       var $jqNodes = $();
 
       $.map($nodes, function (node) {

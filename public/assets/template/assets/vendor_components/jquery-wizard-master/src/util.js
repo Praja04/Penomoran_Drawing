@@ -6,8 +6,8 @@ function emulateTransitionEnd($el, duration) {
     });
     var callback = function () {
         if (!called) {
-            $el.trigger(Support.transition.end);
+            $el.trigger( Support.transition.end );
         }
-    };
+    }
     setTimeout(callback, duration);
 }

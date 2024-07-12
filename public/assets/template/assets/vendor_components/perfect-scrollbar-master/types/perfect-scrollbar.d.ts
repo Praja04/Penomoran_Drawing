@@ -16,15 +16,12 @@ declare namespace PerfectScrollbar {
 }
 
 declare class PerfectScrollbar {
-  constructor(
-    element: string | HTMLElement,
-    options?: PerfectScrollbar.Options,
-  );
+  constructor(element: string | HTMLElement, options?: PerfectScrollbar.Options);
 
   update(): void;
   destroy(): void;
 
-  reach: { x: "start" | "end" | null; y: "start" | "end" | null };
+  reach: { x: 'start' | 'end' | null, y: 'start' | 'end' | null };
 }
 
 export default PerfectScrollbar;

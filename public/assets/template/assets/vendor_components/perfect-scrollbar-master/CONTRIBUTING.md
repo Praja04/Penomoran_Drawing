@@ -1,11 +1,11 @@
 # Contributing
 
-I _really_ welcome contributions! Please feel free to fork and issue pull
+I *really* welcome contributions! Please feel free to fork and issue pull
 requests when...
 
-- You have a very nice idea to improve this plugin!
-- You found a bug!
-- You're good at English and can help my bad English!
+* You have a very nice idea to improve this plugin!
+* You found a bug!
+* You're good at English and can help my bad English!
 
 For IE problems, please refer
 to [IE Support](https://github.com/utatti/perfect-scrollbar#ie-support).

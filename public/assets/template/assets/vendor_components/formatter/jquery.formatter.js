@@ -5,7 +5,7 @@
  *
  * thanks to digitalBush/jquery.maskedinput for some of the trickier
  * keycode handling
- */
+ */ 
 
 //
 // Uses CommonJS, AMD or browser globals to create a jQuery plugin.
@@ -17,37 +17,38 @@
 // not want to add the extra CommonJS detection.
 //
 (function (root, factory) {
-  if (typeof define === "function" && define.amd) {
+  if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(["jQuery"], factory);
-  } else if (typeof exports === "object") {
-    factory(require("jQuery"));
+    define(['jQuery'], factory);
+  } else if (typeof exports === 'object') {
+    factory(require('jQuery'));
   } else {
     // Browser globals
     factory(root.jQuery);
   }
-})(this, function (jQuery) {
-  /*
-   * pattern.js
-   *
-   * Utilities to parse str pattern and return info
-   *
-   */
-  var pattern = (function () {
+}(this, function (jQuery) {
+
+
+/*
+ * pattern.js
+ *
+ * Utilities to parse str pattern and return info
+ *
+ */
+var pattern = function () {
     // Define module
     var pattern = {};
     // Match information
     var DELIM_SIZE = 4;
     // Our regex used to parse
-    var regexp = new RegExp("{{([^}]+)}}", "g");
+    var regexp = new RegExp('{{([^}]+)}}', 'g');
     //
     // Helper method to parse pattern str
     //
     var getMatches = function (pattern) {
       // Populate array of matches
-      var matches = [],
-        match;
-      while ((match = regexp.exec(pattern))) {
+      var matches = [], match;
+      while (match = regexp.exec(pattern)) {
         matches.push(match);
       }
       return matches;
@@ -59,16 +60,13 @@
     pattern.parse = function (pattern) {
       // Our obj to populate
       var info = {
-        inpts: {},
-        chars: {},
-      };
+          inpts: {},
+          chars: {}
+        };
       // Pattern information
-      var matches = getMatches(pattern),
-        pLength = pattern.length;
+      var matches = getMatches(pattern), pLength = pattern.length;
       // Counters
-      var mCount = 0,
-        iCount = 0,
-        i = 0;
+      var mCount = 0, iCount = 0, i = 0;
       // Add inpts, move to end of match, and process
       var processMatch = function (val) {
         var valLength = val.length;
@@ -93,18 +91,18 @@
     };
     // Expose
     return pattern;
-  })();
-  /*
-   * utils.js
-   *
-   * Independent helper methods (cross browser, etc..)
-   *
-   */
-  var utils = (function () {
+  }();
+/*
+ * utils.js
+ *
+ * Independent helper methods (cross browser, etc..)
+ *
+ */
+var utils = function () {
     // Define module
     var utils = {};
     // Useragent info for keycode handling
-    var uAgent = typeof navigator !== "undefined" ? navigator.userAgent : null;
+    var uAgent = typeof navigator !== 'undefined' ? navigator.userAgent : null;
     //
     // Shallow copy properties from n objects to destObj
     //
@@ -141,17 +139,13 @@
     // Helper method for cross browser event listeners
     //
     utils.addListener = function (el, evt, handler) {
-      return typeof el.addEventListener !== "undefined"
-        ? el.addEventListener(evt, handler, false)
-        : el.attachEvent("on" + evt, handler);
+      return typeof el.addEventListener !== 'undefined' ? el.addEventListener(evt, handler, false) : el.attachEvent('on' + evt, handler);
     };
     //
     // Helper method for cross browser implementation of preventDefault
     //
     utils.preventDefault = function (evt) {
-      return evt.preventDefault
-        ? evt.preventDefault()
-        : (evt.returnValue = false);
+      return evt.preventDefault ? evt.preventDefault() : evt.returnValue = false;
     };
     //
     // Helper method for cross browser implementation for grabbing
@@ -159,10 +153,10 @@
     //
     utils.getClip = function (evt) {
       if (evt.clipboardData) {
-        return evt.clipboardData.getData("Text");
+        return evt.clipboardData.getData('Text');
       }
       if (window.clipboardData) {
-        return window.clipboardData.getData("Text");
+        return window.clipboardData.getData('Text');
       }
     };
     //
@@ -182,15 +176,15 @@
     //
     utils.isDelKeyDown = function (which, keyCode) {
       var keys = {
-        backspace: {
-          which: 8,
-          keyCode: 8,
-        },
-        delete: {
-          which: 46,
-          keyCode: 46,
-        },
-      };
+          'backspace': {
+            'which': 8,
+            'keyCode': 8
+          },
+          'delete': {
+            'which': 46,
+            'keyCode': 46
+          }
+        };
       return utils.getMatchingKey(which, keyCode, keys);
     };
     //
@@ -198,16 +192,16 @@
     //
     utils.isDelKeyPress = function (which, keyCode) {
       var keys = {
-        backspace: {
-          which: 8,
-          keyCode: 8,
-          shiftKey: false,
-        },
-        delete: {
-          which: 0,
-          keyCode: 46,
-        },
-      };
+          'backspace': {
+            'which': 8,
+            'keyCode': 8,
+            'shiftKey': false
+          },
+          'delete': {
+            'which': 0,
+            'keyCode': 46
+          }
+        };
       return utils.getMatchingKey(which, keyCode, keys);
     };
     // //
@@ -232,43 +226,43 @@
     //
     utils.isSpecialKeyPress = function (which, keyCode) {
       var keys = {
-        tab: {
-          which: 0,
-          keyCode: 9,
-        },
-        enter: {
-          which: 13,
-          keyCode: 13,
-        },
-        end: {
-          which: 0,
-          keyCode: 35,
-        },
-        home: {
-          which: 0,
-          keyCode: 36,
-        },
-        leftarrow: {
-          which: 0,
-          keyCode: 37,
-        },
-        uparrow: {
-          which: 0,
-          keyCode: 38,
-        },
-        rightarrow: {
-          which: 0,
-          keyCode: 39,
-        },
-        downarrow: {
-          which: 0,
-          keyCode: 40,
-        },
-        F5: {
-          which: 116,
-          keyCode: 116,
-        },
-      };
+          'tab': {
+            'which': 0,
+            'keyCode': 9
+          },
+          'enter': {
+            'which': 13,
+            'keyCode': 13
+          },
+          'end': {
+            'which': 0,
+            'keyCode': 35
+          },
+          'home': {
+            'which': 0,
+            'keyCode': 36
+          },
+          'leftarrow': {
+            'which': 0,
+            'keyCode': 37
+          },
+          'uparrow': {
+            'which': 0,
+            'keyCode': 38
+          },
+          'rightarrow': {
+            'which': 0,
+            'keyCode': 39
+          },
+          'downarrow': {
+            'which': 0,
+            'keyCode': 40
+          },
+          'F5': {
+            'which': 116,
+            'keyCode': 116
+          }
+        };
       return utils.getMatchingKey(which, keyCode, keys);
     };
     //
@@ -281,21 +275,16 @@
     // Iterates over each property of object or array.
     //
     utils.forEach = function (collection, callback, thisArg) {
-      if (collection.hasOwnProperty("length")) {
+      if (collection.hasOwnProperty('length')) {
         for (var index = 0, len = collection.length; index < len; index++) {
-          if (
-            callback.call(thisArg, collection[index], index, collection) ===
-            false
-          ) {
+          if (callback.call(thisArg, collection[index], index, collection) === false) {
             break;
           }
         }
       } else {
         for (var key in collection) {
           if (collection.hasOwnProperty(key)) {
-            if (
-              callback.call(thisArg, collection[key], key, collection) === false
-            ) {
+            if (callback.call(thisArg, collection[key], key, collection) === false) {
               break;
             }
           }
@@ -304,22 +293,22 @@
     };
     // Expose
     return utils;
-  })();
-  /*
-   * pattern-matcher.js
-   *
-   * Parses a pattern specification and determines appropriate pattern for an
-   * input string
-   *
-   */
-  var patternMatcher = (function (pattern, utils) {
+  }();
+/*
+* pattern-matcher.js
+*
+* Parses a pattern specification and determines appropriate pattern for an
+* input string
+*
+*/
+var patternMatcher = function (pattern, utils) {
     //
     // Parse a matcher string into a RegExp. Accepts valid regular
     // expressions and the catchall '*'.
     // @private
     //
     var parseMatcher = function (matcher) {
-      if (matcher === "*") {
+      if (matcher === '*') {
         return /.*/;
       }
       return new RegExp(matcher);
@@ -333,14 +322,12 @@
     //  ...
     // ]
     function patternMatcher(patternSpec) {
-      var matchers = [],
-        patterns = [];
+      var matchers = [], patterns = [];
       // Iterate over each pattern in order.
       utils.forEach(patternSpec, function (patternMatcher) {
         // Process single property object to obtain pattern and matcher.
         utils.forEach(patternMatcher, function (patternStr, matcherStr) {
-          var parsedPattern = pattern.parse(patternStr),
-            regExpMatcher = parseMatcher(matcherStr);
+          var parsedPattern = pattern.parse(patternStr), regExpMatcher = parseMatcher(matcherStr);
           matchers.push(regExpMatcher);
           patterns.push(parsedPattern);
           // Stop after one iteration.
@@ -360,19 +347,19 @@
       return {
         getPattern: getPattern,
         patterns: patterns,
-        matchers: matchers,
+        matchers: matchers
       };
     }
     // Expose
     return patternMatcher;
-  })(pattern, utils);
-  /*
-   * inpt-sel.js
-   *
-   * Cross browser implementation to get and set input selections
-   *
-   */
-  var inptSel = (function () {
+  }(pattern, utils);
+/*
+ * inpt-sel.js
+ *
+ * Cross browser implementation to get and set input selections
+ *
+ */
+var inptSel = function () {
     // Define module
     var inptSel = {};
     //
@@ -381,44 +368,42 @@
     //
     inptSel.get = function (el) {
       // If normal browser return with result
-      if (typeof el.selectionStart === "number") {
+      if (typeof el.selectionStart === 'number') {
         return {
           begin: el.selectionStart,
-          end: el.selectionEnd,
+          end: el.selectionEnd
         };
       }
       // Uh-Oh. We must be IE. Fun with TextRange!!
       var range = document.selection.createRange();
       // Determine if there is a selection
       if (range && range.parentElement() === el) {
-        var inputRange = el.createTextRange(),
-          endRange = el.createTextRange(),
-          length = el.value.length;
+        var inputRange = el.createTextRange(), endRange = el.createTextRange(), length = el.value.length;
         // Create a working TextRange for the input selection
         inputRange.moveToBookmark(range.getBookmark());
         // Move endRange begin pos to end pos (hence endRange)
         endRange.collapse(false);
         // If we are at the very end of the input, begin and end
         // must both be the length of the el.value
-        if (inputRange.compareEndPoints("StartToEnd", endRange) > -1) {
+        if (inputRange.compareEndPoints('StartToEnd', endRange) > -1) {
           return {
             begin: length,
-            end: length,
+            end: length
           };
         }
-        // Note: moveStart usually returns the units moved, which
+        // Note: moveStart usually returns the units moved, which 
         // one may think is -length, however, it will stop when it
         // gets to the begin of the range, thus giving us the
         // negative value of the pos.
         return {
-          begin: -inputRange.moveStart("character", -length),
-          end: -inputRange.moveEnd("character", -length),
+          begin: -inputRange.moveStart('character', -length),
+          end: -inputRange.moveEnd('character', -length)
         };
       }
       //Return 0's on no selection data
       return {
         begin: 0,
-        end: 0,
+        end: 0
       };
     };
     //
@@ -426,10 +411,10 @@
     //
     inptSel.set = function (el, pos) {
       // Normalize pos
-      if (typeof pos !== "object") {
+      if (typeof pos !== 'object') {
         pos = {
           begin: pos,
-          end: pos,
+          end: pos
         };
       }
       // If normal browser
@@ -439,33 +424,33 @@
       } else if (el.createTextRange) {
         var range = el.createTextRange();
         range.collapse(true);
-        range.moveEnd("character", pos.end);
-        range.moveStart("character", pos.begin);
+        range.moveEnd('character', pos.end);
+        range.moveStart('character', pos.begin);
         range.select();
       }
     };
     // Expose
     return inptSel;
-  })();
-  /*
-   * formatter.js
-   *
-   * Class used to format input based on passed pattern
-   *
-   */
-  var formatter = (function (patternMatcher, inptSel, utils) {
+  }();
+/*
+ * formatter.js
+ *
+ * Class used to format input based on passed pattern
+ *
+ */
+var formatter = function (patternMatcher, inptSel, utils) {
     // Defaults
     var defaults = {
-      persistent: false,
-      repeat: false,
-      placeholder: " ",
-    };
+        persistent: false,
+        repeat: false,
+        placeholder: ' '
+      };
     // Regexs for input validation
     var inptRegs = {
-      9: /[0-9]/,
-      a: /[A-Za-z]/,
-      "*": /[A-Za-z0-9]/,
-    };
+        '9': /[0-9]/,
+        'a': /[A-Za-z]/,
+        '*': /[A-Za-z0-9]/
+      };
     //
     // Class Constructor - Called with new Formatter(el, opts)
     // Responsible for setting up required instance variables, and
@@ -477,18 +462,18 @@
       // Make sure we have an element. Make accesible to instance
       self.el = el;
       if (!self.el) {
-        throw new TypeError("Must provide an existing element");
+        throw new TypeError('Must provide an existing element');
       }
       // Merge opts with defaults
       self.opts = utils.extend({}, defaults, opts);
       // 1 pattern is special case
-      if (typeof self.opts.pattern !== "undefined") {
+      if (typeof self.opts.pattern !== 'undefined') {
         self.opts.patterns = self._specFromSinglePattern(self.opts.pattern);
         delete self.opts.pattern;
       }
       // Make sure we have valid opts
-      if (typeof self.opts.patterns === "undefined") {
-        throw new TypeError("Must provide a pattern or array of patterns");
+      if (typeof self.opts.patterns === 'undefined') {
+        throw new TypeError('Must provide a pattern or array of patterns');
       }
       self.patternMatcher = patternMatcher(self.opts.patterns);
       // Upate pattern with initial value
@@ -497,28 +482,28 @@
       self.hldrs = {};
       self.focus = 0;
       // Add Listeners
-      utils.addListener(self.el, "keydown", function (evt) {
+      utils.addListener(self.el, 'keydown', function (evt) {
         self._keyDown(evt);
       });
-      utils.addListener(self.el, "keypress", function (evt) {
+      utils.addListener(self.el, 'keypress', function (evt) {
         self._keyPress(evt);
       });
-      utils.addListener(self.el, "paste", function (evt) {
+      utils.addListener(self.el, 'paste', function (evt) {
         self._paste(evt);
       });
       // Persistence
       if (self.opts.persistent) {
         // Format on start
-        self._processKey("", false);
+        self._processKey('', false);
         self.el.blur();
         // Add Listeners
-        utils.addListener(self.el, "focus", function (evt) {
+        utils.addListener(self.el, 'focus', function (evt) {
           self._focus(evt);
         });
-        utils.addListener(self.el, "click", function (evt) {
+        utils.addListener(self.el, 'click', function (evt) {
           self._focus(evt);
         });
-        utils.addListener(self.el, "touchstart", function (evt) {
+        utils.addListener(self.el, 'touchstart', function (evt) {
           self._focus(evt);
         });
       }
@@ -536,9 +521,7 @@
     //
     Formatter.prototype.resetPattern = function (str) {
       // Update opts to hold new pattern
-      this.opts.patterns = str
-        ? this._specFromSinglePattern(str)
-        : this.opts.patterns;
+      this.opts.patterns = str ? this._specFromSinglePattern(str) : this.opts.patterns;
       // Get current state
       this.sel = inptSel.get(this.el);
       this.val = this.el.value;
@@ -553,7 +536,7 @@
       this.chars = newPattern.chars;
       this.inpts = newPattern.inpts;
       // Format on start
-      this._processKey("", false, true);
+      this._processKey('', false, true);
     };
     //
     // @private
@@ -599,11 +582,7 @@
       k = evt.which || evt.keyCode;
       isSpecial = utils.isSpecialKeyPress(evt.which, evt.keyCode);
       // Process the keyCode and prevent default
-      if (
-        !utils.isDelKeyPress(evt.which, evt.keyCode) &&
-        !isSpecial &&
-        !utils.isModifier(evt)
-      ) {
+      if (!utils.isDelKeyPress(evt.which, evt.keyCode) && !isSpecial && !utils.isModifier(evt)) {
         this._processKey(String.fromCharCode(k), false);
         return utils.preventDefault(evt);
       }
@@ -628,8 +607,7 @@
         // Grab selection
         var selection = inptSel.get(self.el);
         // Char check
-        var isAfterStart = selection.end > self.focus,
-          isFirstChar = selection.end === 0;
+        var isAfterStart = selection.end > self.focus, isFirstChar = selection.end === 0;
         // If clicked in front of start, refocus to start
         if (isAfterStart || isFirstChar) {
           inptSel.set(self.el, self.focus);
@@ -713,7 +691,7 @@
       // Set value and adhere to maxLength
       this.el.value = this.val.substr(0, this.mLength);
       // Set new caret position
-      if (typeof ignoreCaret === "undefined" || ignoreCaret === false) {
+      if (typeof ignoreCaret === 'undefined' || ignoreCaret === false) {
         inptSel.set(this.el, this.newPos);
       }
     };
@@ -731,15 +709,12 @@
       // Loop through all possible char positions
       for (var i = 0; i <= this.mLength; i++) {
         // Get transformed position
-        var curChar = this.chars[i],
-          curHldr = this.hldrs[i],
-          pos = i + shift,
-          val;
+        var curChar = this.chars[i], curHldr = this.hldrs[i], pos = i + shift, val;
         // If after selection we need to account for delta
         pos = i >= this.sel.begin ? pos + this.delta : pos;
         val = this.val.charAt(pos);
         // Remove char and account for shift
-        if ((curChar && curChar === val) || (curHldr && curHldr === val)) {
+        if (curChar && curChar === val || curHldr && curHldr === val) {
           this.val = utils.removeChars(this.val, pos, pos + 1);
           shift--;
         }
@@ -759,10 +734,7 @@
         // Get char inpt type
         var inptType = this.inpts[i];
         // Checks
-        var isBadType = !inptRegs[inptType],
-          isInvalid =
-            !isBadType && !inptRegs[inptType].test(this.val.charAt(i)),
-          inBounds = this.inpts[i];
+        var isBadType = !inptRegs[inptType], isInvalid = !isBadType && !inptRegs[inptType].test(this.val.charAt(i)), inBounds = this.inpts[i];
         // Remove if incorrect and inbounds
         if ((isBadType || isInvalid) && inBounds) {
           this.val = utils.removeChars(this.val, i, i + 1);
@@ -817,7 +789,10 @@
       }
       // If chars are added in between the old pos and new pos
       // we need to increment pos and delta
-      if (utils.isBetween(i, [this.sel.begin - 1, this.newPos + 1])) {
+      if (utils.isBetween(i, [
+          this.sel.begin - 1,
+          this.newPos + 1
+        ])) {
         this.newPos++;
         this.delta++;
       }
@@ -839,44 +814,48 @@
     // has exactly one catch all pattern.
     //
     Formatter.prototype._specFromSinglePattern = function (patternStr) {
-      return [{ "*": patternStr }];
+      return [{ '*': patternStr }];
     };
     // Expose
     return Formatter;
-  })(patternMatcher, inptSel, utils);
+  }(patternMatcher, inptSel, utils);
 
-  // A really lightweight plugin wrapper around the constructor,
-  // preventing against multiple instantiations
-  var pluginName = "formatter";
 
-  $.fn[pluginName] = function (options) {
-    // Initiate plugin if options passed
-    if (typeof options == "object") {
-      this.each(function () {
-        if (!$.data(this, "plugin_" + pluginName)) {
-          $.data(this, "plugin_" + pluginName, new formatter(this, options));
-        }
-      });
-    }
 
-    // Add resetPattern method to plugin
-    this.resetPattern = function (str) {
-      this.each(function () {
-        var formatted = $.data(this, "plugin_" + pluginName);
-        // resetPattern for instance
-        if (formatted) {
-          formatted.resetPattern(str);
-        }
-      });
-      // Chainable please
-      return this;
-    };
+// A really lightweight plugin wrapper around the constructor,
+// preventing against multiple instantiations
+var pluginName = 'formatter';
 
+$.fn[pluginName] = function (options) {
+
+  // Initiate plugin if options passed
+  if (typeof options == 'object') {
+    this.each(function () {
+      if (!$.data(this, 'plugin_' + pluginName)) {
+        $.data(this, 'plugin_' + pluginName,
+        new formatter(this, options));
+      }
+    });
+  }
+
+  // Add resetPattern method to plugin
+  this.resetPattern = function (str) {
+    this.each(function () {
+      var formatted = $.data(this, 'plugin_' + pluginName);
+      // resetPattern for instance
+      if (formatted) { formatted.resetPattern(str); }
+    });
     // Chainable please
     return this;
   };
 
-  $.fn[pluginName].addInptType = function (chr, regexp) {
-    formatter.addInptType(chr, regexp);
-  };
-});
+  // Chainable please
+  return this;
+};
+
+$.fn[pluginName].addInptType = function (chr, regexp) {
+  formatter.addInptType(chr, regexp);
+};
+
+
+}));

@@ -1,6 +1,9 @@
 {
   "name": "bootstrap-daterangepicker",
-  "main": ["daterangepicker.js", "daterangepicker.css"],
+  "main": [
+    "daterangepicker.js",
+    "daterangepicker.css"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",

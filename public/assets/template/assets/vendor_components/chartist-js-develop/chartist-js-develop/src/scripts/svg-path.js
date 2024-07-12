@@ -4,8 +4,8 @@
  * @module Chartist.Svg.Path
  */
 /* global Chartist */
-(function (globalRoot, Chartist) {
-  "use strict";
+(function(globalRoot, Chartist) {
+  'use strict';
 
   /**
    * Contains the descriptors of supported element types in a SVG path. Currently only move, line and curve are supported.
@@ -14,10 +14,10 @@
    * @type {Object}
    */
   var elementDescriptions = {
-    m: ["x", "y"],
-    l: ["x", "y"],
-    c: ["x1", "y1", "x2", "y2", "x", "y"],
-    a: ["rx", "ry", "xAr", "lAf", "sf", "x", "y"],
+    m: ['x', 'y'],
+    l: ['x', 'y'],
+    c: ['x1', 'y1', 'x2', 'y2', 'x', 'y'],
+    a: ['rx', 'ry', 'xAr', 'lAf', 'sf', 'x', 'y']
   };
 
   /**
@@ -28,34 +28,22 @@
    */
   var defaultOptions = {
     // The accuracy in digit count after the decimal point. This will be used to round numbers in the SVG path. If this option is set to false then no rounding will be performed.
-    accuracy: 3,
+    accuracy: 3
   };
 
   function element(command, params, pathElements, pos, relative, data) {
-    var pathElement = Chartist.extend(
-      {
-        command: relative ? command.toLowerCase() : command.toUpperCase(),
-      },
-      params,
-      data ? { data: data } : {},
-    );
+    var pathElement = Chartist.extend({
+      command: relative ? command.toLowerCase() : command.toUpperCase()
+    }, params, data ? { data: data } : {} );
 
     pathElements.splice(pos, 0, pathElement);
   }
 
   function forEachParam(pathElements, cb) {
-    pathElements.forEach(function (pathElement, pathElementIndex) {
-      elementDescriptions[pathElement.command.toLowerCase()].forEach(
-        function (paramName, paramIndex) {
-          cb(
-            pathElement,
-            paramName,
-            pathElementIndex,
-            paramIndex,
-            pathElements,
-          );
-        },
-      );
+    pathElements.forEach(function(pathElement, pathElementIndex) {
+      elementDescriptions[pathElement.command.toLowerCase()].forEach(function(paramName, paramIndex) {
+        cb(pathElement, paramName, pathElementIndex, paramIndex, pathElements);
+      });
     });
   }
 
@@ -82,7 +70,7 @@
    * @return {Chartist.Svg.Path|Number} If the position parameter was passed then the return value will be the path object for easy call chaining. If no position parameter was passed then the current position is returned.
    */
   function position(pos) {
-    if (pos !== undefined) {
+    if(pos !== undefined) {
       this.pos = Math.max(0, Math.min(this.pathElements.length, pos));
       return this;
     } else {
@@ -113,17 +101,10 @@
    * @return {Chartist.Svg.Path} The current path object for easy call chaining.
    */
   function move(x, y, relative, data) {
-    element(
-      "M",
-      {
-        x: +x,
-        y: +y,
-      },
-      this.pathElements,
-      this.pos++,
-      relative,
-      data,
-    );
+    element('M', {
+      x: +x,
+      y: +y
+    }, this.pathElements, this.pos++, relative, data);
     return this;
   }
 
@@ -138,17 +119,10 @@
    * @return {Chartist.Svg.Path} The current path object for easy call chaining.
    */
   function line(x, y, relative, data) {
-    element(
-      "L",
-      {
-        x: +x,
-        y: +y,
-      },
-      this.pathElements,
-      this.pos++,
-      relative,
-      data,
-    );
+    element('L', {
+      x: +x,
+      y: +y
+    }, this.pathElements, this.pos++, relative, data);
     return this;
   }
 
@@ -167,21 +141,14 @@
    * @return {Chartist.Svg.Path} The current path object for easy call chaining.
    */
   function curve(x1, y1, x2, y2, x, y, relative, data) {
-    element(
-      "C",
-      {
-        x1: +x1,
-        y1: +y1,
-        x2: +x2,
-        y2: +y2,
-        x: +x,
-        y: +y,
-      },
-      this.pathElements,
-      this.pos++,
-      relative,
-      data,
-    );
+    element('C', {
+      x1: +x1,
+      y1: +y1,
+      x2: +x2,
+      y2: +y2,
+      x: +x,
+      y: +y
+    }, this.pathElements, this.pos++, relative, data);
     return this;
   }
 
@@ -201,22 +168,15 @@
    * @return {Chartist.Svg.Path} The current path object for easy call chaining.
    */
   function arc(rx, ry, xAr, lAf, sf, x, y, relative, data) {
-    element(
-      "A",
-      {
-        rx: +rx,
-        ry: +ry,
-        xAr: +xAr,
-        lAf: +lAf,
-        sf: +sf,
-        x: +x,
-        y: +y,
-      },
-      this.pathElements,
-      this.pos++,
-      relative,
-      data,
-    );
+    element('A', {
+      rx: +rx,
+      ry: +ry,
+      xAr: +xAr,
+      lAf: +lAf,
+      sf: +sf,
+      x: +x,
+      y: +y
+    }, this.pathElements, this.pos++, relative, data);
     return this;
   }
 
@@ -229,12 +189,11 @@
    */
   function parse(path) {
     // Parsing the SVG path string into an array of arrays [['M', '10', '10'], ['L', '100', '100']]
-    var chunks = path
-      .replace(/([A-Za-z])([0-9])/g, "$1 $2")
-      .replace(/([0-9])([A-Za-z])/g, "$1 $2")
+    var chunks = path.replace(/([A-Za-z])([0-9])/g, '$1 $2')
+      .replace(/([0-9])([A-Za-z])/g, '$1 $2')
       .split(/[\s,]+/)
-      .reduce(function (result, element) {
-        if (element.match(/[A-Za-z]/)) {
+      .reduce(function(result, element) {
+        if(element.match(/[A-Za-z]/)) {
           result.push([]);
         }
 
@@ -243,26 +202,23 @@
       }, []);
 
     // If this is a closed path we remove the Z at the end because this is determined by the close option
-    if (chunks[chunks.length - 1][0].toUpperCase() === "Z") {
+    if(chunks[chunks.length - 1][0].toUpperCase() === 'Z') {
       chunks.pop();
     }
 
     // Using svgPathElementDescriptions to map raw path arrays into objects that contain the command and the parameters
     // For example {command: 'M', x: '10', y: '10'}
-    var elements = chunks.map(function (chunk) {
-      var command = chunk.shift(),
-        description = elementDescriptions[command.toLowerCase()];
+    var elements = chunks.map(function(chunk) {
+        var command = chunk.shift(),
+          description = elementDescriptions[command.toLowerCase()];
 
-      return Chartist.extend(
-        {
-          command: command,
-        },
-        description.reduce(function (result, paramName, index) {
+        return Chartist.extend({
+          command: command
+        }, description.reduce(function(result, paramName, index) {
           result[paramName] = +chunk[index];
           return result;
-        }, {}),
-      );
-    });
+        }, {}));
+      });
 
     // Preparing a splice call with the elements array as var arg params and insert the parsed elements at the current position
     var spliceArgs = [this.pos, 0];
@@ -283,25 +239,15 @@
   function stringify() {
     var accuracyMultiplier = Math.pow(10, this.options.accuracy);
 
-    return (
-      this.pathElements.reduce(
-        function (path, pathElement) {
-          var params = elementDescriptions[
-            pathElement.command.toLowerCase()
-          ].map(
-            function (paramName) {
-              return this.options.accuracy
-                ? Math.round(pathElement[paramName] * accuracyMultiplier) /
-                    accuracyMultiplier
-                : pathElement[paramName];
-            }.bind(this),
-          );
+    return this.pathElements.reduce(function(path, pathElement) {
+        var params = elementDescriptions[pathElement.command.toLowerCase()].map(function(paramName) {
+          return this.options.accuracy ?
+            (Math.round(pathElement[paramName] * accuracyMultiplier) / accuracyMultiplier) :
+            pathElement[paramName];
+        }.bind(this));
 
-          return path + pathElement.command + params.join(",");
-        }.bind(this),
-        "",
-      ) + (this.close ? "Z" : "")
-    );
+        return path + pathElement.command + params.join(',');
+      }.bind(this), '') + (this.close ? 'Z' : '');
   }
 
   /**
@@ -313,8 +259,8 @@
    * @return {Chartist.Svg.Path} The current path object for easy call chaining.
    */
   function scale(x, y) {
-    forEachParam(this.pathElements, function (pathElement, paramName) {
-      pathElement[paramName] *= paramName[0] === "x" ? x : y;
+    forEachParam(this.pathElements, function(pathElement, paramName) {
+      pathElement[paramName] *= paramName[0] === 'x' ? x : y;
     });
     return this;
   }
@@ -328,8 +274,8 @@
    * @return {Chartist.Svg.Path} The current path object for easy call chaining.
    */
   function translate(x, y) {
-    forEachParam(this.pathElements, function (pathElement, paramName) {
-      pathElement[paramName] += paramName[0] === "x" ? x : y;
+    forEachParam(this.pathElements, function(pathElement, paramName) {
+      pathElement[paramName] += paramName[0] === 'x' ? x : y;
     });
     return this;
   }
@@ -347,27 +293,12 @@
    * @return {Chartist.Svg.Path} The current path object for easy call chaining.
    */
   function transform(transformFnc) {
-    forEachParam(
-      this.pathElements,
-      function (
-        pathElement,
-        paramName,
-        pathElementIndex,
-        paramIndex,
-        pathElements,
-      ) {
-        var transformed = transformFnc(
-          pathElement,
-          paramName,
-          pathElementIndex,
-          paramIndex,
-          pathElements,
-        );
-        if (transformed || transformed === 0) {
-          pathElement[paramName] = transformed;
-        }
-      },
-    );
+    forEachParam(this.pathElements, function(pathElement, paramName, pathElementIndex, paramIndex, pathElements) {
+      var transformed = transformFnc(pathElement, paramName, pathElementIndex, paramIndex, pathElements);
+      if(transformed || transformed === 0) {
+        pathElement[paramName] = transformed;
+      }
+    });
     return this;
   }
 
@@ -381,11 +312,9 @@
   function clone(close) {
     var c = new Chartist.Svg.Path(close || this.close);
     c.pos = this.pos;
-    c.pathElements = this.pathElements
-      .slice()
-      .map(function cloneElements(pathElement) {
-        return Chartist.extend({}, pathElement);
-      });
+    c.pathElements = this.pathElements.slice().map(function cloneElements(pathElement) {
+      return Chartist.extend({}, pathElement);
+    });
     c.options = Chartist.extend({}, this.options);
     return c;
   }
@@ -398,13 +327,12 @@
    * @return {Array<Chartist.Svg.Path>}
    */
   function splitByCommand(command) {
-    var split = [new Chartist.Svg.Path()];
+    var split = [
+      new Chartist.Svg.Path()
+    ];
 
-    this.pathElements.forEach(function (pathElement) {
-      if (
-        pathElement.command === command.toUpperCase() &&
-        split[split.length - 1].pathElements.length !== 0
-      ) {
+    this.pathElements.forEach(function(pathElement) {
+      if(pathElement.command === command.toUpperCase() && split[split.length - 1].pathElements.length !== 0) {
         split.push(new Chartist.Svg.Path());
       }
 
@@ -426,9 +354,9 @@
 
   function join(paths, close, options) {
     var joinedPath = new Chartist.Svg.Path(close, options);
-    for (var i = 0; i < paths.length; i++) {
+    for(var i = 0; i < paths.length; i++) {
       var path = paths[i];
-      for (var j = 0; j < path.pathElements.length; j++) {
+      for(var j = 0; j < path.pathElements.length; j++) {
         joinedPath.pathElements.push(path.pathElements[j]);
       }
     }
@@ -449,9 +377,9 @@
     parse: parse,
     stringify: stringify,
     clone: clone,
-    splitByCommand: splitByCommand,
+    splitByCommand: splitByCommand
   });
 
   Chartist.Svg.Path.elementDescriptions = elementDescriptions;
   Chartist.Svg.Path.join = join;
-})(this, Chartist);
+}(this, Chartist));

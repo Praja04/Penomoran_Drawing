@@ -2,7 +2,7 @@
 
 .anchorjs-link {
   color: inherit;
-  transition: all 0.16s linear;
+  transition: all .16s linear;
   text-decoration: none;
 
   &:link,
@@ -17,7 +17,7 @@
 }
 
 *:hover > .anchorjs-link {
-  opacity: 0.5;
+  opacity: .5;
   margin-left: -0.9em !important;
 }
 

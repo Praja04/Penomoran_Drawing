@@ -12,6 +12,10 @@
   "eqnull": true,
   "browser": true,
 
-  "predef": ["define", "module", "mfp"],
+  "predef": [
+    "define",
+    "module",
+    "mfp"
+  ],
   "jquery": true
 }

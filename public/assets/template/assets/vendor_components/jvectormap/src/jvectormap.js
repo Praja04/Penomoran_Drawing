@@ -2,12 +2,13 @@
  * @namespace jvm Holds core methods and classes used by jVectorMap.
  */
 var jvm = {
+
   /**
    * Inherits child's prototype from the parent's one.
    * @param {Function} child
    * @param {Function} parent
    */
-  inherits: function (child, parent) {
+  inherits: function(child, parent) {
     function temp() {}
     temp.prototype = parent.prototype;
     child.prototype = new temp();
@@ -20,7 +21,7 @@ var jvm = {
    * @param {Function} target
    * @param {Function} source
    */
-  mixin: function (target, source) {
+  mixin: function(target, source){
     var prop;
 
     for (prop in source.prototype) {
@@ -30,9 +31,9 @@ var jvm = {
     }
   },
 
-  min: function (values) {
+  min: function(values){
     var min = Number.MAX_VALUE,
-      i;
+        i;
 
     if (values instanceof Array) {
       for (i = 0; i < values.length; i++) {
@@ -50,9 +51,9 @@ var jvm = {
     return min;
   },
 
-  max: function (values) {
+  max: function(values){
     var max = Number.MIN_VALUE,
-      i;
+        i;
 
     if (values instanceof Array) {
       for (i = 0; i < values.length; i++) {
@@ -70,9 +71,9 @@ var jvm = {
     return max;
   },
 
-  keys: function (object) {
+  keys: function(object){
     var keys = [],
-      key;
+        key;
 
     for (key in object) {
       keys.push(key);
@@ -80,10 +81,10 @@ var jvm = {
     return keys;
   },
 
-  values: function (object) {
+  values: function(object){
     var values = [],
-      key,
-      i;
+        key,
+        i;
 
     for (i = 0; i < arguments.length; i++) {
       object = arguments[i];
@@ -94,25 +95,23 @@ var jvm = {
     return values;
   },
 
-  whenImageLoaded: function (url) {
+  whenImageLoaded: function(url){
     var deferred = new jvm.$.Deferred(),
-      img = jvm.$("<img/>");
+        img = jvm.$('<img/>');
 
-    img
-      .error(function () {
-        deferred.reject();
-      })
-      .load(function () {
-        deferred.resolve(img);
-      });
-    img.attr("src", url);
+    img.error(function(){
+      deferred.reject();
+    }).load(function(){
+      deferred.resolve(img);
+    });
+    img.attr('src', url);
 
     return deferred;
   },
 
-  isImageUrl: function (s) {
+  isImageUrl: function(s){
     return /\.\w{3,4}$/.test(s);
-  },
+  }
 };
 
 jvm.$ = jQuery;
@@ -123,6 +122,7 @@ jvm.$ = jQuery;
  */
 if (!Array.prototype.indexOf) {
   Array.prototype.indexOf = function (searchElement, fromIndex) {
+
     var k;
 
     // 1. Let O be the result of calling ToObject passing

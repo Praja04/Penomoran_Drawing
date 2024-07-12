@@ -9,16 +9,16 @@
  * @since       3.0.0
  */
 
-mixitup.CommandChangeLayout = function () {
-  mixitup.Base.call(this);
+mixitup.CommandChangeLayout = function() {
+    mixitup.Base.call(this);
 
-  this.callActions("beforeConstruct");
+    this.callActions('beforeConstruct');
 
-  this.containerClassName = "";
+    this.containerClassName = '';
 
-  this.callActions("afterConstruct");
+    this.callActions('afterConstruct');
 
-  h.seal(this);
+    h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.CommandChangeLayout);

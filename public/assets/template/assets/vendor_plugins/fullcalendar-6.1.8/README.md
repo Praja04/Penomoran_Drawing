@@ -1,3 +1,4 @@
+
 # FullCalendar
 
 Full-sized drag & drop calendar in JavaScript
@@ -33,19 +34,24 @@ npm install @fullcalendar/core @fullcalendar/interaction @fullcalendar/daygrid
 Instantiate a Calendar with plugins and options:
 
 ```js
-import { Calendar } from "@fullcalendar/core";
-import interactionPlugin from "@fullcalendar/interaction";
-import dayGridPlugin from "@fullcalendar/daygrid";
+import { Calendar } from '@fullcalendar/core'
+import interactionPlugin from '@fullcalendar/interaction'
+import dayGridPlugin from '@fullcalendar/daygrid'
 
-const calendarEl = document.getElementById("calendar");
+const calendarEl = document.getElementById('calendar')
 const calendar = new Calendar(calendarEl, {
-  plugins: [interactionPlugin, dayGridPlugin],
-  initialView: "timeGridWeek",
+  plugins: [
+    interactionPlugin,
+    dayGridPlugin
+  ],
+  initialView: 'timeGridWeek',
   editable: true,
-  events: [{ title: "Meeting", start: new Date() }],
-});
+  events: [
+    { title: 'Meeting', start: new Date() }
+  ]
+})
 
-calendar.render();
+calendar.render()
 ```
 
 ## Development

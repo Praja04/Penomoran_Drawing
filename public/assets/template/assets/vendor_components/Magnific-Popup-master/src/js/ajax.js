@@ -1,81 +1,77 @@
-var AJAX_NS = "ajax",
-  _ajaxCur,
-  _removeAjaxCursor = function () {
-    if (_ajaxCur) {
-      $(document.body).removeClass(_ajaxCur);
-    }
-  },
-  _destroyAjaxRequest = function () {
-    _removeAjaxCursor();
-    if (mfp.req) {
-      mfp.req.abort();
-    }
-  };
+var AJAX_NS = 'ajax',
+	_ajaxCur,
+	_removeAjaxCursor = function() {
+		if(_ajaxCur) {
+			$(document.body).removeClass(_ajaxCur);
+		}
+	},
+	_destroyAjaxRequest = function() {
+		_removeAjaxCursor();
+		if(mfp.req) {
+			mfp.req.abort();
+		}
+	};
 
 $.magnificPopup.registerModule(AJAX_NS, {
-  options: {
-    settings: null,
-    cursor: "mfp-ajax-cur",
-    tError: '<a href="%url%">The content</a> could not be loaded.',
-  },
 
-  proto: {
-    initAjax: function () {
-      mfp.types.push(AJAX_NS);
-      _ajaxCur = mfp.st.ajax.cursor;
+	options: {
+		settings: null,
+		cursor: 'mfp-ajax-cur',
+		tError: '<a href="%url%">The content</a> could not be loaded.'
+	},
 
-      _mfpOn(CLOSE_EVENT + "." + AJAX_NS, _destroyAjaxRequest);
-      _mfpOn("BeforeChange." + AJAX_NS, _destroyAjaxRequest);
-    },
-    getAjax: function (item) {
-      if (_ajaxCur) {
-        $(document.body).addClass(_ajaxCur);
-      }
+	proto: {
+		initAjax: function() {
+			mfp.types.push(AJAX_NS);
+			_ajaxCur = mfp.st.ajax.cursor;
 
-      mfp.updateStatus("loading");
+			_mfpOn(CLOSE_EVENT+'.'+AJAX_NS, _destroyAjaxRequest);
+			_mfpOn('BeforeChange.' + AJAX_NS, _destroyAjaxRequest);
+		},
+		getAjax: function(item) {
 
-      var opts = $.extend(
-        {
-          url: item.src,
-          success: function (data, textStatus, jqXHR) {
-            var temp = {
-              data: data,
-              xhr: jqXHR,
-            };
+			if(_ajaxCur) {
+				$(document.body).addClass(_ajaxCur);
+			}
 
-            _mfpTrigger("ParseAjax", temp);
+			mfp.updateStatus('loading');
 
-            mfp.appendContent($(temp.data), AJAX_NS);
+			var opts = $.extend({
+				url: item.src,
+				success: function(data, textStatus, jqXHR) {
+					var temp = {
+						data:data,
+						xhr:jqXHR
+					};
 
-            item.finished = true;
+					_mfpTrigger('ParseAjax', temp);
 
-            _removeAjaxCursor();
+					mfp.appendContent( $(temp.data), AJAX_NS );
 
-            mfp._setFocus();
+					item.finished = true;
 
-            setTimeout(function () {
-              mfp.wrap.addClass(READY_CLASS);
-            }, 16);
+					_removeAjaxCursor();
 
-            mfp.updateStatus("ready");
+					mfp._setFocus();
 
-            _mfpTrigger("AjaxContentAdded");
-          },
-          error: function () {
-            _removeAjaxCursor();
-            item.finished = item.loadError = true;
-            mfp.updateStatus(
-              "error",
-              mfp.st.ajax.tError.replace("%url%", item.src),
-            );
-          },
-        },
-        mfp.st.ajax.settings,
-      );
+					setTimeout(function() {
+						mfp.wrap.addClass(READY_CLASS);
+					}, 16);
 
-      mfp.req = $.ajax(opts);
+					mfp.updateStatus('ready');
 
-      return "";
-    },
-  },
+					_mfpTrigger('AjaxContentAdded');
+				},
+				error: function() {
+					_removeAjaxCursor();
+					item.finished = item.loadError = true;
+					mfp.updateStatus('error', mfp.st.ajax.tError.replace('%url%', item.src));
+				}
+			}, mfp.st.ajax.settings);
+
+			mfp.req = $.ajax(opts);
+
+			return '';
+		}
+	}
 });

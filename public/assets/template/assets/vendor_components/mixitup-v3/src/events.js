@@ -7,11 +7,11 @@
  * @since       3.0.0
  */
 
-mixitup.EventDetail = function () {
-  this.state = null;
-  this.futureState = null;
-  this.instance = null;
-  this.originalEvent = null;
+mixitup.EventDetail = function() {
+    this.state          = null;
+    this.futureState    = null;
+    this.instance       = null;
+    this.originalEvent  = null;
 };
 
 /**
@@ -35,82 +35,82 @@ mixitup.EventDetail = function () {
  * @since       3.0.0
  */
 
-mixitup.Events = function () {
-  mixitup.Base.call(this);
+mixitup.Events = function() {
+    mixitup.Base.call(this);
 
-  this.callActions("beforeConstruct");
+    this.callActions('beforeConstruct');
 
-  /**
-   * A custom event triggered immediately after any MixItUp operation is requested
-   * and before animations have begun.
-   *
-   * The `mixStart` event also exposes a `futureState` property via the
-   * `event.detail` object, which represents the final state of the mixer once
-   * the requested operation has completed.
-   *
-   * @name        mixStart
-   * @memberof    mixitup.Events
-   * @static
-   * @type        {CustomEvent}
-   */
+    /**
+     * A custom event triggered immediately after any MixItUp operation is requested
+     * and before animations have begun.
+     *
+     * The `mixStart` event also exposes a `futureState` property via the
+     * `event.detail` object, which represents the final state of the mixer once
+     * the requested operation has completed.
+     *
+     * @name        mixStart
+     * @memberof    mixitup.Events
+     * @static
+     * @type        {CustomEvent}
+     */
 
-  this.mixStart = null;
+    this.mixStart = null;
 
-  /**
-   * A custom event triggered when a MixItUp operation is requested while another
-   * operation is in progress, and the animation queue is full, or queueing
-   * is disabled.
-   *
-   * @name        mixBusy
-   * @memberof    mixitup.Events
-   * @static
-   * @type        {CustomEvent}
-   */
+    /**
+     * A custom event triggered when a MixItUp operation is requested while another
+     * operation is in progress, and the animation queue is full, or queueing
+     * is disabled.
+     *
+     * @name        mixBusy
+     * @memberof    mixitup.Events
+     * @static
+     * @type        {CustomEvent}
+     */
 
-  this.mixBusy = null;
+    this.mixBusy = null;
 
-  /**
-   * A custom event triggered after any MixItUp operation has completed, and the
-   * state has been updated.
-   *
-   * @name        mixEnd
-   * @memberof    mixitup.Events
-   * @static
-   * @type        {CustomEvent}
-   */
+    /**
+     * A custom event triggered after any MixItUp operation has completed, and the
+     * state has been updated.
+     *
+     * @name        mixEnd
+     * @memberof    mixitup.Events
+     * @static
+     * @type        {CustomEvent}
+     */
 
-  this.mixEnd = null;
+    this.mixEnd = null;
 
-  /**
-   * A custom event triggered whenever a filter operation "fails", i.e. no targets
-   * could be found matching the requested filter.
-   *
-   * @name        mixFail
-   * @memberof    mixitup.Events
-   * @static
-   * @type        {CustomEvent}
-   */
+    /**
+     * A custom event triggered whenever a filter operation "fails", i.e. no targets
+     * could be found matching the requested filter.
+     *
+     * @name        mixFail
+     * @memberof    mixitup.Events
+     * @static
+     * @type        {CustomEvent}
+     */
 
-  this.mixFail = null;
+    this.mixFail = null;
 
-  /**
-   * A custom event triggered whenever a MixItUp control is clicked, and before its
-   * respective operation is requested.
-   *
-   * This event also exposes an `originalEvent` property via the `event.detail`
-   * object, which holds a reference to the original click event.
-   *
-   * @name        mixClick
-   * @memberof    mixitup.Events
-   * @static
-   * @type        {CustomEvent}
-   */
+    /**
+     * A custom event triggered whenever a MixItUp control is clicked, and before its
+     * respective operation is requested.
+     *
+     * This event also exposes an `originalEvent` property via the `event.detail`
+     * object, which holds a reference to the original click event.
+     *
+     * @name        mixClick
+     * @memberof    mixitup.Events
+     * @static
+     * @type        {CustomEvent}
+     */
 
-  this.mixClick = null;
+    this.mixClick = null;
 
-  this.callActions("afterConstruct");
+    this.callActions('afterConstruct');
 
-  h.seal(this);
+    h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.Events);
@@ -127,38 +127,38 @@ mixitup.Events.prototype.constructor = mixitup.Events;
  * @param   {Document}    [doc]
  */
 
-mixitup.Events.prototype.fire = function (eventType, el, detail, doc) {
-  var self = this,
-    event = null,
-    eventDetail = new mixitup.EventDetail();
+mixitup.Events.prototype.fire = function(eventType, el, detail, doc) {
+    var self        = this,
+        event       = null,
+        eventDetail = new mixitup.EventDetail();
 
-  self.callActions("beforeFire", arguments);
+    self.callActions('beforeFire', arguments);
 
-  if (typeof self[eventType] === "undefined") {
-    throw new Error('Event type "' + eventType + '" not found.');
-  }
+    if (typeof self[eventType] === 'undefined') {
+        throw new Error('Event type "' + eventType + '" not found.');
+    }
 
-  eventDetail.state = new mixitup.State();
+    eventDetail.state = new mixitup.State();
 
-  h.extend(eventDetail.state, detail.state);
+    h.extend(eventDetail.state, detail.state);
 
-  if (detail.futureState) {
-    eventDetail.futureState = new mixitup.State();
+    if (detail.futureState) {
+        eventDetail.futureState = new mixitup.State();
 
-    h.extend(eventDetail.futureState, detail.futureState);
-  }
+        h.extend(eventDetail.futureState, detail.futureState);
+    }
 
-  eventDetail.instance = detail.instance;
+    eventDetail.instance = detail.instance;
 
-  if (detail.originalEvent) {
-    eventDetail.originalEvent = detail.originalEvent;
-  }
+    if (detail.originalEvent) {
+        eventDetail.originalEvent = detail.originalEvent;
+    }
 
-  event = h.getCustomEvent(eventType, eventDetail, doc);
+    event = h.getCustomEvent(eventType, eventDetail, doc);
 
-  self.callFilters("eventFire", event, arguments);
+    self.callFilters('eventFire', event, arguments);
 
-  el.dispatchEvent(event);
+    el.dispatchEvent(event);
 };
 
 // Asign a singleton instance to `mixitup.events`:

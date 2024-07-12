@@ -1,15 +1,11 @@
-{{#if button}}<a
-    href="#"
-    class="button"
-    data-toggle-visible="#{{id}}"
-  >{{button}}</a>{{/if}}
+{{#if button}}<a href="#" class="button" data-toggle-visible="#{{id}}">{{button}}</a>{{/if}}
 <table id="{{id}}" role="presentation">
   {{#if header}}
     <thead>
       <tr>
-        {{#each header}}
-          <th>{{this}}</th>
-        {{/each}}
+      {{#each header}}
+        <th>{{this}}</th>
+      {{/each}}
       </tr>
     </thead>
   {{/if}}

@@ -59,5 +59,4 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: 'Error: Undefined variable: "$wi-css-prefix".\A         on line 1 of scss/icons/weather-icons/sass/mappings/wi-wmo4680.scss\A \A 1: .#{$wi-css-prefix}-wmo4680-0:before,\A 2: .#{$wi-css-prefix}-wmo4680-00:before       { content: $thermometer           ; }\A 3: .#{$wi-css-prefix}-wmo4680-1:before,\A 4: .#{$wi-css-prefix}-wmo4680-01:before       { content: $cloudy                ; }\A 5: .#{$wi-css-prefix}-wmo4680-2:before,\A 6: .#{$wi-css-prefix}-wmo4680-02:before       { content: $thermometer           ; }';
-}
+  content: "Error: Undefined variable: \"$wi-css-prefix\".\A         on line 1 of scss/icons/weather-icons/sass/mappings/wi-wmo4680.scss\A \A 1: .#{$wi-css-prefix}-wmo4680-0:before,\A 2: .#{$wi-css-prefix}-wmo4680-00:before       { content: $thermometer           ; }\A 3: .#{$wi-css-prefix}-wmo4680-1:before,\A 4: .#{$wi-css-prefix}-wmo4680-01:before       { content: $cloudy                ; }\A 5: .#{$wi-css-prefix}-wmo4680-2:before,\A 6: .#{$wi-css-prefix}-wmo4680-02:before       { content: $thermometer           ; }"; }

@@ -64,5 +64,4 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: 'Error: Undefined variable: "$alien".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-misc.scss\A \A 1: .wi-alien:before {content: $alien;}\A 2: .wi-celsius:before {content: $celsius;}\A 3: .wi-fahrenheit:before {content: $fahrenheit;}\A 4: .wi-degrees:before {content: $degrees;}\A 5: .wi-thermometer:before {content: $thermometer;}\A 6: .wi-thermometer-exterior:before {content: $thermometer-exterior;}';
-}
+  content: "Error: Undefined variable: \"$alien\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-misc.scss\A \A 1: .wi-alien:before {content: $alien;}\A 2: .wi-celsius:before {content: $celsius;}\A 3: .wi-fahrenheit:before {content: $fahrenheit;}\A 4: .wi-degrees:before {content: $degrees;}\A 5: .wi-thermometer:before {content: $thermometer;}\A 6: .wi-thermometer-exterior:before {content: $thermometer-exterior;}"; }

@@ -50,8 +50,7 @@
   color: $color-yellow;
 }
 
-.cm-s-chartist span.cm-property,
-.cm-s-3024-day span.cm-attribute {
+.cm-s-chartist span.cm-property, .cm-s-3024-day span.cm-attribute {
   color: lighten($color-white, 10%);
 }
 

@@ -45,93 +45,86 @@
  *      A "mixer" object holding the MixItUp instance.
  */
 
-mixitup = function (container, config, foreignDoc) {
-  var el = null,
-    returnCollection = false,
-    instance = null,
-    facade = null,
-    doc = null,
-    output = null,
-    instances = [],
-    id = "",
-    elements = [],
-    i = -1;
+mixitup = function(container, config, foreignDoc) {
+    var el                  = null,
+        returnCollection    = false,
+        instance            = null,
+        facade              = null,
+        doc                 = null,
+        output              = null,
+        instances           = [],
+        id                  = '',
+        elements            = [],
+        i                   = -1;
 
-  doc = foreignDoc || window.document;
+    doc = foreignDoc || window.document;
 
-  if ((returnCollection = arguments[3])) {
-    // A non-documented 4th paramater enabling control of multiple instances
+    if (returnCollection = arguments[3]) {
+        // A non-documented 4th paramater enabling control of multiple instances
 
-    returnCollection = typeof returnCollection === "boolean";
-  }
-
-  if (typeof container === "string") {
-    elements = doc.querySelectorAll(container);
-  } else if (
-    container &&
-    typeof container === "object" &&
-    h.isElement(container, doc)
-  ) {
-    elements = [container];
-  } else if (container && typeof container === "object" && container.length) {
-    // Although not documented, the container may also be an array-like list of
-    // elements such as a NodeList or jQuery collection, is returnCollection is true
-
-    elements = container;
-  } else {
-    throw new Error(mixitup.messages.errorFactoryInvalidContainer());
-  }
-
-  if (elements.length < 1) {
-    throw new Error(mixitup.messages.errorFactoryContainerNotFound());
-  }
-
-  for (i = 0; (el = elements[i]); i++) {
-    if (i > 0 && !returnCollection) break;
-
-    if (!el.id) {
-      id = "MixItUp" + h.randomHex();
-
-      el.id = id;
-    } else {
-      id = el.id;
+        returnCollection = typeof returnCollection === 'boolean';
     }
 
-    if (mixitup.instances[id] instanceof mixitup.Mixer) {
-      instance = mixitup.instances[id];
+    if (typeof container === 'string') {
+        elements = doc.querySelectorAll(container);
+    } else if (container && typeof container === 'object' && h.isElement(container, doc)) {
+        elements = [container];
+    } else if (container && typeof container === 'object' && container.length) {
+        // Although not documented, the container may also be an array-like list of
+        // elements such as a NodeList or jQuery collection, is returnCollection is true
 
-      if (
-        !config ||
-        (config && config.debug && config.debug.showWarnings !== false)
-      ) {
-        console.warn(mixitup.messages.warningFactoryPreexistingInstance());
-      }
+        elements = container;
     } else {
-      instance = new mixitup.Mixer();
-
-      instance.attach(el, doc, id, config);
-
-      mixitup.instances[id] = instance;
+        throw new Error(mixitup.messages.errorFactoryInvalidContainer());
     }
 
-    facade = new mixitup.Facade(instance);
-
-    if (config && config.debug && config.debug.enable) {
-      instances.push(instance);
-    } else {
-      instances.push(facade);
+    if (elements.length < 1) {
+        throw new Error(mixitup.messages.errorFactoryContainerNotFound());
     }
-  }
 
-  if (returnCollection) {
-    output = new mixitup.Collection(instances);
-  } else {
-    // Return the first instance regardless
+    for (i = 0; el = elements[i]; i++) {
+        if (i > 0 && !returnCollection) break;
 
-    output = instances[0];
-  }
+        if (!el.id) {
+            id = 'MixItUp' + h.randomHex();
 
-  return output;
+            el.id = id;
+        } else {
+            id = el.id;
+        }
+
+        if (mixitup.instances[id] instanceof mixitup.Mixer) {
+            instance = mixitup.instances[id];
+
+            if (!config || (config && config.debug && config.debug.showWarnings !== false)) {
+                console.warn(mixitup.messages.warningFactoryPreexistingInstance());
+            }
+        } else {
+            instance = new mixitup.Mixer();
+
+            instance.attach(el, doc, id, config);
+
+            mixitup.instances[id] = instance;
+        }
+
+        facade = new mixitup.Facade(instance);
+
+        if (config && config.debug && config.debug.enable) {
+            instances.push(instance);
+        } else {
+            instances.push(facade);
+        }
+    }
+
+    if (returnCollection) {
+        output = new mixitup.Collection(instances);
+    } else {
+        // Return the first instance regardless
+
+        output = instances[0];
+    }
+
+    return output;
 };
 
 /**
@@ -166,32 +159,29 @@ mixitup = function (container, config, foreignDoc) {
  * @return   {void}
  */
 
-mixitup.use = function (extension) {
-  mixitup.Base.prototype.callActions.call(mixitup, "beforeUse", arguments);
+mixitup.use = function(extension) {
+    mixitup.Base.prototype.callActions.call(mixitup, 'beforeUse', arguments);
 
-  // Call the extension's factory function, passing
-  // the mixitup factory as a paramater
+    // Call the extension's factory function, passing
+    // the mixitup factory as a paramater
 
-  if (
-    typeof extension === "function" &&
-    extension.TYPE === "mixitup-extension"
-  ) {
-    // Mixitup extension
+    if (typeof extension === 'function' && extension.TYPE === 'mixitup-extension') {
+        // Mixitup extension
 
-    if (typeof mixitup.extensions[extension.NAME] === "undefined") {
-      extension(mixitup);
+        if (typeof mixitup.extensions[extension.NAME] === 'undefined') {
+            extension(mixitup);
 
-      mixitup.extensions[extension.NAME] = extension;
+            mixitup.extensions[extension.NAME] = extension;
+        }
+    } else if (extension.fn && extension.fn.jquery) {
+        // jQuery
+
+        mixitup.libraries.$ = extension;
     }
-  } else if (extension.fn && extension.fn.jquery) {
-    // jQuery
 
-    mixitup.libraries.$ = extension;
-  }
-
-  mixitup.Base.prototype.callActions.call(mixitup, "afterUse", arguments);
+    mixitup.Base.prototype.callActions.call(mixitup, 'afterUse', arguments);
 };
 
-mixitup.instances = {};
-mixitup.extensions = {};
-mixitup.libraries = {};
+mixitup.instances   = {};
+mixitup.extensions  = {};
+mixitup.libraries   = {};

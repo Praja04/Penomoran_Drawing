@@ -4,51 +4,51 @@
 # Use `grunt` in the root directory to select and run a specific task.
 
 default:
-  - "newer:jshint"
-  - "test"
-  - "build"
-  - "dev"
+  - 'newer:jshint'
+  - 'test'
+  - 'build'
+  - 'dev'
 
 # create the library
 build:
-  - "clean:dist"
-  - "sass:dist"
-  - "cssmin"
-  - "copy:dist"
-  - "concat:dist"
-  - "template:dist"
-  - "umd"
-  - "uglify:dist"
+  - 'clean:dist'
+  - 'sass:dist'
+  - 'cssmin'
+  - 'copy:dist'
+  - 'concat:dist'
+  - 'template:dist'
+  - 'umd'
+  - 'uglify:dist'
 
 # prepare the website
 public:
-  - "clean:public"
-  - "assemble"
-  - "useminPrepare"
-  - "concurrent:public"
-  - "concat:generated"
-  - "copy:public"
-  - "cssmin:generated"
-  - "uglify:generated"
-  - "usemin"
-  - "critical"
-  - "htmlmin"
+  - 'clean:public'
+  - 'assemble'
+  - 'useminPrepare'
+  - 'concurrent:public'
+  - 'concat:generated'
+  - 'copy:public'
+  - 'cssmin:generated'
+  - 'uglify:generated'
+  - 'usemin'
+  - 'critical'
+  - 'htmlmin'
 
 # tests
 test:
-  - "clean:tmp"
-  - "concurrent:test"
-  - "connect:test"
-  - "jasmine"
+  - 'clean:tmp'
+  - 'concurrent:test'
+  - 'connect:test'
+  - 'jasmine'
 
 # local version with livereload
 dev:
-  - "assemble"
-  - "sass:tmp"
-  - "connect:livereload"
-  - "watch"
+  - 'assemble'
+  - 'sass:tmp'
+  - 'connect:livereload'
+  - 'watch'
 
 # online version
 preview:
-  - "public"
-  - "connect:public"
+  - 'public'
+  - 'connect:public'

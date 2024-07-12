@@ -1,83 +1,75 @@
 define([
-  "../core",
-  "../core/parseHTML",
-  "../ajax",
-  "../traversing",
-  "../manipulation",
-  "../selector",
-  // Optional event/alias dependency
-  "../event/alias",
-], function (jQuery) {
-  // Keep a copy of the old load method
-  var _load = jQuery.fn.load;
+	"../core",
+	"../core/parseHTML",
+	"../ajax",
+	"../traversing",
+	"../manipulation",
+	"../selector",
+	// Optional event/alias dependency
+	"../event/alias"
+], function( jQuery ) {
 
-  /**
-   * Load a url into a page
-   */
-  jQuery.fn.load = function (url, params, callback) {
-    if (typeof url !== "string" && _load) {
-      return _load.apply(this, arguments);
-    }
+// Keep a copy of the old load method
+var _load = jQuery.fn.load;
 
-    var selector,
-      response,
-      type,
-      self = this,
-      off = url.indexOf(" ");
+/**
+ * Load a url into a page
+ */
+jQuery.fn.load = function( url, params, callback ) {
+	if ( typeof url !== "string" && _load ) {
+		return _load.apply( this, arguments );
+	}
 
-    if (off >= 0) {
-      selector = jQuery.trim(url.slice(off, url.length));
-      url = url.slice(0, off);
-    }
+	var selector, response, type,
+		self = this,
+		off = url.indexOf(" ");
 
-    // If it's a function
-    if (jQuery.isFunction(params)) {
-      // We assume that it's the callback
-      callback = params;
-      params = undefined;
+	if ( off >= 0 ) {
+		selector = jQuery.trim( url.slice( off, url.length ) );
+		url = url.slice( 0, off );
+	}
 
-      // Otherwise, build a param string
-    } else if (params && typeof params === "object") {
-      type = "POST";
-    }
+	// If it's a function
+	if ( jQuery.isFunction( params ) ) {
 
-    // If we have elements to modify, make the request
-    if (self.length > 0) {
-      jQuery
-        .ajax({
-          url: url,
+		// We assume that it's the callback
+		callback = params;
+		params = undefined;
 
-          // if "type" variable is undefined, then "GET" method will be used
-          type: type,
-          dataType: "html",
-          data: params,
-        })
-        .done(function (responseText) {
-          // Save response for use in complete callback
-          response = arguments;
+	// Otherwise, build a param string
+	} else if ( params && typeof params === "object" ) {
+		type = "POST";
+	}
 
-          self.html(
-            selector
-              ? // If a selector was specified, locate the right elements in a dummy div
-                // Exclude scripts to avoid IE 'Permission Denied' errors
-                jQuery("<div>")
-                  .append(jQuery.parseHTML(responseText))
-                  .find(selector)
-              : // Otherwise use the full result
-                responseText,
-          );
-        })
-        .complete(
-          callback &&
-            function (jqXHR, status) {
-              self.each(
-                callback,
-                response || [jqXHR.responseText, status, jqXHR],
-              );
-            },
-        );
-    }
+	// If we have elements to modify, make the request
+	if ( self.length > 0 ) {
+		jQuery.ajax({
+			url: url,
 
-    return this;
-  };
+			// if "type" variable is undefined, then "GET" method will be used
+			type: type,
+			dataType: "html",
+			data: params
+		}).done(function( responseText ) {
+
+			// Save response for use in complete callback
+			response = arguments;
+
+			self.html( selector ?
+
+				// If a selector was specified, locate the right elements in a dummy div
+				// Exclude scripts to avoid IE 'Permission Denied' errors
+				jQuery("<div>").append( jQuery.parseHTML( responseText ) ).find( selector ) :
+
+				// Otherwise use the full result
+				responseText );
+
+		}).complete( callback && function( jqXHR, status ) {
+			self.each( callback, response || [ jqXHR.responseText, status, jqXHR ] );
+		});
+	}
+
+	return this;
+};
+
 });

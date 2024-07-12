@@ -1,87 +1,93 @@
-define(["../core", "../ajax"], function (jQuery) {
-  // Install script dataType
-  jQuery.ajaxSetup({
-    accepts: {
-      script:
-        "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript",
-    },
-    contents: {
-      script: /(?:java|ecma)script/,
-    },
-    converters: {
-      "text script": function (text) {
-        jQuery.globalEval(text);
-        return text;
-      },
-    },
-  });
+define([
+	"../core",
+	"../ajax"
+], function( jQuery ) {
 
-  // Handle cache's special case and global
-  jQuery.ajaxPrefilter("script", function (s) {
-    if (s.cache === undefined) {
-      s.cache = false;
-    }
-    if (s.crossDomain) {
-      s.type = "GET";
-      s.global = false;
-    }
-  });
+// Install script dataType
+jQuery.ajaxSetup({
+	accepts: {
+		script: "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"
+	},
+	contents: {
+		script: /(?:java|ecma)script/
+	},
+	converters: {
+		"text script": function( text ) {
+			jQuery.globalEval( text );
+			return text;
+		}
+	}
+});
 
-  // Bind script tag hack transport
-  jQuery.ajaxTransport("script", function (s) {
-    // This transport only deals with cross domain requests
-    if (s.crossDomain) {
-      var script,
-        head = document.head || jQuery("head")[0] || document.documentElement;
+// Handle cache's special case and global
+jQuery.ajaxPrefilter( "script", function( s ) {
+	if ( s.cache === undefined ) {
+		s.cache = false;
+	}
+	if ( s.crossDomain ) {
+		s.type = "GET";
+		s.global = false;
+	}
+});
 
-      return {
-        send: function (_, callback) {
-          script = document.createElement("script");
+// Bind script tag hack transport
+jQuery.ajaxTransport( "script", function(s) {
 
-          script.async = true;
+	// This transport only deals with cross domain requests
+	if ( s.crossDomain ) {
 
-          if (s.scriptCharset) {
-            script.charset = s.scriptCharset;
-          }
+		var script,
+			head = document.head || jQuery("head")[0] || document.documentElement;
 
-          script.src = s.url;
+		return {
 
-          // Attach handlers for all browsers
-          script.onload = script.onreadystatechange = function (_, isAbort) {
-            if (
-              isAbort ||
-              !script.readyState ||
-              /loaded|complete/.test(script.readyState)
-            ) {
-              // Handle memory leak in IE
-              script.onload = script.onreadystatechange = null;
+			send: function( _, callback ) {
 
-              // Remove the script
-              if (script.parentNode) {
-                script.parentNode.removeChild(script);
-              }
+				script = document.createElement("script");
 
-              // Dereference the script
-              script = null;
+				script.async = true;
 
-              // Callback if not abort
-              if (!isAbort) {
-                callback(200, "success");
-              }
-            }
-          };
+				if ( s.scriptCharset ) {
+					script.charset = s.scriptCharset;
+				}
 
-          // Circumvent IE6 bugs with base elements (#2709 and #4378) by prepending
-          // Use native DOM manipulation to avoid our domManip AJAX trickery
-          head.insertBefore(script, head.firstChild);
-        },
+				script.src = s.url;
 
-        abort: function () {
-          if (script) {
-            script.onload(undefined, true);
-          }
-        },
-      };
-    }
-  });
+				// Attach handlers for all browsers
+				script.onload = script.onreadystatechange = function( _, isAbort ) {
+
+					if ( isAbort || !script.readyState || /loaded|complete/.test( script.readyState ) ) {
+
+						// Handle memory leak in IE
+						script.onload = script.onreadystatechange = null;
+
+						// Remove the script
+						if ( script.parentNode ) {
+							script.parentNode.removeChild( script );
+						}
+
+						// Dereference the script
+						script = null;
+
+						// Callback if not abort
+						if ( !isAbort ) {
+							callback( 200, "success" );
+						}
+					}
+				};
+
+				// Circumvent IE6 bugs with base elements (#2709 and #4378) by prepending
+				// Use native DOM manipulation to avoid our domManip AJAX trickery
+				head.insertBefore( script, head.firstChild );
+			},
+
+			abort: function() {
+				if ( script ) {
+					script.onload( undefined, true );
+				}
+			}
+		};
+	}
+});
+
 });

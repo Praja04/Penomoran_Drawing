@@ -1,12 +1,14 @@
-define([], function () {
-  function SelectOnClose() {}
+define([
+
+], function () {
+  function SelectOnClose () { }
 
   SelectOnClose.prototype.bind = function (decorated, container, $container) {
     var self = this;
 
     decorated.call(this, container, $container);
 
-    container.on("close", function (params) {
+    container.on('close', function (params) {
       self._handleSelectOnClose(params);
     });
   };
@@ -17,7 +19,7 @@ define([], function () {
 
       // Don't select an item if the close event was triggered from a select or
       // unselect event
-      if (event._type === "select" || event._type === "unselect") {
+      if (event._type === 'select' || event._type === 'unselect') {
         return;
       }
     }
@@ -29,7 +31,7 @@ define([], function () {
       return;
     }
 
-    var data = $highlightedResults.data("data");
+    var data = $highlightedResults.data('data');
 
     // Don't re-select already selected resulte
     if (
@@ -39,8 +41,8 @@ define([], function () {
       return;
     }
 
-    this.trigger("select", {
-      data: data,
+    this.trigger('select', {
+        data: data
     });
   };
 

@@ -7,7 +7,7 @@
  * Link: https://github.com/gruntjs/grunt-contrib-clean
  */
 
-"use strict";
+'use strict';
 
 module.exports = function (grunt) {
   return {
@@ -16,14 +16,14 @@ module.exports = function (grunt) {
         {
           dot: true,
           src: [
-            "<%= pkg.config.tmp %>",
-            "<%= pkg.config.public %>/*",
-            "!<%= pkg.config.public %>/.git*",
-          ],
-        },
-      ],
+            '<%= pkg.config.tmp %>',
+            '<%= pkg.config.public %>/*',
+            '!<%= pkg.config.public %>/.git*'
+          ]
+        }
+      ]
     },
-    tmp: "<%= pkg.config.tmp %>",
-    dist: "<%= pkg.config.dist %>",
+    tmp: '<%= pkg.config.tmp %>',
+    dist: '<%= pkg.config.dist %>'
   };
 };

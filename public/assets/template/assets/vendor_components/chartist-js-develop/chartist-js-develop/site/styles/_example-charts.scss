@@ -1,8 +1,5 @@
 #chartist-guy #chart-canvas {
-  @include ct-chart(
-    $ct-text-color: darken($color-white, 50%),
-    $ct-grid-color: darken($color-white, 20%)
-  );
+  @include ct-chart($ct-text-color: darken($color-white, 50%), $ct-grid-color: darken($color-white, 20%));
 
   .ct-series-a {
     .ct-point {
@@ -17,11 +14,7 @@
 }
 
 #example-line-months-interpolation {
-  @include ct-chart(
-    $ct-text-color: lighten($color-gray, 30%),
-    $ct-grid-color: lighten($color-gray, 5%),
-    $ct-grid-dasharray: 3px
-  );
+  @include ct-chart($ct-text-color: lighten($color-gray, 30%), $ct-grid-color: lighten($color-gray, 5%), $ct-grid-dasharray: 3px);
 
   .ct-series-a {
     .ct-point {
@@ -61,15 +54,11 @@
     animation: dashoffset 1s linear infinite;
   }
 
-  .ct-line.ct-threshold-above,
-  .ct-point.ct-threshold-above,
-  .ct-bar.ct-threshold-above {
+  .ct-line.ct-threshold-above, .ct-point.ct-threshold-above, .ct-bar.ct-threshold-above {
     stroke: #f05b4f;
   }
 
-  .ct-line.ct-threshold-below,
-  .ct-point.ct-threshold-below,
-  .ct-bar.ct-threshold-below {
+  .ct-line.ct-threshold-below, .ct-point.ct-threshold-below, .ct-bar.ct-threshold-below {
     stroke: #59922b;
   }
 
@@ -88,12 +77,12 @@
   }
 
   .ct-chart-donut .ct-series-b .ct-slice-donut {
-    stroke: rgba(0, 0, 0, 0.4);
-    opacity: 0;
+    stroke: rgba(0,0,0,.4);
+    opacity: 0.0;
   }
 
   .ct-chart-donut .ct-fill-donut .ct-slice-donut {
-    stroke: rgba(0, 0, 0, 0.4);
+    stroke: rgba(0,0,0,.4);
     opacity: 1;
   }
 
@@ -106,16 +95,18 @@
       font-size: 0.6em;
     }
 
+
     i {
       font-size: 1.5em;
     }
+
   }
 }
 #example-plugin-zoom {
   .ct-zoom-rect {
-    fill: rgba(200, 100, 100, 0.3);
-    stroke: red;
-  }
+		  fill: rgba(200, 100, 100, 0.3);
+		  stroke: red;
+	  }
 }
 #example-plugin-tooltip {
   .chart {
@@ -126,19 +117,18 @@
     position: absolute;
     display: block;
     min-width: 5em;
-    padding: 0.5em;
-    background: #f4c63d;
-    color: #453d3f;
-    font-family: Oxygen, Helvetica, Arial, sans-serif;
+    padding: .5em;
+    background: #F4C63D;
+    color: #453D3F;
+    font-family: Oxygen,Helvetica,Arial,sans-serif;
     font-weight: 700;
     text-align: center;
     pointer-events: none;
     z-index: 1;
-    -webkit-transition: opacity 0.2s linear;
-    -moz-transition: opacity 0.2s linear;
-    -o-transition: opacity 0.2s linear;
-    transition: opacity 0.2s linear;
-  }
+    -webkit-transition: opacity .2s linear;
+    -moz-transition: opacity .2s linear;
+    -o-transition: opacity .2s linear;
+    transition: opacity .2s linear; }
   .chartist-tooltip:before {
     content: "";
     position: absolute;
@@ -148,9 +138,7 @@
     height: 0;
     margin-left: -15px;
     border: 15px solid transparent;
-    border-top-color: #f4c63d;
-  }
+    border-top-color: #F4C63D; }
   .chartist-tooltip.tooltip-show {
-    opacity: 1;
-  }
+    opacity: 1; }
 }

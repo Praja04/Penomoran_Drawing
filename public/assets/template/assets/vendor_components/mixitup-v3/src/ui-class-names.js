@@ -7,18 +7,18 @@
  * @since       3.0.0
  */
 
-mixitup.UiClassNames = function () {
-  mixitup.Base.call(this);
+mixitup.UiClassNames = function() {
+    mixitup.Base.call(this);
 
-  this.callActions("beforeConstruct");
+    this.callActions('beforeConstruct');
 
-  this.base = "";
-  this.active = "";
-  this.disabled = "";
+    this.base       = '';
+    this.active     = '';
+    this.disabled   = '';
 
-  this.callActions("afterConstruct");
+    this.callActions('afterConstruct');
 
-  h.seal(this);
+    h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.UiClassNames);

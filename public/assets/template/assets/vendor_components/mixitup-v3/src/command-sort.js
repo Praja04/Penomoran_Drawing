@@ -9,20 +9,20 @@
  * @since       3.0.0
  */
 
-mixitup.CommandSort = function () {
-  mixitup.Base.call(this);
+mixitup.CommandSort = function() {
+    mixitup.Base.call(this);
 
-  this.callActions("beforeConstruct");
+    this.callActions('beforeConstruct');
 
-  this.sortString = "";
-  this.attribute = "";
-  this.order = "asc";
-  this.collection = null;
-  this.next = null;
+    this.sortString = '';
+    this.attribute  = '';
+    this.order      = 'asc';
+    this.collection = null;
+    this.next       = null;
 
-  this.callActions("afterConstruct");
+    this.callActions('afterConstruct');
 
-  h.seal(this);
+    h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.CommandSort);

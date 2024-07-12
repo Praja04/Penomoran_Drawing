@@ -59,5 +59,4 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: 'Error: Undefined variable: "$wi-css-prefix".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-wind-degrees.scss\A \A 1: .#{$wi-css-prefix}-wind {\A 2:   &.towards-0-deg {@include wind-rotate(0deg);}\A 3:   &.towards-1-deg {@include wind-rotate(1deg);}\A 4:   &.towards-2-deg {@include wind-rotate(2deg);}\A 5:   &.towards-3-deg {@include wind-rotate(3deg);}\A 6:   &.towards-4-deg {@include wind-rotate(4deg);}';
-}
+  content: "Error: Undefined variable: \"$wi-css-prefix\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-wind-degrees.scss\A \A 1: .#{$wi-css-prefix}-wind {\A 2:   &.towards-0-deg {@include wind-rotate(0deg);}\A 3:   &.towards-1-deg {@include wind-rotate(1deg);}\A 4:   &.towards-2-deg {@include wind-rotate(2deg);}\A 5:   &.towards-3-deg {@include wind-rotate(3deg);}\A 6:   &.towards-4-deg {@include wind-rotate(4deg);}"; }

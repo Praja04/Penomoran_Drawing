@@ -64,5 +64,4 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: 'Error: Undefined variable: "$time-1".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-time.scss\A \A 1: .wi-time-1:before {content: $time-1;}\A 2: .wi-time-2:before {content: $time-2;}\A 3: .wi-time-3:before {content: $time-3;}\A 4: .wi-time-4:before {content: $time-4;}\A 5: .wi-time-5:before {content: $time-5;}\A 6: .wi-time-6:before {content: $time-6;}';
-}
+  content: "Error: Undefined variable: \"$time-1\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-time.scss\A \A 1: .wi-time-1:before {content: $time-1;}\A 2: .wi-time-2:before {content: $time-2;}\A 3: .wi-time-3:before {content: $time-3;}\A 4: .wi-time-4:before {content: $time-4;}\A 5: .wi-time-5:before {content: $time-5;}\A 6: .wi-time-6:before {content: $time-6;}"; }

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,194 +9,181 @@
     <link href="../../assets/styles.css" rel="stylesheet" />
 
     <style>
-      #chart {
-        max-width: 650px;
-        margin: 35px auto;
-      }
+      
+        #chart {
+      max-width: 650px;
+      margin: 35px auto;
+    }
+      
     </style>
 
     <script>
       window.Promise ||
         document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>',
-        );
+          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+        )
       window.Promise ||
         document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>',
-        );
+          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+        )
       window.Promise ||
         document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>',
-        );
+          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+        )
     </script>
 
+    
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-apexcharts"></script>
+    
 
     <script>
-      var lastDate = 0;
-      var data = [];
-      var TICKINTERVAL = 86400000;
-      let XAXISRANGE = 777600000;
-      function getDayWiseTimeSeries(baseval, count, yrange) {
-        var i = 0;
-        while (i < count) {
-          var x = baseval;
-          var y =
-            Math.floor(Math.random() * (yrange.max - yrange.min + 1)) +
-            yrange.min;
-
-          data.push({
-            x,
-            y,
-          });
-          lastDate = baseval;
-          baseval += TICKINTERVAL;
-          i++;
-        }
-      }
-
-      getDayWiseTimeSeries(new Date("11 Feb 2017 GMT").getTime(), 10, {
-        min: 10,
-        max: 90,
+  var lastDate = 0;
+  var data = []
+  var TICKINTERVAL = 86400000
+  let XAXISRANGE = 777600000
+  function getDayWiseTimeSeries(baseval, count, yrange) {
+    var i = 0;
+    while (i < count) {
+      var x = baseval;
+      var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+  
+      data.push({
+        x, y
       });
-
-      function getNewSeries(baseval, yrange) {
-        var newDate = baseval + TICKINTERVAL;
-        lastDate = newDate;
-
-        for (var i = 0; i < data.length - 10; i++) {
-          // IMPORTANT
-          // we reset the x and y of the data which is out of drawing area
-          // to prevent memory leaks
-          data[i].x = newDate - XAXISRANGE - TICKINTERVAL;
-          data[i].y = 0;
-        }
-
-        data.push({
-          x: newDate,
-          y:
-            Math.floor(Math.random() * (yrange.max - yrange.min + 1)) +
-            yrange.min,
-        });
-      }
-
-      function resetData() {
-        // Alternatively, you can also reset the data at certain intervals to prevent creating a huge series
-        data = data.slice(data.length - 10, data.length);
-      }
-    </script>
+      lastDate = baseval
+      baseval += TICKINTERVAL;
+      i++;
+    }
+  }
+  
+  getDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 10, {
+    min: 10,
+    max: 90
+  })
+  
+  function getNewSeries(baseval, yrange) {
+    var newDate = baseval + TICKINTERVAL;
+    lastDate = newDate
+  
+    for(var i = 0; i< data.length - 10; i++) {
+      // IMPORTANT
+      // we reset the x and y of the data which is out of drawing area
+      // to prevent memory leaks
+      data[i].x = newDate - XAXISRANGE - TICKINTERVAL
+      data[i].y = 0
+    }
+  
+    data.push({
+      x: newDate,
+      y: Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
+    })
+  }
+  
+  function resetData(){
+    // Alternatively, you can also reset the data at certain intervals to prevent creating a huge series 
+    data = data.slice(data.length - 10, data.length);
+  }
+  </script>
   </head>
 
   <body>
+    
     <div id="app">
       <div id="chart">
-        <apexchart
-          type="line"
-          height="350"
-          ref="chart"
-          :options="chartOptions"
-          :series="series"
-        ></apexchart>
-      </div>
+      <apexchart type="line" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
+    </div>
     </div>
 
     <!-- Below element is just for displaying source code. it is not required. DO NOT USE -->
     <div id="html">
-      &lt;div id=&quot;chart&quot;&gt; &lt;apexchart type=&quot;line&quot;
-      height=&quot;350&quot; ref=&quot;chart&quot;
-      :options=&quot;chartOptions&quot;
-      :series=&quot;series&quot;&gt;&lt;/apexchart&gt; &lt;/div&gt;
+      &lt;div id=&quot;chart&quot;&gt;
+        &lt;apexchart type=&quot;line&quot; height=&quot;350&quot; ref=&quot;chart&quot; :options=&quot;chartOptions&quot; :series=&quot;series&quot;&gt;&lt;/apexchart&gt;
+      &lt;/div&gt;
     </div>
 
     <script>
       new Vue({
-        el: "#app",
+        el: '#app',
         components: {
           apexchart: VueApexCharts,
         },
         data: {
-          series: [
-            {
-              data: data.slice(),
-            },
-          ],
+          
+          series: [{
+            data: data.slice()
+          }],
           chartOptions: {
             chart: {
-              id: "realtime",
+              id: 'realtime',
               height: 350,
-              type: "line",
+              type: 'line',
               animations: {
                 enabled: true,
-                easing: "linear",
+                easing: 'linear',
                 dynamicAnimation: {
-                  speed: 1000,
-                },
+                  speed: 1000
+                }
               },
               toolbar: {
-                show: false,
+                show: false
               },
               zoom: {
-                enabled: false,
-              },
+                enabled: false
+              }
             },
             dataLabels: {
-              enabled: false,
+              enabled: false
             },
             stroke: {
-              curve: "smooth",
+              curve: 'smooth'
             },
             title: {
-              text: "Dynamic Updating Chart",
-              align: "left",
+              text: 'Dynamic Updating Chart',
+              align: 'left'
             },
             markers: {
-              size: 0,
+              size: 0
             },
             xaxis: {
-              type: "datetime",
+              type: 'datetime',
               range: XAXISRANGE,
             },
             yaxis: {
-              max: 100,
+              max: 100
             },
             legend: {
-              show: false,
+              show: false
             },
           },
+          
+          
         },
         mounted: function () {
-          var me = this;
+          var me = this
           window.setInterval(function () {
             getNewSeries(lastDate, {
               min: 10,
-              max: 90,
-            });
-
-            me.$refs.chart.updateSeries([
-              {
-                data: data,
-              },
-            ]);
-          }, 1000);
-
+              max: 90
+            })
+            
+            me.$refs.chart.updateSeries([{
+              data: data
+            }])
+          }, 1000)
+        
           // every 60 seconds, we reset the data to prevent memory leaks
           window.setInterval(function () {
-            resetData();
-
-            me.$refs.chart.updateSeries(
-              [
-                {
-                  data,
-                },
-              ],
-              false,
-              true,
-            );
-          }, 60000);
+            resetData()
+            
+            me.$refs.chart.updateSeries([{
+              data
+            }], false, true)
+          }, 60000)
         },
-      });
+      })
     </script>
+    
   </body>
 </html>

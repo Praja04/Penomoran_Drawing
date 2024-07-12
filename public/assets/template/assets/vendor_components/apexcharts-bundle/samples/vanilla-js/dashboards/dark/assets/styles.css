@@ -1,20 +1,15 @@
+
 body {
-  background: #343e59;
+  background: #343E59;
   color: #777;
   font-family: Montserrat, Arial, sans-serif;
 }
 
 .body-bg {
-  background: #f3f4fa !important;
+  background: #F3F4FA !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-strong {
+h1, h2, h3, h4, h5, h6, strong {
   font-weight: 600;
 }
 
@@ -29,7 +24,7 @@ body {
 }
 
 .box {
-  background-color: #2b2d3e;
+  background-color: #2B2D3E;
   padding: 25px 20px;
 }
 
@@ -57,20 +52,21 @@ body {
   color: #fff;
 }
 
+
 .sparkboxes .box1 {
-  background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
+  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
 }
 
 .sparkboxes .box2 {
-  background-image: linear-gradient(135deg, #2afadf 10%, #4c83ff 100%);
+  background-image: linear-gradient( 135deg, #2AFADF 10%, #4C83FF 100%);
 }
 
 .sparkboxes .box3 {
-  background-image: linear-gradient(135deg, #ffd3a5 10%, #fd6585 100%);
+  background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);
 }
 
 .sparkboxes .box4 {
-  background-image: linear-gradient(135deg, #ee9ae5 10%, #5961f9 100%);
+  background-image: linear-gradient( 135deg, #EE9AE5 10%, #5961F9 100%);
 }
 
 /* fusionexport btn CSS START */
@@ -100,3 +96,4 @@ body {
   display: none;
 }
 /* fusionexport btn CSS START */
+

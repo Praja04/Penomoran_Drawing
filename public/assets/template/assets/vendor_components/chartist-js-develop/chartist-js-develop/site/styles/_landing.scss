@@ -13,11 +13,7 @@
     line-height: 0.5;
     margin-top: 2rem;
 
-    @include text-shadow(
-      1px 1px mix(black, $color-yellow, 15%),
-      2px 2px mix(black, $color-yellow, 15%),
-      3px 3px mix(black, $color-yellow, 15%)
-    );
+    @include text-shadow(1px 1px mix(black, $color-yellow, 15%), 2px 2px mix(black, $color-yellow, 15%), 3px 3px mix(black, $color-yellow, 15%));
 
     @media #{$medium-up} {
       font-size: rem-calc(nth($modular-scale, 10));
@@ -27,10 +23,7 @@
       font-size: rem-calc(nth($modular-scale, 4));
       display: inline-block;
       width: 100%;
-      @include text-shadow(
-        1px 1px mix(black, $color-yellow, 15%),
-        2px 2px mix(black, $color-yellow, 15%)
-      );
+      @include text-shadow(1px 1px mix(black, $color-yellow, 15%), 2px 2px mix(black, $color-yellow, 15%));
     }
   }
 
@@ -43,10 +36,7 @@
     font-weight: 700;
     color: white;
 
-    @include text-shadow(
-      1px 1px mix(black, $color-yellow, 15%),
-      2px 2px mix(black, $color-yellow, 15%)
-    );
+    @include text-shadow(1px 1px mix(black, $color-yellow, 15%), 2px 2px mix(black, $color-yellow, 15%));
 
     padding-bottom: $column-gutter;
 
@@ -62,11 +52,7 @@
 
     > figure {
       margin: 0;
-      @include ct-responsive-svg-container(
-        $ratio: (
-          1/1,
-        )
-      );
+      @include ct-responsive-svg-container($ratio: (1/1));
 
       > svg {
         width: 100%;
@@ -93,19 +79,13 @@
       &.download {
         background-color: $color-red;
         &:hover,
-        &:focus {
-          background-color: darken($color-red, 10%);
-          color: rgba(255, 255, 255, 1);
-        }
+        &:focus { background-color: darken($color-red, 10%); color: rgba(255, 255, 255, 1);}
       }
 
       &.contribute {
         background-color: $color-grapefruit;
         &:hover,
-        &:focus {
-          background-color: darken($color-grapefruit, 10%);
-          color: rgba(255, 255, 255, 1);
-        }
+        &:focus { background-color: darken($color-grapefruit, 10%); color: rgba(255, 255, 255, 1);}
       }
 
       @media #{$small-only} {
@@ -128,11 +108,7 @@
 
   .brwsrsup__support--supported {
     color: $color-green;
-    @include icon(
-      $fa-var-check-circle,
-      $icon-location: after,
-      $icon-size: 1.5rem
-    );
+    @include icon($fa-var-check-circle, $icon-location: after, $icon-size: 1.5rem);
   }
 
   .brwsrsup__visually-hidden {
@@ -187,7 +163,7 @@
       margin: 0 10px 10px 0;
 
       &:before {
-        content: attr(data-browser) " ";
+        content: attr(data-browser)" ";
       }
     }
 
@@ -196,7 +172,7 @@
       color: white;
 
       &:before {
-        content: attr(data-browser) " ";
+        content: attr(data-browser)" ";
       }
 
       @include icon($fa-var-check-circle, $icon-location: after);
@@ -207,7 +183,7 @@
       color: lighten($color-white, 10%);
 
       &:before {
-        content: attr(data-browser) " ";
+        content: attr(data-browser)" ";
       }
       @include icon($fa-var-exclamation-circle, $icon-location: after);
     }
