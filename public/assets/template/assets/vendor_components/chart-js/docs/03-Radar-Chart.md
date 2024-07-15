@@ -19,33 +19,43 @@ var myRadarChart = new Chart(ctx).Radar(data, options);
 ```
 
 ###Data structure
+
 ```javascript
 var data = {
-	labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
-	datasets: [
-		{
-			label: "My First dataset",
-			fillColor: "rgba(220,220,220,0.2)",
-			strokeColor: "rgba(220,220,220,1)",
-			pointColor: "rgba(220,220,220,1)",
-			pointStrokeColor: "#fff",
-			pointHighlightFill: "#fff",
-			pointHighlightStroke: "rgba(220,220,220,1)",
-			data: [65, 59, 90, 81, 56, 55, 40]
-		},
-		{
-			label: "My Second dataset",
-			fillColor: "rgba(151,187,205,0.2)",
-			strokeColor: "rgba(151,187,205,1)",
-			pointColor: "rgba(151,187,205,1)",
-			pointStrokeColor: "#fff",
-			pointHighlightFill: "#fff",
-			pointHighlightStroke: "rgba(151,187,205,1)",
-			data: [28, 48, 40, 19, 96, 27, 100]
-		}
-	]
+  labels: [
+    "Eating",
+    "Drinking",
+    "Sleeping",
+    "Designing",
+    "Coding",
+    "Cycling",
+    "Running",
+  ],
+  datasets: [
+    {
+      label: "My First dataset",
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data: [65, 59, 90, 81, 56, 55, 40],
+    },
+    {
+      label: "My Second dataset",
+      fillColor: "rgba(151,187,205,0.2)",
+      strokeColor: "rgba(151,187,205,1)",
+      pointColor: "rgba(151,187,205,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(151,187,205,1)",
+      data: [28, 48, 40, 19, 96, 27, 100],
+    },
+  ],
 };
 ```
+
 For a radar chart, to provide context of what each point means, we include an array of strings that show around each point in the chart.
 For the radar chart data, we have an array of datasets. Each of these is an object, with a fill colour, a stroke colour, a colour for the fill of each point, and a colour for the stroke of each point. We also have an array of data values.
 
@@ -54,7 +64,6 @@ The label key on each dataset is optional, and can be used when generating a sca
 ### Chart options
 
 These are the customisation options specific to Radar charts. These options are merged with the [global chart configuration options](#getting-started-global-chart-configuration), and form the options of the chart.
-
 
 ```javascript
 {
@@ -115,21 +124,19 @@ These are the customisation options specific to Radar charts. These options are 
 }
 ```
 
-
 You can override these for your `Chart` instance by passing a second argument into the `Radar` method as an object with the keys you want to override.
 
 For example, we could have a radar chart without a point for each on piece of data by doing the following:
 
 ```javascript
 new Chart(ctx).Radar(data, {
-	pointDot: false
+  pointDot: false,
 });
 // This will create a chart with all of the default options, merged from the global config,
 //  and the Bar chart defaults but this particular instance will have `pointDot` set to false.
 ```
 
 We can also change these defaults values for each Radar type that is created, this object is available at `Chart.defaults.Radar`.
-
 
 ### Prototype methods
 
@@ -138,9 +145,9 @@ We can also change these defaults values for each Radar type that is created, th
 Calling `getPointsAtEvent(event)` on your Chart instance passing an argument of an event, or jQuery event, will return the point elements that are at that the same position of that event.
 
 ```javascript
-canvas.onclick = function(evt){
-	var activePoints = myRadarChart.getPointsAtEvent(evt);
-	// => activePoints is an array of points on the canvas that are at the same position as the click event.
+canvas.onclick = function (evt) {
+  var activePoints = myRadarChart.getPointsAtEvent(evt);
+  // => activePoints is an array of points on the canvas that are at the same position as the click event.
 };
 ```
 

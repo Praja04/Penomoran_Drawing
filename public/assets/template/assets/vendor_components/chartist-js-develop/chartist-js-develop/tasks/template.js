@@ -7,21 +7,22 @@
  * Link: https://github.com/mathiasbynens/grunt-template
  */
 
-'use strict';
+"use strict";
 
-var pkg = require('../package.json');
+var pkg = require("../package.json");
 
 module.exports = function (grunt) {
   return {
     dist: {
       options: {
         data: {
-          pkg: pkg
-        }
+          pkg: pkg,
+        },
       },
       files: {
-        '<%= pkg.config.dist %>/chartist.js': '<%= pkg.config.dist %>/chartist.js'
-      }
-    }
+        "<%= pkg.config.dist %>/chartist.js":
+          "<%= pkg.config.dist %>/chartist.js",
+      },
+    },
   };
 };

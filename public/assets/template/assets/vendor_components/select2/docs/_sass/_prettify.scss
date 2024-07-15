@@ -6,20 +6,27 @@
 .lit {
   color: #195f91;
 }
-.pun, .opn, .clo {
+.pun,
+.opn,
+.clo {
   color: #93a1a1;
 }
 .fun {
   color: #dc322f;
 }
-.str, .atv {
-  color: #C7254E;
+.str,
+.atv {
+  color: #c7254e;
 }
-.kwd, .prettyprint .tag {
-  color: #2F6F9F;
+.kwd,
+.prettyprint .tag {
+  color: #2f6f9f;
 }
-.typ, .atn, .dec, .var {
-  color: #428BCA;
+.typ,
+.atn,
+.dec,
+.var {
+  color: #428bca;
 }
 .pln {
   color: #333;
@@ -32,9 +39,15 @@
   border: 1px solid #eee;
 
   &.linenums {
-    -webkit-box-shadow: inset 40px 0 0 #fbfbfb, inset 41px 0 0 #f6f6f6;
-       -moz-box-shadow: inset 40px 0 0 #fbfbfb, inset 41px 0 0 #f6f6f6;
-            box-shadow: inset 40px 0 0 #fbfbfb, inset 41px 0 0 #f6f6f6;
+    -webkit-box-shadow:
+      inset 40px 0 0 #fbfbfb,
+      inset 41px 0 0 #f6f6f6;
+    -moz-box-shadow:
+      inset 40px 0 0 #fbfbfb,
+      inset 41px 0 0 #f6f6f6;
+    box-shadow:
+      inset 40px 0 0 #fbfbfb,
+      inset 41px 0 0 #f6f6f6;
   }
 }
 

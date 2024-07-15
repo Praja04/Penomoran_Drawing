@@ -4,8 +4,8 @@
  * @module Chartist.Svg
  */
 /* global Chartist */
-(function(globalRoot, Chartist) {
-  'use strict';
+(function (globalRoot, Chartist) {
+  "use strict";
 
   var document = globalRoot.document;
 
@@ -22,28 +22,28 @@
    */
   function Svg(name, attributes, className, parent, insertFirst) {
     // If Svg is getting called with an SVG element we just return the wrapper
-    if(name instanceof Element) {
+    if (name instanceof Element) {
       this._node = name;
     } else {
       this._node = document.createElementNS(Chartist.namespaces.svg, name);
 
       // If this is an SVG element created then custom namespace
-      if(name === 'svg') {
+      if (name === "svg") {
         this.attr({
-          'xmlns:ct': Chartist.namespaces.ct
+          "xmlns:ct": Chartist.namespaces.ct,
         });
       }
     }
 
-    if(attributes) {
+    if (attributes) {
       this.attr(attributes);
     }
 
-    if(className) {
+    if (className) {
       this.addClass(className);
     }
 
-    if(parent) {
+    if (parent) {
       if (insertFirst && parent._node.firstChild) {
         parent._node.insertBefore(this._node, parent._node.firstChild);
       } else {
@@ -61,27 +61,33 @@
    * @return {Object|String} The current wrapper object will be returned so it can be used for chaining or the attribute value if used as getter function.
    */
   function attr(attributes, ns) {
-    if(typeof attributes === 'string') {
-      if(ns) {
+    if (typeof attributes === "string") {
+      if (ns) {
         return this._node.getAttributeNS(ns, attributes);
       } else {
         return this._node.getAttribute(attributes);
       }
     }
 
-    Object.keys(attributes).forEach(function(key) {
-      // If the attribute value is undefined we can skip this one
-      if(attributes[key] === undefined) {
-        return;
-      }
+    Object.keys(attributes).forEach(
+      function (key) {
+        // If the attribute value is undefined we can skip this one
+        if (attributes[key] === undefined) {
+          return;
+        }
 
-      if (key.indexOf(':') !== -1) {
-        var namespacedAttribute = key.split(':');
-        this._node.setAttributeNS(Chartist.namespaces[namespacedAttribute[0]], key, attributes[key]);
-      } else {
-        this._node.setAttribute(key, attributes[key]);
-      }
-    }.bind(this));
+        if (key.indexOf(":") !== -1) {
+          var namespacedAttribute = key.split(":");
+          this._node.setAttributeNS(
+            Chartist.namespaces[namespacedAttribute[0]],
+            key,
+            attributes[key],
+          );
+        } else {
+          this._node.setAttribute(key, attributes[key]);
+        }
+      }.bind(this),
+    );
 
     return this;
   }
@@ -107,7 +113,9 @@
    * @return {Chartist.Svg} Returns a Chartist.Svg wrapper around the parent node of the current node. If the parent node is not existing or it's not an SVG node then this function will return null.
    */
   function parent() {
-    return this._node.parentNode instanceof SVGElement ? new Chartist.Svg(this._node.parentNode) : null;
+    return this._node.parentNode instanceof SVGElement
+      ? new Chartist.Svg(this._node.parentNode)
+      : null;
   }
 
   /**
@@ -118,7 +126,7 @@
    */
   function root() {
     var node = this._node;
-    while(node.nodeName !== 'svg') {
+    while (node.nodeName !== "svg") {
       node = node.parentNode;
     }
     return new Chartist.Svg(node);
@@ -171,18 +179,18 @@
   function foreignObject(content, attributes, className, insertFirst) {
     // If content is string then we convert it to DOM
     // TODO: Handle case where content is not a string nor a DOM Node
-    if(typeof content === 'string') {
-      var container = document.createElement('div');
+    if (typeof content === "string") {
+      var container = document.createElement("div");
       container.innerHTML = content;
       content = container.firstChild;
     }
 
     // Adding namespace to content element
-    content.setAttribute('xmlns', Chartist.namespaces.xmlns);
+    content.setAttribute("xmlns", Chartist.namespaces.xmlns);
 
     // Creating the foreignObject without required extension attribute (as described here
     // http://www.w3.org/TR/SVG/extend.html#ForeignObjectElement)
-    var fnObj = this.elem('foreignObject', attributes, className, insertFirst);
+    var fnObj = this.elem("foreignObject", attributes, className, insertFirst);
 
     // Add content to foreignObjectElement
     fnObj._node.appendChild(content);
@@ -248,7 +256,7 @@
    * @return {Chartist.Svg} The wrapper of the appended object
    */
   function append(element, insertFirst) {
-    if(insertFirst && this._node.firstChild) {
+    if (insertFirst && this._node.firstChild) {
       this._node.insertBefore(element._node, this._node.firstChild);
     } else {
       this._node.appendChild(element._node);
@@ -264,7 +272,9 @@
    * @return {Array} A list of classes or an empty array if there are no classes on the current element
    */
   function classes() {
-    return this._node.getAttribute('class') ? this._node.getAttribute('class').trim().split(/\s+/) : [];
+    return this._node.getAttribute("class")
+      ? this._node.getAttribute("class").trim().split(/\s+/)
+      : [];
   }
 
   /**
@@ -275,12 +285,14 @@
    * @return {Chartist.Svg} The wrapper of the current element
    */
   function addClass(names) {
-    this._node.setAttribute('class',
+    this._node.setAttribute(
+      "class",
       this.classes(this._node)
         .concat(names.trim().split(/\s+/))
-        .filter(function(elem, pos, self) {
+        .filter(function (elem, pos, self) {
           return self.indexOf(elem) === pos;
-        }).join(' ')
+        })
+        .join(" "),
     );
 
     return this;
@@ -296,9 +308,14 @@
   function removeClass(names) {
     var removedClasses = names.trim().split(/\s+/);
 
-    this._node.setAttribute('class', this.classes(this._node).filter(function(name) {
-      return removedClasses.indexOf(name) === -1;
-    }).join(' '));
+    this._node.setAttribute(
+      "class",
+      this.classes(this._node)
+        .filter(function (name) {
+          return removedClasses.indexOf(name) === -1;
+        })
+        .join(" "),
+    );
 
     return this;
   }
@@ -310,7 +327,7 @@
    * @return {Chartist.Svg} The wrapper of the current element
    */
   function removeAllClasses() {
-    this._node.setAttribute('class', '');
+    this._node.setAttribute("class", "");
 
     return this;
   }
@@ -377,112 +394,136 @@
    * @return {Chartist.Svg} The current element where the animation was added
    */
   function animate(animations, guided, eventEmitter) {
-    if(guided === undefined) {
+    if (guided === undefined) {
       guided = true;
     }
 
-    Object.keys(animations).forEach(function createAnimateForAttributes(attribute) {
+    Object.keys(animations).forEach(
+      function createAnimateForAttributes(attribute) {
+        function createAnimate(animationDefinition, guided) {
+          var attributeProperties = {},
+            animate,
+            timeout,
+            easing;
 
-      function createAnimate(animationDefinition, guided) {
-        var attributeProperties = {},
-          animate,
-          timeout,
-          easing;
-
-        // Check if an easing is specified in the definition object and delete it from the object as it will not
-        // be part of the animate element attributes.
-        if(animationDefinition.easing) {
-          // If already an easing Bézier curve array we take it or we lookup a easing array in the Easing object
-          easing = animationDefinition.easing instanceof Array ?
-            animationDefinition.easing :
-            Chartist.Svg.Easing[animationDefinition.easing];
-          delete animationDefinition.easing;
-        }
-
-        // If numeric dur or begin was provided we assume milli seconds
-        animationDefinition.begin = Chartist.ensureUnit(animationDefinition.begin, 'ms');
-        animationDefinition.dur = Chartist.ensureUnit(animationDefinition.dur, 'ms');
-
-        if(easing) {
-          animationDefinition.calcMode = 'spline';
-          animationDefinition.keySplines = easing.join(' ');
-          animationDefinition.keyTimes = '0;1';
-        }
-
-        // Adding "fill: freeze" if we are in guided mode and set initial attribute values
-        if(guided) {
-          animationDefinition.fill = 'freeze';
-          // Animated property on our element should already be set to the animation from value in guided mode
-          attributeProperties[attribute] = animationDefinition.from;
-          this.attr(attributeProperties);
-
-          // In guided mode we also set begin to indefinite so we can trigger the start manually and put the begin
-          // which needs to be in ms aside
-          timeout = Chartist.quantity(animationDefinition.begin || 0).value;
-          animationDefinition.begin = 'indefinite';
-        }
-
-        animate = this.elem('animate', Chartist.extend({
-          attributeName: attribute
-        }, animationDefinition));
-
-        if(guided) {
-          // If guided we take the value that was put aside in timeout and trigger the animation manually with a timeout
-          setTimeout(function() {
-            // If beginElement fails we set the animated attribute to the end position and remove the animate element
-            // This happens if the SMIL ElementTimeControl interface is not supported or any other problems occured in
-            // the browser. (Currently FF 34 does not support animate elements in foreignObjects)
-            try {
-              animate._node.beginElement();
-            } catch(err) {
-              // Set animated attribute to current animated value
-              attributeProperties[attribute] = animationDefinition.to;
-              this.attr(attributeProperties);
-              // Remove the animate element as it's no longer required
-              animate.remove();
-            }
-          }.bind(this), timeout);
-        }
-
-        if(eventEmitter) {
-          animate._node.addEventListener('beginEvent', function handleBeginEvent() {
-            eventEmitter.emit('animationBegin', {
-              element: this,
-              animate: animate._node,
-              params: animationDefinition
-            });
-          }.bind(this));
-        }
-
-        animate._node.addEventListener('endEvent', function handleEndEvent() {
-          if(eventEmitter) {
-            eventEmitter.emit('animationEnd', {
-              element: this,
-              animate: animate._node,
-              params: animationDefinition
-            });
+          // Check if an easing is specified in the definition object and delete it from the object as it will not
+          // be part of the animate element attributes.
+          if (animationDefinition.easing) {
+            // If already an easing Bézier curve array we take it or we lookup a easing array in the Easing object
+            easing =
+              animationDefinition.easing instanceof Array
+                ? animationDefinition.easing
+                : Chartist.Svg.Easing[animationDefinition.easing];
+            delete animationDefinition.easing;
           }
 
-          if(guided) {
-            // Set animated attribute to current animated value
-            attributeProperties[attribute] = animationDefinition.to;
+          // If numeric dur or begin was provided we assume milli seconds
+          animationDefinition.begin = Chartist.ensureUnit(
+            animationDefinition.begin,
+            "ms",
+          );
+          animationDefinition.dur = Chartist.ensureUnit(
+            animationDefinition.dur,
+            "ms",
+          );
+
+          if (easing) {
+            animationDefinition.calcMode = "spline";
+            animationDefinition.keySplines = easing.join(" ");
+            animationDefinition.keyTimes = "0;1";
+          }
+
+          // Adding "fill: freeze" if we are in guided mode and set initial attribute values
+          if (guided) {
+            animationDefinition.fill = "freeze";
+            // Animated property on our element should already be set to the animation from value in guided mode
+            attributeProperties[attribute] = animationDefinition.from;
             this.attr(attributeProperties);
-            // Remove the animate element as it's no longer required
-            animate.remove();
+
+            // In guided mode we also set begin to indefinite so we can trigger the start manually and put the begin
+            // which needs to be in ms aside
+            timeout = Chartist.quantity(animationDefinition.begin || 0).value;
+            animationDefinition.begin = "indefinite";
           }
-        }.bind(this));
-      }
 
-      // If current attribute is an array of definition objects we create an animate for each and disable guided mode
-      if(animations[attribute] instanceof Array) {
-        animations[attribute].forEach(function(animationDefinition) {
-          createAnimate.bind(this)(animationDefinition, false);
-        }.bind(this));
-      } else {
-        createAnimate.bind(this)(animations[attribute], guided);
-      }
+          animate = this.elem(
+            "animate",
+            Chartist.extend(
+              {
+                attributeName: attribute,
+              },
+              animationDefinition,
+            ),
+          );
 
-    }.bind(this));
+          if (guided) {
+            // If guided we take the value that was put aside in timeout and trigger the animation manually with a timeout
+            setTimeout(
+              function () {
+                // If beginElement fails we set the animated attribute to the end position and remove the animate element
+                // This happens if the SMIL ElementTimeControl interface is not supported or any other problems occured in
+                // the browser. (Currently FF 34 does not support animate elements in foreignObjects)
+                try {
+                  animate._node.beginElement();
+                } catch (err) {
+                  // Set animated attribute to current animated value
+                  attributeProperties[attribute] = animationDefinition.to;
+                  this.attr(attributeProperties);
+                  // Remove the animate element as it's no longer required
+                  animate.remove();
+                }
+              }.bind(this),
+              timeout,
+            );
+          }
+
+          if (eventEmitter) {
+            animate._node.addEventListener(
+              "beginEvent",
+              function handleBeginEvent() {
+                eventEmitter.emit("animationBegin", {
+                  element: this,
+                  animate: animate._node,
+                  params: animationDefinition,
+                });
+              }.bind(this),
+            );
+          }
+
+          animate._node.addEventListener(
+            "endEvent",
+            function handleEndEvent() {
+              if (eventEmitter) {
+                eventEmitter.emit("animationEnd", {
+                  element: this,
+                  animate: animate._node,
+                  params: animationDefinition,
+                });
+              }
+
+              if (guided) {
+                // Set animated attribute to current animated value
+                attributeProperties[attribute] = animationDefinition.to;
+                this.attr(attributeProperties);
+                // Remove the animate element as it's no longer required
+                animate.remove();
+              }
+            }.bind(this),
+          );
+        }
+
+        // If current attribute is an array of definition objects we create an animate for each and disable guided mode
+        if (animations[attribute] instanceof Array) {
+          animations[attribute].forEach(
+            function (animationDefinition) {
+              createAnimate.bind(this)(animationDefinition, false);
+            }.bind(this),
+          );
+        } else {
+          createAnimate.bind(this)(animations[attribute], guided);
+        }
+      }.bind(this),
+    );
 
     return this;
   }
@@ -508,7 +549,7 @@
     removeAllClasses: removeAllClasses,
     height: height,
     width: width,
-    animate: animate
+    animate: animate,
   });
 
   /**
@@ -518,8 +559,11 @@
    * @param {String} feature The SVG 1.1 feature that should be checked for support.
    * @return {Boolean} True of false if the feature is supported or not
    */
-  Chartist.Svg.isSupported = function(feature) {
-    return document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#' + feature, '1.1');
+  Chartist.Svg.isSupported = function (feature) {
+    return document.implementation.hasFeature(
+      "http://www.w3.org/TR/SVG11/feature#" + feature,
+      "1.1",
+    );
   };
 
   /**
@@ -551,7 +595,7 @@
     easeInOutCirc: [0.785, 0.135, 0.15, 0.86],
     easeInBack: [0.6, -0.28, 0.735, 0.045],
     easeOutBack: [0.175, 0.885, 0.32, 1.275],
-    easeInOutBack: [0.68, -0.55, 0.265, 1.55]
+    easeInOutBack: [0.68, -0.55, 0.265, 1.55],
   };
 
   Chartist.Svg.Easing = easingCubicBeziers;
@@ -568,33 +612,39 @@
     var list = this;
 
     this.svgElements = [];
-    for(var i = 0; i < nodeList.length; i++) {
+    for (var i = 0; i < nodeList.length; i++) {
       this.svgElements.push(new Chartist.Svg(nodeList[i]));
     }
 
     // Add delegation methods for Chartist.Svg
-    Object.keys(Chartist.Svg.prototype).filter(function(prototypeProperty) {
-      return ['constructor',
-          'parent',
-          'querySelector',
-          'querySelectorAll',
-          'replace',
-          'append',
-          'classes',
-          'height',
-          'width'].indexOf(prototypeProperty) === -1;
-    }).forEach(function(prototypeProperty) {
-      list[prototypeProperty] = function() {
-        var args = Array.prototype.slice.call(arguments, 0);
-        list.svgElements.forEach(function(element) {
-          Chartist.Svg.prototype[prototypeProperty].apply(element, args);
-        });
-        return list;
-      };
-    });
+    Object.keys(Chartist.Svg.prototype)
+      .filter(function (prototypeProperty) {
+        return (
+          [
+            "constructor",
+            "parent",
+            "querySelector",
+            "querySelectorAll",
+            "replace",
+            "append",
+            "classes",
+            "height",
+            "width",
+          ].indexOf(prototypeProperty) === -1
+        );
+      })
+      .forEach(function (prototypeProperty) {
+        list[prototypeProperty] = function () {
+          var args = Array.prototype.slice.call(arguments, 0);
+          list.svgElements.forEach(function (element) {
+            Chartist.Svg.prototype[prototypeProperty].apply(element, args);
+          });
+          return list;
+        };
+      });
   }
 
   Chartist.Svg.List = Chartist.Class.extend({
-    constructor: SvgList
+    constructor: SvgList,
   });
-}(this, Chartist));
+})(this, Chartist);

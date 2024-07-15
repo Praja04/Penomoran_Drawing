@@ -56,10 +56,10 @@ By default, MixItUp will query the container for targets matching the selector `
 
 ```html
 <div class="container">
-    <div class="mix category-a" data-order="1"></div>
-    <div class="mix category-b" data-order="2"></div>
-    <div class="mix category-b category-c" data-order="3"></div>
-    <div class="mix category-a category-d" data-order="4"></div>
+  <div class="mix category-a" data-order="1"></div>
+  <div class="mix category-b" data-order="2"></div>
+  <div class="mix category-b category-c" data-order="3"></div>
+  <div class="mix category-a category-d" data-order="4"></div>
 </div>
 ```
 
@@ -131,21 +131,19 @@ If you are building a modular JavaScript project with Webpack, Browserify, or Re
 ```js
 // ES2015
 
-import mixitup from 'mixitup';
+import mixitup from "mixitup";
 ```
 
 ```js
 // CommonJS
 
-var mixitup = require('mixitup');
+var mixitup = require("mixitup");
 ```
 
 ```js
 // AMD
 
-require(['mixitup'], function(mixitup) {
-
-});
+require(["mixitup"], function (mixitup) {});
 ```
 
 ### Creating a Mixer
@@ -157,7 +155,7 @@ Call the factory function passing a selector string or a reference to your conta
 ###### Example: Instantiating a mixer with a selector string
 
 ```js
-var mixer = mixitup('.container');
+var mixer = mixitup(".container");
 ```
 
 ###### Example: Instantiating a mixer with an element reference
@@ -178,12 +176,12 @@ Further reading: [Configuration Object](/docs/mixitup.Config.md)
 
 ```js
 var mixer = mixitup(containerEl, {
-    selectors: {
-        target: '.blog-item'
-    },
-    animation: {
-        duration: 300
-    }
+  selectors: {
+    target: ".blog-item",
+  },
+  animation: {
+    duration: 300,
+  },
 });
 ```
 
@@ -196,7 +194,7 @@ If you wish to interact with your mixer via its API, the mixer reference returne
 ```js
 var mixer = mixitup(containerEl);
 
-mixer.filter('.category-a');
+mixer.filter(".category-a");
 ```
 
 Further reading: [Mixer API Methods](./docs/mixitup.Mixer.md)

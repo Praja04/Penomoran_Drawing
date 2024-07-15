@@ -59,4 +59,5 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$wi-css-prefix\".\A         on line 1 of scss/icons/weather-icons/sass/mappings/wi-yahoo.scss\A \A 1: .#{$wi-css-prefix}-yahoo-0:before { content: $tornado; }\A 2: .#{$wi-css-prefix}-yahoo-1:before { content: $day-storm-showers; }\A 3: .#{$wi-css-prefix}-yahoo-2:before { content: $hurricane; }\A 4: .#{$wi-css-prefix}-yahoo-3:before { content: $thunderstorm; }\A 5: .#{$wi-css-prefix}-yahoo-4:before { content: $thunderstorm; }\A 6: .#{$wi-css-prefix}-yahoo-5:before { content: $rain-mix; }"; }
+  content: 'Error: Undefined variable: "$wi-css-prefix".\A         on line 1 of scss/icons/weather-icons/sass/mappings/wi-yahoo.scss\A \A 1: .#{$wi-css-prefix}-yahoo-0:before { content: $tornado; }\A 2: .#{$wi-css-prefix}-yahoo-1:before { content: $day-storm-showers; }\A 3: .#{$wi-css-prefix}-yahoo-2:before { content: $hurricane; }\A 4: .#{$wi-css-prefix}-yahoo-3:before { content: $thunderstorm; }\A 5: .#{$wi-css-prefix}-yahoo-4:before { content: $thunderstorm; }\A 6: .#{$wi-css-prefix}-yahoo-5:before { content: $rain-mix; }';
+}

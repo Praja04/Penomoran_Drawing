@@ -4,8 +4,8 @@
  * @module Chartist.Base
  */
 /* global Chartist */
-(function(globalRoot, Chartist) {
-  'use strict';
+(function (globalRoot, Chartist) {
+  "use strict";
 
   var window = globalRoot.window;
 
@@ -24,30 +24,38 @@
    * @memberof Chartist.Base
    */
   function update(data, options, override) {
-    if(data) {
+    if (data) {
       this.data = data || {};
       this.data.labels = this.data.labels || [];
       this.data.series = this.data.series || [];
       // Event for data transformation that allows to manipulate the data before it gets rendered in the charts
-      this.eventEmitter.emit('data', {
-        type: 'update',
-        data: this.data
+      this.eventEmitter.emit("data", {
+        type: "update",
+        data: this.data,
       });
     }
 
-    if(options) {
-      this.options = Chartist.extend({}, override ? this.options : this.defaultOptions, options);
+    if (options) {
+      this.options = Chartist.extend(
+        {},
+        override ? this.options : this.defaultOptions,
+        options,
+      );
 
       // If chartist was not initialized yet, we just set the options and leave the rest to the initialization
       // Otherwise we re-create the optionsProvider at this point
-      if(!this.initializeTimeoutId) {
+      if (!this.initializeTimeoutId) {
         this.optionsProvider.removeMediaQueryListeners();
-        this.optionsProvider = Chartist.optionsProvider(this.options, this.responsiveOptions, this.eventEmitter);
+        this.optionsProvider = Chartist.optionsProvider(
+          this.options,
+          this.responsiveOptions,
+          this.eventEmitter,
+        );
       }
     }
 
     // Only re-created the chart if it has been initialized yet
-    if(!this.initializeTimeoutId) {
+    if (!this.initializeTimeoutId) {
       this.createChart(this.optionsProvider.getCurrentOptions());
     }
 
@@ -63,8 +71,8 @@
   function detach() {
     // Only detach if initialization already occurred on this chart. If this chart still hasn't initialized (therefore
     // the initializationTimeoutId is still a valid timeout reference, we will clear the timeout
-    if(!this.initializeTimeoutId) {
-      window.removeEventListener('resize', this.resizeListener);
+    if (!this.initializeTimeoutId) {
+      window.removeEventListener("resize", this.resizeListener);
       this.optionsProvider.removeMediaQueryListeners();
     } else {
       window.clearTimeout(this.initializeTimeoutId);
@@ -99,32 +107,41 @@
 
   function initialize() {
     // Add window resize listener that re-creates the chart
-    window.addEventListener('resize', this.resizeListener);
+    window.addEventListener("resize", this.resizeListener);
 
     // Obtain current options based on matching media queries (if responsive options are given)
     // This will also register a listener that is re-creating the chart based on media changes
-    this.optionsProvider = Chartist.optionsProvider(this.options, this.responsiveOptions, this.eventEmitter);
+    this.optionsProvider = Chartist.optionsProvider(
+      this.options,
+      this.responsiveOptions,
+      this.eventEmitter,
+    );
     // Register options change listener that will trigger a chart update
-    this.eventEmitter.addEventHandler('optionsChanged', function() {
-      this.update();
-    }.bind(this));
+    this.eventEmitter.addEventHandler(
+      "optionsChanged",
+      function () {
+        this.update();
+      }.bind(this),
+    );
 
     // Before the first chart creation we need to register us with all plugins that are configured
     // Initialize all relevant plugins with our chart object and the plugin options specified in the config
-    if(this.options.plugins) {
-      this.options.plugins.forEach(function(plugin) {
-        if(plugin instanceof Array) {
-          plugin[0](this, plugin[1]);
-        } else {
-          plugin(this);
-        }
-      }.bind(this));
+    if (this.options.plugins) {
+      this.options.plugins.forEach(
+        function (plugin) {
+          if (plugin instanceof Array) {
+            plugin[0](this, plugin[1]);
+          } else {
+            plugin(this);
+          }
+        }.bind(this),
+      );
     }
 
     // Event for data transformation that allows to manipulate the data before it gets rendered in the charts
-    this.eventEmitter.emit('data', {
-      type: 'initial',
-      data: this.data
+    this.eventEmitter.emit("data", {
+      type: "initial",
+      data: this.data,
     });
 
     // Create the first chart
@@ -154,15 +171,17 @@
     this.options = options;
     this.responsiveOptions = responsiveOptions;
     this.eventEmitter = Chartist.EventEmitter();
-    this.supportsForeignObject = Chartist.Svg.isSupported('Extensibility');
-    this.supportsAnimations = Chartist.Svg.isSupported('AnimationEventsAttribute');
-    this.resizeListener = function resizeListener(){
+    this.supportsForeignObject = Chartist.Svg.isSupported("Extensibility");
+    this.supportsAnimations = Chartist.Svg.isSupported(
+      "AnimationEventsAttribute",
+    );
+    this.resizeListener = function resizeListener() {
       this.update();
     }.bind(this);
 
-    if(this.container) {
+    if (this.container) {
       // If chartist was already initialized in this container we are detaching all event listeners first
-      if(this.container.__chartist__) {
+      if (this.container.__chartist__) {
         this.container.__chartist__.detach();
       }
 
@@ -181,15 +200,14 @@
     container: undefined,
     svg: undefined,
     eventEmitter: undefined,
-    createChart: function() {
-      throw new Error('Base chart type can\'t be instantiated!');
+    createChart: function () {
+      throw new Error("Base chart type can't be instantiated!");
     },
     update: update,
     detach: detach,
     on: on,
     off: off,
     version: Chartist.version,
-    supportsForeignObject: false
+    supportsForeignObject: false,
   });
-
-}(this, Chartist));
+})(this, Chartist);

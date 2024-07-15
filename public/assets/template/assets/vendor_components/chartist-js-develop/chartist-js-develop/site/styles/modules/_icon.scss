@@ -5,7 +5,13 @@ $icon-vertical-align: baseline !default;
 $icon-attr-name: data-icon !default;
 $icon-include-classes: true !default;
 
-@mixin icon($icon: "", $icon-size: 1em, $icon-location: $icon-location, $icon-font-name: $icon-font-name, $icon-vertical-align: $icon-vertical-align) {
+@mixin icon(
+  $icon: "",
+  $icon-size: 1em,
+  $icon-location: $icon-location,
+  $icon-font-name: $icon-font-name,
+  $icon-vertical-align: $icon-vertical-align
+) {
   &:#{$icon-location} {
     content: $icon;
     display: inline-block;

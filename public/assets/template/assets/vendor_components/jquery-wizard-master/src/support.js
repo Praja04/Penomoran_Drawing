@@ -1,20 +1,20 @@
-var Support = (function() {
-    var style = $('<support>').get(0).style,
-        prefixes = ['webkit', 'Moz', 'O', 'ms'],
+var Support = (function () {
+    var style = $("<support>").get(0).style,
+        prefixes = ["webkit", "Moz", "O", "ms"],
         events = {
             transition: {
                 end: {
-                    WebkitTransition: 'webkitTransitionEnd',
-                    MozTransition: 'transitionend',
-                    OTransition: 'oTransitionEnd',
-                    transition: 'transitionend'
-                }
-            }
+                    WebkitTransition: "webkitTransitionEnd",
+                    MozTransition: "transitionend",
+                    OTransition: "oTransitionEnd",
+                    transition: "transitionend",
+                },
+            },
         },
         tests = {
-            csstransitions: function() {
-                return !!test('transition');
-            }
+            csstransitions: function () {
+                return !!test("transition");
+            },
         };
 
     function test(property, prefixed) {
@@ -25,9 +25,9 @@ var Support = (function() {
             result = property;
         }
         if (!result) {
-            $.each(prefixes, function(i, prefix) {
+            $.each(prefixes, function (i, prefix) {
                 if (style[prefix + upper] !== undefined) {
-                    result = '-' + prefix.toLowerCase() + '-' + upper;
+                    result = "-" + prefix.toLowerCase() + "-" + upper;
                     return false;
                 }
             });
@@ -49,10 +49,9 @@ var Support = (function() {
     var support = {};
     if (tests.csstransitions()) {
         /* jshint -W053 */
-        support.transition = new String(prefixed('transition'))
+        support.transition = new String(prefixed("transition"));
         support.transition.end = events.transition.end[support.transition];
     }
 
     return support;
 })();
-

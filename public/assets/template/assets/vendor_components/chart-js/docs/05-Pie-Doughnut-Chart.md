@@ -2,6 +2,7 @@
 title: Pie & Doughnut Charts
 anchor: doughnut-pie-chart
 ---
+
 ###Introduction
 Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data.
 
@@ -19,40 +20,39 @@ They are also registered under two aliases in the `Chart` core. Other than their
 	<canvas width="250" height="125"></canvas>
 </div>
 
-
 ### Example usage
 
 ```javascript
 // For a pie chart
-var myPieChart = new Chart(ctx[0]).Pie(data,options);
+var myPieChart = new Chart(ctx[0]).Pie(data, options);
 
 // And for a doughnut chart
-var myDoughnutChart = new Chart(ctx[1]).Doughnut(data,options);
+var myDoughnutChart = new Chart(ctx[1]).Doughnut(data, options);
 ```
 
 ### Data structure
 
 ```javascript
 var data = [
-	{
-		value: 300,
-		color:"#F7464A",
-		highlight: "#FF5A5E",
-		label: "Red"
-	},
-	{
-		value: 50,
-		color: "#46BFBD",
-		highlight: "#5AD3D1",
-		label: "Green"
-	},
-	{
-		value: 100,
-		color: "#FDB45C",
-		highlight: "#FFC870",
-		label: "Yellow"
-	}
-]
+  {
+    value: 300,
+    color: "#F7464A",
+    highlight: "#FF5A5E",
+    label: "Red",
+  },
+  {
+    value: 50,
+    color: "#46BFBD",
+    highlight: "#5AD3D1",
+    label: "Green",
+  },
+  {
+    value: 100,
+    color: "#FDB45C",
+    highlight: "#FFC870",
+    label: "Yellow",
+  },
+];
 ```
 
 For a pie chart, you must pass in an array of objects with a value and a color property. The value attribute should be a number, Chart.js will total all of the numbers and calculate the relative proportion of each. The color attribute should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.
@@ -92,13 +92,14 @@ These are the customisation options specific to Pie & Doughnut charts. These opt
 	{% endraw %}
 }
 ```
+
 You can override these for your `Chart` instance by passing a second argument into the `Doughnut` method as an object with the keys you want to override.
 
 For example, we could have a doughnut chart that animates by scaling out from the centre like so:
 
 ```javascript
 new Chart(ctx).Doughnut(data, {
-	animateScale: true
+  animateScale: true,
 });
 // This will create a chart with all of the default options, merged from the global config,
 // and the Doughnut chart defaults but this particular instance will have `animateScale` set to `true`.
@@ -113,9 +114,9 @@ We can also change these default values for each Doughnut type that is created, 
 Calling `getSegmentsAtEvent(event)` on your Chart instance passing an argument of an event, or jQuery event, will return the segment elements that are at the same position of that event.
 
 ```javascript
-canvas.onclick = function(evt){
-	var activePoints = myDoughnutChart.getSegmentsAtEvent(evt);
-	// => activePoints is an array of segments on the canvas that are at the same position as the click event.
+canvas.onclick = function (evt) {
+  var activePoints = myDoughnutChart.getSegmentsAtEvent(evt);
+  // => activePoints is an array of segments on the canvas that are at the same position as the click event.
 };
 ```
 
@@ -140,10 +141,10 @@ Calling `addData(segmentData, index)` on your Chart instance passing an object i
 ```javascript
 // An object in the same format as the original data source
 myDoughnutChart.addData({
-	value: 130,
-	color: "#B48EAD",
-	highlight: "#C69CBE",
-	label: "Purple"
+  value: 130,
+  color: "#B48EAD",
+  highlight: "#C69CBE",
+  label: "Purple",
 });
 // The new segment will now animate in.
 ```

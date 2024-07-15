@@ -1,22 +1,11 @@
 {
     "disallowEmptyBlocks": true,
-    "disallowKeywords": [
-        "with"
-    ],
+    "disallowKeywords": ["with"],
     "disallowMixedSpacesAndTabs": true,
     "disallowMultipleLineStrings": true,
     "disallowMultipleVarDecl": true,
-    "disallowSpaceAfterPrefixUnaryOperators": [
-        "!",
-        "+",
-        "++",
-        "-",
-        "--",
-        "~"
-    ],
-    "disallowSpaceBeforeBinaryOperators": [
-        ","
-    ],
+    "disallowSpaceAfterPrefixUnaryOperators": ["!", "+", "++", "-", "--", "~"],
+    "disallowSpaceBeforeBinaryOperators": [","],
     "disallowSpaceBeforePostfixUnaryOperators": true,
     "disallowSpacesInNamedFunctionExpression": {
         "beforeOpeningRoundBrace": true

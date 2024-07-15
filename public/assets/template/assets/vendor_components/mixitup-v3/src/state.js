@@ -13,217 +13,217 @@
  * @since       3.0.0
  */
 
-mixitup.State = function() {
-    mixitup.Base.call(this);
+mixitup.State = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    /**
-     * The ID of the mixer instance.
-     *
-     * @name        id
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {string}
-     * @default     ''
-     */
+  /**
+   * The ID of the mixer instance.
+   *
+   * @name        id
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {string}
+   * @default     ''
+   */
 
-    this.id = '';
+  this.id = "";
 
-    /**
-     * The currently active filter command as set by a control click or API call.
-     *
-     * @name        activeFilter
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {mixitup.CommandFilter}
-     * @default     null
-     */
+  /**
+   * The currently active filter command as set by a control click or API call.
+   *
+   * @name        activeFilter
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {mixitup.CommandFilter}
+   * @default     null
+   */
 
-    this.activeFilter = null;
+  this.activeFilter = null;
 
-    /**
-     * The currently active sort command as set by a control click or API call.
-     *
-     * @name        activeSort
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {mixitup.CommandSort}
-     * @default     null
-     */
+  /**
+   * The currently active sort command as set by a control click or API call.
+   *
+   * @name        activeSort
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {mixitup.CommandSort}
+   * @default     null
+   */
 
-    this.activeSort = null;
+  this.activeSort = null;
 
-    /**
-     * The current layout-specific container class name, if applied.
-     *
-     * @name        activeContainerClassName
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {string}
-     * @default     ''
-     */
+  /**
+   * The current layout-specific container class name, if applied.
+   *
+   * @name        activeContainerClassName
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {string}
+   * @default     ''
+   */
 
-    this.activeContainerClassName = '';
+  this.activeContainerClassName = "";
 
-    /**
-     * A reference to the container element that the mixer is instantiated on.
-     *
-     * @name        container
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {Element}
-     * @default     null
-     */
+  /**
+   * A reference to the container element that the mixer is instantiated on.
+   *
+   * @name        container
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {Element}
+   * @default     null
+   */
 
-    this.container = null;
+  this.container = null;
 
-    /**
-     * An array of all target elements indexed by the mixer.
-     *
-     * @name        targets
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {Array.<Element>}
-     * @default     []
-     */
+  /**
+   * An array of all target elements indexed by the mixer.
+   *
+   * @name        targets
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {Array.<Element>}
+   * @default     []
+   */
 
-    this.targets = [];
+  this.targets = [];
 
-    /**
-     * An array of all target elements not matching the current filter.
-     *
-     * @name        hide
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {Array.<Element>}
-     * @default     []
-     */
+  /**
+   * An array of all target elements not matching the current filter.
+   *
+   * @name        hide
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {Array.<Element>}
+   * @default     []
+   */
 
-    this.hide = [];
+  this.hide = [];
 
-    /**
-     * An array of all target elements matching the current filter and any additional
-     * limits applied such as pagination.
-     *
-     * @name        show
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {Array.<Element>}
-     * @default     []
-     */
+  /**
+   * An array of all target elements matching the current filter and any additional
+   * limits applied such as pagination.
+   *
+   * @name        show
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {Array.<Element>}
+   * @default     []
+   */
 
-    this.show = [];
+  this.show = [];
 
-    /**
-     * An array of all target elements matching the current filter irrespective of
-     * any additional limits applied such as pagination.
-     *
-     * @name        matching
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {Array.<Element>}
-     * @default     []
-     */
+  /**
+   * An array of all target elements matching the current filter irrespective of
+   * any additional limits applied such as pagination.
+   *
+   * @name        matching
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {Array.<Element>}
+   * @default     []
+   */
 
-    this.matching = [];
+  this.matching = [];
 
-    /**
-     * An integer representing the total number of target elements indexed by the
-     * mixer. Equivalent to `state.targets.length`.
-     *
-     * @name        totalTargets
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {number}
-     * @default     -1
-     */
+  /**
+   * An integer representing the total number of target elements indexed by the
+   * mixer. Equivalent to `state.targets.length`.
+   *
+   * @name        totalTargets
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {number}
+   * @default     -1
+   */
 
-    this.totalTargets = -1;
+  this.totalTargets = -1;
 
-    /**
-     * An integer representing the total number of target elements matching the
-     * current filter and any additional limits applied such as pagination.
-     * Equivalent to `state.show.length`.
-     *
-     * @name        totalShow
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {number}
-     * @default     -1
-     */
+  /**
+   * An integer representing the total number of target elements matching the
+   * current filter and any additional limits applied such as pagination.
+   * Equivalent to `state.show.length`.
+   *
+   * @name        totalShow
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {number}
+   * @default     -1
+   */
 
-    this.totalShow = -1;
+  this.totalShow = -1;
 
-    /**
-     * An integer representing the total number of target elements not matching
-     * the current filter. Equivalent to `state.hide.length`.
-     *
-     * @name        totalHide
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {number}
-     * @default     -1
-     */
+  /**
+   * An integer representing the total number of target elements not matching
+   * the current filter. Equivalent to `state.hide.length`.
+   *
+   * @name        totalHide
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {number}
+   * @default     -1
+   */
 
-    this.totalHide = -1;
+  this.totalHide = -1;
 
-    /**
-     * An integer representing the total number of target elements matching the
-     * current filter irrespective of any other limits applied such as pagination.
-     * Equivalent to `state.matching.length`.
-     *
-     * @name        totalMatching
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {number}
-     * @default     -1
-     */
+  /**
+   * An integer representing the total number of target elements matching the
+   * current filter irrespective of any other limits applied such as pagination.
+   * Equivalent to `state.matching.length`.
+   *
+   * @name        totalMatching
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {number}
+   * @default     -1
+   */
 
-    this.totalMatching = -1;
+  this.totalMatching = -1;
 
-    /**
-     * A boolean indicating whether the last operation "failed", i.e. no targets
-     * could be found matching the filter.
-     *
-     * @name        hasFailed
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {boolean}
-     * @default     false
-     */
+  /**
+   * A boolean indicating whether the last operation "failed", i.e. no targets
+   * could be found matching the filter.
+   *
+   * @name        hasFailed
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {boolean}
+   * @default     false
+   */
 
-    this.hasFailed = false;
+  this.hasFailed = false;
 
-    /**
-     * The DOM element that was clicked if the last operation was triggered by the
-     * clicking of a control and not an API call.
-     *
-     * @name        triggerElement
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {Element|null}
-     * @default     null
-     */
+  /**
+   * The DOM element that was clicked if the last operation was triggered by the
+   * clicking of a control and not an API call.
+   *
+   * @name        triggerElement
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {Element|null}
+   * @default     null
+   */
 
-    this.triggerElement = null;
+  this.triggerElement = null;
 
-    /**
-     * The currently active dataset underlying the rendered targets, if the
-     * dataset API is in use.
-     *
-     * @name        activeDataset
-     * @memberof    mixitup.State
-     * @instance
-     * @type        {Array.<object>}
-     * @default     null
-     */
+  /**
+   * The currently active dataset underlying the rendered targets, if the
+   * dataset API is in use.
+   *
+   * @name        activeDataset
+   * @memberof    mixitup.State
+   * @instance
+   * @type        {Array.<object>}
+   * @default     null
+   */
 
-    this.activeDataset = null;
+  this.activeDataset = null;
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.State);

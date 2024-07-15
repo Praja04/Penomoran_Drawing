@@ -63,4 +63,5 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$wi-css-prefix\".\A         on line 5 of scss/icons/weather-icons/sass/icon-classes/classes-wind.scss\A \A 1: // Wind Variables 2.0\A 2: \A 3: $wind: \"\f0b1\";\A 4: \A 5: .#{$wi-css-prefix}-wind:before { content: $wind; }\A 6: \A 7: @mixin wind-rotate( $val: 0deg ) {\A 8:   -webkit-transform: rotate($val);\A 9:   -moz-transform: rotate($val);\A 10:   -ms-transform: rotate($val);"; }
+  content: 'Error: Undefined variable: "$wi-css-prefix".\A         on line 5 of scss/icons/weather-icons/sass/icon-classes/classes-wind.scss\A \A 1: // Wind Variables 2.0\A 2: \A 3: $wind: "\f0b1";\A 4: \A 5: .#{$wi-css-prefix}-wind:before { content: $wind; }\A 6: \A 7: @mixin wind-rotate( $val: 0deg ) {\A 8:   -webkit-transform: rotate($val);\A 9:   -moz-transform: rotate($val);\A 10:   -ms-transform: rotate($val);';
+}

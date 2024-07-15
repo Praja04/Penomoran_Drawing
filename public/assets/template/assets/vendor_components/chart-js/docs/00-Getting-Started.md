@@ -15,13 +15,12 @@ Alternatively, if you're using an AMD loader for JavaScript modules, that is als
 
 ```javascript
 // Using requirejs
-require(['path/to/Chartjs'], function(Chart){
-	// Use Chart.js as normal here.
+require(["path/to/Chartjs"], function (Chart) {
+  // Use Chart.js as normal here.
 
-	// Chart.noConflict restores the Chart global variable to it's previous owner
-	// The function returns what was previously Chart, allowing you to reassign.
-	var Chartjs = Chart.noConflict();
-
+  // Chart.noConflict restores the Chart global variable to it's previous owner
+  // The function returns what was previously Chart, allowing you to reassign.
+  var Chartjs = Chart.noConflict();
 });
 ```
 

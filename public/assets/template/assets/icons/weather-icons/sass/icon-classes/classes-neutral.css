@@ -64,4 +64,5 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$cloud\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-neutral.scss\A \A 1: .wi-cloud:before {content: $cloud;}\A 2: .wi-cloudy:before {content: $cloudy;}\A 3: .wi-cloudy-gusts:before {content: $cloudy-gusts;}\A 4: .wi-cloudy-windy:before {content: $cloudy-windy;}\A 5: .wi-fog:before {content: $fog;}\A 6: .wi-hail:before {content: $hail;}"; }
+  content: 'Error: Undefined variable: "$cloud".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-neutral.scss\A \A 1: .wi-cloud:before {content: $cloud;}\A 2: .wi-cloudy:before {content: $cloudy;}\A 3: .wi-cloudy-gusts:before {content: $cloudy-gusts;}\A 4: .wi-cloudy-windy:before {content: $cloudy-windy;}\A 5: .wi-fog:before {content: $fog;}\A 6: .wi-hail:before {content: $hail;}';
+}

@@ -1,9 +1,5 @@
-define([
-  'jquery',
-  './base',
-  '../utils'
-], function ($, BaseSelection, Utils) {
-  function MultipleSelection ($element, options) {
+define(["jquery", "./base", "../utils"], function ($, BaseSelection, Utils) {
+  function MultipleSelection($element, options) {
     MultipleSelection.__super__.constructor.apply(this, arguments);
   }
 
@@ -12,11 +8,9 @@ define([
   MultipleSelection.prototype.render = function () {
     var $selection = MultipleSelection.__super__.render.call(this);
 
-    $selection.addClass('select2-selection--multiple');
+    $selection.addClass("select2-selection--multiple");
 
-    $selection.html(
-      '<ul class="select2-selection__rendered"></ul>'
-    );
+    $selection.html('<ul class="select2-selection__rendered"></ul>');
 
     return $selection;
   };
@@ -26,41 +20,41 @@ define([
 
     MultipleSelection.__super__.bind.apply(this, arguments);
 
-    this.$selection.on('click', function (evt) {
-      self.trigger('toggle', {
-        originalEvent: evt
+    this.$selection.on("click", function (evt) {
+      self.trigger("toggle", {
+        originalEvent: evt,
       });
     });
 
     this.$selection.on(
-      'click',
-      '.select2-selection__choice__remove',
+      "click",
+      ".select2-selection__choice__remove",
       function (evt) {
         // Ignore the event if it is disabled
-        if (self.options.get('disabled')) {
+        if (self.options.get("disabled")) {
           return;
         }
 
         var $remove = $(this);
         var $selection = $remove.parent();
 
-        var data = $selection.data('data');
+        var data = $selection.data("data");
 
-        self.trigger('unselect', {
+        self.trigger("unselect", {
           originalEvent: evt,
-          data: data
+          data: data,
         });
-      }
+      },
     );
   };
 
   MultipleSelection.prototype.clear = function () {
-    this.$selection.find('.select2-selection__rendered').empty();
+    this.$selection.find(".select2-selection__rendered").empty();
   };
 
   MultipleSelection.prototype.display = function (data, container) {
-    var template = this.options.get('templateSelection');
-    var escapeMarkup = this.options.get('escapeMarkup');
+    var template = this.options.get("templateSelection");
+    var escapeMarkup = this.options.get("escapeMarkup");
 
     return escapeMarkup(template(data, container));
   };
@@ -69,9 +63,9 @@ define([
     var $container = $(
       '<li class="select2-selection__choice">' +
         '<span class="select2-selection__choice__remove" role="presentation">' +
-          '&times;' +
-        '</span>' +
-      '</li>'
+        "&times;" +
+        "</span>" +
+        "</li>",
     );
 
     return $container;
@@ -93,14 +87,14 @@ define([
       var formatted = this.display(selection, $selection);
 
       $selection.append(formatted);
-      $selection.prop('title', selection.title || selection.text);
+      $selection.prop("title", selection.title || selection.text);
 
-      $selection.data('data', selection);
+      $selection.data("data", selection);
 
       $selections.push($selection);
     }
 
-    var $rendered = this.$selection.find('.select2-selection__rendered');
+    var $rendered = this.$selection.find(".select2-selection__rendered");
 
     Utils.appendMany($rendered, $selections);
   };

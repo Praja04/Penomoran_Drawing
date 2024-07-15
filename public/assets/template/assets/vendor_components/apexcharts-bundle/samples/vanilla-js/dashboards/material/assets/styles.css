@@ -1,15 +1,20 @@
-
 body {
-  background: #F3F4FA;
+  background: #f3f4fa;
   color: #777;
   font-family: Montserrat, Arial, sans-serif;
 }
 
 .body-bg {
-  background: #F3F4FA !important;
+  background: #f3f4fa !important;
 }
 
-h1, h2, h3, h4, h5, h6, strong {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
   font-weight: 600;
 }
 
@@ -31,7 +36,6 @@ body {
 .box {
   background-color: #fff;
   padding: 25px 20px;
-
 }
 
 .shadow {
@@ -45,7 +49,6 @@ body {
   position: relative;
 }
 
-
 .sparkboxes strong {
   position: relative;
   z-index: 3;
@@ -53,13 +56,12 @@ body {
   color: #fff;
 }
 
-
 .sparkboxes .box1 {
-  border-bottom: 3px solid #734CEA
+  border-bottom: 3px solid #734cea;
 }
 
 .sparkboxes .box2 {
-  border-bottom: 3px solid #34bfa3
+  border-bottom: 3px solid #34bfa3;
 }
 
 .sparkboxes .box3 {
@@ -84,7 +86,6 @@ body {
 #fusionexport-btn[disabled] {
   cursor: wait;
 }
-
 
 .spinner-border {
   display: none;

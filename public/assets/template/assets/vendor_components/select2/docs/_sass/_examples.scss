@@ -42,7 +42,8 @@
 .s2-event-log {
   background: #002451;
   color: white;
-  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco,
+    Consolas, monospace;
   margin: 0 -15px 15px;
   padding: 45px 15px 15px;
   position: relative;
@@ -54,7 +55,7 @@
     left: 15px;
     font-size: 12px;
     font-weight: bold;
-    color: #BBB;
+    color: #bbb;
     text-transform: uppercase;
     letter-spacing: 1px;
   }

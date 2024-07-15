@@ -7,16 +7,16 @@
  * @since       3.0.0
  */
 
-mixitup.TargetDom = function() {
-    mixitup.Base.call(this);
+mixitup.TargetDom = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    this.el = null;
+  this.el = null;
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.TargetDom);

@@ -1,37 +1,37 @@
 window.Apex = {
   chart: {
-    foreColor: '#ccc',
+    foreColor: "#ccc",
     toolbar: {
-      show: false
+      show: false,
     },
   },
   stroke: {
-    width: 3
+    width: 3,
   },
   dataLabels: {
-    enabled: false
+    enabled: false,
   },
   tooltip: {
-    theme: 'dark'
+    theme: "dark",
   },
   grid: {
     borderColor: "#535A6C",
     xaxis: {
       lines: {
-        show: true
-      }
-    }
-  }
+        show: true,
+      },
+    },
+  },
 };
 
 var spark1 = {
   chart: {
-    id: 'spark1',
-    group: 'sparks',
-    type: 'line',
+    id: "spark1",
+    group: "sparks",
+    type: "line",
     height: 80,
     sparkline: {
-      enabled: true
+      enabled: true,
     },
     dropShadow: {
       enabled: true,
@@ -39,47 +39,49 @@ var spark1 = {
       left: 1,
       blur: 2,
       opacity: 0.2,
-    }
+    },
   },
-  series: [{
-    data: [25, 66, 41, 59, 25, 44, 12, 36, 9, 21]
-  }],
+  series: [
+    {
+      data: [25, 66, 41, 59, 25, 44, 12, 36, 9, 21],
+    },
+  ],
   stroke: {
-    curve: 'smooth'
+    curve: "smooth",
   },
   markers: {
-    size: 0
+    size: 0,
   },
   grid: {
     padding: {
       top: 20,
       bottom: 10,
-      left: 110
-    }
+      left: 110,
+    },
   },
-  colors: ['#fff'],
+  colors: ["#fff"],
   tooltip: {
     x: {
-      show: false
+      show: false,
     },
     y: {
       title: {
         formatter: function formatter(val) {
-          return '';
-        }
-      }
-    }
-  }
-}
+          return "";
+        },
+      },
+    },
+  },
+};
 
 var spark2 = {
   chart: {
-    id: 'spark2',
-    group: 'sparks',
-    type: 'line',
+    id: "spark2",
+    group: "sparks",
+    type: "line",
     height: 80,
     sparkline: {
-      enabled: true
+      enabled: true,
     },
     dropShadow: {
       enabled: true,
@@ -87,47 +89,49 @@ var spark2 = {
       left: 1,
       blur: 2,
       opacity: 0.2,
-    }
+    },
   },
-  series: [{
-    data: [12, 14, 2, 47, 32, 44, 14, 55, 41, 69]
-  }],
+  series: [
+    {
+      data: [12, 14, 2, 47, 32, 44, 14, 55, 41, 69],
+    },
+  ],
   stroke: {
-    curve: 'smooth'
+    curve: "smooth",
   },
   grid: {
     padding: {
       top: 20,
       bottom: 10,
-      left: 110
-    }
+      left: 110,
+    },
   },
   markers: {
-    size: 0
+    size: 0,
   },
-  colors: ['#fff'],
+  colors: ["#fff"],
   tooltip: {
     x: {
-      show: false
+      show: false,
     },
     y: {
       title: {
         formatter: function formatter(val) {
-          return '';
-        }
-      }
-    }
-  }
-}
+          return "";
+        },
+      },
+    },
+  },
+};
 
 var spark3 = {
   chart: {
-    id: 'spark3',
-    group: 'sparks',
-    type: 'line',
+    id: "spark3",
+    group: "sparks",
+    type: "line",
     height: 80,
     sparkline: {
-      enabled: true
+      enabled: true,
     },
     dropShadow: {
       enabled: true,
@@ -135,52 +139,54 @@ var spark3 = {
       left: 1,
       blur: 2,
       opacity: 0.2,
-    }
+    },
   },
-  series: [{
-    data: [47, 45, 74, 32, 56, 31, 44, 33, 45, 19]
-  }],
+  series: [
+    {
+      data: [47, 45, 74, 32, 56, 31, 44, 33, 45, 19],
+    },
+  ],
   stroke: {
-    curve: 'smooth'
+    curve: "smooth",
   },
   markers: {
-    size: 0
+    size: 0,
   },
   grid: {
     padding: {
       top: 20,
       bottom: 10,
-      left: 110
-    }
+      left: 110,
+    },
   },
-  colors: ['#fff'],
+  colors: ["#fff"],
   xaxis: {
     crosshairs: {
-      width: 1
+      width: 1,
     },
   },
   tooltip: {
     x: {
-      show: false
+      show: false,
     },
     y: {
       title: {
         formatter: function formatter(val) {
-          return '';
-        }
-      }
-    }
-  }
-}
+          return "";
+        },
+      },
+    },
+  },
+};
 
 var spark4 = {
   chart: {
-    id: 'spark4',
-    group: 'sparks',
-    type: 'line',
+    id: "spark4",
+    group: "sparks",
+    type: "line",
     height: 80,
     sparkline: {
-      enabled: true
+      enabled: true,
     },
     dropShadow: {
       enabled: true,
@@ -188,56 +194,57 @@ var spark4 = {
       left: 1,
       blur: 2,
       opacity: 0.2,
-    }
+    },
   },
-  series: [{
-    data: [15, 75, 47, 65, 14, 32, 19, 54, 44, 61]
-  }],
+  series: [
+    {
+      data: [15, 75, 47, 65, 14, 32, 19, 54, 44, 61],
+    },
+  ],
   stroke: {
-    curve: 'smooth'
+    curve: "smooth",
   },
   markers: {
-    size: 0
+    size: 0,
   },
   grid: {
     padding: {
       top: 20,
       bottom: 10,
-      left: 110
-    }
+      left: 110,
+    },
   },
-  colors: ['#fff'],
+  colors: ["#fff"],
   xaxis: {
     crosshairs: {
-      width: 1
+      width: 1,
     },
   },
   tooltip: {
     x: {
-      show: false
+      show: false,
     },
     y: {
       title: {
         formatter: function formatter(val) {
-          return '';
-        }
-      }
-    }
-  }
-}
+          return "";
+        },
+      },
+    },
+  },
+};
 
 new ApexCharts(document.querySelector("#spark1"), spark1).render();
 new ApexCharts(document.querySelector("#spark2"), spark2).render();
 new ApexCharts(document.querySelector("#spark3"), spark3).render();
 new ApexCharts(document.querySelector("#spark4"), spark4).render();
 
-
 var optionsLine = {
   chart: {
     height: 328,
-    type: 'line',
+    type: "line",
     zoom: {
-      enabled: false
+      enabled: false,
     },
     dropShadow: {
       enabled: true,
@@ -245,69 +252,80 @@ var optionsLine = {
       left: 2,
       blur: 4,
       opacity: 1,
-    }
+    },
   },
   stroke: {
-    curve: 'smooth',
-    width: 2
+    curve: "smooth",
+    width: 2,
   },
   //colors: ["#3F51B5", '#2196F3'],
-  series: [{
+  series: [
+    {
       name: "Music",
-      data: [1, 15, 26, 20, 33, 27]
+      data: [1, 15, 26, 20, 33, 27],
     },
     {
       name: "Photos",
-      data: [3, 33, 21, 42, 19, 32]
+      data: [3, 33, 21, 42, 19, 32],
     },
     {
       name: "Files",
-      data: [0, 39, 52, 11, 29, 43]
-    }
+      data: [0, 39, 52, 11, 29, 43],
+    },
   ],
   title: {
-    text: 'Media',
-    align: 'left',
+    text: "Media",
+    align: "left",
     offsetY: 25,
-    offsetX: 20
+    offsetX: 20,
   },
   subtitle: {
-    text: 'Statistics',
+    text: "Statistics",
     offsetY: 55,
-    offsetX: 20
+    offsetX: 20,
   },
   markers: {
     size: 6,
     strokeWidth: 0,
     hover: {
-      size: 9
-    }
+      size: 9,
+    },
   },
   grid: {
     show: true,
     padding: {
-      bottom: 0
-    }
+      bottom: 0,
+    },
   },
-  labels: ['01/15/2002', '01/16/2002', '01/17/2002', '01/18/2002', '01/19/2002', '01/20/2002'],
+  labels: [
+    "01/15/2002",
+    "01/16/2002",
+    "01/17/2002",
+    "01/18/2002",
+    "01/19/2002",
+    "01/20/2002",
+  ],
   xaxis: {
     tooltip: {
-      enabled: false
-    }
+      enabled: false,
+    },
   },
   legend: {
-    position: 'top',
-    horizontalAlign: 'right',
-    offsetY: -20
-  }
-}
+    position: "top",
+    horizontalAlign: "right",
+    offsetY: -20,
+  },
+};
 
-var chartLine = new ApexCharts(document.querySelector('#line-adwords'), optionsLine);
+var chartLine = new ApexCharts(
+  document.querySelector("#line-adwords"),
+  optionsLine,
+);
 chartLine.render();
 
 var optionsCircle4 = {
   chart: {
-    type: 'radialBar',
+    type: "radialBar",
     height: 350,
     width: 380,
   },
@@ -317,131 +335,147 @@ var optionsCircle4 = {
       inverseOrder: true,
       hollow: {
         margin: 5,
-        size: '48%',
-        background: 'transparent',
-
+        size: "48%",
+        background: "transparent",
       },
       track: {
         show: false,
       },
       startAngle: -180,
-      endAngle: 180
-
+      endAngle: 180,
     },
   },
   stroke: {
-    lineCap: 'round'
+    lineCap: "round",
   },
   series: [71, 63, 77],
-  labels: ['June', 'May', 'April'],
+  labels: ["June", "May", "April"],
   legend: {
     show: true,
     floating: true,
-    position: 'right',
+    position: "right",
     offsetX: 70,
-    offsetY: 240
+    offsetY: 240,
   },
-}
+};
 
-var chartCircle4 = new ApexCharts(document.querySelector('#radialBarBottom'), optionsCircle4);
+var chartCircle4 = new ApexCharts(
+  document.querySelector("#radialBarBottom"),
+  optionsCircle4,
+);
 chartCircle4.render();
-
 
 var optionsBar = {
   chart: {
     height: 380,
-    type: 'bar',
+    type: "bar",
     stacked: true,
   },
   plotOptions: {
     bar: {
-      columnWidth: '30%',
+      columnWidth: "30%",
       horizontal: false,
     },
   },
-  series: [{
-    name: 'PRODUCT A',
-    data: [14, 25, 21, 17, 12, 13, 11, 19]
-  }, {
-    name: 'PRODUCT B',
-    data: [13, 23, 20, 8, 13, 27, 33, 12]
-  }, {
-    name: 'PRODUCT C',
-    data: [11, 17, 15, 15, 21, 14, 15, 13]
-  }],
+  series: [
+    {
+      name: "PRODUCT A",
+      data: [14, 25, 21, 17, 12, 13, 11, 19],
+    },
+    {
+      name: "PRODUCT B",
+      data: [13, 23, 20, 8, 13, 27, 33, 12],
+    },
+    {
+      name: "PRODUCT C",
+      data: [11, 17, 15, 15, 21, 14, 15, 13],
+    },
+  ],
   xaxis: {
-    categories: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2', '2012 Q3', '2012 Q4'],
+    categories: [
+      "2011 Q1",
+      "2011 Q2",
+      "2011 Q3",
+      "2011 Q4",
+      "2012 Q1",
+      "2012 Q2",
+      "2012 Q3",
+      "2012 Q4",
+    ],
   },
   fill: {
-    opacity: 1
+    opacity: 1,
   },
+};
 
-}
-
-var chartBar = new ApexCharts(
-  document.querySelector("#barchart"),
-  optionsBar
-);
+var chartBar = new ApexCharts(document.querySelector("#barchart"), optionsBar);
 
 chartBar.render();
 
 var optionsArea = {
   chart: {
     height: 380,
-    type: 'area',
+    type: "area",
     stacked: false,
   },
   stroke: {
-    curve: 'straight'
+    curve: "straight",
   },
-  series: [{
+  series: [
+    {
       name: "Music",
-      data: [11, 15, 26, 20, 33, 27]
+      data: [11, 15, 26, 20, 33, 27],
     },
     {
       name: "Photos",
-      data: [32, 33, 21, 42, 19, 32]
+      data: [32, 33, 21, 42, 19, 32],
     },
     {
       name: "Files",
-      data: [20, 39, 52, 11, 29, 43]
-    }
+      data: [20, 39, 52, 11, 29, 43],
+    },
   ],
   xaxis: {
-    categories: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2'],
+    categories: [
+      "2011 Q1",
+      "2011 Q2",
+      "2011 Q3",
+      "2011 Q4",
+      "2012 Q1",
+      "2012 Q2",
+    ],
   },
   tooltip: {
-    followCursor: true
+    followCursor: true,
   },
   fill: {
     opacity: 1,
   },
-
-}
+};
 
 var chartArea = new ApexCharts(
   document.querySelector("#areachart"),
-  optionsArea
+  optionsArea,
 );
 
 chartArea.render();
 
 /* fusionexport integrations START */
 (() => {
-    const btn = document.getElementById('fusionexport-btn')
-    btn.addEventListener('click', async function() {
-      const endPoint = 'https://www.fusioncharts.com/demos/dashboards/fusionexport-apexcharts/api/export-dashboard'
-      const information = {
-        dashboardName: 'dark'
-      };
+  const btn = document.getElementById("fusionexport-btn");
+  btn.addEventListener("click", async function () {
+    const endPoint =
+      "https://www.fusioncharts.com/demos/dashboards/fusionexport-apexcharts/api/export-dashboard";
+    const information = {
+      dashboardName: "dark",
+    };
 
-      this.setAttribute('disabled', true);
-      const { data } = await axios.post(endPoint, information, {
-        responseType: 'blob'
-      });
-      await download(data, 'apexCharts-dark-dashboard.pdf', 'application/pdf')
-      this.removeAttribute('disabled')
+    this.setAttribute("disabled", true);
+    const { data } = await axios.post(endPoint, information, {
+      responseType: "blob",
     });
-  }
-)();
+    await download(data, "apexCharts-dark-dashboard.pdf", "application/pdf");
+    this.removeAttribute("disabled");
+  });
+})();
 /* fusionexport integrations END */

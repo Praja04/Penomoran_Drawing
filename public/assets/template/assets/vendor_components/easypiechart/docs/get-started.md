@@ -16,11 +16,11 @@ To use the easy pie chart plugin you need to load the current version of jQuery 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="/path/to/jquery.easy-pie-chart.js"></script>
 <script>
-    $(function() {
-        $('.chart').easyPieChart({
-            //your options goes here
-        });
+  $(function () {
+    $(".chart").easyPieChart({
+      //your options goes here
     });
+  });
 </script>
 ```
 
@@ -33,10 +33,10 @@ If you don't want to use jQuery, implement the Vanilla JS version without any de
 
 <script src="/path/to/easy-pie-chart.js"></script>
 <script>
-    var element = document.querySelector('.chart');
-    new EasyPieChart(element, {
-        // your options goes here
-    });
+  var element = document.querySelector(".chart");
+  new EasyPieChart(element, {
+    // your options goes here
+  });
 </script>
 ```
 
@@ -44,25 +44,28 @@ If you don't want to use jQuery, implement the Vanilla JS version without any de
 
 ```html
 <div ng-controller="chartCtrl">
-    <div easypiechart options="options" percent="percent"></div>
+  <div easypiechart options="options" percent="percent"></div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
 <script src="../dist/angular.easypiechart.min.js"></script>
 <script>
-    var app = angular.module('app', ['easypiechart']);
-    app.controller('chartCtrl', ['$scope', function ($scope) {
-        $scope.percent = 65;
-        $scope.options = {
-            animate:{
-                duration:0,
-                enabled:false
-            },
-            barColor:'#2C3E50',
-            scaleColor:false,
-            lineWidth:20,
-            lineCap:'circle'
-        };
-    }]);
+  var app = angular.module("app", ["easypiechart"]);
+  app.controller("chartCtrl", [
+    "$scope",
+    function ($scope) {
+      $scope.percent = 65;
+      $scope.options = {
+        animate: {
+          duration: 0,
+          enabled: false,
+        },
+        barColor: "#2C3E50",
+        scaleColor: false,
+        lineWidth: 20,
+        lineCap: "circle",
+      };
+    },
+  ]);
 </script>
 ```

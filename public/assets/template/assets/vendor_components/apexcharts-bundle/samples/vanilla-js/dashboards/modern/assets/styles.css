@@ -1,11 +1,16 @@
-
 body {
   background-color: #eff4f7;
   color: #777;
-  font-family: 'Titillium Web', Arial, Helvetica, sans-serif
+  font-family: "Titillium Web", Arial, Helvetica, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, strong {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
   font-weight: 600;
 }
 
@@ -61,7 +66,7 @@ h1, h2, h3, h4, h5, h6, strong {
   display: flex;
   height: 36px;
   border-radius: 35px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .search-bar-dropdown {
@@ -71,7 +76,6 @@ h1, h2, h3, h4, h5, h6, strong {
   padding: 0 18px;
   margin-right: 15px;
   background: #2c393f;
-
 }
 .search-bar-input {
   flex: 2 0 0;
@@ -86,9 +90,9 @@ h1, h2, h3, h4, h5, h6, strong {
   width: 100%;
   background: transparent;
   border: 0;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
-.search-bar-input input:focus{
+.search-bar-input input:focus {
   outline: none;
 }
 
@@ -116,12 +120,12 @@ h1, h2, h3, h4, h5, h6, strong {
 
 .box .banana {
   min-height: 404px;
-  background-image: url('img/banana.png');
+  background-image: url("img/banana.png");
   background-size: cover;
 }
 .box .map {
   min-height: 404px;
-  background-image: url('img/map.png');
+  background-image: url("img/map.png");
   background-size: cover;
 }
 .box .cog-icon {
@@ -132,16 +136,28 @@ h1, h2, h3, h4, h5, h6, strong {
   z-index: 10;
 }
 
-@media screen and (max-width:760px) {
-  #topnav { flex-wrap: wrap; }
-  .admin-menu { flex-basis: 20%; }
-  .logo { justify-content: flex-end; padding-right: 10px; }
-  .logo { flex-basis: 80%; }
-  .topnav-rightmenu, .search-bar { display: none; }
+@media screen and (max-width: 760px) {
+  #topnav {
+    flex-wrap: wrap;
+  }
+  .admin-menu {
+    flex-basis: 20%;
+  }
+  .logo {
+    justify-content: flex-end;
+    padding-right: 10px;
+  }
+  .logo {
+    flex-basis: 80%;
+  }
+  .topnav-rightmenu,
+  .search-bar {
+    display: none;
+  }
 }
 
 .box {
-  box-shadow: 0px 1px 22px -12px #607D8B;
+  box-shadow: 0px 1px 22px -12px #607d8b;
   background-color: #fff;
   padding: 25px 35px 25px 30px;
 }
@@ -178,12 +194,11 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 .chart-title h5 {
   font-size: 18px;
-  color: rgba(51,51,51,1);
+  color: rgba(51, 51, 51, 1);
   margin-bottom: 38px;
 }
 
-
-@media screen and (max-width:760px) {
+@media screen and (max-width: 760px) {
   .monthly-earnings-text {
     left: 30px;
   }
@@ -197,14 +212,18 @@ h1, h2, h3, h4, h5, h6, strong {
   position: relative;
 }
 
-#spark1, #spark2, #spark3, #spark4 {
+#spark1,
+#spark2,
+#spark3,
+#spark4 {
   position: relative;
   padding-top: 15px;
 }
 
-
 /* overrides */
-.sparkboxes #apexcharts-subtitle-text { fill: #8799a2 !important; }
+.sparkboxes #apexcharts-subtitle-text {
+  fill: #8799a2 !important;
+}
 
 /* fusionexport btn CSS START */
 #fusionexport-btn {
@@ -220,7 +239,6 @@ h1, h2, h3, h4, h5, h6, strong {
 #fusionexport-btn[disabled] {
   cursor: wait;
 }
-
 
 .spinner-border {
   display: none;

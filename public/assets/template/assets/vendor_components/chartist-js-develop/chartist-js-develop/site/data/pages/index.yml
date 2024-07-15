@@ -216,35 +216,25 @@ sections:
             - Project
             - Type
           rows:
-            -
-              - '<a href="https://github.com/panosoft/node-chartist" target="_blank">node-chartist</a>'
+            - - '<a href="https://github.com/panosoft/node-chartist" target="_blank">node-chartist</a>'
               - Node Package for Server-side Charts
-            -
-              - '<a href="https://github.com/paradox41/ng-chartist.js" target="_blank">ng-chartist.js</a>'
+            - - '<a href="https://github.com/paradox41/ng-chartist.js" target="_blank">ng-chartist.js</a>'
               - Angular Directive
-            -
-              - '<a href="https://github.com/gruberb/chartistAngularDirective" target="_blank">chartistAngularDirective.js</a>'
+            - - '<a href="https://github.com/gruberb/chartistAngularDirective" target="_blank">chartistAngularDirective.js</a>'
               - Angular Directive
-            -
-              - '<a href="https://fraserxu.me/react-chartist" target="_blank">react-chartist</a>'
+            - - '<a href="https://fraserxu.me/react-chartist" target="_blank">react-chartist</a>'
               - React Component
-            -
-              - '<a href="https://github.com/mfpierre/meteor-chartist-js" target="_blank">meteor-chartist-js</a>'
+            - - '<a href="https://github.com/mfpierre/meteor-chartist-js" target="_blank">meteor-chartist-js</a>'
               - Meteor Package
-            -
-              - '<a href="https://github.com/soderlind/tablepress_chartist" target="_blank">tablepress_chartist</a>'
+            - - '<a href="https://github.com/soderlind/tablepress_chartist" target="_blank">tablepress_chartist</a>'
               - Wordpress / Tablepress Extension
-            -
-              - '<a href="https://github.com/tylergaw/ember-cli-chartist" target="_blank">ember-cli-chartist</a>'
+            - - '<a href="https://github.com/tylergaw/ember-cli-chartist" target="_blank">ember-cli-chartist</a>'
               - Ember Addon
-            -
-              - '<a href="https://github.com/hatemalimam/ChartistJSF" target="_blank">ChartistJSF</a>'
+            - - '<a href="https://github.com/hatemalimam/ChartistJSF" target="_blank">ChartistJSF</a>'
               - Java Server Faces (Prime Faces) Component
-            -
-              -'<a href="https://github.com/Yopadd/vue-chartist" target="_blank">vue-chartist</a>'
+            - -'<a href="https://github.com/Yopadd/vue-chartist" target="_blank">vue-chartist</a>'
               - Vue plugin
-            -
-              -'<a href="https://github.com/eriklieben/aurelia-chartist" target="_blank">aurelia-chartist</a>'
+            - -'<a href="https://github.com/eriklieben/aurelia-chartist" target="_blank">aurelia-chartist</a>'
               - Aurelia plugin
   - title: Chart CSS animation example
     level: 3
@@ -274,9 +264,9 @@ sections:
       - type: text
         data:
           text: >
-                  Almost limitless animation possibilities with the Chartist.Svg animation API. Checkout the
-                  <a href="getting-started.html#animations-using-chartistsvg">advanced getting started guide about SVG
-                  animations</a> with SMIL.
+            Almost limitless animation possibilities with the Chartist.Svg animation API. Checkout the
+            <a href="getting-started.html#animations-using-chartistsvg">advanced getting started guide about SVG
+            animations</a> with SMIL.
 
   - title: Responsive charts configuration
     level: 3

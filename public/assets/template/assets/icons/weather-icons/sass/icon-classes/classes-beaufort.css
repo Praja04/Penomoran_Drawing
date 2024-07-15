@@ -64,4 +64,5 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$wind-beaufort-0\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-beaufort.scss\A \A 1: .wi-wind-beaufort-0:before {content: $wind-beaufort-0;}\A 2: .wi-wind-beaufort-1:before {content: $wind-beaufort-1;}\A 3: .wi-wind-beaufort-2:before {content: $wind-beaufort-2;}\A 4: .wi-wind-beaufort-3:before {content: $wind-beaufort-3;}\A 5: .wi-wind-beaufort-4:before {content: $wind-beaufort-4;}\A 6: .wi-wind-beaufort-5:before {content: $wind-beaufort-5;}"; }
+  content: 'Error: Undefined variable: "$wind-beaufort-0".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-beaufort.scss\A \A 1: .wi-wind-beaufort-0:before {content: $wind-beaufort-0;}\A 2: .wi-wind-beaufort-1:before {content: $wind-beaufort-1;}\A 3: .wi-wind-beaufort-2:before {content: $wind-beaufort-2;}\A 4: .wi-wind-beaufort-3:before {content: $wind-beaufort-3;}\A 5: .wi-wind-beaufort-4:before {content: $wind-beaufort-4;}\A 6: .wi-wind-beaufort-5:before {content: $wind-beaufort-5;}';
+}

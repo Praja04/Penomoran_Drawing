@@ -1,93 +1,87 @@
-define([
-	"../core",
-	"../ajax"
-], function( jQuery ) {
+define(["../core", "../ajax"], function (jQuery) {
+  // Install script dataType
+  jQuery.ajaxSetup({
+    accepts: {
+      script:
+        "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript",
+    },
+    contents: {
+      script: /(?:java|ecma)script/,
+    },
+    converters: {
+      "text script": function (text) {
+        jQuery.globalEval(text);
+        return text;
+      },
+    },
+  });
 
-// Install script dataType
-jQuery.ajaxSetup({
-	accepts: {
-		script: "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"
-	},
-	contents: {
-		script: /(?:java|ecma)script/
-	},
-	converters: {
-		"text script": function( text ) {
-			jQuery.globalEval( text );
-			return text;
-		}
-	}
-});
+  // Handle cache's special case and global
+  jQuery.ajaxPrefilter("script", function (s) {
+    if (s.cache === undefined) {
+      s.cache = false;
+    }
+    if (s.crossDomain) {
+      s.type = "GET";
+      s.global = false;
+    }
+  });
 
-// Handle cache's special case and global
-jQuery.ajaxPrefilter( "script", function( s ) {
-	if ( s.cache === undefined ) {
-		s.cache = false;
-	}
-	if ( s.crossDomain ) {
-		s.type = "GET";
-		s.global = false;
-	}
-});
+  // Bind script tag hack transport
+  jQuery.ajaxTransport("script", function (s) {
+    // This transport only deals with cross domain requests
+    if (s.crossDomain) {
+      var script,
+        head = document.head || jQuery("head")[0] || document.documentElement;
 
-// Bind script tag hack transport
-jQuery.ajaxTransport( "script", function(s) {
+      return {
+        send: function (_, callback) {
+          script = document.createElement("script");
 
-	// This transport only deals with cross domain requests
-	if ( s.crossDomain ) {
+          script.async = true;
 
-		var script,
-			head = document.head || jQuery("head")[0] || document.documentElement;
+          if (s.scriptCharset) {
+            script.charset = s.scriptCharset;
+          }
 
-		return {
+          script.src = s.url;
 
-			send: function( _, callback ) {
+          // Attach handlers for all browsers
+          script.onload = script.onreadystatechange = function (_, isAbort) {
+            if (
+              isAbort ||
+              !script.readyState ||
+              /loaded|complete/.test(script.readyState)
+            ) {
+              // Handle memory leak in IE
+              script.onload = script.onreadystatechange = null;
 
-				script = document.createElement("script");
+              // Remove the script
+              if (script.parentNode) {
+                script.parentNode.removeChild(script);
+              }
 
-				script.async = true;
+              // Dereference the script
+              script = null;
 
-				if ( s.scriptCharset ) {
-					script.charset = s.scriptCharset;
-				}
+              // Callback if not abort
+              if (!isAbort) {
+                callback(200, "success");
+              }
+            }
+          };
 
-				script.src = s.url;
+          // Circumvent IE6 bugs with base elements (#2709 and #4378) by prepending
+          // Use native DOM manipulation to avoid our domManip AJAX trickery
+          head.insertBefore(script, head.firstChild);
+        },
 
-				// Attach handlers for all browsers
-				script.onload = script.onreadystatechange = function( _, isAbort ) {
-
-					if ( isAbort || !script.readyState || /loaded|complete/.test( script.readyState ) ) {
-
-						// Handle memory leak in IE
-						script.onload = script.onreadystatechange = null;
-
-						// Remove the script
-						if ( script.parentNode ) {
-							script.parentNode.removeChild( script );
-						}
-
-						// Dereference the script
-						script = null;
-
-						// Callback if not abort
-						if ( !isAbort ) {
-							callback( 200, "success" );
-						}
-					}
-				};
-
-				// Circumvent IE6 bugs with base elements (#2709 and #4378) by prepending
-				// Use native DOM manipulation to avoid our domManip AJAX trickery
-				head.insertBefore( script, head.firstChild );
-			},
-
-			abort: function() {
-				if ( script ) {
-					script.onload( undefined, true );
-				}
-			}
-		};
-	}
-});
-
+        abort: function () {
+          if (script) {
+            script.onload(undefined, true);
+          }
+        },
+      };
+    }
+  });
 });

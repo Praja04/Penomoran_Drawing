@@ -64,4 +64,5 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$moon-new\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-moon.scss\A \A 1: .wi-moon-new:before {content: $moon-new;}\A 2: .wi-moon-waxing-cresent-1:before {content: $moon-waxing-cresent-1;}\A 3: .wi-moon-waxing-cresent-2:before {content: $moon-waxing-cresent-2;}\A 4: .wi-moon-waxing-cresent-3:before {content: $moon-waxing-cresent-3;}\A 5: .wi-moon-waxing-cresent-4:before {content: $moon-waxing-cresent-4;}\A 6: .wi-moon-waxing-cresent-5:before {content: $moon-waxing-cresent-5;}"; }
+  content: 'Error: Undefined variable: "$moon-new".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-moon.scss\A \A 1: .wi-moon-new:before {content: $moon-new;}\A 2: .wi-moon-waxing-cresent-1:before {content: $moon-waxing-cresent-1;}\A 3: .wi-moon-waxing-cresent-2:before {content: $moon-waxing-cresent-2;}\A 4: .wi-moon-waxing-cresent-3:before {content: $moon-waxing-cresent-3;}\A 5: .wi-moon-waxing-cresent-4:before {content: $moon-waxing-cresent-4;}\A 6: .wi-moon-waxing-cresent-5:before {content: $moon-waxing-cresent-5;}';
+}

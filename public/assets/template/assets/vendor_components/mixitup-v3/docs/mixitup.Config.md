@@ -28,38 +28,31 @@ configuration values detailed below.
 - [selectors](#selectors)
 - [render](#render)
 
-
 <h2 id="animation">animation</h2>
 
 A group of properties defining the mixer's animation and effects settings.
 
 ### enable
 
-
-
-
 A boolean dictating whether or not animation should be enabled for the MixItUp instance.
 If `false`, all operations will occur instantly and syncronously, although callback
 functions and any returned promises will still be fulfilled.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example: Create a mixer with all animations disabled
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        enable: false
-    }
+  animation: {
+    enable: false,
+  },
 });
 ```
+
 ### effects
-
-
-
 
 A string of one or more space-seperated properties to which transitions will be
 applied for all filtering animations.
@@ -70,10 +63,9 @@ predefined order to produce consistent results.
 To learn more about available effects, experiment with our <a href="https://www.kunkalabs.com/mixitup/">
 sandbox demo</a> and try out the "Export config" button in the Animation options drop down.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'fade scale'`
+| Type     | Default        |
+| -------- | -------------- |
+| `string` | `'fade scale'` |
 
 ###### Example: Apply "fade" and "translateZ" effects to all animations
 
@@ -83,116 +75,99 @@ sandbox demo</a> and try out the "Export config" button in the Animation options
 // translateZ(0).
 
 var mixer = mixitup(containerEl, {
-    animation: {
-        effects: 'fade translateZ(-100px)'
-    }
+  animation: {
+    effects: "fade translateZ(-100px)",
+  },
 });
 ```
+
 ### effectsIn
-
-
-
 
 A string of one or more space-seperated effects to be applied only to filter-in
 animations, overriding `config.animation.effects` if set.
 
-
-|Type | Default
-|---  | ---
-|`string`| `''`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `''`    |
 
 ###### Example: Apply downwards vertical translate to targets being filtered in
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    animation: {
-        effectsIn: 'fade translateY(-100%)'
-    }
+  animation: {
+    effectsIn: "fade translateY(-100%)",
+  },
 });
 ```
+
 ### effectsOut
-
-
-
 
 A string of one or more space-seperated effects to be applied only to filter-out
 animations, overriding `config.animation.effects` if set.
 
-
-|Type | Default
-|---  | ---
-|`string`| `''`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `''`    |
 
 ###### Example: Apply upwards vertical translate to targets being filtered out
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    animation: {
-        effectsOut: 'fade translateY(-100%)'
-    }
+  animation: {
+    effectsOut: "fade translateY(-100%)",
+  },
 });
 ```
+
 ### duration
-
-
-
 
 An integer dictating the duration of all MixItUp animations in milliseconds, not
 including any additional delay apllied via the `'stagger'` effect.
 
-
-|Type | Default
-|---  | ---
-|`number`| `600`
+| Type     | Default |
+| -------- | ------- |
+| `number` | `600`   |
 
 ###### Example: Apply an animation duration of 200ms to all mixitup animations
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    animation: {
-        duration: 200
-    }
+  animation: {
+    duration: 200,
+  },
 });
 ```
+
 ### easing
-
-
-
 
 A valid CSS3 transition-timing function or shorthand. For a full list of accepted
 values, visit <a href="http://easings.net" target="_blank">easings.net</a>.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'ease'`
+| Type     | Default  |
+| -------- | -------- |
+| `string` | `'ease'` |
 
 ###### Example 1: Apply "ease-in-out" easing to all animations
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    animation: {
-        easing: 'ease-in-out'
-    }
+  animation: {
+    easing: "ease-in-out",
+  },
 });
 ```
+
 ###### Example 2: Apply a custom "cubic-bezier" easing function to all animations
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)'
-    }
+  animation: {
+    easing: "cubic-bezier(0.645, 0.045, 0.355, 1)",
+  },
 });
 ```
+
 ### applyPerspective
-
-
-
 
 A boolean dictating whether or not to apply perspective to the MixItUp container
 during animations. By default, perspective is always applied and creates the
@@ -201,70 +176,61 @@ and `rotateY`.
 
 You may wish to disable this and define your own perspective settings via CSS.
 
-
-|Type | Default
-|---  | ---
-|`bolean`| `true`
+| Type     | Default |
+| -------- | ------- |
+| `bolean` | `true`  |
 
 ###### Example: Prevent perspective from being applied to any 3D transforms
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        applyPerspective: false
-    }
+  animation: {
+    applyPerspective: false,
+  },
 });
 ```
+
 ### perspectiveDistance
-
-
-
 
 The perspective distance value to be applied to the container during animations,
 affecting any 3D-transform-based effects.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'3000px'`
+| Type     | Default    |
+| -------- | ---------- |
+| `string` | `'3000px'` |
 
 ###### Example: Set a perspective distance of 2000px
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        effects: 'rotateY(-25deg)',
-        perspectiveDistance: '2000px'
-    }
+  animation: {
+    effects: "rotateY(-25deg)",
+    perspectiveDistance: "2000px",
+  },
 });
 ```
+
 ### perspectiveOrigin
-
-
-
 
 The perspective-origin value to be applied to the container during animations,
 affecting any 3D-transform-based effects.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'50% 50%'`
+| Type     | Default     |
+| -------- | ----------- |
+| `string` | `'50% 50%'` |
 
 ###### Example: Set a perspective origin in the top-right of the container
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        effects: 'transateZ(-200px)',
-        perspectiveOrigin: '100% 0'
-    }
+  animation: {
+    effects: "transateZ(-200px)",
+    perspectiveOrigin: "100% 0",
+  },
 });
 ```
+
 ### queue
-
-
-
 
 A boolean dictating whether or not to enable the queuing of operations.
 
@@ -275,46 +241,40 @@ when the previous operaitons is finished.
 If `false`, any requested operations will be ignored, and the `onMixBusy` callback and `mixBusy`
 event will be fired. If `debug.showWarnings` is enabled, a console warning will also occur.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example: Disable queuing
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        queue: false
-    }
+  animation: {
+    queue: false,
+  },
 });
 ```
+
 ### queueLimit
-
-
-
 
 An integer dictacting the maximum number of operations allowed in the queue at
 any time, when queuing is enabled.
 
-
-|Type | Default
-|---  | ---
-|`number`| `3`
+| Type     | Default |
+| -------- | ------- |
+| `number` | `3`     |
 
 ###### Example: Allow a maximum of 5 operations in the queue at any time
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        queueLimit: 5
-    }
+  animation: {
+    queueLimit: 5,
+  },
 });
 ```
+
 ### animateResizeContainer
-
-
-
 
 A boolean dictating whether or not to transition the height and width of the
 container as elements are filtered in and out. If disabled, the container height
@@ -323,33 +283,31 @@ will change abruptly.
 It may be desirable to disable this on mobile devices as the CSS `height` and
 `width` properties do not receive GPU-acceleration and can therefore cause stuttering.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example 1: Disable the transitioning of the container height and/or width
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        animateResizeContainer: false
-    }
+  animation: {
+    animateResizeContainer: false,
+  },
 });
 ```
+
 ###### Example 2: Disable the transitioning of the container height and/or width for mobile devices only
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        animateResizeContainer: myFeatureTests.isMobile ? false : true
-    }
+  animation: {
+    animateResizeContainer: myFeatureTests.isMobile ? false : true,
+  },
 });
 ```
+
 ### animateResizeTargets
-
-
-
 
 A boolean dictating whether or not to transition the height and width of target
 elements as they change throughout the course of an animation.
@@ -362,24 +320,21 @@ NB: This feature requires additional calculations and manipulation to non-hardwa
 properties which may adversely affect performance on slower devices, and is therefore
 disabled by default.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `false`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `false` |
 
 ###### Example: Enable the transitioning of target widths and heights
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        animateResizeTargets: true
-    }
+  animation: {
+    animateResizeTargets: true,
+  },
 });
 ```
+
 ### staggerSequence
-
-
-
 
 A custom function used to manipulate the order in which the stagger delay is
 incremented when using the ‘stagger’ effect.
@@ -391,39 +346,37 @@ delay is incremented and create engaging non-linear stagger effects.
 The function receives the index of the target element as a parameter, and must
 return an integer which serves as the multiplier for the stagger delay.
 
-
-|Type | Default
-|---  | ---
-|`function`| `null`
+| Type       | Default |
+| ---------- | ------- |
+| `function` | `null`  |
 
 ###### Example 1: Stagger target elements by column in a 3-column grid
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        effects: 'fade stagger(100ms)',
-        staggerSequence: function(i) {
-            return i % 3;
-        }
-    }
+  animation: {
+    effects: "fade stagger(100ms)",
+    staggerSequence: function (i) {
+      return i % 3;
+    },
+  },
 });
 ```
+
 ###### Example 2: Using an algorithm to produce a more complex sequence
 
 ```js
 var mixer = mixitup(containerEl, {
-    animation: {
-        effects: 'fade stagger(100ms)',
-        staggerSequence: function(i) {
-            return (2*i) - (5*((i/3) - ((1/3) * (i%3))));
-        }
-    }
+  animation: {
+    effects: "fade stagger(100ms)",
+    staggerSequence: function (i) {
+      return 2 * i - 5 * (i / 3 - (1 / 3) * (i % 3));
+    },
+  },
 });
 ```
+
 ### reverseOut
-
-
-
 
 A boolean dictating whether or not to reverse the direction of `translate`
 and `rotate` transforms for elements being filtered out.
@@ -435,10 +388,9 @@ being filtered in would become `translateX(100%)` for targets being filtered out
 This functionality can also be achieved by providing seperate effects
 strings for `config.animation.effectsIn` and `config.animation.effectsOut`.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `false`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `false` |
 
 ###### Example: Reverse the desired direction on any translate/rotate effect for targets being filtered out
 
@@ -447,17 +399,15 @@ strings for `config.animation.effectsIn` and `config.animation.effectsOut`.
 // elements being filtered out will be translated from 0 to '-100%'
 
 var mixer = mixitup(containerEl, {
-    animation: {
-        effects: 'fade translateX(100%)',
-        reverseOut: true,
-        nudge: false // Disable nudging to create a carousel-like effect
-    }
+  animation: {
+    effects: "fade translateX(100%)",
+    reverseOut: true,
+    nudge: false, // Disable nudging to create a carousel-like effect
+  },
 });
 ```
+
 ### nudge
-
-
-
 
 A boolean dictating whether or not to "nudge" the animation path of targets
 when they are being filtered in and out simulatenously.
@@ -467,25 +417,21 @@ may be desirable to disable this effect when filtering directly from
 one exclusive set of targets to a different exclusive set of targets,
 to create a carousel-like effect, or a generally more subtle animation.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example: Disable the "nudging" of targets being filtered in and out simulatenously
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    animation: {
-        nudge: false
-    }
+  animation: {
+    nudge: false,
+  },
 });
 ```
+
 ### clampHeight
-
-
-
 
 A boolean dictating whether or not to clamp the height of the container while MixItUp's
 geometry tests are carried out before an operation.
@@ -495,25 +441,21 @@ height of the container might affect its vertical positioning in the viewport
 (e.g. a vertically-centered container), this should be turned off to ensure accurate
 test results and a smooth animation.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example: Disable container height-clamping
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    animation: {
-        clampHeight: false
-    }
+  animation: {
+    clampHeight: false,
+  },
 });
 ```
+
 ### clampWidth
-
-
-
 
 A boolean dictating whether or not to clamp the width of the container while MixItUp's
 geometry tests are carried out before an operation.
@@ -523,19 +465,17 @@ width of the container might affect its horitzontal positioning in the viewport
 (e.g. a horizontall-centered container), this should be turned off to ensure accurate
 test results and a smooth animation.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example: Disable container width-clamping
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    animation: {
-        clampWidth: false
-    }
+  animation: {
+    clampWidth: false,
+  },
 });
 ```
 
@@ -544,9 +484,6 @@ var mixer = mixitup(containerEl, {
 A group of properties relating to the behavior of the Mixer.
 
 ### liveSort
-
-
-
 
 A boolean dictating whether to allow "live" sorting of the mixer.
 
@@ -559,36 +496,33 @@ attribute will be ignored when requesting a re-sort by the same attribute.
 By setting to `behavior.liveSort` to `true`, the mixer will always re-sort
 regardless of whether or not the sorting attribute and order have changed.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `false`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `false` |
 
 ###### Example: Enabling `liveSort` to allow for re-sorting
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    behavior: {
-        liveSort: true
-    },
-    load: {
-        sort: 'edited:desc'
-    }
+  behavior: {
+    liveSort: true,
+  },
+  load: {
+    sort: "edited:desc",
+  },
 });
 
 var target = containerEl.children[3];
 
-console.log(target.getAttribute('data-edited')); // '2015-04-24'
+console.log(target.getAttribute("data-edited")); // '2015-04-24'
 
-target.setAttribute('data-edited', '2017-08-10'); // Update the target's edited date
+target.setAttribute("data-edited", "2017-08-10"); // Update the target's edited date
 
-mixer.sort('edited:desc')
-    .then(function(state) {
-        // The target is now at the top of the list
+mixer.sort("edited:desc").then(function (state) {
+  // The target is now at the top of the list
 
-        console.log(state.targets[0] === target); // true
-    });
+  console.log(state.targets[0] === target); // true
+});
 ```
 
 <h2 id="callbacks">callbacks</h2>
@@ -604,108 +538,93 @@ argument, as well as other more specific arguments described below.
 
 ### onMixStart
 
-
-
-
 A callback function invoked immediately after any MixItUp operation is requested
 and before animations have begun.
 
 A second `futureState` argument is passed to the function which represents the final
 state of the mixer once the requested operation has completed.
 
-
-|Type | Default
-|---  | ---
-|`function`| `null`
+| Type       | Default |
+| ---------- | ------- |
+| `function` | `null`  |
 
 ###### Example: Adding an `onMixStart` callback function
 
 ```js
 var mixer = mixitup(containerEl, {
-    callbacks: {
-        onMixStart: function(state, futureState) {
-             console.log('Starting operation...');
-        }
-    }
+  callbacks: {
+    onMixStart: function (state, futureState) {
+      console.log("Starting operation...");
+    },
+  },
 });
 ```
+
 ### onMixBusy
-
-
-
 
 A callback function invoked when a MixItUp operation is requested while another
 operation is in progress, and the animation queue is full, or queueing
 is disabled.
 
-
-|Type | Default
-|---  | ---
-|`function`| `null`
+| Type       | Default |
+| ---------- | ------- |
+| `function` | `null`  |
 
 ###### Example: Adding an `onMixBusy` callback function
 
 ```js
 var mixer = mixitup(containerEl, {
-    callbacks: {
-        onMixBusy: function(state) {
-             console.log('Mixer busy');
-        }
-    }
+  callbacks: {
+    onMixBusy: function (state) {
+      console.log("Mixer busy");
+    },
+  },
 });
 ```
+
 ### onMixEnd
-
-
-
 
 A callback function invoked after any MixItUp operation has completed, and the
 state has been updated.
 
-
-|Type | Default
-|---  | ---
-|`function`| `null`
+| Type       | Default |
+| ---------- | ------- |
+| `function` | `null`  |
 
 ###### Example: Adding an `onMixEnd` callback function
 
 ```js
 var mixer = mixitup(containerEl, {
-    callbacks: {
-        onMixEnd: function(state) {
-             console.log('Operation complete');
-        }
-    }
+  callbacks: {
+    onMixEnd: function (state) {
+      console.log("Operation complete");
+    },
+  },
 });
 ```
+
 ### onMixFail
-
-
-
 
 A callback function invoked whenever an operation "fails", i.e. no targets
 could be found matching the requested filter.
 
-
-|Type | Default
-|---  | ---
-|`function`| `null`
+| Type       | Default |
+| ---------- | ------- |
+| `function` | `null`  |
 
 ###### Example: Adding an `onMixFail` callback function
 
 ```js
 var mixer = mixitup(containerEl, {
-    callbacks: {
-        onMixFail: function(state) {
-             console.log('No items could be found matching the requested filter');
-        }
-    }
+  callbacks: {
+    onMixFail: function (state) {
+      console.log("No items could be found matching the requested filter");
+    },
+  },
 });
 ```
+
 ### onMixClick
-
-
-
 
 A callback function invoked whenever a MixItUp control is clicked, and before its
 respective operation is requested.
@@ -717,52 +636,53 @@ using `<a>` tags as controls where the default behavior needs to be prevented.
 Returning `false` from the callback will prevent the control click from triggering
 an operation.
 
-
-|Type | Default
-|---  | ---
-|`function`| `null`
+| Type       | Default |
+| ---------- | ------- |
+| `function` | `null`  |
 
 ###### Example 1: Adding an `onMixClick` callback function
 
 ```js
 var mixer = mixitup(containerEl, {
-    callbacks: {
-        onMixClick: function(state, originalEvent) {
-             console.log('The control "' + this.innerText + '" was clicked');
-        }
-    }
+  callbacks: {
+    onMixClick: function (state, originalEvent) {
+      console.log('The control "' + this.innerText + '" was clicked');
+    },
+  },
 });
 ```
+
 ###### Example 2: Using `onMixClick` to manipulate the original click event
 
 ```js
 var mixer = mixitup(containerEl, {
-    callbacks: {
-        onMixClick: function(state, originalEvent) {
-             // Prevent original click event from bubbling up:
-             originalEvent.stopPropagation();
+  callbacks: {
+    onMixClick: function (state, originalEvent) {
+      // Prevent original click event from bubbling up:
+      originalEvent.stopPropagation();
 
-             // Prevent default behavior of clicked element:
-             originalEvent.preventDefault();
-        }
-    }
+      // Prevent default behavior of clicked element:
+      originalEvent.preventDefault();
+    },
+  },
 });
 ```
+
 ###### Example 3: Using `onMixClick` to conditionally cancel operations
 
 ```js
 var mixer = mixitup(containerEl, {
-    callbacks: {
-        onMixClick: function(state, originalEvent) {
-             // Perform some conditional check:
+  callbacks: {
+    onMixClick: function (state, originalEvent) {
+      // Perform some conditional check:
 
-             if (myApp.isLoading) {
-                 // By returning false, we can prevent the control click from triggering an operation.
+      if (myApp.isLoading) {
+        // By returning false, we can prevent the control click from triggering an operation.
 
-                 return false;
-             }
-        }
-    }
+        return false;
+      }
+    },
+  },
 });
 ```
 
@@ -771,9 +691,6 @@ var mixer = mixitup(containerEl, {
 A group of properties relating to clickable control elements.
 
 ### enable
-
-
-
 
 A boolean dictating whether or not controls should be enabled for the mixer instance.
 
@@ -787,29 +704,26 @@ If you do not intend to use the default controls, setting this property to `fals
 marginally improve the startup time of your mixer instance, and will also prevent any other active
 mixer instances in the DOM which are bound to controls from controlling the instance.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example: Disabling controls
 
 ```js
 var mixer = mixitup(containerEl, {
-    controls: {
-        enable: false
-    }
+  controls: {
+    enable: false,
+  },
 });
 
 // With the default controls disabled, we can only control
 // the mixer via its API methods, e.g.:
 
-mixer.filter('.cat-1');
+mixer.filter(".cat-1");
 ```
+
 ### live
-
-
-
 
 A boolean dictating whether or not to use event delegation when binding click events
 to the default controls.
@@ -827,27 +741,24 @@ lifetime of a mixer, `controls.live` should be set to `true`. There is a margina
 performance deficit when using live controls, as the value of each control button must be read
 from the DOM in real time once the click event has propagated.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example: Setting live controls
 
 ```js
 var mixer = mixitup(containerEl, {
-    controls: {
-        live: true
-    }
+  controls: {
+    live: true,
+  },
 });
 
 // Control buttons can now be added, remove and changed without breaking
 // the mixer's UI
 ```
+
 ### scope
-
-
-
 
 A string dictating the "scope" to use when binding or querying the default controls. The available
 values are `'global'` or `'local'`.
@@ -862,33 +773,30 @@ controls that would otherwise intefere with each other if scoped globally.
 Conversely, if you wish to control multiple instances with a single UI, you would create one
 set of controls and keep the controls scope of each mixer set to `global`.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'global'`
+| Type     | Default    |
+| -------- | ---------- |
+| `string` | `'global'` |
 
 ###### Example: Setting 'local' scoped controls
 
 ```js
 var mixerOne = mixitup(containerOne, {
-    controls: {
-        scope: 'local'
-    }
+  controls: {
+    scope: "local",
+  },
 });
 
 var mixerTwo = mixitup(containerTwo, {
-    controls: {
-        scope: 'local'
-    }
+  controls: {
+    scope: "local",
+  },
 });
 
 // Both mixers can now exist within the same document with
 // isolated controls placed within their container elements.
 ```
+
 ### toggleLogic
-
-
-
 
 A string dictating the type of logic to apply when concatenating the filter selectors of
 active toggle buttons (i.e. any clickable element with a `data-toggle` attribute).
@@ -902,77 +810,76 @@ If set to `'and'`, selectors will be directly concatenated together. For example
 
 `'.cat-1.cat-2'` (shows any elements which match both `'.cat-1'` AND `'.cat-2'`)
 
-
-|Type | Default
-|---  | ---
-|`string`| `'or'`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `'or'`  |
 
 ###### Example: Setting "and" toggle logic
 
 ```js
 var mixer = mixitup(containerEl, {
-    controls: {
-        toggleLogic: 'and'
-    }
+  controls: {
+    toggleLogic: "and",
+  },
 });
 ```
+
 ### toggleDefault
-
-
-
 
 A string dictating the filter behavior when all toggles are inactive.
 
-When set to `'all'` (default behavior), *all* targets will be shown by default
+When set to `'all'` (default behavior), _all_ targets will be shown by default
 when no toggles are active, or at the moment all active toggles are toggled off.
 
 When set to `'none'`, no targets will be shown by default when no toggles are
 active, or at the moment all active toggles are toggled off.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'all'`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `'all'` |
 
 ###### Example 1: Setting the default toggle behavior to `'all'`
 
 ```js
 var mixer = mixitup(containerEl, {
-    controls: {
-        toggleDefault: 'all'
-    }
+  controls: {
+    toggleDefault: "all",
+  },
 });
 
-mixer.toggleOn('.cat-2')
-    .then(function() {
-        // Deactivate all active toggles
+mixer
+  .toggleOn(".cat-2")
+  .then(function () {
+    // Deactivate all active toggles
 
-        return mixer.toggleOff('.cat-2')
-    })
-    .then(function(state) {
-         console.log(state.activeFilter.selector); // 'all'
-         console.log(state.totalShow); // 12
-    });
+    return mixer.toggleOff(".cat-2");
+  })
+  .then(function (state) {
+    console.log(state.activeFilter.selector); // 'all'
+    console.log(state.totalShow); // 12
+  });
 ```
+
 ###### Example 2: Setting the default toggle behavior to `'none'`
 
 ```js
 var mixer = mixitup(containerEl, {
-    controls: {
-        toggleDefault: 'none'
-    }
+  controls: {
+    toggleDefault: "none",
+  },
 });
 
-mixer.toggleOn('.cat-2')
-    .then(function() {
-        // Deactivate all active toggles
+mixer
+  .toggleOn(".cat-2")
+  .then(function () {
+    // Deactivate all active toggles
 
-        return mixer.toggleOff('.cat-2')
-    })
-    .then(function(state) {
-         console.log(state.activeFilter.selector); // 'none'
-         console.log(state.totalShow); // 0
-    });
+    return mixer.toggleOff(".cat-2");
+  })
+  .then(function (state) {
+    console.log(state.activeFilter.selector); // 'none'
+    console.log(state.totalShow); // 0
+  });
 ```
 
 <h2 id="classNames">classNames</h2>
@@ -993,276 +900,243 @@ your project.
 
 ### block
 
-
-
-
 The "block" portion, or top-level namespace added to the start of any class names created by MixItUp.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'mixitup'`
+| Type     | Default     |
+| -------- | ----------- |
+| `string` | `'mixitup'` |
 
 ###### Example 1: changing the `config.classNames.block` value
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        block: 'portfolio'
-    }
+  classNames: {
+    block: "portfolio",
+  },
 });
 
 // Active control output: "portfolio-control-active"
 ```
+
 ###### Example 2: Removing `config.classNames.block`
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        block: ''
-    }
+  classNames: {
+    block: "",
+  },
 });
 
 // Active control output: "control-active"
 ```
+
 ### elementContainer
-
-
-
 
 The "element" portion of the class name added to container.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'container'`
+| Type     | Default       |
+| -------- | ------------- |
+| `string` | `'container'` |
 
 ### elementFilter
-
-
-
 
 The "element" portion of the class name added to filter controls.
 
 By default, all filter, sort, multimix and toggle controls take the same element value of `'control'`, but
 each type's element value can be individually overwritten to match the unique classNames of your controls as needed.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'control'`
+| Type     | Default     |
+| -------- | ----------- |
+| `string` | `'control'` |
 
 ###### Example 1: changing the `config.classNames.elementFilter` value
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        elementFilter: 'filter'
-    }
+  classNames: {
+    elementFilter: "filter",
+  },
 });
 
 // Active filter output: "mixitup-filter-active"
 ```
+
 ###### Example 2: changing the `config.classNames.block` and `config.classNames.elementFilter` values
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        block: 'portfolio',
-        elementFilter: 'filter'
-    }
+  classNames: {
+    block: "portfolio",
+    elementFilter: "filter",
+  },
 });
 
 // Active filter output: "portfolio-filter-active"
 ```
+
 ### elementSort
-
-
-
 
 The "element" portion of the class name added to sort controls.
 
 By default, all filter, sort, multimix and toggle controls take the same element value of `'control'`, but
 each type's element value can be individually overwritten to match the unique classNames of your controls as needed.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'control'`
+| Type     | Default     |
+| -------- | ----------- |
+| `string` | `'control'` |
 
 ###### Example 1: changing the `config.classNames.elementSort` value
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        elementSort: 'sort'
-    }
+  classNames: {
+    elementSort: "sort",
+  },
 });
 
 // Active sort output: "mixitup-sort-active"
 ```
+
 ###### Example 2: changing the `config.classNames.block` and `config.classNames.elementSort` values
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        block: 'portfolio',
-        elementSort: 'sort'
-    }
+  classNames: {
+    block: "portfolio",
+    elementSort: "sort",
+  },
 });
 
 // Active sort output: "portfolio-sort-active"
 ```
+
 ### elementMultimix
-
-
-
 
 The "element" portion of the class name added to multimix controls.
 
 By default, all filter, sort, multimix and toggle controls take the same element value of `'control'`, but
 each type's element value can be individually overwritten to match the unique classNames of your controls as needed.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'control'`
+| Type     | Default     |
+| -------- | ----------- |
+| `string` | `'control'` |
 
 ###### Example 1: changing the `config.classNames.elementMultimix` value
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        elementMultimix: 'multimix'
-    }
+  classNames: {
+    elementMultimix: "multimix",
+  },
 });
 
 // Active multimix output: "mixitup-multimix-active"
 ```
+
 ###### Example 2: changing the `config.classNames.block` and `config.classNames.elementMultimix` values
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        block: 'portfolio',
-        elementSort: 'multimix'
-    }
+  classNames: {
+    block: "portfolio",
+    elementSort: "multimix",
+  },
 });
 
 // Active multimix output: "portfolio-multimix-active"
 ```
+
 ### elementToggle
-
-
-
 
 The "element" portion of the class name added to toggle controls.
 
 By default, all filter, sort, multimix and toggle controls take the same element value of `'control'`, but
 each type's element value can be individually overwritten to match the unique classNames of your controls as needed.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'control'`
+| Type     | Default     |
+| -------- | ----------- |
+| `string` | `'control'` |
 
 ###### Example 1: changing the `config.classNames.elementToggle` value
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        elementToggle: 'toggle'
-    }
+  classNames: {
+    elementToggle: "toggle",
+  },
 });
 
 // Active toggle output: "mixitup-toggle-active"
 ```
+
 ###### Example 2: changing the `config.classNames.block` and `config.classNames.elementToggle` values
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        block: 'portfolio',
-        elementToggle: 'toggle'
-    }
+  classNames: {
+    block: "portfolio",
+    elementToggle: "toggle",
+  },
 });
 
 // Active toggle output: "portfolio-toggle-active"
 ```
+
 ### modifierActive
-
-
-
 
 The "modifier" portion of the class name added to active controls.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'active'`
+| Type     | Default    |
+| -------- | ---------- |
+| `string` | `'active'` |
 
 ### modifierDisabled
 
-
-
-
 The "modifier" portion of the class name added to disabled controls.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'disabled'`
+| Type     | Default      |
+| -------- | ------------ |
+| `string` | `'disabled'` |
 
 ### modifierFailed
 
-
-
-
 The "modifier" portion of the class name added to the container when in a "failed" state.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'failed'`
+| Type     | Default    |
+| -------- | ---------- |
+| `string` | `'failed'` |
 
 ### delineatorElement
-
-
-
 
 The delineator used between the "block" and "element" portions of any class name added by MixItUp.
 
 If the block portion is ommited by setting it to an empty string, no delineator will be added.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'-'`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `'-'`   |
 
 ###### Example: changing the delineator to match BEM convention
 
 ```js
 var mixer = mixitup(containerEl, {
-    classNames: {
-        delineatorElement: '__'
-    }
+  classNames: {
+    delineatorElement: "__",
+  },
 });
 
 // example active control output: "mixitup__control-active"
 ```
+
 ### delineatorModifier
-
-
-
 
 The delineator used between the "element" and "modifier" portions of any class name added by MixItUp.
 
 If the element portion is ommited by setting it to an empty string, no delineator will be added.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'-'`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `'-'`   |
 
 ###### Example: changing both delineators to match BEM convention
 
@@ -1283,9 +1157,6 @@ A group of properties relating to MixItUp's dataset API.
 
 ### uidKey
 
-
-
-
 A string specifying the name of the key containing your data model's unique
 identifier (UID). To use the dataset API, a UID key must be specified and
 be present and unique on all objects in the dataset you provide to MixItUp.
@@ -1293,24 +1164,21 @@ be present and unique on all objects in the dataset you provide to MixItUp.
 For example, if your dataset is made up of MongoDB documents, the UID
 key would be `'id'` or `'_id'`.
 
-
-|Type | Default
-|---  | ---
-|`string`| `''`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `''`    |
 
 ###### Example: Setting the UID to `'id'`
 
 ```js
 var mixer = mixitup(containerEl, {
-    data: {
-        uidKey: 'id'
-    }
+  data: {
+    uidKey: "id",
+  },
 });
 ```
+
 ### dirtyCheck
-
-
-
 
 A boolean dictating whether or not MixItUp should "dirty check" each object in
 your dataset for changes whenever `.dataset()` is called, and re-render any targets
@@ -1324,10 +1192,9 @@ provided to mixitup, rather than manipulating properties on the existing instanc
 If your changes are a result of a DB write and read, you will most likely be calling
 `.dataset()` with a clean set of objects each time, so this will not be an issue.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `false`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `false` |
 
 ###### Example: Enabling dirty checking
 
@@ -1382,9 +1249,6 @@ A group of properties allowing the toggling of various debug features.
 
 ### enable
 
-
-
-
 A boolean dictating whether or not the mixer instance returned by the
 `mixitup()` factory function should expose private properties and methods.
 
@@ -1392,29 +1256,25 @@ By default, mixer instances only expose their public API, but enabling
 debug mode will give you access to various mixer internals which may aid
 in debugging, or the authoring of extensions.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `false`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `false` |
 
 ###### Example: Enabling debug mode
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    debug: {
-        enable: true
-    }
+  debug: {
+    enable: true,
+  },
 });
 
 // Private properties and methods will now be visible on the mixer instance:
 
 console.log(mixer);
 ```
+
 ### showWarnings
-
-
-
 
 A boolean dictating whether or not warnings should be shown when various
 common gotchas occur.
@@ -1424,31 +1284,29 @@ occurs that is not a fatal, but may indicate an issue with your integration,
 and are therefore turned on by default. However, you may wish to disable
 them in production.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example 1: Disabling warnings
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    debug: {
-        showWarnings: false
-    }
+  debug: {
+    showWarnings: false,
+  },
 });
 ```
+
 ###### Example 2: Disabling warnings based on environment
 
 ```js
-
-var showWarnings = myAppConfig.environment === 'development' ? true : false;
+var showWarnings = myAppConfig.environment === "development" ? true : false;
 
 var mixer = mixitup(containerEl, {
-    debug: {
-        showWarnings: showWarnings
-    }
+  debug: {
+    showWarnings: showWarnings,
+  },
 });
 ```
 
@@ -1457,9 +1315,6 @@ var mixer = mixitup(containerEl, {
 A group of properties relating to the layout of the container.
 
 ### allowNestedTargets
-
-
-
 
 A boolean dictating whether or not mixitup should query all descendants
 of the container for targets, or only immediate children.
@@ -1474,25 +1329,21 @@ However, if you are building a more complex UI requiring the nesting
 of mixers within mixers, you will most likely want to limit targets to
 immediate children of the container by setting this property to `false`.
 
-
-|Type | Default
-|---  | ---
-|`boolean`| `true`
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 ###### Example: Restricting targets to immediate children
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    layout: {
-        allowNestedTargets: false
-    }
+  layout: {
+    allowNestedTargets: false,
+  },
 });
 ```
+
 ### containerClassName
-
-
-
 
 A string specifying an optional class name to apply to the container when in
 its default state.
@@ -1502,84 +1353,73 @@ By changing this class name or adding a class name to the container via the
 and MixItUp will attemp to gracefully animate the container and its targets
 between states.
 
-
-|Type | Default
-|---  | ---
-|`string`| `''`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `''`    |
 
 ###### Example 1: Specifying a container class name
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    layout: {
-        containerClassName: 'grid'
-    }
+  layout: {
+    containerClassName: "grid",
+  },
 });
 ```
+
 ###### Example 2: Changing the default class name with `.changeLayout()`
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    layout: {
-        containerClassName: 'grid'
-    }
+  layout: {
+    containerClassName: "grid",
+  },
 });
 
-mixer.changeLayout('list')
-    .then(function(state) {
-         console.log(state.activeContainerClass); // "list"
-    });
+mixer.changeLayout("list").then(function (state) {
+  console.log(state.activeContainerClass); // "list"
+});
 ```
+
 ### siblingBefore
-
-
-
 
 A reference to a non-target sibling element after which to insert targets
 when there are no targets in the container.
 
-
-|Type | Default
-|---  | ---
-|`HTMLElement`| `null`
+| Type          | Default |
+| ------------- | ------- |
+| `HTMLElement` | `null`  |
 
 ###### Example: Setting a `siblingBefore` reference element
 
 ```js
-
-var addButton = containerEl.querySelector('button');
+var addButton = containerEl.querySelector("button");
 
 var mixer = mixitup(containerEl, {
-    layout: {
-        siblingBefore: addButton
-    }
+  layout: {
+    siblingBefore: addButton,
+  },
 });
 ```
+
 ### siblingAfter
-
-
-
 
 A reference to a non-target sibling element before which to insert targets
 when there are no targets in the container.
 
-
-|Type | Default
-|---  | ---
-|`HTMLElement`| `null`
+| Type          | Default |
+| ------------- | ------- |
+| `HTMLElement` | `null`  |
 
 ###### Example: Setting an `siblingAfter` reference element
 
 ```js
-
-var gap = containerEl.querySelector('.gap');
+var gap = containerEl.querySelector(".gap");
 
 var mixer = mixitup(containerEl, {
-    layout: {
-        siblingAfter: gap
-    }
+  layout: {
+    siblingAfter: gap,
+  },
 });
 ```
 
@@ -1589,84 +1429,72 @@ A group of properties defining the initial state of the mixer on load (instantia
 
 ### filter
 
-
-
-
 A string defining any filtering to be statically applied to the mixer on load.
 As per the `.filter()` API, this can be any valid selector string, or the
 values `'all'` or `'none'`.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'all'`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `'all'` |
 
 ###### Example 1: Defining an initial filter selector to be applied on load
 
 ```js
-
 // The mixer will show only those targets matching '.category-a' on load.
 
 var mixer = mixitup(containerEl, {
-    load: {
-        filter: '.category-a'
-    }
+  load: {
+    filter: ".category-a",
+  },
 });
 ```
+
 ###### Example 2: Hiding all targets on load
 
 ```js
-
 // The mixer will show hide all targets on load.
 
 var mixer = mixitup(containerEl, {
-    load: {
-        filter: 'none'
-    }
+  load: {
+    filter: "none",
+  },
 });
 ```
+
 ### sort
-
-
-
 
 A string defining any sorting to be statically applied to the mixer on load.
 As per the `.sort()` API, this should be a valid "sort string" made up of
 an attribute to sort by (or `'default'`) followed by an optional sorting
 order, or the value `'random'`;
 
-
-|Type | Default
-|---  | ---
-|`string`| `'default:asc'`
+| Type     | Default         |
+| -------- | --------------- |
+| `string` | `'default:asc'` |
 
 ###### Example: Defining sorting to be applied on load
 
 ```js
-
 // The mixer will sort the container by the value of the `data-published-date`
 // attribute, in descending order.
 
 var mixer = mixitup(containerEl, {
-    load: {
-        sort: 'published-date:desc'
-    }
+  load: {
+    sort: "published-date:desc",
+  },
 });
 ```
+
 ### dataset
-
-
-
 
 An array of objects representing the underlying data of any pre-rendered targets,
 when using the `.dataset()` API.
 
 NB: If targets are pre-rendered when the mixer is instantiated, this must be set.
 
-
-|Type | Default
-|---  | ---
-|`Array.<object>`| `null`
+| Type             | Default |
+| ---------------- | ------- |
+| `Array.<object>` | `null`  |
 
 ###### Example: Defining the initial underyling dataset
 
@@ -1701,45 +1529,38 @@ A group of properties defining the selectors used to query elements within a mix
 
 ### target
 
-
-
-
 A selector string used to query and index target elements within the container.
 
 By default, the class selector `'.mix'` is used, but this can be changed to an
 attribute or element selector to match the style of your project.
 
-
-|Type | Default
-|---  | ---
-|`string`| `'.mix'`
+| Type     | Default  |
+| -------- | -------- |
+| `string` | `'.mix'` |
 
 ###### Example 1: Changing the target selector
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    selectors: {
-        target: '.portfolio-item'
-    }
+  selectors: {
+    target: ".portfolio-item",
+  },
 });
 ```
+
 ###### Example 2: Using an attribute selector as a target selector
 
 ```js
-
 // The mixer will search for any children with the attribute `data-ref="mix"`
 
 var mixer = mixitup(containerEl, {
-    selectors: {
-        target: '[data-ref="mix"]'
-    }
+  selectors: {
+    target: '[data-ref="mix"]',
+  },
 });
 ```
+
 ### control
-
-
-
 
 A optional selector string used to add further specificity to the querying of control elements,
 in addition to their mandatory data attribute (e.g. `data-filter`, `data-toggle`, `data-sort`).
@@ -1749,19 +1570,17 @@ This can be used if other elements in your document must contain the above attri
 an additional `control` selector of your choice allows MixItUp to restrict event handling
 to only those elements matching the defined selector.
 
-
-|Type | Default
-|---  | ---
-|`string`| `''`
+| Type     | Default |
+| -------- | ------- |
+| `string` | `''`    |
 
 ###### Example 1: Adding a `selectors.control` selector
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    selectors: {
-        control: '.mixitup-control'
-    }
+  selectors: {
+    control: ".mixitup-control",
+  },
 });
 
 // Will not be handled:
@@ -1779,9 +1598,6 @@ All render functions receive a data object, and should return a valid HTML strin
 
 ### target
 
-
-
-
 A function returning an HTML string representing a target element, or a reference to a
 single DOM element.
 
@@ -1790,55 +1606,50 @@ to the dataset, or an item in the dataset changes (if `dataset.dirtyCheck` is en
 
 The function receives the relevant dataset item as its first parameter.
 
-
-|Type | Default
-|---  | ---
-|`function`| `'null'`
+| Type       | Default  |
+| ---------- | -------- |
+| `function` | `'null'` |
 
 ###### Example 1: Using string concatenation
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    render: {
-        target: function(item) {
-            return (
-                '<div class="mix">' +
-                    '<h2>' + item.title + '</h2>' +
-                '</div>'
-            );
-        }
-    }
+  render: {
+    target: function (item) {
+      return '<div class="mix">' + "<h2>" + item.title + "</h2>" + "</div>";
+    },
+  },
 });
 ```
+
 ###### Example 2: Using an ES2015 template literal
 
 ```js
-
 var mixer = mixitup(containerEl, {
-    render: {
-        target: function(item) {
-            return (
-                `<div class="mix">
+  render: {
+    target: function (item) {
+      return `<div class="mix">
                     <h2>${item.title}</h2>
-                 </div>`
-            );
-        }
-    }
+                 </div>`;
+    },
+  },
 });
 ```
+
 ###### Example 3: Using a Handlebars template
 
 ```js
-
-var targetTemplate = Handlebars.compile('<div class="mix"><h2>{{title}}</h2></div>');
+var targetTemplate = Handlebars.compile(
+  '<div class="mix"><h2>{{title}}</h2></div>',
+);
 
 var mixer = mixitup(containerEl, {
-    render: {
-        target: targetTemplate
-    }
+  render: {
+    target: targetTemplate,
+  },
 });
 ```
+
 ###### Example 4: Returning a DOM element
 
 ```js
@@ -1855,4 +1666,3 @@ var mixer = mixitup(containerEl, {
     }
 });
 ```
-

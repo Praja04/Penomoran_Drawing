@@ -12,8 +12,7 @@
                         <div class="box-body d-flex px-0">
                             <div class="flex-grow-1 p-30 flex-grow-1 bg-img dask-bg bg-none-md" style="
                         background-position: right bottom;
-                        background-size: auto 100%;
-                        background-image: url(<?php base_url() ?>assets/images/custom-1.svg);">
+                        background-size: auto 100%;">
                                 <div class="row">
                                     <div class="col-12 col-xl-7">
                                         <h2>Welcome back, <strong><?= $nama ?></strong></h2>
@@ -152,7 +151,7 @@
         </section>
     </div>
 </div>
-<script src="<?php base_url() ?>/assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         initializeDocument();

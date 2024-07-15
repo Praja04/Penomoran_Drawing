@@ -1,16 +1,14 @@
-define([
-  'jquery'
-], function ($) {
-  function InputData (decorated, $element, options) {
+define(["jquery"], function ($) {
+  function InputData(decorated, $element, options) {
     this._currentData = [];
-    this._valueSeparator = options.get('valueSeparator') || ',';
+    this._valueSeparator = options.get("valueSeparator") || ",";
 
-    if ($element.prop('type') === 'hidden') {
-      if (options.get('debug') && console && console.warn) {
+    if ($element.prop("type") === "hidden") {
+      if (options.get("debug") && console && console.warn) {
         console.warn(
-          'Select2: Using a hidden input with Select2 is no longer ' +
-          'supported and may stop working in the future. It is recommended ' +
-          'to use a `<select>` element instead.'
+          "Select2: Using a hidden input with Select2 is no longer " +
+            "supported and may stop working in the future. It is recommended " +
+            "to use a `<select>` element instead.",
         );
       }
     }
@@ -19,7 +17,7 @@ define([
   }
 
   InputData.prototype.current = function (_, callback) {
-    function getSelected (data, selectedIds) {
+    function getSelected(data, selectedIds) {
       var selected = [];
 
       if (data.selected || $.inArray(data.id, selectedIds) !== -1) {
@@ -43,12 +41,7 @@ define([
 
       selected.push.apply(
         selected,
-        getSelected(
-          data,
-          this.$element.val().split(
-            this._valueSeparator
-          )
-        )
+        getSelected(data, this.$element.val().split(this._valueSeparator)),
       );
     }
 
@@ -56,7 +49,7 @@ define([
   };
 
   InputData.prototype.select = function (_, data) {
-    if (!this.options.get('multiple')) {
+    if (!this.options.get("multiple")) {
       this.current(function (allData) {
         $.map(allData, function (data) {
           data.selected = false;
@@ -64,13 +57,13 @@ define([
       });
 
       this.$element.val(data.id);
-      this.$element.trigger('change');
+      this.$element.trigger("change");
     } else {
       var value = this.$element.val();
       value += this._valueSeparator + data.id;
 
       this.$element.val(value);
-      this.$element.trigger('change');
+      this.$element.trigger("change");
     }
   };
 
@@ -93,7 +86,7 @@ define([
       }
 
       self.$element.val(values.join(self._valueSeparator));
-      self.$element.trigger('change');
+      self.$element.trigger("change");
     });
   };
 
@@ -111,13 +104,13 @@ define([
     }
 
     callback({
-      results: results
+      results: results,
     });
   };
 
   InputData.prototype.addOptions = function (_, $options) {
     var options = $.map($options, function ($option) {
-      return $.data($option[0], 'data');
+      return $.data($option[0], "data");
     });
 
     this._currentData.push.apply(this._currentData, options);

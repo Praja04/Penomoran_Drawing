@@ -8,8 +8,8 @@
 
 Get the latest build, ready to go:
 
- * [Development](https://raw.githubusercontent.com/amazingSurge/jquery-wizard/master/dist/jquery-wizard.js) - unminified
- * [Production](https://raw.githubusercontent.com/amazingSurge/jquery-wizard/master/dist/jquery-wizard.min.js) - minified
+-   [Development](https://raw.githubusercontent.com/amazingSurge/jquery-wizard/master/dist/jquery-wizard.js) - unminified
+-   [Production](https://raw.githubusercontent.com/amazingSurge/jquery-wizard/master/dist/jquery-wizard.min.js) - minified
 
 ###Build From Source
 
@@ -29,26 +29,22 @@ Done!
 ## Usage
 
 ### Include Files
+
 ```html
-<link rel="stylesheet" href="wizard.css">
+<link rel="stylesheet" href="wizard.css" />
 
 <script src="jquery.min.js"></script>
 <script src="jquery-wizard.min.js"></script>
 ```
 
 ### Html Structure
+
 ```html
 <div class="wizard">
     <ul class="wizard-steps" role="tablist">
-        <li class="active" role="tab">
-            Step 1
-        </li>
-        <li role="tab">
-            Step 2
-        </li>
-        <li role="tab">
-            Step 3
-        </li>
+        <li class="active" role="tab">Step 1</li>
+        <li role="tab">Step 2</li>
+        <li role="tab">Step 3</li>
     </ul>
     <div class="wizard-content">
         <div class="wizard-pane active" role="tabpanel">Step Content 1</div>
@@ -59,104 +55,115 @@ Done!
 ```
 
 ### Javascript
+
 ```html
 <scritp>
-(function(){
-    $('.wizard').wizard({
-        onFinish: function(){
-            // do something
-        }
-    });
-})();
+    (function(){ $('.wizard').wizard({ onFinish: function(){ // do something }
+    }); })();
 </scritp>
 ```
 
 ## Options
+
 ```javascript
-    $('.wizard').wizard({
-        step: '.wizard-steps > li',
+$(".wizard").wizard({
+    step: ".wizard-steps > li",
 
-        getPane: function(index, step){
-            return this.$element.find('.wizard-content').children().eq(index);
+    getPane: function (index, step) {
+        return this.$element.find(".wizard-content").children().eq(index);
+    },
+
+    buttonsAppendTo: "this",
+    templates: {
+        buttons: function () {
+            var options = this.options;
+            return (
+                '<div class="wizard-buttons">' +
+                '<a class="wizard-back" href="#' +
+                this.id +
+                '" data-wizard="back" role="button">' +
+                options.buttonLabels.back +
+                "</a>" +
+                '<a class="wizard-next" href="#' +
+                this.id +
+                '" data-wizard="next" role="button">' +
+                options.buttonLabels.next +
+                "</a>" +
+                '<a class="wizard-finish" href="#' +
+                this.id +
+                '" data-wizard="finish" role="button">' +
+                options.buttonLabels.finish +
+                "</a>" +
+                "</div>"
+            );
+        },
+    },
+
+    // state classes
+    classes: {
+        step: {
+            done: "done",
+            error: "error",
+            active: "current",
+            disabled: "disabled",
+            activing: "activing",
+            loading: "loading",
         },
 
-        buttonsAppendTo: 'this',
-        templates: {
-            buttons: function(){
-                var options = this.options;
-                return '<div class="wizard-buttons">'+
-                    '<a class="wizard-back" href="#'+this.id+'" data-wizard="back" role="button">'+options.buttonLabels.back+'</a>' +
-                    '<a class="wizard-next" href="#'+this.id+'" data-wizard="next" role="button">'+options.buttonLabels.next+'</a>' +
-                    '<a class="wizard-finish" href="#'+this.id+'" data-wizard="finish" role="button">'+options.buttonLabels.finish+'</a>' +
-                '</div>';
-            }
+        pane: {
+            active: "active",
+            activing: "activing",
         },
 
-        // state classes
-        classes: {
-            step: {
-                done: 'done',
-                error: 'error',
-                active: 'current',
-                disabled: 'disabled',
-                activing: 'activing',
-                loading: 'loading'
-            },
-
-            pane: {
-                active: 'active',
-                activing: 'activing'
-            },
-
-            button: {
-                hide: 'hide',
-                disabled: 'disabled'
-            }
+        button: {
+            hide: "hide",
+            disabled: "disabled",
         },
+    },
 
-        autoFocus: true,
-        keyboard: true,
+    autoFocus: true,
+    keyboard: true,
 
-        enableWhenVisited: false,
+    enableWhenVisited: false,
 
-        buttonLabels: {
-            next: 'Next',
-            back: 'Back',
-            finish: 'Finish'
-        },
+    buttonLabels: {
+        next: "Next",
+        back: "Back",
+        finish: "Finish",
+    },
 
-        loading: {
-            show: function(step) {},
-            hide: function(step) {},
-            fail: function(step) {}
-        },
+    loading: {
+        show: function (step) {},
+        hide: function (step) {},
+        fail: function (step) {},
+    },
 
-        cacheContent: false,
+    cacheContent: false,
 
-        validator: function(step){
-            return true;
-        },
+    validator: function (step) {
+        return true;
+    },
 
-        // callbacks
-        onInit: function(){},
-        onNext: function(from, to){},
-        onBack: function(from, to){},
-        onReset: function(){},
+    // callbacks
+    onInit: function () {},
+    onNext: function (from, to) {},
+    onBack: function (from, to) {},
+    onReset: function () {},
 
-        onBeforeShow: function(from, to){},
-        onAfterShow: function(step){},
-        onBeforeHide: function(step){},
-        onAfterHide: function(step){},
-        onBeforeLoad: function(step){},
-        onAfterLoad: function(step){},
+    onBeforeShow: function (from, to) {},
+    onAfterShow: function (step) {},
+    onBeforeHide: function (step) {},
+    onAfterHide: function (step) {},
+    onBeforeLoad: function (step) {},
+    onAfterLoad: function (step) {},
 
-        onBeforeChange: function(from, to){},
-        onAfterChange: function(from, to){},
+    onBeforeChange: function (from, to) {},
+    onAfterChange: function (from, to) {},
 
-        onStateChange: function(step, enter, state){},
+    onStateChange: function (step, enter, state) {},
 
-        onFinish: function(){}
-    });
+    onFinish: function () {},
+});
 ```
 
 ## Bugs and feature requests
@@ -164,8 +171,8 @@ Done!
 Anyone and everyone is welcome to contribute. Please take a moment to
 review the [guidelines for contributing](CONTRIBUTING.md). Make sure you're using the latest version of jquery-wizard before submitting an issue.
 
-* [Bug reports](CONTRIBUTING.md#bug-reports)
-* [Feature requests](CONTRIBUTING.md#feature-requests)
+-   [Bug reports](CONTRIBUTING.md#bug-reports)
+-   [Feature requests](CONTRIBUTING.md#feature-requests)
 
 ## Copyright and license
 
@@ -175,6 +182,5 @@ Licensed under [the GPL license](LICENSE-GPL).
 
 [bower-image]: https://img.shields.io/bower/v/jquery-wizard.js.svg?style=flat
 [bower-link]: https://david-dm.org/amazingSurge/jquery-wizard.js/dev-status.svg
-
 [devdeps-image]: https://img.shields.io/david/dev/amazingSurge/jquery-wizard.svg?style=flat
 [devdeps-link]: https://david-dm.org/amazingSurge/jquery-wizard#info=devDependencies

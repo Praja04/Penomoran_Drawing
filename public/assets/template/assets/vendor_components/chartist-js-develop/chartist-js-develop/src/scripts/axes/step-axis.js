@@ -15,17 +15,19 @@
  */
 /* global Chartist */
 (function (globalRoot, Chartist) {
-  'use strict';
+  "use strict";
 
   var window = globalRoot.window;
   var document = globalRoot.document;
 
   function StepAxis(axisUnit, data, chartRect, options) {
-    Chartist.StepAxis.super.constructor.call(this,
+    Chartist.StepAxis.super.constructor.call(
+      this,
       axisUnit,
       chartRect,
       options.ticks,
-      options);
+      options,
+    );
 
     var calc = Math.max(1, options.ticks.length - (options.stretch ? 1 : 0));
     this.stepLength = this.axisLength / calc;
@@ -37,7 +39,6 @@
 
   Chartist.StepAxis = Chartist.Axis.extend({
     constructor: StepAxis,
-    projectValue: projectValue
+    projectValue: projectValue,
   });
-
-}(this, Chartist));
+})(this, Chartist);

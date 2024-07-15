@@ -9,19 +9,19 @@
  * @since       3.0.0
  */
 
-mixitup.CommandInsert = function() {
-    mixitup.Base.call(this);
+mixitup.CommandInsert = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    this.index      = 0;
-    this.collection = [];
-    this.position   = 'before'; // enum: ['before', 'after']
-    this.sibling    = null;
+  this.index = 0;
+  this.collection = [];
+  this.position = "before"; // enum: ['before', 'after']
+  this.sibling = null;
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.CommandInsert);

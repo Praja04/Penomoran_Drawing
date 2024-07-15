@@ -37,7 +37,7 @@
         </section>
     </div>
 </div>
-<script src="../../assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
 
@@ -62,7 +62,7 @@
             contentType: false,
             success: function(response) {
                 alert(berhasil);
-                
+
 
             },
             error: function(xhr, status, error) {

@@ -7,20 +7,20 @@
  * @since       3.0.0
  */
 
-mixitup.QueueItem = function() {
-    mixitup.Base.call(this);
+mixitup.QueueItem = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    this.args           = [];
-    this.instruction    = null;
-    this.triggerElement = null;
-    this.deferred       = null;
-    this.isToggling     = false;
+  this.args = [];
+  this.instruction = null;
+  this.triggerElement = null;
+  this.deferred = null;
+  this.isToggling = false;
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.QueueItem);

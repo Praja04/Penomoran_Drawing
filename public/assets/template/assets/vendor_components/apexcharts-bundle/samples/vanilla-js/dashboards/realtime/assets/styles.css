@@ -1,20 +1,25 @@
-
 body {
-  background: #1B213B;
+  background: #1b213b;
   color: #777;
   font-family: Montserrat, Arial, sans-serif;
 }
 
 .body-bg {
-  background: #F3F4FA !important;
+  background: #f3f4fa !important;
 }
 
-h1, h2, h3, h4, h5, h6, strong {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
   font-weight: 600;
 }
 
 .box .apexcharts-xaxistooltip {
-  background: #1B213B;
+  background: #1b213b;
   color: #fff;
 }
 
@@ -24,7 +29,7 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 .box {
-  background-color: #262D47;
+  background-color: #262d47;
   padding: 25px 25px;
   border-radius: 4px;
 }
@@ -65,7 +70,6 @@ h1, h2, h3, h4, h5, h6, strong {
 #fusionexport-btn[disabled] {
   cursor: wait;
 }
-
 
 .spinner-border {
   display: none;

@@ -5,7 +5,6 @@ title: News Ticker, Stock Ticker & Image Ticker with jQuery Web Ticker
 description: A list of possible use cases of how you can use the jQuery Web Ticker, from news tickers to stock tickers, to image tickers.
 ---
 
-
 ##Use Cases
 
 Below are examples of different uses for the web ticker.
@@ -24,7 +23,7 @@ News changes fairly frequently, at times you may want to offer byte-sized headli
 
 ### Use Case 2: Stock Ticker {#finance}
 
-Tick rates change and update all the time, Web Ticker is a great way to show updated pricing to your clients. Through the update facility you can update the ticks as frequently as you want. Note example below does not contain real data but is rather used to show a possible concept use. Other than stock ticker, this is also found as *live rates ticker*, *forex ticker* and *market ticker* amongst other variations, particularly as it's used to represent changing values in the market. Company symbold represented in the ticker are usually referred to as ticker symbols.
+Tick rates change and update all the time, Web Ticker is a great way to show updated pricing to your clients. Through the update facility you can update the ticks as frequently as you want. Note example below does not contain real data but is rather used to show a possible concept use. Other than stock ticker, this is also found as _live rates ticker_, _forex ticker_ and _market ticker_ amongst other variations, particularly as it's used to represent changing values in the market. Company symbold represented in the ticker are usually referred to as ticker symbols.
 
 <div class="ticker-wrapper">
 	<ul id="finance-webticker" >

@@ -3,7 +3,6 @@ title: Advanced usage
 anchor: advanced-usage
 ---
 
-
 ### Prototype methods
 
 For each chart, there are a set of global prototype methods on the shared `ChartType` which you may find useful. These are available on all charts created with Chart.js, but for the examples, let's use a line chart we've made.
@@ -102,7 +101,6 @@ var myPieChart = new Chart(ctx).Pie(data, {
 
 See files `sample/pie-customTooltips.html` and `sample/line-customTooltips.html` for examples on how to get started.
 
-
 ### Writing new chart types
 
 Chart.js 1.0 has been rewritten to provide a platform for developers to create their own custom chart types, and be able to share and utilise them through the Chart.js API.
@@ -113,22 +111,21 @@ On top of this, there are also some simple base classes of Chart elements, these
 
 ```javascript
 Chart.Type.extend({
-	// Passing in a name registers this chart in the Chart namespace
-	name: "Scatter",
-	// Providing a defaults will also register the deafults in the chart namespace
-	defaults : {
-		options: "Here",
-		available: "at this.options"
-	},
-	// Initialize is fired when the chart is initialized - Data is passed in as a parameter
-	// Config is automatically merged by the core of Chart.js, and is available at this.options
-	initialize:  function(data){
-		this.chart.ctx // The drawing context for this chart
-		this.chart.canvas // the canvas node for this chart
-	},
-	// Used to draw something on the canvas
-	draw: function() {
-	}
+  // Passing in a name registers this chart in the Chart namespace
+  name: "Scatter",
+  // Providing a defaults will also register the deafults in the chart namespace
+  defaults: {
+    options: "Here",
+    available: "at this.options",
+  },
+  // Initialize is fired when the chart is initialized - Data is passed in as a parameter
+  // Config is automatically merged by the core of Chart.js, and is available at this.options
+  initialize: function (data) {
+    this.chart.ctx; // The drawing context for this chart
+    this.chart.canvas; // the canvas node for this chart
+  },
+  // Used to draw something on the canvas
+  draw: function () {},
 });
 
 // Now we can create a new instance of our chart, using the Chart.js API
@@ -143,12 +140,12 @@ We can also extend existing chart types, and expose them to the API in the same 
 ```javascript
 // Notice now we're extending the particular Line chart type, rather than the base class.
 Chart.types.Line.extend({
-	// Passing in a name registers this chart in the Chart namespace in the same way
-	name: "LineAlt",
-	initialize: function(data){
-		console.log('My Line chart extension');
-		Chart.types.Line.prototype.initialize.apply(this, arguments);
-	}
+  // Passing in a name registers this chart in the Chart namespace in the same way
+  name: "LineAlt",
+  initialize: function (data) {
+    console.log("My Line chart extension");
+    Chart.types.Line.prototype.initialize.apply(this, arguments);
+  },
 });
 
 // Creates a line chart in the same way
@@ -158,8 +155,8 @@ new Chart(ctx).LineAlt(data);
 
 ### Community extensions
 
-- <a href="https://github.com/Regaddi/Chart.StackedBar.js" target"_blank">Stacked Bar Chart</a> by <a href="https://twitter.com/Regaddi" target="_blank">@Regaddi</a>
-- <a href="https://github.com/CAYdenberg/Chart.js" target"_blank">Error bars (bar and line charts)</a> by <a href="https://twitter.com/CAYdenberg" target="_blank">@CAYdenberg</a>
+- <a href="https://github.com/Regaddi/Chart.StackedBar.js" target"\_blank">Stacked Bar Chart</a> by <a href="https://twitter.com/Regaddi" target="_blank">@Regaddi</a>
+- <a href="https://github.com/CAYdenberg/Chart.js" target"\_blank">Error bars (bar and line charts)</a> by <a href="https://twitter.com/CAYdenberg" target="_blank">@CAYdenberg</a>
 
 ### Creating custom builds
 

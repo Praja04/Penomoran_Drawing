@@ -9,20 +9,20 @@
  * @since       3.0.0
  */
 
-mixitup.CommandMultimix = function() {
-    mixitup.Base.call(this);
+mixitup.CommandMultimix = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    this.filter       = null;
-    this.sort         = null;
-    this.insert       = null;
-    this.remove       = null;
-    this.changeLayout = null;
+  this.filter = null;
+  this.sort = null;
+  this.insert = null;
+  this.remove = null;
+  this.changeLayout = null;
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.CommandMultimix);

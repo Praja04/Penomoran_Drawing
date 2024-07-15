@@ -7,20 +7,14 @@
  * Link: https://github.com/sindresorhus/grunt-concurrent
  */
 
-'use strict';
+"use strict";
 
 module.exports = function (grunt) {
   return {
-    server: [
-      'sass:public'
-    ],
+    server: ["sass:public"],
     test: [
-      'sass' // tmp
+      "sass", // tmp
     ],
-    public: [
-      'sass:public',
-      'imagemin',
-      'svgmin'
-    ]
+    public: ["sass:public", "imagemin", "svgmin"],
   };
 };

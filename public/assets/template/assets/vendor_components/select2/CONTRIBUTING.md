@@ -1,5 +1,5 @@
-Contributing to Select2
-=======================
+# Contributing to Select2
+
 Looking to contribute something to Select2? **Here's how you can help.**
 
 Please take a moment to review this document in order to make the contribution
@@ -10,8 +10,8 @@ the developers managing and developing this open source project. In return,
 they should reciprocate that respect in addressing your issue or assessing
 patches and features.
 
-Using the issue tracker
------------------------
+## Using the issue tracker
+
 When [reporting bugs][reporting-bugs] or
 [requesting features][requesting-features], the
 [issue tracker on GitHub][issue-tracker] is the recommended channel to use.
@@ -20,18 +20,18 @@ The issue tracker **is not** a place for support requests. The
 [mailing list][community] or [IRC channel][community] are better places to
 get help.
 
-Reporting bugs with Select2
----------------------------
+## Reporting bugs with Select2
+
 We really appreciate clear bug reports that _consistently_ show an issue
 _within Select2_.
 
 The ideal bug report follows these guidelines:
 
-1. **Use the [GitHub issue search][issue-search]**  &mdash; Check if the issue
+1. **Use the [GitHub issue search][issue-search]** &mdash; Check if the issue
    has already been reported.
-2. **Check if the issue has been fixed**  &mdash; Try to reproduce the problem
+2. **Check if the issue has been fixed** &mdash; Try to reproduce the problem
    using the code in the `master` branch.
-3. **Isolate the problem**  &mdash; Try to create an
+3. **Isolate the problem** &mdash; Try to create an
    [isolated test case][isolated-case] that consistently reproduces the problem.
 
 Please try to be as detailed as possible in your bug report, especially if an
@@ -47,8 +47,8 @@ to are:
 
 All of these questions will help others fix and identify any potential bugs.
 
-Requesting features in Select2
-------------------------------
+## Requesting features in Select2
+
 Select2 is a large library that carries with it a lot of functionality. Because
 of this, many feature requests will not be implemented in the core library.
 
@@ -57,8 +57,8 @@ Before starting work on a major feature for Select2, **contact the
 time on something which the project developers are not interested in bringing
 into the project.
 
-Contributing changes to Select2
--------------------------------
+## Contributing changes to Select2
+
 Select2 is made up of multiple submodules that all come together to make the
 standard and extended builds that are available to users. The build system uses
 Node.js to manage and compile the submodules, all of which is done using the
@@ -131,26 +131,26 @@ We use GitHub's pull request system for submitting patches. Here are some
 guidelines to follow when creating the pull request for your fix.
 
 1. Make sure to create a ticket for your pull request. This will serve as the
-bug ticket, and any discussion about the bug will take place there. Your pull
-request will be focused on the specific changes that fix the bug.
+   bug ticket, and any discussion about the bug will take place there. Your pull
+   request will be focused on the specific changes that fix the bug.
 2. Make sure to reference the ticket you are fixing within your pull request.
-This will allow us to close off the ticket once we merge the pull request, or
-follow up on the ticket if there are any related blocking issues.
+   This will allow us to close off the ticket once we merge the pull request, or
+   follow up on the ticket if there are any related blocking issues.
 3. Explain why the specific change was made. Not everyone who is reviewing your
-pull request will be familiar with the problem it is fixing.
+   pull request will be familiar with the problem it is fixing.
 4. Run your tests first. If your tests aren't passing, the pull request won't
-be able to be merged. If you're breaking existing tests, make sure that you
-aren't causing any breaking changes.
+   be able to be merged. If you're breaking existing tests, make sure that you
+   aren't causing any breaking changes.
 5. Only include source changes. While it's not required, only including changes
-from the `src` directory will prevent merge conflicts from occuring. Making
-this happen can be as a simple as not committing changes from the `dist`
-directory.
+   from the `src` directory will prevent merge conflicts from occuring. Making
+   this happen can be as a simple as not committing changes from the `dist`
+   directory.
 
 By following these steps, you will make it easier for your pull request to be
 reviewed and eventually merged.
 
-Triaging issues and pull requests
----------------------------------
+## Triaging issues and pull requests
+
 Anyone can help the project maintainers triage issues and review pull requests.
 
 ### Handling new issues
@@ -158,9 +158,9 @@ Anyone can help the project maintainers triage issues and review pull requests.
 Select2 regularly receives new issues which need to be tested and organized.
 
 When a new issue that comes in that is similar to another existing issue, it
-should be checked to make sure it is not a duplicate.  Duplicates issues should
+should be checked to make sure it is not a duplicate. Duplicates issues should
 be marked by replying to the issue with "Duplicate of #[issue number]" where
-`[issue number]` is the url or issue number for the existing issue.  This will
+`[issue number]` is the url or issue number for the existing issue. This will
 allow the project maintainers to quickly close off additional issues and keep
 the discussion focused within a single issue.
 
@@ -171,8 +171,8 @@ what causes a bug quicker.
 ### Reviewing pull requests
 
 It is very common for pull requests to be opened for issues that contain a clear
-solution to the problem.  These pull requests should be rigorously reviewed by
-the community before being accepted.  If you are not sure about a piece of
+solution to the problem. These pull requests should be rigorously reviewed by
+the community before being accepted. If you are not sure about a piece of
 submitted code, or know of a better way to do something, do not hesitate to make
 a comment on the pull request.
 
@@ -184,11 +184,10 @@ best if you can include more information on the issue. Common bugs and feature
 requests are more likely to be fixed, whether it is by the community or the
 developers, so keeping tickets up to date is encouraged.
 
-Licensing
----------
+## Licensing
 
 It should also be made clear that **all code contributed to Select** must be
-licensable under the [MIT license][licensing].  Code that cannot be released
+licensable under the [MIT license][licensing]. Code that cannot be released
 under this license **cannot be accepted** into the project.
 
 [community]: https://select2.github.io/community.html

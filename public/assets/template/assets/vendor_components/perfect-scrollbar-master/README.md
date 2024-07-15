@@ -5,18 +5,18 @@ Minimalistic but perfect custom scrollbar plugin
 [![npm](https://img.shields.io/npm/v/perfect-scrollbar.svg)](https://www.npmjs.com/package/perfect-scrollbar)
 [![Travis CI](https://travis-ci.org/utatti/perfect-scrollbar.svg?branch=master)](https://travis-ci.org/utatti/perfect-scrollbar)
 
-***To read documentation for versions < 1.0, please visit [`v0.8.1`](https://github.com/utatti/perfect-scrollbar/tree/0.8.1).***
+**_To read documentation for versions < 1.0, please visit [`v0.8.1`](https://github.com/utatti/perfect-scrollbar/tree/0.8.1)._**
 
 ## Why perfect-scrollbar?
 
-perfect-scrollbar is minimalistic but *perfect* (for me, and maybe for most
+perfect-scrollbar is minimalistic but _perfect_ (for me, and maybe for most
 developers) scrollbar plugin.
 
-* No change on design layout
-* No manipulation on DOM tree
-* Use plain `scrollTop` and `scrollLeft`
-* Scrollbar style is fully customizable
-* Efficient update on layout change
+- No change on design layout
+- No manipulation on DOM tree
+- Use plain `scrollTop` and `scrollLeft`
+- Scrollbar style is fully customizable
+- Efficient update on layout change
 
 I hope you love it!
 
@@ -26,15 +26,15 @@ It's on the [GitHub Pages](http://utatti.github.io/perfect-scrollbar/).
 
 ## Table of Contents
 
-* [Install](#install)
-* [Before using perfect-scrollbar](#before-using-perfect-scrollbar)
-* [Caveats](#caveats)
-* [How to use](#how-to-use)
-* [Options](#options)
-* [Events](#events)
-* [Helpdesk](#helpdesk)
-* [IE Support](#ie-support)
-* [License](#license)
+- [Install](#install)
+- [Before using perfect-scrollbar](#before-using-perfect-scrollbar)
+- [Caveats](#caveats)
+- [How to use](#how-to-use)
+- [Options](#options)
+- [Events](#events)
+- [Helpdesk](#helpdesk)
+- [IE Support](#ie-support)
+- [License](#license)
 
 ## Install
 
@@ -68,7 +68,7 @@ $ npm run build
 
 You can fork the following JSFiddles for testing and experimenting purposes:
 
-* [perfect-scrollbar JSFiddle](https://jsfiddle.net/utatti/dyvL31r6/)
+- [perfect-scrollbar JSFiddle](https://jsfiddle.net/utatti/dyvL31r6/)
 
 #### Unofficial sources
 
@@ -79,15 +79,15 @@ of the following sources, please ask and resolve in each repository.
 
 The following requirements should meet.
 
-* the container must have a `position` style.
-* the container must be a normal container element.
+- the container must have a `position` style.
+- the container must be a normal container element.
 
 The following requirements are included in the basic CSS, but please keep in
 mind when you'd like to change the CSS files.
 
-* the container must have an `overflow: hidden` css style.
-* the scrollbar's position must be `absolute`.
-* the scrollbar-x must have `bottom` or `top`, and the scrollbar-y must have
+- the container must have an `overflow: hidden` css style.
+- the scrollbar's position must be `absolute`.
+- the scrollbar-x must have `bottom` or `top`, and the scrollbar-y must have
   `right` or `left`.
 
 Finally, scroll hooking is generally considered as a bad practice, and
@@ -96,7 +96,7 @@ needed, using browser-native scroll is always recommended.
 
 ## Caveats
 
-perfect-scrollbar emulates some scrolls, but not all of the kinds. It also *does not* work
+perfect-scrollbar emulates some scrolls, but not all of the kinds. It also _does not_ work
 in some situations. You can find these cases in [Caveats](https://github.com/utatti/perfect-scrollbar/wiki/Caveats).
 Basically, items listed in the caveats are hacky to implement and may not be
 implemented in the future. If the features are really needed, please consider
@@ -115,14 +115,13 @@ the main CSS is imported.
     height: 400px;
   }
 </style>
-<link rel="stylesheet" href="css/perfect-scrollbar.css">
+<link rel="stylesheet" href="css/perfect-scrollbar.css" />
 ```
-
 
 Import via ES modules:
 
 ```js
-import PerfectScrollbar from 'perfect-scrollbar';
+import PerfectScrollbar from "perfect-scrollbar";
 ```
 
 Or in browser:
@@ -134,20 +133,20 @@ Or in browser:
 To initialise:
 
 ```js
-const container = document.querySelector('#container');
+const container = document.querySelector("#container");
 const ps = new PerfectScrollbar(container);
 
 // or just with selector string
-const ps = new PerfectScrollbar('#container');
+const ps = new PerfectScrollbar("#container");
 ```
 
 It can be initialised with [options](#options).
 
 ```js
-const ps = new PerfectScrollbar('#container', {
+const ps = new PerfectScrollbar("#container", {
   wheelSpeed: 2,
   wheelPropagation: true,
-  minScrollbarLength: 20
+  minScrollbarLength: 20,
 });
 ```
 
@@ -167,7 +166,7 @@ ps = null; // to make sure garbages are collected
 If you want to scroll to somewhere, just update `scrollTop`.
 
 ```js
-const container = document.querySelector('#container');
+const container = document.querySelector("#container");
 container.scrollTop = 0;
 ```
 

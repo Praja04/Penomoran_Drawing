@@ -9,18 +9,18 @@
  * @since       3.0.0
  */
 
-mixitup.CommandFilter = function() {
-    mixitup.Base.call(this);
+mixitup.CommandFilter = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    this.selector   = '';
-    this.collection = null;
-    this.action     = 'show'; // enum: ['show', 'hide']
+  this.selector = "";
+  this.collection = null;
+  this.action = "show"; // enum: ['show', 'hide']
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.CommandFilter);

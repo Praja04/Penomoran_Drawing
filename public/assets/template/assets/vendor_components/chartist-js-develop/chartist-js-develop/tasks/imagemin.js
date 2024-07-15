@@ -7,7 +7,7 @@
  * Link: https://github.com/gruntjs/grunt-contrib-imagemin
  */
 
-'use strict';
+"use strict";
 
 module.exports = function (grunt) {
   return {
@@ -15,11 +15,11 @@ module.exports = function (grunt) {
       files: [
         {
           expand: true,
-          cwd: '<%= pkg.config.site %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= pkg.config.public %>/images'
-        }
-      ]
-    }
-  }
+          cwd: "<%= pkg.config.site %>/images",
+          src: "{,*/}*.{png,jpg,jpeg,gif}",
+          dest: "<%= pkg.config.public %>/images",
+        },
+      ],
+    },
+  };
 };

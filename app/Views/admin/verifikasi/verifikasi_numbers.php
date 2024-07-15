@@ -125,7 +125,7 @@
          </section>
      </div>
  </div>
- <script src="<?php base_url() ?>/assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+ <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
  <script>
      $(document).ready(function() {
          $('.btn-pdf-modal').on('click', function() {

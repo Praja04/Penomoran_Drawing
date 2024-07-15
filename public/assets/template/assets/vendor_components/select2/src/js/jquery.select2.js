@@ -1,18 +1,18 @@
 define([
-  'jquery',
-  'jquery-mousewheel',
+  "jquery",
+  "jquery-mousewheel",
 
-  './select2/core',
-  './select2/defaults'
+  "./select2/core",
+  "./select2/defaults",
 ], function ($, _, Select2, Defaults) {
   if ($.fn.select2 == null) {
     // All methods that should return the element
-    var thisMethods = ['open', 'close', 'destroy'];
+    var thisMethods = ["open", "close", "destroy"];
 
     $.fn.select2 = function (options) {
       options = options || {};
 
-      if (typeof options === 'object') {
+      if (typeof options === "object") {
         this.each(function () {
           var instanceOptions = $.extend(true, {}, options);
 
@@ -20,17 +20,19 @@ define([
         });
 
         return this;
-      } else if (typeof options === 'string') {
+      } else if (typeof options === "string") {
         var ret;
         var args = Array.prototype.slice.call(arguments, 1);
 
         this.each(function () {
-          var instance = $(this).data('select2');
+          var instance = $(this).data("select2");
 
           if (instance == null && window.console && console.error) {
             console.error(
-              'The select2(\'' + options + '\') method was called on an ' +
-              'element that is not using Select2.'
+              "The select2('" +
+                options +
+                "') method was called on an " +
+                "element that is not using Select2.",
             );
           }
 
@@ -44,7 +46,7 @@ define([
 
         return ret;
       } else {
-        throw new Error('Invalid arguments for Select2: ' + options);
+        throw new Error("Invalid arguments for Select2: " + options);
       }
     };
   }

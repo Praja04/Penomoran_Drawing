@@ -18,7 +18,7 @@
                                      </p>
                                  </div>
                                  <div class="col-12 col-lg-4">
-                                     <img src="<?php base_url() ?>\assets\images\custom-15.svg" alt="" />
+                                     <img src="<?php base_url() ?>assets\images\custom-15.svg" alt="" />
                                  </div>
                              </div>
                          </div>
@@ -107,7 +107,7 @@
          </section>
      </div>
  </div>
- <script src="<?php base_url() ?>/assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+ <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
  <script>
      $(document).ready(function() {
          $('.btn-pdf-modal').on('click', function() {

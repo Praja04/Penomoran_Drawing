@@ -47,27 +47,27 @@
  * @since       2.0.0
  */
 
-mixitup.Config = function() {
-    mixitup.Base.call(this);
+mixitup.Config = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    this.animation          = new mixitup.ConfigAnimation();
-    this.behavior           = new mixitup.ConfigBehavior();
-    this.callbacks          = new mixitup.ConfigCallbacks();
-    this.controls           = new mixitup.ConfigControls();
-    this.classNames         = new mixitup.ConfigClassNames();
-    this.data               = new mixitup.ConfigData();
-    this.debug              = new mixitup.ConfigDebug();
-    this.layout             = new mixitup.ConfigLayout();
-    this.load               = new mixitup.ConfigLoad();
-    this.selectors          = new mixitup.ConfigSelectors();
-    this.render             = new mixitup.ConfigRender();
-    this.templates          = new mixitup.ConfigTemplates();
+  this.animation = new mixitup.ConfigAnimation();
+  this.behavior = new mixitup.ConfigBehavior();
+  this.callbacks = new mixitup.ConfigCallbacks();
+  this.controls = new mixitup.ConfigControls();
+  this.classNames = new mixitup.ConfigClassNames();
+  this.data = new mixitup.ConfigData();
+  this.debug = new mixitup.ConfigDebug();
+  this.layout = new mixitup.ConfigLayout();
+  this.load = new mixitup.ConfigLoad();
+  this.selectors = new mixitup.ConfigSelectors();
+  this.render = new mixitup.ConfigRender();
+  this.templates = new mixitup.ConfigTemplates();
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.Config);

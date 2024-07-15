@@ -32,14 +32,14 @@ chart.enableAnimation();
 
 ```javascript
 new EasyPieChart(element, {
-  barColor: function(percent) {
+  barColor: function (percent) {
     var ctx = this.renderer.ctx();
     var canvas = this.renderer.canvas();
-    var gradient = ctx.createLinearGradient(0,0,canvas.width,0);
-        gradient.addColorStop(0, "#ffe57e");
-        gradient.addColorStop(1, "#de5900");
+    var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradient.addColorStop(0, "#ffe57e");
+    gradient.addColorStop(1, "#de5900");
     return gradient;
-  }
+  },
 });
 ```
 

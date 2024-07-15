@@ -2,7 +2,9 @@
 title: Polar Area Chart
 anchor: polar-area-chart
 ---
+
 ### Introduction
+
 Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.
 
 This type of chart is often useful when we want to show a comparison data similar to a pie chart, but also show a scale of values for context.
@@ -21,39 +23,39 @@ new Chart(ctx).PolarArea(data, options);
 
 ```javascript
 var data = [
-	{
-		value: 300,
-		color:"#F7464A",
-		highlight: "#FF5A5E",
-		label: "Red"
-	},
-	{
-		value: 50,
-		color: "#46BFBD",
-		highlight: "#5AD3D1",
-		label: "Green"
-	},
-	{
-		value: 100,
-		color: "#FDB45C",
-		highlight: "#FFC870",
-		label: "Yellow"
-	},
-	{
-		value: 40,
-		color: "#949FB1",
-		highlight: "#A8B3C5",
-		label: "Grey"
-	},
-	{
-		value: 120,
-		color: "#4D5360",
-		highlight: "#616774",
-		label: "Dark Grey"
-	}
-
+  {
+    value: 300,
+    color: "#F7464A",
+    highlight: "#FF5A5E",
+    label: "Red",
+  },
+  {
+    value: 50,
+    color: "#46BFBD",
+    highlight: "#5AD3D1",
+    label: "Green",
+  },
+  {
+    value: 100,
+    color: "#FDB45C",
+    highlight: "#FFC870",
+    label: "Yellow",
+  },
+  {
+    value: 40,
+    color: "#949FB1",
+    highlight: "#A8B3C5",
+    label: "Grey",
+  },
+  {
+    value: 120,
+    color: "#4D5360",
+    highlight: "#616774",
+    label: "Dark Grey",
+  },
 ];
 ```
+
 As you can see, for the chart data you pass in an array of objects, with a value and a colour. The value attribute should be a number, while the color attribute should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.
 
 ### Chart options
@@ -113,7 +115,7 @@ For example, we could have a polar area chart with a black stroke on each segmen
 
 ```javascript
 new Chart(ctx).PolarArea(data, {
-	segmentStrokeColor: "#000000"
+  segmentStrokeColor: "#000000",
 });
 // This will create a chart with all of the default options, merged from the global config,
 // and the PolarArea chart defaults but this particular instance will have `segmentStrokeColor` set to `"#000000"`.
@@ -128,9 +130,9 @@ We can also change these defaults values for each PolarArea type that is created
 Calling `getSegmentsAtEvent(event)` on your Chart instance passing an argument of an event, or jQuery event, will return the segment elements that are at that the same position of that event.
 
 ```javascript
-canvas.onclick = function(evt){
-	var activePoints = myPolarAreaChart.getSegmentsAtEvent(evt);
-	// => activePoints is an array of segments on the canvas that are at the same position as the click event.
+canvas.onclick = function (evt) {
+  var activePoints = myPolarAreaChart.getSegmentsAtEvent(evt);
+  // => activePoints is an array of segments on the canvas that are at the same position as the click event.
 };
 ```
 
@@ -154,10 +156,10 @@ Calling `addData(segmentData, index)` on your Chart instance passing an object i
 ```javascript
 // An object in the same format as the original data source
 myPolarAreaChart.addData({
-	value: 130,
-	color: "#B48EAD",
-	highlight: "#C69CBE",
-	label: "Purple"
+  value: 130,
+  color: "#B48EAD",
+  highlight: "#C69CBE",
+  label: "Purple",
 });
 // The new segment will now animate in.
 ```

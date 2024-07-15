@@ -79,4 +79,5 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$day-sunny\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-day.scss\A         from line 1 of scss/icons/weather-icons/sass/weather-icons-classes.scss\A \A 1: @import \"icon-classes/classes-day.scss\";\A 2: @import \"icon-classes/classes-night.scss\";\A 3: @import \"icon-classes/classes-neutral.scss\";\A 4: @import \"icon-classes/classes-misc.scss\";\A 5: @import \"icon-classes/classes-moon.scss\";\A 6: @import \"icon-classes/classes-moon-aliases.scss\";"; }
+  content: 'Error: Undefined variable: "$day-sunny".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-day.scss\A         from line 1 of scss/icons/weather-icons/sass/weather-icons-classes.scss\A \A 1: @import "icon-classes/classes-day.scss";\A 2: @import "icon-classes/classes-night.scss";\A 3: @import "icon-classes/classes-neutral.scss";\A 4: @import "icon-classes/classes-misc.scss";\A 5: @import "icon-classes/classes-moon.scss";\A 6: @import "icon-classes/classes-moon-aliases.scss";';
+}

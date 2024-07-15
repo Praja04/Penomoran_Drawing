@@ -64,4 +64,5 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$day-sunny\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-day.scss\A \A 1: .wi-day-sunny:before {content: $day-sunny;}\A 2: .wi-day-cloudy:before {content: $day-cloudy;}\A 3: .wi-day-cloudy-gusts:before {content: $day-cloudy-gusts;}\A 4: .wi-day-cloudy-windy:before {content: $day-cloudy-windy;}\A 5: .wi-day-fog:before {content: $day-fog;}\A 6: .wi-day-hail:before {content: $day-hail;}"; }
+  content: 'Error: Undefined variable: "$day-sunny".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-day.scss\A \A 1: .wi-day-sunny:before {content: $day-sunny;}\A 2: .wi-day-cloudy:before {content: $day-cloudy;}\A 3: .wi-day-cloudy-gusts:before {content: $day-cloudy-gusts;}\A 4: .wi-day-cloudy-windy:before {content: $day-cloudy-windy;}\A 5: .wi-day-fog:before {content: $day-fog;}\A 6: .wi-day-hail:before {content: $day-hail;}';
+}

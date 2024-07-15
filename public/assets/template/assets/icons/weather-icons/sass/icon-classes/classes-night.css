@@ -64,4 +64,5 @@ C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-listen-4.0.0/lib/sass-listen/interna
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$night-clear\".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-night.scss\A \A 1: .wi-night-clear:before {content: $night-clear;}\A 2: .wi-night-alt-cloudy:before {content: $night-alt-cloudy;}\A 3: .wi-night-alt-cloudy-gusts:before {content: $night-alt-cloudy-gusts;}\A 4: .wi-night-alt-cloudy-windy:before {content: $night-alt-cloudy-windy;}\A 5: .wi-night-alt-hail:before {content: $night-alt-hail;}\A 6: .wi-night-alt-lightning:before {content: $night-alt-lightning;}"; }
+  content: 'Error: Undefined variable: "$night-clear".\A         on line 1 of scss/icons/weather-icons/sass/icon-classes/classes-night.scss\A \A 1: .wi-night-clear:before {content: $night-clear;}\A 2: .wi-night-alt-cloudy:before {content: $night-alt-cloudy;}\A 3: .wi-night-alt-cloudy-gusts:before {content: $night-alt-cloudy-gusts;}\A 4: .wi-night-alt-cloudy-windy:before {content: $night-alt-cloudy-windy;}\A 5: .wi-night-alt-hail:before {content: $night-alt-hail;}\A 6: .wi-night-alt-lightning:before {content: $night-alt-lightning;}';
+}

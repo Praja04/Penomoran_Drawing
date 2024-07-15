@@ -1,108 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link href="../reset.css" rel="stylesheet"/>
-        <link href="./style.css" rel="stylesheet"/>
+    <link href="../reset.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
 
-        <title>MixItUp Demo - Checkboxes with Reset Checkbox</title>
-    </head>
-    <body>
-        <div class="controls">
-            <div class="checkbox-group">
-                <div class="checkbox">
-                    <label class="checkbox-label">All</label>
-                    <input type="checkbox" value="all" checked/>
-                </div>
-
-                <div class="checkbox">
-                    <label class="checkbox-label">Green</label>
-                    <input type="checkbox" value=".green"/>
-                </div>
-
-                <div class="checkbox">
-                    <label class="checkbox-label">Blue</label>
-                    <input type="checkbox" value=".blue"/>
-                </div>
-
-                <div class="checkbox">
-                    <label class="checkbox-label">Pink</label>
-                    <input type="checkbox" value=".pink"/>
-                </div>
-            </div>
-
-            <button type="button" class="control" data-sort="default:asc">Asc</button>
-            <button type="button" class="control" data-sort="default:desc">Desc</button>
+    <title>MixItUp Demo - Checkboxes with Reset Checkbox</title>
+  </head>
+  <body>
+    <div class="controls">
+      <div class="checkbox-group">
+        <div class="checkbox">
+          <label class="checkbox-label">All</label>
+          <input type="checkbox" value="all" checked />
         </div>
 
-        <div class="container">
-            <div class="mix green"></div>
-            <div class="mix green"></div>
-            <div class="mix blue"></div>
-            <div class="mix pink"></div>
-            <div class="mix green"></div>
-            <div class="mix blue"></div>
-            <div class="mix pink"></div>
-            <div class="mix blue"></div>
-
-            <div class="gap"></div>
-            <div class="gap"></div>
-            <div class="gap"></div>
+        <div class="checkbox">
+          <label class="checkbox-label">Green</label>
+          <input type="checkbox" value=".green" />
         </div>
 
-        <script src="../mixitup.min.js"></script>
+        <div class="checkbox">
+          <label class="checkbox-label">Blue</label>
+          <input type="checkbox" value=".blue" />
+        </div>
 
-        <script>
-            // In this example, we must bind a 'change' event handler to
-            // our checkboxes, then interact with the mixer via
-            // its .filter() API methods.
+        <div class="checkbox">
+          <label class="checkbox-label">Pink</label>
+          <input type="checkbox" value=".pink" />
+        </div>
+      </div>
 
-            var containerEl = document.querySelector('.container');
-            var checkboxGroup = document.querySelector('.checkbox-group');
-            var checkboxes = checkboxGroup.querySelectorAll('input[type="checkbox"]');
-            var allCheckbox = checkboxGroup.querySelector('input[value="all"]');
+      <button type="button" class="control" data-sort="default:asc">Asc</button>
+      <button type="button" class="control" data-sort="default:desc">
+        Desc
+      </button>
+    </div>
 
-            var mixer = mixitup(containerEl);
+    <div class="container">
+      <div class="mix green"></div>
+      <div class="mix green"></div>
+      <div class="mix blue"></div>
+      <div class="mix pink"></div>
+      <div class="mix green"></div>
+      <div class="mix blue"></div>
+      <div class="mix pink"></div>
+      <div class="mix blue"></div>
 
-            checkboxGroup.addEventListener('change', function(e) {
-                var selectors = [];
-                var checkbox;
-                var i;
+      <div class="gap"></div>
+      <div class="gap"></div>
+      <div class="gap"></div>
+    </div>
 
-                if (e.target === allCheckbox && e.target.checked) {
-                    // If the "all" checkbox was checked, uncheck all other checkboxes
+    <script src="../mixitup.min.js"></script>
 
-                    for (i = 0; i < checkboxes.length; i++) {
-                        checkbox = checkboxes[i];
+    <script>
+      // In this example, we must bind a 'change' event handler to
+      // our checkboxes, then interact with the mixer via
+      // its .filter() API methods.
 
-                        if (checkbox !== allCheckbox) checkbox.checked = false;
-                    }
-                } else {
-                    // Another checkbox was changed, uncheck "all".
+      var containerEl = document.querySelector(".container");
+      var checkboxGroup = document.querySelector(".checkbox-group");
+      var checkboxes = checkboxGroup.querySelectorAll('input[type="checkbox"]');
+      var allCheckbox = checkboxGroup.querySelector('input[value="all"]');
 
-                    allCheckbox.checked = false;
-                }
+      var mixer = mixitup(containerEl);
 
-                // Iterate through all checkboxes, pushing the
-                // values of those that are checked into an array
+      checkboxGroup.addEventListener("change", function (e) {
+        var selectors = [];
+        var checkbox;
+        var i;
 
-                for (i = 0; i < checkboxes.length; i++) {
-                    checkbox = checkboxes[i];
+        if (e.target === allCheckbox && e.target.checked) {
+          // If the "all" checkbox was checked, uncheck all other checkboxes
 
-                    if (checkbox.checked) selectors.push(checkbox.value);
-                }
+          for (i = 0; i < checkboxes.length; i++) {
+            checkbox = checkboxes[i];
 
-                // If there are values in the array, join it into a string
-                // using your desired logic, and send to the mixer's .filter()
-                // method, otherwise filter by 'all'
+            if (checkbox !== allCheckbox) checkbox.checked = false;
+          }
+        } else {
+          // Another checkbox was changed, uncheck "all".
 
-                var selectorString = selectors.length > 0 ?
-                    selectors.join(',') : // or '.' for AND logic
-                    'all';
+          allCheckbox.checked = false;
+        }
 
-                mixer.filter(selectorString);
-            });
-        </script>
-    </body>
+        // Iterate through all checkboxes, pushing the
+        // values of those that are checked into an array
+
+        for (i = 0; i < checkboxes.length; i++) {
+          checkbox = checkboxes[i];
+
+          if (checkbox.checked) selectors.push(checkbox.value);
+        }
+
+        // If there are values in the array, join it into a string
+        // using your desired logic, and send to the mixer's .filter()
+        // method, otherwise filter by 'all'
+
+        var selectorString =
+          selectors.length > 0
+            ? selectors.join(",") // or '.' for AND logic
+            : "all";
+
+        mixer.filter(selectorString);
+      });
+    </script>
+  </body>
 </html>

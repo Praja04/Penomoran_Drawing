@@ -25,10 +25,12 @@
     "email": "rendro87@gmail.com",
     "url": "http://robert-fleischmann.de"
   },
-  "contributors": [{
-    "name": "Moritz",
-    "url": "https://github.com/mrzmyr"
-  }],
+  "contributors": [
+    {
+      "name": "Moritz",
+      "url": "https://github.com/mrzmyr"
+    }
+  ],
   "scripts": {
     "test": "grunt karma:ci"
   },

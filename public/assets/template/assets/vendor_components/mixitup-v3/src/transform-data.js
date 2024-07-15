@@ -7,17 +7,17 @@
  * @since       3.0.0
  */
 
-mixitup.TransformData = function() {
-    mixitup.Base.call(this);
+mixitup.TransformData = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    this.value  = 0;
-    this.unit   = '';
+  this.value = 0;
+  this.unit = "";
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.TransformData);

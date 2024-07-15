@@ -23,7 +23,6 @@
   }
 
   @media (min-width: 768px) {
-
     .navbar-nav > li > .dropdown-menu:before {
       position: absolute;
       top: -21px;
@@ -44,10 +43,10 @@
       display: block;
       width: 0;
       height: 0;
-      border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #FFF;
+      border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #fff;
       border-style: solid;
       border-width: 10px;
-      content: '';
+      content: "";
     }
 
     .navbar-nav .dropdown-menu {

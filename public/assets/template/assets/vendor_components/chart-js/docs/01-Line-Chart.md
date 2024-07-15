@@ -2,6 +2,7 @@
 title: Line Chart
 anchor: line-chart
 ---
+
 ###Introduction
 A line chart is a way of plotting data points on a line.
 
@@ -12,36 +13,38 @@ Often, it is used to show trend data, and the comparison of two data sets.
 </div>
 
 ###Example usage
+
 ```javascript
 var myLineChart = new Chart(ctx).Line(data, options);
 ```
+
 ###Data structure
 
 ```javascript
 var data = {
-	labels: ["January", "February", "March", "April", "May", "June", "July"],
-	datasets: [
-		{
-			label: "My First dataset",
-			fillColor: "rgba(220,220,220,0.2)",
-			strokeColor: "rgba(220,220,220,1)",
-			pointColor: "rgba(220,220,220,1)",
-			pointStrokeColor: "#fff",
-			pointHighlightFill: "#fff",
-			pointHighlightStroke: "rgba(220,220,220,1)",
-			data: [65, 59, 80, 81, 56, 55, 40]
-		},
-		{
-			label: "My Second dataset",
-			fillColor: "rgba(151,187,205,0.2)",
-			strokeColor: "rgba(151,187,205,1)",
-			pointColor: "rgba(151,187,205,1)",
-			pointStrokeColor: "#fff",
-			pointHighlightFill: "#fff",
-			pointHighlightStroke: "rgba(151,187,205,1)",
-			data: [28, 48, 40, 19, 86, 27, 90]
-		}
-	]
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+    {
+      label: "My First dataset",
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data: [65, 59, 80, 81, 56, 55, 40],
+    },
+    {
+      label: "My Second dataset",
+      fillColor: "rgba(151,187,205,0.2)",
+      strokeColor: "rgba(151,187,205,1)",
+      pointColor: "rgba(151,187,205,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(151,187,205,1)",
+      data: [28, 48, 40, 19, 86, 27, 90],
+    },
+  ],
 };
 ```
 
@@ -111,14 +114,13 @@ For example, we could have a line chart without bezier curves between points by 
 
 ```javascript
 new Chart(ctx).Line(data, {
-	bezierCurve: false
+  bezierCurve: false,
 });
 // This will create a chart with all of the default options, merged from the global config,
 // and the Line chart defaults, but this particular instance will have `bezierCurve` set to false.
 ```
 
 We can also change these defaults values for each Line type that is created, this object is available at `Chart.defaults.Line`.
-
 
 ### Prototype methods
 
@@ -127,9 +129,9 @@ We can also change these defaults values for each Line type that is created, thi
 Calling `getPointsAtEvent(event)` on your Chart instance passing an argument of an event, or jQuery event, will return the point elements that are at that the same position of that event.
 
 ```javascript
-canvas.onclick = function(evt){
-	var activePoints = myLineChart.getPointsAtEvent(evt);
-	// => activePoints is an array of points on the canvas that are at the same position as the click event.
+canvas.onclick = function (evt) {
+  var activePoints = myLineChart.getPointsAtEvent(evt);
+  // => activePoints is an array of points on the canvas that are at the same position as the click event.
 };
 ```
 

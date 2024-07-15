@@ -21,7 +21,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="col-12 col-lg-4">
-                                                    <img src="<?php base_url() ?>\assets\images\custom-15.svg" alt="" />
+                                                    <img src="<?php base_url() ?>assets\images\custom-15.svg" alt="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -71,7 +71,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Sub Proses</label>
                                                                 <select class="form-select" id="filter-select3" style="width: 100px; align-items:right">
-
+                                                                    <option value="">Semua</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -79,7 +79,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Type Sub Proses</label>
                                                                 <select class="form-select" id="filter-select4" style="width: 100px; align-items:right">
-
+                                                                    <option value="">Semua</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -155,7 +155,7 @@
         <!-- /.content -->
     </div>
 </div>
-<script src="<?php base_url() ?>/assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+<script src="<?php base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         handleProsesChange();

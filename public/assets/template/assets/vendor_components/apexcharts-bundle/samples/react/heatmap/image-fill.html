@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,65 +9,62 @@
     <link href="../../assets/styles.css" rel="stylesheet" />
 
     <style>
-      
-        #chart {
-      max-width: 650px;
-      margin: 35px auto;
-    }
-      
+      #chart {
+        max-width: 650px;
+        margin: 35px auto;
+      }
     </style>
 
     <script>
       window.Promise ||
         document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
-        )
+          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>',
+        );
       window.Promise ||
         document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
-        )
+          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>',
+        );
       window.Promise ||
         document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
-        )
+          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>',
+        );
     </script>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/react@16.12/umd/react.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-dom@16.12/umd/react-dom.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prop-types@15.7.2/prop-types.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-apexcharts@1.3.6/dist/react-apexcharts.iife.min.js"></script>
-    
 
     <script>
-  function generateData(count, yrange) {
-    var i = 0;
-    var series = [];
-    while (i < count) {
-      var x = 'round' + (i + 1).toString();
-      var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-  
-      series.push({
-        x: x,
-        y: y
-      });
-      i++;
-    }
-    return series;
-  }
-  </script>
+      function generateData(count, yrange) {
+        var i = 0;
+        var series = [];
+        while (i < count) {
+          var x = "round" + (i + 1).toString();
+          var y =
+            Math.floor(Math.random() * (yrange.max - yrange.min + 1)) +
+            yrange.min;
+
+          series.push({
+            x: x,
+            y: y,
+          });
+          i++;
+        }
+        return series;
+      }
+    </script>
   </head>
 
   <body>
-    
     <div id="app"></div>
 
     <div id="html">
-      &lt;div id=&quot;chart&quot;&gt;
-  &lt;ReactApexChart options={this.state.options} series={this.state.series} type=&quot;heatmap&quot; height={360} /&gt;
-&lt;/div&gt;
+      &lt;div id=&quot;chart&quot;&gt; &lt;ReactApexChart
+      options={this.state.options} series={this.state.series}
+      type=&quot;heatmap&quot; height={360} /&gt; &lt;/div&gt;
     </div>
 
     <script type="text/babel">
@@ -76,89 +73,89 @@
           super(props);
 
           this.state = {
-          
             series: [
               {
-                name: 'Oliver',
+                name: "Oliver",
                 data: generateData(15, {
                   min: 0,
-                  max: 90
-                })
+                  max: 90,
+                }),
               },
               {
-                name: 'Harry',
+                name: "Harry",
                 data: generateData(15, {
                   min: 0,
-                  max: 90
-                })
+                  max: 90,
+                }),
               },
               {
-                name: 'Thomas',
+                name: "Thomas",
                 data: generateData(15, {
                   min: 0,
-                  max: 90
-                })
+                  max: 90,
+                }),
               },
               {
-                name: 'Callum',
+                name: "Callum",
                 data: generateData(15, {
                   min: 0,
-                  max: 90
-                })
+                  max: 90,
+                }),
               },
               {
-                name: 'Ethan',
+                name: "Ethan",
                 data: generateData(15, {
                   min: 0,
-                  max: 90
-                })
+                  max: 90,
+                }),
               },
               {
-                name: 'Richard',
+                name: "Richard",
                 data: generateData(15, {
                   min: 0,
-                  max: 90
-                })
+                  max: 90,
+                }),
               },
               {
-                name: 'David',
+                name: "David",
                 data: generateData(15, {
                   min: 0,
-                  max: 90
-                })
-              }
+                  max: 90,
+                }),
+              },
             ],
             options: {
               chart: {
                 height: 360,
-                type: 'heatmap',
+                type: "heatmap",
               },
               dataLabels: {
-                enabled: false
+                enabled: false,
               },
               colors: ["#008FFB"],
               title: {
-                text: 'HeatMap Chart with image fill'
+                text: "HeatMap Chart with image fill",
               },
               fill: {
-                type: 'image',
+                type: "image",
                 image: {
-                  src: '../../assets/images/ico-instagram.png',
-                }
-              }
+                  src: "../../assets/images/ico-instagram.png",
+                },
+              },
             },
-          
-          
           };
         }
-
-      
 
         render() {
           return (
             <div>
               <div id="chart">
-                <ReactApexChart options={this.state.options} series={this.state.series} type="heatmap" height={360} />
+                <ReactApexChart
+                  options={this.state.options}
+                  series={this.state.series}
+                  type="heatmap"
+                  height={360}
+                />
               </div>
               <div id="html-dist"></div>
             </div>
@@ -166,10 +163,8 @@
         }
       }
 
-      const domContainer = document.querySelector('#app');
+      const domContainer = document.querySelector("#app");
       ReactDOM.render(React.createElement(ApexChart), domContainer);
     </script>
-
-    
   </body>
 </html>

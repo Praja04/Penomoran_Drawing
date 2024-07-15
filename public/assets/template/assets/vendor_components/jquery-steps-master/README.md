@@ -1,5 +1,4 @@
-jQuery Steps Plugin [![Build Status](https://travis-ci.org/rstaib/jquery-steps.svg?branch=master)](https://travis-ci.org/rstaib/jquery-steps) [![Bower version](https://badge.fury.io/bo/jquery.steps.svg)](http://badge.fury.io/bo/jquery.steps) [![NuGet version](https://badge.fury.io/nu/jquery.steps.svg)](http://badge.fury.io/nu/jquery.steps)
-============
+# jQuery Steps Plugin [![Build Status](https://travis-ci.org/rstaib/jquery-steps.svg?branch=master)](https://travis-ci.org/rstaib/jquery-steps) [![Bower version](https://badge.fury.io/bo/jquery.steps.svg)](http://badge.fury.io/bo/jquery.steps) [![NuGet version](https://badge.fury.io/nu/jquery.steps.svg)](http://badge.fury.io/nu/jquery.steps)
 
 A powerful jQuery wizard plugin that supports accessibility and HTML5.
 
@@ -13,21 +12,21 @@ Everything you need to start is:
 2. Then select an element represents the wizard and call the `steps` method.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title>Demo</title>
-        <meta charset="utf-8">
-        <script src="jquery.js"></script> 
-        <script src="jquery.steps.js"></script>
-        <link href="jquery.steps.css" rel="stylesheet">
-    </head>
-    <body>
-        <script>
-            $("#wizard").steps();
-        </script>
-        <div id="wizard"></div>
-    </body>
+  <head>
+    <title>Demo</title>
+    <meta charset="utf-8" />
+    <script src="jquery.js"></script>
+    <script src="jquery.steps.js"></script>
+    <link href="jquery.steps.css" rel="stylesheet" />
+  </head>
+  <body>
+    <script>
+      $("#wizard").steps();
+    </script>
+    <div id="wizard"></div>
+  </body>
 </html>
 ```
 
@@ -41,11 +40,11 @@ There are two ways to add steps and their corresponding content.
 
 ```html
 <div id="wizard">
-    <h1>First Step</h1>
-    <div>First Content</div>
+  <h1>First Step</h1>
+  <div>First Content</div>
 
-    <h1>Second Step</h1>
-    <div>Second Content</div>
+  <h1>Second Step</h1>
+  <div>Second Content</div>
 </div>
 ```
 
@@ -57,8 +56,8 @@ var wizard = $("#wizard").steps();
 
 // Add step
 wizard.steps("add", {
-    title: "HTML code", 
-    content: "<strong>HTML code</strong>"
+  title: "HTML code",
+  content: "<strong>HTML code</strong>",
 });
 ```
 

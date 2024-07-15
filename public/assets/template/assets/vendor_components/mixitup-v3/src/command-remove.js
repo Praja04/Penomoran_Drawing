@@ -9,17 +9,17 @@
  * @since       3.0.0
  */
 
-mixitup.CommandRemove = function() {
-    mixitup.Base.call(this);
+mixitup.CommandRemove = function () {
+  mixitup.Base.call(this);
 
-    this.callActions('beforeConstruct');
+  this.callActions("beforeConstruct");
 
-    this.targets    = [];
-    this.collection = [];
+  this.targets = [];
+  this.collection = [];
 
-    this.callActions('afterConstruct');
+  this.callActions("afterConstruct");
 
-    h.seal(this);
+  h.seal(this);
 };
 
 mixitup.BaseStatic.call(mixitup.CommandRemove);

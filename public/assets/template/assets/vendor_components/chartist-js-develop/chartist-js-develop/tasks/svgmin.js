@@ -7,7 +7,7 @@
  * Link: https://github.com/sindresorhus/grunt-svgmin
  */
 
-'use strict';
+"use strict";
 
 module.exports = function (grunt) {
   return {
@@ -15,18 +15,18 @@ module.exports = function (grunt) {
       files: [
         {
           expand: true,
-          cwd: '<%= pkg.config.site %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= pkg.config.public %>/images'
-        }
+          cwd: "<%= pkg.config.site %>/images",
+          src: "{,*/}*.svg",
+          dest: "<%= pkg.config.public %>/images",
+        },
       ],
       options: {
         plugins: [
           { removeEmptyContainers: true },
           { cleanupIDs: false },
-          { removeUnknownsAndDefaults: false }
-        ]
-      }
-    }
+          { removeUnknownsAndDefaults: false },
+        ],
+      },
+    },
   };
 };

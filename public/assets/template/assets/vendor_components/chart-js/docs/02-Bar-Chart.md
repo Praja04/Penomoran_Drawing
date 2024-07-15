@@ -4,6 +4,7 @@ anchor: bar-chart
 ---
 
 ### Introduction
+
 A bar chart is a way of showing data as bars.
 
 It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
@@ -13,6 +14,7 @@ It is sometimes used to show trend data, and the comparison of multiple data set
 </div>
 
 ### Example usage
+
 ```javascript
 var myBarChart = new Chart(ctx).Bar(data, options);
 ```
@@ -21,27 +23,28 @@ var myBarChart = new Chart(ctx).Bar(data, options);
 
 ```javascript
 var data = {
-	labels: ["January", "February", "March", "April", "May", "June", "July"],
-	datasets: [
-		{
-			label: "My First dataset",
-			fillColor: "rgba(220,220,220,0.5)",
-			strokeColor: "rgba(220,220,220,0.8)",
-			highlightFill: "rgba(220,220,220,0.75)",
-			highlightStroke: "rgba(220,220,220,1)",
-			data: [65, 59, 80, 81, 56, 55, 40]
-		},
-		{
-			label: "My Second dataset",
-			fillColor: "rgba(151,187,205,0.5)",
-			strokeColor: "rgba(151,187,205,0.8)",
-			highlightFill: "rgba(151,187,205,0.75)",
-			highlightStroke: "rgba(151,187,205,1)",
-			data: [28, 48, 40, 19, 86, 27, 90]
-		}
-	]
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+    {
+      label: "My First dataset",
+      fillColor: "rgba(220,220,220,0.5)",
+      strokeColor: "rgba(220,220,220,0.8)",
+      highlightFill: "rgba(220,220,220,0.75)",
+      highlightStroke: "rgba(220,220,220,1)",
+      data: [65, 59, 80, 81, 56, 55, 40],
+    },
+    {
+      label: "My Second dataset",
+      fillColor: "rgba(151,187,205,0.5)",
+      strokeColor: "rgba(151,187,205,0.8)",
+      highlightFill: "rgba(151,187,205,0.75)",
+      highlightStroke: "rgba(151,187,205,1)",
+      data: [28, 48, 40, 19, 86, 27, 90],
+    },
+  ],
 };
 ```
+
 The bar chart has the a very similar data structure to the line chart, and has an array of datasets, each with colours and an array of data. Again, colours are in CSS format.
 We have an array of labels too for display. In the example, we are showing the same data as the previous line chart example.
 
@@ -95,7 +98,7 @@ For example, we could have a bar chart without a stroke on each bar by doing the
 
 ```javascript
 new Chart(ctx).Bar(data, {
-	barShowStroke: false
+  barShowStroke: false,
 });
 // This will create a chart with all of the default options, merged from the global config,
 //  and the Bar chart defaults but this particular instance will have `barShowStroke` set to false.
@@ -110,9 +113,9 @@ We can also change these defaults values for each Bar type that is created, this
 Calling `getBarsAtEvent(event)` on your Chart instance passing an argument of an event, or jQuery event, will return the bar elements that are at that the same position of that event.
 
 ```javascript
-canvas.onclick = function(evt){
-	var activeBars = myBarChart.getBarsAtEvent(evt);
-	// => activeBars is an array of bars on the canvas that are at the same position as the click event.
+canvas.onclick = function (evt) {
+  var activeBars = myBarChart.getBarsAtEvent(evt);
+  // => activeBars is an array of bars on the canvas that are at the same position as the click event.
 };
 ```
 

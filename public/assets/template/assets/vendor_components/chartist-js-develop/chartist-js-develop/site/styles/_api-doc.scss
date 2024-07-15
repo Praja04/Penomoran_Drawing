@@ -13,7 +13,6 @@
       width: calc(100% + 20px);
       margin: 0 -10px;
 
-
       @media #{$medium-up} {
         position: absolute;
         width: auto;
@@ -38,7 +37,7 @@
   }
 
   .member-title {
-    background: #453D3F;
+    background: #453d3f;
     padding: 10px;
     margin: -10px -10px 0 -10px;
     color: lighten($color-white, 10%);
@@ -58,7 +57,6 @@
   }
 
   .param-type {
-
     > code {
       background-color: rgba(255, 255, 255, 0.2);
       padding: 0.1em 0.2em;
