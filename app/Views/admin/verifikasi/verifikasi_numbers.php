@@ -127,14 +127,15 @@
  </div>
  <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
  <script>
+     // Define baseUrl outside the document ready function
+     const baseUrl = "<?= base_url() ?>";
+
      $(document).ready(function() {
          $('.btn-pdf-modal').on('click', function() {
              var pdfUrl = $(this).data('pdf');
              $('#pdfViewer').attr('src', pdfUrl);
              $('#pdfModal').modal('show');
          });
-
-
 
          $('#example125').DataTable({
              "paging": true,
@@ -148,13 +149,13 @@
 
      function ubahHasilVerifikasi(idpdf) {
          $.ajax({
-             url: '<?php echo base_url('admin/updateHasilVerifikasi/') ?>' + idpdf,
+             url: baseUrl + 'admin/updateHasilVerifikasi/' + idpdf,
              type: 'POST',
              success: function(response) {
                  if (response.success === true) {
                      showModal('Berhasil Verifikasi');
                      setTimeout(function() {
-                         window.location.href = '/verifikasi';
+                         window.location.href = baseUrl + 'verifikasi';
                      }, 4000);
                  } else {
                      showModal('Gagal mengubah hasil verifikasi!');
@@ -166,16 +167,15 @@
          });
      }
 
-
      function ubahHasilVerifikasi2(idpdf) {
          $.ajax({
-             url: '<?php echo base_url('admin/updateHasilVerifikasi2/') ?>' + idpdf,
+             url: baseUrl + 'admin/updateHasilVerifikasi2/' + idpdf,
              type: 'POST',
              success: function(response) {
                  if (response.success === true) {
                      showModal('Berhasil Verifikasi');
                      setTimeout(function() {
-                         window.location.href = '/verifikasi';
+                         window.location.href = baseUrl + 'verifikasi';
                      }, 4000);
                  } else {
                      showModal('Gagal mengubah hasil verifikasi!');

@@ -141,9 +141,11 @@
  <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 
  <script>
+     const baseUrl = "<?= base_url() ?>";
      $(document).ready(function() {
-         handleProsesChange();
-         handleItemChange();
+
+         handleProsesChange(baseUrl);
+         handleItemChange(baseUrl);
 
          // Event listener untuk setiap perubahan pada dropdown
          $('#filter-select, #filter-select2, #filter-select3, #filter-select4').change(function() {
@@ -168,7 +170,7 @@
              "ordering": true,
              "info": true,
              "autoWidth": false
-         });;
+         });
      });
 
      function filterTable() {
@@ -202,22 +204,20 @@
          });
      }
 
-
-
-     function handleProsesChange() {
+     function handleProsesChange(baseUrl) {
          $('#filter-select2').on('change', function() {
              const proses = $(this).find('option:selected');
              var selected_sub = proses.data('proses');
-             updateSubProses(selected_sub);
+             updateSubProses(baseUrl, selected_sub);
              console.log($('#nama_file').val());
          });
      }
 
-     function updateSubProses(selected_sub) {
+     function updateSubProses(baseUrl, selected_sub) {
          if (!selected_sub) return;
 
          $.ajax({
-             url: '/sub/proses',
+             url: baseUrl + '/sub/proses',
              type: 'GET',
              data: {
                  proses: selected_sub
@@ -236,7 +236,7 @@
                      const option = $('<option></option>')
                          .val(item.jenis_sub_proses)
                          .text(item.jenis_sub_proses)
-                         .data('no_subProses', item.no_sub_proses)
+                         .data('no_subProses', item.no_sub_proses);
                      sub_proses.append(option);
                  });
              },
@@ -246,25 +246,25 @@
          });
      }
 
-     function handleItemChange() {
+     function handleItemChange(baseUrl) {
          $('#filter-select3').on('change', function() {
              var selectedOption2 = $(this).find('option:selected');
              var selectedOption = $('#filter-select2').find('option:selected');
              var data = selectedOption.data('proses');
              var selected_type = selectedOption2.val();
              if (selected_type == 'Connector' || selected_type == 'Pole' || selected_type == 'Bushing') {
-                 updateTypeProses2(selected_type);
+                 updateTypeProses2(baseUrl, selected_type);
              } else {
-                 updateTypeProses(data);
+                 updateTypeProses(baseUrl, data);
              }
          });
      }
 
-     function updateTypeProses(selected_type) {
+     function updateTypeProses(baseUrl, selected_type) {
          if (!selected_type) return;
 
          $.ajax({
-             url: 'type/sub',
+             url: baseUrl + 'type/sub',
              type: 'GET',
              data: {
                  typesub: selected_type
@@ -283,7 +283,7 @@
                      const option = $('<option></option>')
                          .val(item.type_sub_proses)
                          .text(item.type_sub_proses)
-                         .data('no_type', item.no_type)
+                         .data('no_type', item.no_type);
                      type_sub.append(option);
                  });
              },
@@ -293,11 +293,11 @@
          });
      }
 
-     function updateTypeProses2(selected_type) {
+     function updateTypeProses2(baseUrl, selected_type) {
          if (!selected_type) return;
 
          $.ajax({
-             url: 'type/sub2',
+             url: baseUrl + 'type/sub2',
              type: 'GET',
              data: {
                  subProses: selected_type
@@ -316,7 +316,7 @@
                      const option = $('<option></option>')
                          .val(item.type_sub_proses)
                          .text(item.type_sub_proses)
-                         .data('no_type', item.no_type)
+                         .data('no_type', item.no_type);
                      type_sub.append(option);
                  });
              },

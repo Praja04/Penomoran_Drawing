@@ -160,7 +160,10 @@
 </div>
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
+    const baseUrl = "<?= base_url() ?>";
     $(document).ready(function() {
+
+
         handleProsesChange();
         handleItemChange();
 
@@ -173,23 +176,159 @@
         $('#reset-button').click(function() {
             resetFilters();
         });
+
         $('.btn-pdf-modal').on('click', function() {
             var pdfUrl = $(this).data('pdf');
             $('#pdfViewer').attr('src', pdfUrl);
             $('#pdfModal').modal('show');
         });
 
-
-
         $('#example122').DataTable({
-            "paging": true, // Mengaktifkan pagination
-            "lengthChange": true, // Mengaktifkan opsi untuk mengubah jumlah baris yang ditampilkan
-            "searching": true, // Mengaktifkan pencarian
-            "ordering": true, // Mengaktifkan pengurutan
-            "info": true, // Mengaktifkan informasi footer
-            "autoWidth": false // Menonaktifkan pengaturan otomatis lebar kolom
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
         });
+
+
+
+
     });
+
+    function handleProsesChange() {
+        $('#filter-select2').on('change', function() {
+            const proses = $(this).find('option:selected');
+            var selected_sub = proses.data('proses');
+            updateSubProses(selected_sub);
+            console.log($('#nama_file').val());
+        });
+    }
+
+    function updateSubProses(selected_sub) {
+        if (!selected_sub) return;
+
+        $.ajax({
+            url: baseUrl + 'sub/proses',
+            type: 'GET',
+            data: {
+                proses: selected_sub
+            },
+            success: function(response) {
+                console.log(response);
+                const sub_proses = $('#filter-select3');
+                sub_proses.empty();
+                sub_proses.append('<option value="">Semua</option>');
+                if (response.error) {
+                    console.error(response.error);
+                    return;
+                }
+
+                response.forEach(function(item) {
+                    const option = $('<option></option>')
+                        .val(item.jenis_sub_proses)
+                        .text(item.jenis_sub_proses)
+                        .data('no_subProses', item.no_sub_proses);
+                    sub_proses.append(option);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error in AJAX request:', status, error);
+            }
+        });
+    }
+
+    function updateTypeProses(selected_type) {
+        if (!selected_type) return;
+
+        $.ajax({
+            url: baseUrl + 'type/sub',
+            type: 'GET',
+            data: {
+                typesub: selected_type
+            },
+            success: function(response) {
+                console.log(response);
+                const type_sub = $('#filter-select4');
+                type_sub.empty();
+                type_sub.append('<option value="">Semua</option>');
+                if (response.error) {
+                    console.error(response.error);
+                    return;
+                }
+
+                response.forEach(function(item) {
+                    const option = $('<option></option>')
+                        .val(item.type_sub_proses)
+                        .text(item.type_sub_proses)
+                        .data('no_type', item.no_type);
+                    type_sub.append(option);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error in AJAX request:', status, error);
+            }
+        });
+    }
+
+    function updateTypeProses2(selected_type) {
+        if (!selected_type) return;
+
+        $.ajax({
+            url: baseUrl + 'type/sub2',
+            type: 'GET',
+            data: {
+                subProses: selected_type
+            },
+            success: function(response) {
+                console.log(response);
+                const type_sub = $('#filter-select4');
+                type_sub.empty();
+                type_sub.append('<option value="">Semua</option>');
+                if (response.error) {
+                    console.error(response.error);
+                    return;
+                }
+
+                response.forEach(function(item) {
+                    const option = $('<option></option>')
+                        .val(item.type_sub_proses)
+                        .text(item.type_sub_proses)
+                        .data('no_type', item.no_type);
+                    type_sub.append(option);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error in AJAX request:', status, error);
+            }
+        });
+    }
+
+    function handleItemChange() {
+        $('#filter-select3').on('change', function() {
+            var selectedOption2 = $(this).find('option:selected');
+            var selectedOption = $('#filter-select2').find('option:selected');
+            var data = selectedOption.data('proses');
+            var selected_type = selectedOption2.val();
+            if (selected_type == 'Connector' || selected_type == 'Pole' || selected_type == 'Bushing') {
+                updateTypeProses2(selected_type);
+            } else {
+                updateTypeProses(data);
+            }
+        });
+    }
+
+    function resetFilters() {
+        // Reset nilai semua dropdown ke default (value "")
+        $('#filter-select').val('');
+        $('#filter-select2').val('');
+        $('#filter-select3').val('');
+        $('#filter-select4').val('');
+
+        // Panggil filterTable untuk menampilkan semua baris
+        filterTable();
+    }
 
     function filterTable() {
         // Ambil nilai dari setiap filter
@@ -220,139 +359,6 @@
                 $(this).hide();
             }
         });
-    }
-
-    function handleProsesChange() {
-        $('#filter-select2').on('change', function() {
-            const proses = $(this).find('option:selected');
-            var selected_sub = proses.data('proses');
-            updateSubProses(selected_sub);
-            console.log($('#nama_file').val());
-        });
-    }
-
-    function updateSubProses(selected_sub) {
-        if (!selected_sub) return;
-
-        $.ajax({
-            url: '/sub/proses',
-            type: 'GET',
-            data: {
-                proses: selected_sub
-            },
-            success: function(response) {
-                console.log(response);
-                const sub_proses = $('#filter-select3');
-                sub_proses.empty();
-                sub_proses.append('<option value="">Semua</option>');
-                if (response.error) {
-                    console.error(response.error);
-                    return;
-                }
-
-                response.forEach(function(item) {
-                    const option = $('<option></option>')
-                        .val(item.jenis_sub_proses)
-                        .text(item.jenis_sub_proses)
-                        .data('no_subProses', item.no_sub_proses)
-                    sub_proses.append(option);
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error('Error in AJAX request:', status, error);
-            }
-        });
-    }
-
-    function handleItemChange() {
-        $('#filter-select3').on('change', function() {
-            var selectedOption2 = $(this).find('option:selected');
-            var selectedOption = $('#filter-select2').find('option:selected');
-            var data = selectedOption.data('proses');
-            var selected_type = selectedOption2.val();
-            if (selected_type == 'Connector' || selected_type == 'Pole' || selected_type == 'Bushing') {
-                updateTypeProses2(selected_type);
-            } else {
-                updateTypeProses(data);
-            }
-        });
-    }
-
-    function updateTypeProses(selected_type) {
-        if (!selected_type) return;
-
-        $.ajax({
-            url: 'type/sub',
-            type: 'GET',
-            data: {
-                typesub: selected_type
-            },
-            success: function(response) {
-                console.log(response);
-                const type_sub = $('#filter-select4');
-                type_sub.empty();
-                type_sub.append('<option value="">Semua</option>');
-                if (response.error) {
-                    console.error(response.error);
-                    return;
-                }
-
-                response.forEach(function(item) {
-                    const option = $('<option></option>')
-                        .val(item.type_sub_proses)
-                        .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
-                    type_sub.append(option);
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error('Error in AJAX request:', status, error);
-            }
-        });
-    }
-
-    function updateTypeProses2(selected_type) {
-        if (!selected_type) return;
-
-        $.ajax({
-            url: 'type/sub2',
-            type: 'GET',
-            data: {
-                subProses: selected_type
-            },
-            success: function(response) {
-                console.log(response);
-                const type_sub = $('#filter-select4');
-                type_sub.empty();
-                type_sub.append('<option value="">Semua</option>');
-                if (response.error) {
-                    console.error(response.error);
-                    return;
-                }
-
-                response.forEach(function(item) {
-                    const option = $('<option></option>')
-                        .val(item.type_sub_proses)
-                        .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
-                    type_sub.append(option);
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error('Error in AJAX request:', status, error);
-            }
-        });
-    }
-
-    function resetFilters() {
-        // Reset nilai semua dropdown ke default (value "")
-        $('#filter-select').val('');
-        $('#filter-select2').val('');
-        $('#filter-select3').val('');
-        $('#filter-select4').val('');
-
-        // Panggil filterTable untuk menampilkan semua baris
-        filterTable();
     }
 </script>
 

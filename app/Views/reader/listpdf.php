@@ -157,7 +157,10 @@
 </div>
 <script src="<?php base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
+    const baseUrl = "<?= base_url() ?>";
     $(document).ready(function() {
+
+
         handleProsesChange();
         handleItemChange();
 
@@ -201,7 +204,7 @@
             var produksi = $(this).find('td:nth-child(3)').text().toLowerCase(); // Kolom Produksi
             var proses = $(this).find('td:nth-child(4)').text().toLowerCase(); // Kolom Proses
             var proses3 = $(this).find('td:nth-child(4)').text().toLowerCase(); // Kolom Proses 3
-            var proses4 = $(this).find('td:nth-child(4)').text().toLowerCase(); // Kolom Proses 4
+            var proses4 = $(this).find('td:nth-child(4)').text().toLowerCase();
 
             // Inisialisasi variabel untuk mengecek apakah baris sesuai dengan filter
             var match1 = filter1 === "" || produksi.includes(filter1);
@@ -223,7 +226,7 @@
             const proses = $(this).find('option:selected');
             var selected_sub = proses.data('proses');
             updateSubProses(selected_sub);
-            console.log($('#nama_file').val());
+            // console.log($('#nama_file').val());
         });
     }
 
@@ -231,7 +234,7 @@
         if (!selected_sub) return;
 
         $.ajax({
-            url: '/sub/proses',
+            url: baseUrl + '/sub/proses',
             type: 'GET',
             data: {
                 proses: selected_sub
@@ -278,7 +281,7 @@
         if (!selected_type) return;
 
         $.ajax({
-            url: 'type/sub',
+            url: baseUrl + '/type/sub',
             type: 'GET',
             data: {
                 typesub: selected_type
@@ -311,7 +314,7 @@
         if (!selected_type) return;
 
         $.ajax({
-            url: 'type/sub2',
+            url: baseUrl + '/type/sub2',
             type: 'GET',
             data: {
                 subProses: selected_type
@@ -349,6 +352,18 @@
 
         // Panggil filterTable untuk menampilkan semua baris
         filterTable();
+    }
+
+    function showModal(message, callback) {
+        $('#modalMessage').text(message);
+        $('#alertModal').modal('show');
+
+        if (callback) {
+            $('#alertModal').on('hidden.bs.modal', function() {
+                callback();
+                $(this).off('hidden.bs.modal'); // Remove the callback to avoid multiple triggers
+            });
+        }
     }
 </script>
 

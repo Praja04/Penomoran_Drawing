@@ -61,7 +61,7 @@
             success: function(response) {
                 if (response.status === 'success') {
                     alert(response.message);
-                    window.location.href = '<?= base_url('/insert/pdf') ?>';
+                    window.location.href = '<?= base_url('insert/pdf') ?>';
                 } else {
                     alert(response.message);
                 }

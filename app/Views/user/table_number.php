@@ -166,6 +166,8 @@
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
+        const baseUrl = "<?= base_url() ?>";
+
         // Initialize DataTable with options
         var table = $('#example121').DataTable({
             "paging": true,
@@ -216,7 +218,7 @@
             var formData = new FormData(form);
 
             $.ajax({
-                url: '/pdfnumber/update', // Sesuaikan URL ini dengan endpoint Anda
+                url: baseUrl + 'pdfnumber/update',
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -252,5 +254,6 @@
         }
     });
 </script>
+
 
 <?= $this->endSection() ?>

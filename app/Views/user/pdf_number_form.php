@@ -154,15 +154,17 @@
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
-        initializeDocument();
+        const baseUrl = "<?= base_url() ?>";
+
+        initializeDocument(baseUrl);
     });
 
-    function initializeDocument() {
-        handleProsesChange();
-        handleItemChange();
+    function initializeDocument(baseUrl) {
+        handleProsesChange(baseUrl);
+        handleItemChange(baseUrl);
         handleNoMesinChange();
         $('#submitBtn').on('click', function() {
-            handleSubmit();
+            handleSubmit(baseUrl);
         });
     }
 
@@ -172,33 +174,31 @@
             const additionalInputContainer = $('#additional-input-container');
 
             if (selectedOption === 'M(N)') {
-                // Jika opsi 'M(N)' dipilih, tambahkan input baru
                 additionalInputContainer.html(`
-                <div class="form-group">
-                    <label class="form-label">Masukkan Nomor Mesin:</label>
-                    <input type="text" id="input_no_mesin" name="input_no_mesin" class="form-control" placeholder="Masukkan Nomor Mesin" required>
-                </div>
-            `);
+                    <div class="form-group">
+                        <label class="form-label">Masukkan Nomor Mesin:</label>
+                        <input type="text" id="input_no_mesin" name="input_no_mesin" class="form-control" placeholder="Masukkan Nomor Mesin" required>
+                    </div>
+                `);
             } else {
-                // Jika opsi lain dipilih, hapus input baru jika ada
                 additionalInputContainer.empty();
             }
         });
     }
 
-    function handleProsesChange() {
+    function handleProsesChange(baseUrl) {
         $('#group3').on('change', function() {
             const proses = $(this).find('option:selected');
             var selected_sub = proses.data('proses');
-            updateSubProses(selected_sub);
+            updateSubProses(baseUrl, selected_sub);
         });
     }
 
-    function updateSubProses(selected_sub) {
+    function updateSubProses(baseUrl, selected_sub) {
         if (!selected_sub) return;
 
         $.ajax({
-            url: '/sub/proses',
+            url: baseUrl + 'sub/proses',
             type: 'GET',
             data: {
                 proses: selected_sub
@@ -216,7 +216,7 @@
                     const option = $('<option></option>')
                         .val(item.jenis_sub_proses)
                         .text(item.jenis_sub_proses)
-                        .data('no_subProses', item.no_sub_proses)
+                        .data('no_subProses', item.no_sub_proses);
                     sub_proses.append(option);
                 });
 
@@ -227,25 +227,25 @@
         });
     }
 
-    function handleItemChange() {
+    function handleItemChange(baseUrl) {
         $('#sub_proses').on('change', function() {
             var selectedOption2 = $(this).find('option:selected');
             var selectedOption = $('#group3').find('option:selected');
             var data = selectedOption.data('proses');
             var selected_type = selectedOption2.val();
             if (selected_type == 'Connector' || selected_type == 'Pole' || selected_type == 'Bushing') {
-                updateTypeProses2(selected_type);
+                updateTypeProses2(baseUrl, selected_type);
             } else {
-                updateTypeProses(data);
+                updateTypeProses(baseUrl, data);
             }
         });
     }
 
-    function updateTypeProses(selected_type) {
+    function updateTypeProses(baseUrl, selected_type) {
         if (!selected_type) return;
 
         $.ajax({
-            url: 'type/sub',
+            url: baseUrl + 'type/sub',
             type: 'GET',
             data: {
                 typesub: selected_type
@@ -264,7 +264,7 @@
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
                         .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
+                        .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
 
@@ -275,11 +275,11 @@
         });
     }
 
-    function updateTypeProses2(selected_type) {
+    function updateTypeProses2(baseUrl, selected_type) {
         if (!selected_type) return;
 
         $.ajax({
-            url: 'type/sub2',
+            url: baseUrl + 'type/sub2',
             type: 'GET',
             data: {
                 subProses: selected_type
@@ -298,7 +298,7 @@
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
                         .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
+                        .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
 
@@ -309,7 +309,7 @@
         });
     }
 
-    function handleSubmit() {
+    function handleSubmit(baseUrl) {
         const inputs = $('#form1-content').find('input, select');
         let isValid = true;
 
@@ -323,11 +323,11 @@
         });
 
         if (isValid) {
-            submitData();
+            submitData(baseUrl);
         }
     }
 
-    function submitData() {
+    function submitData(baseUrl) {
         var formData = new FormData();
         formData.append('nama_file', $('#nama_file').val());
         //formData.append('nama_penulis', $('#penulis').val());
@@ -344,7 +344,7 @@
         formData.append('type_sub-string', $('#type_sub').val());
 
         $.ajax({
-            url: 'pdfnumber/generate',
+            url: baseUrl + 'pdfnumber/generate',
             type: 'POST',
             data: formData,
             processData: false,
@@ -352,7 +352,7 @@
             success: function(response) {
                 showModal(response.message, function() {
                     setTimeout(function() {
-                        window.location.href = '/insert/pdf';
+                        window.location.href = baseUrl + 'insert/pdf';
                     }, 4000);
                 });
             },
@@ -375,5 +375,6 @@
         }
     }
 </script>
+
 
 <?= $this->endSection() ?>

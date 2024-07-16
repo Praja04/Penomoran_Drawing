@@ -153,12 +153,16 @@
 </div>
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
+    const baseUrl = "<?= base_url() ?>";
     $(document).ready(function() {
+
+
         $('.btn-pdf-modal').on('click', function() {
             var pdfUrl = $(this).data('pdf');
             $('#pdfViewer').attr('src', pdfUrl);
             $('#pdfModal').modal('show');
         });
+
         handleProsesChange();
         handleItemChange();
 
@@ -172,15 +176,13 @@
             resetFilters();
         });
 
-
-
         $('#example122').DataTable({
-            "paging": true, // Mengaktifkan pagination
-            "lengthChange": true, // Mengaktifkan opsi untuk mengubah jumlah baris yang ditampilkan
-            "searching": true, // Mengaktifkan pencarian
-            "ordering": true, // Mengaktifkan pengurutan
-            "info": true, // Mengaktifkan informasi footer
-            "autoWidth": false // Menonaktifkan pengaturan otomatis lebar kolom
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
         });
     });
 
@@ -228,7 +230,7 @@
         if (!selected_sub) return;
 
         $.ajax({
-            url: '/sub/proses',
+            url: baseUrl + '/sub/proses',
             type: 'GET',
             data: {
                 proses: selected_sub
@@ -247,7 +249,7 @@
                     const option = $('<option></option>')
                         .val(item.jenis_sub_proses)
                         .text(item.jenis_sub_proses)
-                        .data('no_subProses', item.no_sub_proses)
+                        .data('no_subProses', item.no_sub_proses);
                     sub_proses.append(option);
                 });
             },
@@ -275,7 +277,7 @@
         if (!selected_type) return;
 
         $.ajax({
-            url: 'type/sub',
+            url: baseUrl + '/type/sub',
             type: 'GET',
             data: {
                 typesub: selected_type
@@ -294,7 +296,7 @@
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
                         .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
+                        .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
             },
@@ -308,7 +310,7 @@
         if (!selected_type) return;
 
         $.ajax({
-            url: 'type/sub2',
+            url: baseUrl + '/type/sub2',
             type: 'GET',
             data: {
                 subProses: selected_type
@@ -327,7 +329,7 @@
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
                         .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
+                        .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
             },

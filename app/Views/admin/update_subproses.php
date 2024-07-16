@@ -107,12 +107,30 @@
 
 
             </div>
+            <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="alertModalLabel">Notif</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modalMessage">
+                            <!-- Message will be inserted here -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 </div>
-<script src="../../assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
-<!-- <script src="../../assets/js/vendors.min.js" type="text/javascript"></script> -->
+<script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+
 <script>
+    const baseUrl = "<?= base_url() ?>";
+
     $(document).ready(function() {
         $('#example122').DataTable({
             "paging": true, // Mengaktifkan pagination
@@ -124,27 +142,42 @@
         });
 
         $('#submitBtn').on('click', function() {
-            submitData();
+            submitData(baseUrl);
         });
     });
 
-    function submitData() {
+    function submitData(baseUrl) {
         var formData = new FormData($('#updatesubproses')[0]);
 
         $.ajax({
-            url: '/update/sub_proses',
+            url: baseUrl + 'update/sub_proses',
             type: 'POST',
             data: formData,
             processData: false,
             contentType: false,
             success: function(response) {
-                alert(response.message);
-                window.location.reload();
+                showModal(response.message);
+                setTimeout(function() {
+                    window.location.reload();
+                }, 3000);
+
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);
             }
         });
+    }
+
+    function showModal(message, callback) {
+        $('#modalMessage').text(message);
+        $('#alertModal').modal('show');
+
+        if (callback) {
+            $('#alertModal').on('hidden.bs.modal', function() {
+                callback();
+                $(this).off('hidden.bs.modal'); // Remove the callback to avoid multiple triggers
+            });
+        }
     }
 </script>
 <?= $this->endSection() ?>

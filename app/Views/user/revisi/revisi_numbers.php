@@ -123,17 +123,7 @@
                                      <label class="form-label" for="nama_file">Nama File:</label>
                                      <input class="form-control" type="text" id="nama_file" name="nama_file" value="<?= esc($data[0]['nama_file']) ?>" required>
                                  </div>
-                                 <!-- <div class="form-group">
-                                     <label class="form-label">Nama Pembuat :</label>
-                                     <select class="form-select" name="nama_penulis" id="nama_penulis" required>
-                                         <option value="" disabled selected>Pilih Opsi</option>
-                                         <option value="Jajang">Jajang</option>
-                                         <option value="Usep">Usep</option>
-                                         <option value="Aman">Aman</option>
-                                         <option value="Suep">Suep</option>
-                                         <option value="Cecep">Cecep</option>
-                                     </select>
-                                 </div> -->
+                                
                                  <div class="form-group">
                                      <label class="form-label" for="pdf_path">Unggah PDF:</label>
                                      <input class="form-control" type="file" id="pdf_path" name="pdf_path" required>
@@ -188,6 +178,8 @@
  </div>
  <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
  <script>
+     const baseUrl = "<?= base_url() ?>";
+
      $(document).ready(function() {
          $('.btn-pdf-modal').on('click', function() {
              var pdfUrl = $(this).data('pdf');
@@ -195,10 +187,10 @@
              $('#pdfModal').modal('show');
          });
 
-
          $('#submitBtn').on('click', function() {
-             submitData();
+             submitData(baseUrl);
          });
+
          $('#example125').DataTable({
              "paging": true,
              "lengthChange": true,
@@ -209,11 +201,10 @@
          });
      });
 
-
-     function submitData() {
+     function submitData(baseUrl) {
          var formData = new FormData($('#revisionForm')[0]);
          $.ajax({
-             url: '<?= base_url('pdf/revise/' . $data[0]['id']) ?>',
+             url: baseUrl + 'pdf/revise/<?= $data[0]['id'] ?>',
              type: 'POST',
              data: formData,
              contentType: false,
@@ -221,8 +212,9 @@
              dataType: 'json',
              success: function(response) {
                  if (response.status === 'success') {
-                     showModal(response.message);
-                     window.location.reload();
+                     showModal(response.message, function() {
+                         window.location.reload();
+                     });
                  } else {
                      showModal(response.message);
                  }

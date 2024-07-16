@@ -194,8 +194,10 @@
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
-        handleProsesChange();
-        handleItemChange();
+        const baseUrl = "<?= base_url() ?>";
+
+        handleProsesChange(baseUrl);
+        handleItemChange(baseUrl);
 
         // Event listener untuk setiap perubahan pada dropdown
         $('#filter-select, #filter-select2, #filter-select3, #filter-select4').change(function() {
@@ -215,23 +217,23 @@
 
         // Tangkap event saat modal akan ditampilkan
         $('#modal-right').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Tombol yang memicu modal
-            var idpdf = button.data('id-pdf'); // Ekstrak informasi dari atribut data-*
-            var number = button.data('number'); // Ekstrak informasi dari atribut data-*
-            var string = button.data('string'); // Ekstrak informasi dari atribut data-*
+            var button = $(event.relatedTarget);
+            var idpdf = button.data('id-pdf');
+            var number = button.data('number');
+            var string = button.data('string');
             var modal = $(this);
-            modal.find('#id-pdf').val(idpdf); // Set nilai id_perbaikan di dalam form
-            modal.find('#number').val(number); // Set nilai id_perbaikan di dalam form
-            modal.find('#string').val(string); // Set nilai id_perbaikan di dalam form
+            modal.find('#id-pdf').val(idpdf);
+            modal.find('#number').val(number);
+            modal.find('#string').val(string);
         });
 
         $('#example124').DataTable({
-            "paging": true, // Mengaktifkan pagination
-            "lengthChange": true, // Mengaktifkan opsi untuk mengubah jumlah baris yang ditampilkan
-            "searching": true, // Mengaktifkan pencarian
-            "ordering": true, // Mengaktifkan pengurutan
-            "info": true, // Mengaktifkan informasi footer
-            "autoWidth": false // Menonaktifkan pengaturan otomatis lebar kolom
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
         });
 
         $('#save-button').on('click', function() {
@@ -239,7 +241,7 @@
             var formData = new FormData(form);
 
             $.ajax({
-                url: 'admin/updateHasilVerifikasi/', // Sesuaikan URL ini dengan endpoint Anda
+                url: baseUrl + 'admin/updateHasilVerifikasi/', // Sesuaikan URL ini dengan endpoint Anda
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -259,17 +261,16 @@
                 }
             });
         });
-
     });
 
-    function ubahHasilVerifikasi(idpdf) {
+    function ubahHasilVerifikasi(baseUrl, idpdf) {
         $.ajax({
-            url: '<?php echo base_url('admin/updateHasilVerifikasi/') ?>' + idpdf,
+            url: baseUrl + 'admin/updateHasilVerifikasi/' + idpdf,
             type: 'POST',
             success: function(response) {
                 if (response.success === true) {
                     showModal('Berhasil Verifikasi');
-                    window.location.href = '/verifikasi';
+                    window.location.href = baseUrl + 'verifikasi';
                 } else {
                     showModal('Gagal mengubah hasil verifikasi!');
                 }
@@ -280,15 +281,14 @@
         });
     }
 
-
-    function ubahHasilVerifikasi2(idpdf) {
+    function ubahHasilVerifikasi2(baseUrl, idpdf) {
         $.ajax({
-            url: '<?php echo base_url('admin/updateHasilVerifikasi2/') ?>' + idpdf,
+            url: baseUrl + 'admin/updateHasilVerifikasi2/' + idpdf,
             type: 'POST',
             success: function(response) {
                 if (response.success === true) {
                     showModal('Berhasil Verifikasi');
-                    window.location.href = '/verifikasi';
+                    window.location.href = baseUrl + 'verifikasi';
                 } else {
                     showModal('Gagal mengubah hasil verifikasi!');
                 }
@@ -298,7 +298,6 @@
             }
         });
     }
-
 
     function filterTable() {
         // Ambil nilai dari setiap filter
@@ -314,7 +313,7 @@
             var produksi = $(this).find('td:nth-child(7)').text().toLowerCase(); // Kolom Produksi
             var proses = $(this).find('td:nth-child(6)').text().toLowerCase(); // Kolom Proses
             var proses3 = $(this).find('td:nth-child(6)').text().toLowerCase(); // Kolom Proses 3
-            var proses4 = $(this).find('td:nth-child(6)').text().toLowerCase(); // Kolom Proses 4
+            var proses4 = $(this).find('td:nth-child(6)').text().toLowerCase();
 
             // Inisialisasi variabel untuk mengecek apakah baris sesuai dengan filter
             var match1 = filter1 === "" || produksi.includes(filter1);
@@ -331,20 +330,20 @@
         });
     }
 
-    function handleProsesChange() {
+    function handleProsesChange(baseUrl) {
         $('#filter-select2').on('change', function() {
             const proses = $(this).find('option:selected');
             var selected_sub = proses.data('proses');
-            updateSubProses(selected_sub);
+            updateSubProses(baseUrl, selected_sub);
             console.log($('#nama_file').val());
         });
     }
 
-    function updateSubProses(selected_sub) {
+    function updateSubProses(baseUrl, selected_sub) {
         if (!selected_sub) return;
 
         $.ajax({
-            url: '/sub/proses',
+            url: baseUrl + 'sub/proses',
             type: 'GET',
             data: {
                 proses: selected_sub
@@ -373,25 +372,25 @@
         });
     }
 
-    function handleItemChange() {
+    function handleItemChange(baseUrl) {
         $('#filter-select3').on('change', function() {
             var selectedOption2 = $(this).find('option:selected');
             var selectedOption = $('#filter-select2').find('option:selected');
             var data = selectedOption.data('proses');
             var selected_type = selectedOption2.val();
             if (selected_type == 'Connector' || selected_type == 'Pole' || selected_type == 'Bushing') {
-                updateTypeProses2(selected_type);
+                updateTypeProses2(baseUrl, selected_type);
             } else {
-                updateTypeProses(data);
+                updateTypeProses(baseUrl, data);
             }
         });
     }
 
-    function updateTypeProses(selected_type) {
+    function updateTypeProses(baseUrl, selected_type) {
         if (!selected_type) return;
 
         $.ajax({
-            url: 'type/sub',
+            url: baseUrl + 'type/sub',
             type: 'GET',
             data: {
                 typesub: selected_type
@@ -420,11 +419,11 @@
         });
     }
 
-    function updateTypeProses2(selected_type) {
+    function updateTypeProses2(baseUrl, selected_type) {
         if (!selected_type) return;
 
         $.ajax({
-            url: 'type/sub2',
+            url: baseUrl + 'type/sub2',
             type: 'GET',
             data: {
                 subProses: selected_type
@@ -476,5 +475,4 @@
         }
     }
 </script>
-
 <?= $this->endSection() ?>
