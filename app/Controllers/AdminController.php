@@ -152,4 +152,39 @@ class AdminController extends BaseController
         }
     }
 
+    public function delete_number($idpdf)
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/'));
+        }
+
+        $record = $this->pdfNumberModel->find($idpdf);
+
+        if ($record) {
+            $number = $record['number'];
+
+            $files = $this->pdfNumberModel->where('number', $number)->findAll();
+
+            foreach ($files as $file) {
+                $filePath =  ROOTPATH . 'public/uploads/' . $file['pdf_path'];
+
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+            $result = $this->pdfNumberModel->where('number', $number)->delete();
+
+            $response = array();
+            $response['success'] = true;
+
+            $response['message'] = 'Berhasil di hapus.';
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Record not found.';
+        }
+
+        return $this->response->setJSON($response);
+    }
+
 }

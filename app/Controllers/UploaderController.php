@@ -30,6 +30,63 @@ class UploaderController extends BaseController
         return view('user/pdf_number_form', $username);
     }
 
+    public function updatePdf($id)
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'uploader') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+        if ($this->request->is('post')) {
+            // Fetch the existing record
+            $existingPdf = $this->pdfNumberModel->find($id);
+            if ($existingPdf) {
+                // Store the old PDF path
+                $oldPdfPath = $existingPdf['pdf_path'];
+                $oldFilePath = ROOTPATH . 'public/uploads/' . $oldPdfPath; // Construct the full path
+
+                // Delete the old PDF file if it exists
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+
+                // Handle the new file upload
+                $file = $this->request->getFile('pdf_drawing');
+                if ($file->isValid() && !$file->hasMoved()) {
+                    $newName = $file->getRandomName(); // Generate a new random name for the file
+                    $file->move(ROOTPATH . 'public/uploads/', $newName); // Move the file to the uploads directory
+
+                    // Update the database record with the new file path
+                    $this->pdfNumberModel->update($id, [
+                        'pdf_path' => $newName,
+                    ]);
+
+                    // Send a JSON response to the client
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'PDF has been updated successfully.',
+                    ]);
+                } else {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Failed to upload the new file.',
+                    ]);
+                }
+            } else {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'PDF record not found.',
+                ]);
+            }
+        }
+
+        // If not a POST request, return an error
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid request.',
+        ]);
+    }
+
     public function revisi()
     {
         if (!session()->get('is_login') || session()->get('role') != 'uploader') {
@@ -88,7 +145,7 @@ class UploaderController extends BaseController
                 // Update data di database
                 $data = [
                     'pdf_path' => $pdf_file_name,
-                    'verifikasi_admin'=>0
+                    'verifikasi_admin' => 0
                 ];
                 $pdf->update($id_pdf, $data);
 

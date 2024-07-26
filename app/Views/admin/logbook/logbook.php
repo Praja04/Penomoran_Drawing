@@ -97,7 +97,7 @@
                                                                 <th>Tanggal Pengajuan</th>
                                                                 <th>Path Drawing</th>
                                                                 <th>Produksi</th>
-                                                                <th>Drawing</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="user2">
@@ -112,9 +112,12 @@
                                                                     <td><?= $user['created_at']; ?></td>
                                                                     <td><?= $user['pdf_number_string']; ?></td>
                                                                     <td><?= $user['proses_produksi']; ?></td>
-                                                                    <td>
-                                                                        <a class="btn btn-link" href=" <?= base_url('logbook/' . $user['id']) ?>">
-                                                                            <i class="mdi mdi-eye"></i> Lihat
+                                                                    <td style="display: flex; gap: 5px;">
+                                                                        <a class="btn btn-primary" href=" <?= base_url('logbook/' . $user['id']) ?>">
+                                                                            <i class="mdi mdi-eye"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-danger" onclick="Delete_number(<?php echo $user['id']; ?>)">
+                                                                            <i class="mdi mdi-delete"></i>
                                                                         </a>
                                                                     </td>
                                                                 </tr>
@@ -147,6 +150,23 @@
                 </div>
 
             </div>
+
+            <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="alertModalLabel">Notif</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modalMessage">
+                            <!-- Message will be inserted here -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="modalOk" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -155,8 +175,6 @@
 <script>
     const baseUrl = "<?= base_url() ?>";
     $(document).ready(function() {
-
-
         $('.btn-pdf-modal').on('click', function() {
             var pdfUrl = $(this).data('pdf');
             $('#pdfViewer').attr('src', pdfUrl);
@@ -174,6 +192,9 @@
         // Event listener untuk tombol reset
         $('#reset-button').click(function() {
             resetFilters();
+        });
+        $('#modalOk').click(function() {
+            location.reload();
         });
 
         $('#example122').DataTable({
@@ -348,6 +369,35 @@
 
         // Panggil filterTable untuk menampilkan semua baris
         filterTable();
+    }
+
+    function Delete_number(idpdf) {
+        $.ajax({
+            url: baseUrl + 'admin/DeleteNumber/' + idpdf,
+            type: 'DELETE',
+            success: function(response) {
+                if (response.success === true) {
+                    showModal(response.message);
+                } else {
+                    showModal(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function showModal(message, callback) {
+        $('#modalMessage').text(message);
+        $('#alertModal').modal('show');
+
+        if (callback) {
+            $('#alertModal').on('hidden.bs.modal', function() {
+                callback();
+                $(this).off('hidden.bs.modal');
+            });
+        }
     }
 </script>
 

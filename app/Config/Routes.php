@@ -33,6 +33,7 @@ $routes->get('verifikasi/(:num)', 'PdfNumberController::getRowsByNumberforAdmin/
 $routes->get('logbook/(:num)', 'PdfNumberController::getlogbookAdmin/$1');
 $routes->post('admin/updateHasilVerifikasi/(:num)', 'AdminController::updateHasilVerifikasi/$1');
 $routes->post('admin/updateHasilVerifikasi2/(:num)', 'AdminController::updateHasilVerifikasi2/$1');
+$routes->delete('admin/DeleteNumber/(:num)', 'AdminController::delete_number/$1');
 $routes->get('admin/resetMassproStatus/(:num)', 'AdminController::resetMassproAdmin/$1');
 
 //uploader
@@ -40,6 +41,7 @@ $routes->get('revisi', 'UploaderController::revisi');
 $routes->get('pdfnumber', 'UploaderController::index');
 $routes->get('insert/pdf', 'UploaderController::insertPdf');
 $routes->post('pdfnumber/update', 'UploaderController::update');
+$routes->post('pdf/update/(:num)', 'UploaderController::updatePdf/$1');
 
 //reader
 // $routes->get('/dashboard-reader', 'ReaderController::index');

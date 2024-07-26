@@ -18,7 +18,7 @@
                                      </p>
                                  </div>
                                  <div class="col-12 col-lg-4">
-                                     <img src="<?php base_url() ?>assets\images\custom-15.svg" alt="" />
+                                     <img src="<?php base_url() ?>\assets\images\custom-15.svg" alt="" />
                                  </div>
                              </div>
                          </div>
@@ -48,6 +48,7 @@
                                                  <th>Pdf Drawing</th>
                                                  <th>Status</th>
                                                  <th>Aksi</th>
+                                                 <th>Update PDF</th>
                                              </tr>
                                          </thead>
                                          <tbody id="user2">
@@ -93,6 +94,11 @@
                                                              <span class="text-muted">masspro</span>
                                                          <?php endif; ?>
                                                      </td>
+                                                     <td> <!-- New Update PDF Button -->
+                                                         <button type="button" class="btn btn-info btn-update-pdf" data-id="<?= $user['id']; ?>">
+                                                             Update PDF
+                                                         </button>
+                                                     </td>
                                                  </tr>
                                              <?php endforeach ?>
                                          </tbody>
@@ -123,7 +129,7 @@
                                      <label class="form-label" for="nama_file">Nama File:</label>
                                      <input class="form-control" type="text" id="nama_file" name="nama_file" value="<?= esc($data[0]['nama_file']) ?>" required>
                                  </div>
-                                
+
                                  <div class="form-group">
                                      <label class="form-label" for="pdf_path">Unggah PDF:</label>
                                      <input class="form-control" type="file" id="pdf_path" name="pdf_path" required>
@@ -165,7 +171,32 @@
                              <!-- Message will be inserted here -->
                          </div>
                          <div class="modal-footer">
-                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                             <button type="button" id="modalOk" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="modal modal-right fade" id="modal-right" tabindex="-1">
+                 <div class="modal-dialog">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title">Upload Drawing</h5>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                             <form id="upload-form">
+                                 <input type="hidden" id="id-pdf" name="id_pdf">
+                                 <div class="form-group">
+                                     <label class="form-label">Upload Drawing:</label>
+                                     <input class="form-control" type="file" id="pdf_drawing" name="pdf_drawing" required>
+                                 </div>
+
+                             </form>
+                         </div>
+                         <div class="modal-footer modal-footer-uniform">
+                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                             <button type="button" id="save-button" class="btn btn-primary float-end">Save changes</button>
                          </div>
                      </div>
                  </div>
@@ -185,6 +216,44 @@
              var pdfUrl = $(this).data('pdf');
              $('#pdfViewer').attr('src', pdfUrl);
              $('#pdfModal').modal('show');
+         });
+
+         $('.btn-update-pdf').on('click', function() {
+             var id = $(this).data('id');
+             $('#id-pdf').val(id);
+             $('#modal-right').modal('show');
+         });
+
+         $('#save-button').on('click', function() {
+             $('#modal-right').modal('hide');
+             updatePdf(baseUrl);
+         });
+
+         function updatePdf(baseUrl) {
+             var formData = new FormData($('#upload-form')[0]);
+             $.ajax({
+                 url: baseUrl + 'pdf/update/' + $('#id-pdf').val(),
+                 type: 'POST',
+                 data: formData,
+                 contentType: false,
+                 processData: false,
+                 dataType: 'json',
+                 success: function(response) {
+                     if (response.status === 'success') {
+                         showModal(response.message, function() {
+                             window.location.reload();
+                         });
+                     } else {
+                         showModal(response.message);
+                     }
+                 },
+                 error: function(xhr, status, error) {
+                     console.error('Error:', error);
+                 }
+             });
+         }
+         $('#modalOk').click(function() {
+             location.reload();
          });
 
          $('#submitBtn').on('click', function() {
@@ -237,4 +306,5 @@
          }
      }
  </script>
+
  <?= $this->endSection() ?>
