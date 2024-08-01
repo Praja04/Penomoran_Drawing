@@ -18,7 +18,7 @@
                                      </p>
                                  </div>
                                  <div class="col-12 col-lg-4">
-                                     <img src="<?php base_url() ?>\assets\images\custom-15.svg" alt="" />
+                                     <img src="<?php base_url() ?>assets\images\custom-15.svg" alt="" />
                                  </div>
                              </div>
                          </div>

@@ -168,34 +168,59 @@ class AdminController extends BaseController
 
     public function delete_number($idpdf)
     {
+        // Verifikasi login dan peran pengguna
         if (!session()->get('is_login') || session()->get('role') != 'admin') {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
             return redirect()->to(base_url('/'));
         }
 
+        // Cari record berdasarkan ID
         $record = $this->pdfNumberModel->find($idpdf);
 
         if ($record) {
             $number = $record['number'];
 
+            // Cari semua file dengan nomor yang sama
             $files = $this->pdfNumberModel->where('number', $number)->findAll();
 
             foreach ($files as $file) {
-                $filePath =  ROOTPATH . 'public/uploads/' . $file['pdf_path'];
+                $filePath = ROOTPATH . 'public/uploads/' . $file['pdf_path'];
 
+                // Periksa apakah file ada dan hapus
                 if (file_exists($filePath)) {
-                    unlink($filePath);
+                    if (!unlink($filePath)) {
+                        $response = [
+                            'success' => false,
+                            'message' => 'Gagal menghapus file: ' . $file['pdf_path']
+                        ];
+                        return $this->response->setJSON($response);
+                    }
+                } else {
+                    $response = [
+                        'success' => false,
+                        'message' => 'File tidak ditemukan: ' . $file['pdf_path']
+                    ];
+                    return $this->response->setJSON($response);
                 }
             }
-            $result = $this->pdfNumberModel->where('number', $number)->delete();
 
-            $response = array();
-            $response['success'] = true;
-
-            $response['message'] = 'Berhasil di hapus.';
+            // Hapus record dari database
+            if ($this->pdfNumberModel->where('number', $number)->delete()) {
+                $response = [
+                    'success' => true,
+                    'message' => 'Berhasil dihapus.'
+                ];
+            } else {
+                $response = [
+                    'success' => false,
+                    'message' => 'Gagal menghapus record dari database.'
+                ];
+            }
         } else {
-            $response['success'] = false;
-            $response['message'] = 'Record not found.';
+            $response = [
+                'success' => false,
+                'message' => 'Record tidak ditemukan.'
+            ];
         }
 
         return $this->response->setJSON($response);

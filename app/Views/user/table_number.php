@@ -46,23 +46,7 @@
                                                 <th>Upload Drawing</th>
                                                 <th>Action</th>
                                             </tr>
-                                            <tr>
-                                                <th></th>
-                                                <th><select class="form-control filter-select" data-column="1">
-                                                        <option value="">All</option>
-                                                    </select></th>
-                                                <th><select class="form-control filter-select" data-column="2">
-                                                        <option value="">All</option>
-                                                    </select></th>
-                                                <th><select class="form-control filter-select" data-column="3">
-                                                        <option value="">All</option>
-                                                    </select></th>
-                                                <th><select class="form-control filter-select" data-column="4">
-                                                        <option value="">All</option>
-                                                    </select></th>
-                                                <th></th>
-                                                <th style="visibility:hidden ;" disabled></th>
-                                            </tr>
+                                            
                                         </thead>
 
                                         <tbody id="user">
@@ -88,7 +72,11 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= base_url('pdf/setStatusMasspro/' . $user['id']); ?>" class="btn btn-success" onclick="return confirm('Apakah Anda yakin ingin mengubah status menjadi masspro?')">Set Masspro</a>
+                                                            <?php if ($user['pdf_path'] != null) : ?>
+                                                                <a href="<?= base_url('pdf/setStatusMasspro/' . $user['id']); ?>" class="btn btn-success" onclick="return confirm('Apakah Anda yakin ingin mengubah status menjadi masspro?')">Set Masspro</a>
+                                                            <?php else : ?>
+                                                                <p>Upload Dahulu !</p>
+                                                            <?php endif; ?>
                                                         </td>
                                                     </tr>
                                                 <?php endif; ?>
