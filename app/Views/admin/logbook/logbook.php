@@ -116,7 +116,7 @@
                                                                         <a class="btn btn-primary" href=" <?= base_url('logbook/' . $user['id']) ?>">
                                                                             <i class="mdi mdi-eye"></i>
                                                                         </a>
-                                                                        <a class="btn btn-danger" onclick="Delete_number(<?php echo $user['id']; ?>)">
+                                                                        <a class="btn btn-danger" onclick="Delete_number(<?= $user['id']; ?>)">
                                                                             <i class="mdi mdi-delete"></i>
                                                                         </a>
                                                                     </td>
@@ -167,13 +167,40 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin menghapus data ini?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="batalDelete" data-dismiss="modal">Batal</button>
+                            <button type="button" class="btn btn-danger" id="confirmDeleteButton">Hapus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
 </div>
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
+    var idToDelete;
+
+    function Delete_number(idpdf) {
+        idToDelete = idpdf;
+        $('#confirmDeleteModal').modal('show');
+    }
     const baseUrl = "<?= base_url() ?>";
+
     $(document).ready(function() {
         $('.btn-pdf-modal').on('click', function() {
             var pdfUrl = $(this).data('pdf');
@@ -204,6 +231,30 @@
             "ordering": true,
             "info": true,
             "autoWidth": false
+        });
+
+        $('#batalDelete').click(function() {
+            $('#confirmDeleteModal').modal('hide');
+        });
+
+        $('#confirmDeleteButton').click(function() {
+            $.ajax({
+                url: '<?= base_url('admin/DeleteNumber/') ?>' + idToDelete,
+                type: 'DELETE',
+                success: function(response) {
+                    $('#confirmDeleteModal').modal('hide');
+                    if (response.success === true) {
+                        showModal(response.message, function() {
+                            location.reload();
+                        });
+                    } else {
+                        showModal(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
         });
     });
 
@@ -369,23 +420,6 @@
 
         // Panggil filterTable untuk menampilkan semua baris
         filterTable();
-    }
-
-    function Delete_number(idpdf) {
-        $.ajax({
-            url: baseUrl + 'admin/DeleteNumber/' + idpdf,
-            type: 'DELETE',
-            success: function(response) {
-                if (response.success === true) {
-                    showModal(response.message);
-                } else {
-                    showModal(response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
     }
 
     function showModal(message, callback) {

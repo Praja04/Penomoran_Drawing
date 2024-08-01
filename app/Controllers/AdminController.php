@@ -16,6 +16,20 @@ class AdminController extends BaseController
         $this->pdfNumberModel = new PdfNumberModel();
         $this->subProsesModel = new SubProsesModel();
     }
+
+    public function getTotalMasspro()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+
+        $massproCount = $this->pdfNumberModel->countMasspro();
+
+        return $this->response->setJSON(['massproCount' => $massproCount]);
+    }
+    
     public function subproses()
     {
         if (!session()->get('is_login') || session()->get('role') != 'admin') {

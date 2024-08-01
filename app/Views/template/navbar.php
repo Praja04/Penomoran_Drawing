@@ -28,7 +28,7 @@
 							</a>
 							<ul class="treeview-menu">
 								<li><a href="<?= base_url('/revisi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Revisi Drawing</a></li>
-			
+
 							</ul>
 						</li>
 					<?php elseif (session()->get('role') == 'admin') : ?>
@@ -37,11 +37,11 @@
 							<a href="#">
 								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
 								<span>Verification Admin</span>
-								<span class="pull-right-container">
+								<span class="pull-right-container" id="verifikasi">
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="<?= base_url('/verifikasi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Verifikasi</a></li>
+								<li><a href="<?= base_url('/verifikasi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Verifikasi <span id="notif_verifikasi"></a></li>
 								<li><a href="<?= base_url('/update/subproses/') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Update Sub Proses</a></li>
 							</ul>
 						</li>
@@ -85,9 +85,40 @@
 			</div>
 		</div>
 	</section>
-	<!-- <div class="sidebar-footer">
-		<a href="javascript:void(0)" class="link" data-bs-toggle="tooltip" title="Settings"><span class="icon-Settings-2"></span></a>
-		<a href="mailbox.html" class="link" data-bs-toggle="tooltip" title="Email"><span class="icon-Mail"></span></a>
-		<a href="javascript:void(0)" class="link" data-bs-toggle="tooltip" title="Logout"><span class="icon-Lock-overturning"><span class="path1"></span><span class="path2"></span></span></a>
-	</div> -->
+
 </aside>
+
+<script src="<?= base_url() ?>/assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+<?php if (session()->get('role') == 'admin') : ?>
+	<script>
+		$(document).ready(function() {
+
+			$.ajax({
+				url: '<?= base_url() ?>total/masspro',
+				type: 'GET',
+				success: function(response) {
+					const data = response.massproCount;
+
+					if (data != 0) {
+						$('#verifikasi').html('<i class="si-info si"></i>').css('color', 'red');
+						$('#notif_verifikasi').text(data).css('color', 'red');
+
+					} else {
+						$('#verifikasi').removeAttr('id');
+						$('#notif_verifikasi').removeAttr('id');
+
+					}
+
+				},
+				error: function(error) {
+					console.log('Error fetching data:', error);
+				}
+			});
+
+		});
+	</script>
+<?php else : ?>
+	<script>
+
+	</script>
+<?php endif; ?>

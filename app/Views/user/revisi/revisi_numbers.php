@@ -69,7 +69,7 @@
                                                      <td><?= esc($user['nama_penulis']); ?></td>
                                                      <td><?= esc($user['nama_file']); ?></td>
                                                      <td><?= esc($user['created_at']); ?></td>
-                                                     <td><?= $user['revisi'] ?? 'Pengajuan Pertama'; ?></td>
+                                                     <td><?= $user['revisi'] ?? '0'; ?></td>
                                                      <td>
                                                          <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['pdf_path']); ?>">
                                                              <i class="fa fa-file-pdf-o"></i> Lihat PDF
@@ -94,10 +94,15 @@
                                                              <span class="text-muted">masspro</span>
                                                          <?php endif; ?>
                                                      </td>
-                                                     <td> <!-- New Update PDF Button -->
-                                                         <button type="button" class="btn btn-info btn-update-pdf" data-id="<?= $user['id']; ?>">
-                                                             Update PDF
-                                                         </button>
+                                                     <td>
+                                                         <?php if ($user['status'] == 'masspro') : ?>
+                                                             <button type="button" class="btn btn-info btn-update-pdf" data-id="<?= $user['id']; ?>">
+                                                                 Update PDF
+                                                             </button>
+                                                         <?php else : ?>
+                                                             -
+                                                         <?php endif; ?>
+
                                                      </td>
                                                  </tr>
                                              <?php endforeach ?>

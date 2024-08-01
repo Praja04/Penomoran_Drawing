@@ -11,6 +11,10 @@ class PdfNumberModel extends Model
     protected $table = 'pdf_numbers';
     protected $primaryKey = 'id';
     protected $allowedFields = ['proses_produksi', 'nama_file', 'number', 'pdf_path', 'pdf_number_string', 'verifikasi_admin', 'revisi', 'status', 'nama_penulis'];
+    public function countMasspro()
+    {
+        return $this->where('status', 'masspro')->countAllResults();
+    }
     public function getRowsByNumber($number)
     {
         return $this->where('number', $number)

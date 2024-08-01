@@ -25,6 +25,7 @@ $routes->post('auth/proses_pilih_role', 'Auth::proses_pilih_role');
 
 //admin
 $routes->get('update/subproses', 'AdminController::subproses');
+$routes->get('total/masspro', 'AdminController::getTotalMasspro');
 $routes->post('update/sub_proses', 'AdminController::update_subproses');
 $routes->get('logbook', 'AdminController::logbook');
 $routes->get('publish', 'AdminController::publish');

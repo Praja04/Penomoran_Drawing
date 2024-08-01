@@ -111,7 +111,7 @@
                                                          <td><?= $user['pdf_number_string']; ?></td>
                                                          <td><?= $user['nama_file']; ?></td>
                                                          <td><?= $user['created_at']; ?></td>
-                                                         <td><a href="<?= base_url('pdf/revise/' . $user['id']) ?>">Revisi</a></td>
+                                                         <td><a class="btn btn-primary" href="<?= base_url('pdf/revise/' . $user['id']) ?>">Revisi</a></td>
                                                          <td>
                                                              <?php
                                                                 if ($user['verifikasi_admin'] == 0) {
