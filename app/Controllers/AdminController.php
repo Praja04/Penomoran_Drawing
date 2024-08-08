@@ -5,16 +5,22 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\PdfNumberModel;
 use App\Models\SubProsesModel;
+use App\Models\TypeSubModel;
+use App\Models\OrderDrawing;
 
 class AdminController extends BaseController
 {
     protected $pdfNumberModel;
     protected $subProsesModel;
+    protected $orderDrawing;
+    protected $TypesubModel;
 
     public function __construct()
     {
         $this->pdfNumberModel = new PdfNumberModel();
         $this->subProsesModel = new SubProsesModel();
+        $this->orderDrawing = new OrderDrawing();
+        $this->TypesubModel = new TypeSubModel();
     }
 
     public function getTotalMasspro()
@@ -29,7 +35,7 @@ class AdminController extends BaseController
 
         return $this->response->setJSON(['massproCount' => $massproCount]);
     }
-    
+
     public function subproses()
     {
         if (!session()->get('is_login') || session()->get('role') != 'admin') {
@@ -101,14 +107,16 @@ class AdminController extends BaseController
         // Kembalikan respons sebagai JSON
         return $this->response->setJSON($response);
     }
-    
+
 
 
     public function updateHasilVerifikasi2($idpdf)
     {
         // Panggil model untuk melakukan update hasil verifikasi
+        $feedback = $this->request->getPost('feedback');
 
         $data = [
+            'feedback_admin' => $feedback,
             'verifikasi_admin' => 2,
             'status' => null
         ];
@@ -144,7 +152,7 @@ class AdminController extends BaseController
         return redirect()->back();
     }
 
-    public function update_subproses()
+    public function create_subproses()
     {
         if (!session()->get('is_login') || session()->get('role') != 'admin') {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -159,7 +167,7 @@ class AdminController extends BaseController
             ];
 
             $this->subProsesModel->insert($data);
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Revisi berhasil disimpan.']);
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Sub Proses berhasil disimpan.']);
         } catch (\Exception $e) {
             log_message('error', $e->getMessage());
             return $this->response->setJSON(['error' => 'Terjadi kesalahan saat memperbarui data.']);
@@ -226,4 +234,194 @@ class AdminController extends BaseController
         return $this->response->setJSON($response);
     }
 
+
+    //update
+    public function order_drawing_external()
+    {
+
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/'));
+        }
+        $Getorders = $this->orderDrawing->getExternalOrders();
+        $dataPdf = [
+            'externalOrders' =>  $Getorders['externalOrders'],
+            'externalAllOrders' =>  $Getorders['externalAllOrders']
+
+        ];
+        return view('admin/approved_order/eksternal', $dataPdf);
+    }
+    public function order_drawing_internal()
+    {
+
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/'));
+        }
+        $Getorders = $this->orderDrawing->getExternalOrders();
+        $dataPdf = [
+            'internalOrders' =>  $Getorders['internalOrders']
+
+        ];
+        return view('admin/approved_order/internal', $dataPdf);
+    }
+
+    public function terima_order()
+    {
+        // if (!session()->get('is_login') || session()->get('role') != 'admin') {
+        //     return $this->response->setJSON(['error' => ' Anda tidak memiliki izin untuk Approve']);
+        // }
+        if (!session()->get('is_login') || session()->get('npk') != 1942) {
+            return $this->response->setJSON(['error' => ' Anda tidak memiliki izin untuk Approve']);
+        }
+
+        $id_order = $this->request->getPost('id-order');
+        try {
+            $data = [
+                'terima_order' => $this->request->getPost('terima_order')
+            ];
+            $this->orderDrawing->update($id_order, $data);
+            // Kirim respons sukses
+            return $this->response->setJSON(['message' => 'Data berhasil diperbarui!']);
+        } catch (\Exception $e) {
+            // Log error dan kirim pesan kesalahan ke klien
+            log_message('error', $e->getMessage());
+            return $this->response->setJSON(['error' => 'Terjadi kesalahan saat memperbarui data.']);
+        }
+    }
+
+    public function getTotalapprove()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+
+        $ApproveCount = $this->orderDrawing->countApprove();
+
+        return $this->response->setJSON(['ApproveCount' => $ApproveCount]);
+    }
+    public function getTrialdrawing()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/'));
+        }
+        $GetTrial =
+            $this->orderDrawing->getTrialdrawing();
+        $dataPdf['data'] = $GetTrial;
+        return view('admin/publish/trial', $dataPdf);
+    }
+
+    //untuk fitur sub proses
+    public function updateSubProses()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+        $input = $this->request->getPost();
+        $data = [
+            'jenis_sub_proses' => $input['sub_proses']
+        ];
+
+        $subProsesModel = new SubProsesModel();
+        $result = $subProsesModel->update($input['no'], $data);
+
+        if ($result) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Sub Proses updated successfully']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to update Sub Proses']);
+        }
+    }
+
+    public function deleteSubProses($id)
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+        $subProsesModel = new SubProsesModel();
+        $result = $subProsesModel->delete($id);
+
+        if ($result) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Sub Proses deleted successfully']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete Sub Proses']);
+        }
+    }
+    //fitur type sub
+    public function Typesubproses()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        $GetAllsubproses = $this->TypesubModel->getAllData();
+        $dataPdf['All'] = $GetAllsubproses;
+        return view('admin/update_typesubproses', $dataPdf);
+    }
+
+    public function updateTypeSubProses()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+        $input = $this->request->getPost();
+        $data = [
+            'type_sub_proses' => $input['type_sub_proses']
+        ];
+
+
+        $result = $this->TypesubModel->update($input['no'], $data);
+
+        if ($result) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Sub Proses updated successfully']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to update Sub Proses']);
+        }
+    }
+
+    public function deleteTypeSubProses($id)
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+        $result = $this->TypesubModel->delete($id);
+
+        if ($result) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Sub Proses deleted successfully']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete Sub Proses']);
+        }
+    }
+
+    public function create_typesubproses()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        try {
+            $data = [
+                'no_type' => $this->request->getPost('no_type'),
+                'proses' => $this->request->getPost('proses'),
+                'type_sub_proses' => $this->request->getPost('type_sub_proses'),
+                'sub_proses' => $this->request->getPost('sub_proses')
+            ];
+
+            $this->TypesubModel->insert($data);
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Sub Proses berhasil disimpan.']);
+        } catch (\Exception $e) {
+            log_message('error', $e->getMessage());
+            return $this->response->setJSON(['error' => 'Terjadi kesalahan saat memperbarui data.']);
+        }
+    }
 }

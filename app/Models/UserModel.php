@@ -8,13 +8,12 @@ class UserModel extends Model
 {
     protected $table            = 'users';
     protected $primaryKey       = 'id';
- 
-    protected $allowedFields    = ['username','password','role'];
+
+    protected $allowedFields    = ['username', 'password', 'role'];
     public function cek_login($username, $password)
     {
         $query = $this->query('SELECT * FROM users WHERE username = \'' . $username . '\' AND password = \'' . $password . '\'');
 
         return $query->getRowArray();
     }
-
 }

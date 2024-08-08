@@ -18,7 +18,7 @@
                                      </p>
                                  </div>
                                  <div class="col-12 col-lg-4">
-                                     <img src="<?php base_url() ?>assets\images\custom-15.svg" alt="" />
+                                     <img src="<?= base_url() ?>assets\images\custom-15.svg" alt="" />
                                  </div>
                              </div>
                          </div>
@@ -76,22 +76,46 @@
                                                          </button>
                                                      </td>
                                                      <td>
-                                                         <?php if ($user['status'] == 'masspro') : ?>
-                                                             <span class="badge bg-success">Masspro</span>
-                                                         <?php elseif ($user['verifikasi_admin'] == 2 && $user['status'] != 'masspro') : ?>
-                                                             <span class="badge bg-danger">Rejected</span>
-                                                         <?php else : ?>
-                                                             <span class="badge bg-warning">Trial</span>
-                                                         <?php endif; ?>
+                                                         <?php
+                                                            $statusClass = '';
+                                                            $statusLabel = '';
+                                                            if ($user['status'] == 'masspro') {
+                                                                $statusClass = 'bg-success';
+                                                                $statusLabel = 'Masspro';
+                                                            } elseif ($user['verifikasi_admin'] == 2) {
+                                                                $statusClass = 'bg-danger';
+                                                                $statusLabel = 'Rejected';
+                                                            } else {
+                                                                $statusClass = 'bg-warning';
+                                                                $statusLabel = 'Trial';
+                                                            }
+                                                            ?>
+                                                         <span class="badge <?= $statusClass; ?>"><?= $statusLabel; ?></span>
                                                      </td>
                                                      <td>
-
-                                                         <?php if ($user['status'] != 'masspro' && $user['verifikasi_admin'] != 2) : ?>
-                                                             <a href="<?= base_url('pdf/setStatusMasspro/' . $user['id']); ?>" class="btn btn-success" onclick="return confirm('Apakah Anda yakin ingin mengubah status menjadi masspro?')">Set Masspro</a>
-                                                         <?php elseif ($user['verifikasi_admin'] == 2 && $user['status'] != 'masspro') : ?>
-                                                             <a href="<?= base_url('pdf/setStatusMasspro/' . $user['id']); ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin mengubah status menjadi masspro?')">Set Masspro Again</a>
+                                                         <?php
+                                                            $buttonClass = '';
+                                                            $buttonText = '';
+                                                            $href = '';
+                                                            if ($user['status'] != 'masspro' && $user['verifikasi_admin'] != 2) {
+                                                                $buttonClass = 'btn-success';
+                                                                $buttonText = 'Set Masspro';
+                                                                $href = base_url('pdf/setStatusMasspro/' . $user['id']);
+                                                            } elseif ($user['verifikasi_admin'] == 2 && $user['status'] != 'masspro') {
+                                                                $buttonClass = 'btn-danger';
+                                                                $buttonText = 'Set Masspro Again';
+                                                                $href = base_url('pdf/setStatusMasspro/' . $user['id']);
+                                                            } else {
+                                                                $buttonClass = 'text-muted';
+                                                                $buttonText = 'masspro';
+                                                            }
+                                                            ?>
+                                                         <?php if ($buttonClass !== 'text-muted') : ?>
+                                                             <a href="<?= $href; ?>" class="btn <?= $buttonClass; ?>" onclick="return confirm('Apakah Anda yakin ingin mengubah status menjadi masspro?')">
+                                                                 <?= $buttonText; ?>
+                                                             </a>
                                                          <?php else : ?>
-                                                             <span class="text-muted">masspro</span>
+                                                             <span class="<?= $buttonClass; ?>"><?= $buttonText; ?></span>
                                                          <?php endif; ?>
                                                      </td>
                                                      <td>
@@ -102,10 +126,10 @@
                                                          <?php else : ?>
                                                              -
                                                          <?php endif; ?>
-
                                                      </td>
                                                  </tr>
-                                             <?php endforeach ?>
+                                             <?php endforeach; ?>
+
                                          </tbody>
                                      </table>
                                  </div>

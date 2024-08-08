@@ -12,13 +12,13 @@
                         <div class="box-body pe-0 ps-lg-50 ps-15 py-0">
                             <div class="row align-items-center">
                                 <div class="col-12 col-lg-8">
-                                    <h1 class="fs-40 text-white">Number Drawing Pdf</h1>
+                                    <h1 class="fs-40 text-white">Upload Drawing Pdf</h1>
                                     <p class="text-white mb-0 fs-20">
                                         PT.Century Batteries Indonesia
                                     </p>
                                 </div>
                                 <div class="col-12 col-lg-4">
-                                    <img src="<?php base_url() ?>assets\images\custom-15.svg" alt="" />
+                                    <img src="<?= base_url() ?>assets\images\custom-15.svg" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -35,18 +35,20 @@
                         <div class="box">
                             <div class="box-body">
                                 <div class="table-responsive">
-                                    <table id="example121" class="table table-bordered table-separated">
+                                    <table id="example121" class="table text-center table-bordered table-separated">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Number Drawing</th>
+                                                <th>Kategori Drawing</th>
                                                 <th>Nama Drawing</th>
                                                 <th>Nama Penulis</th>
                                                 <th>Tanggal Pengajuan</th>
                                                 <th>Upload Drawing</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
-                                            
+
                                         </thead>
 
                                         <tbody id="user">
@@ -58,6 +60,7 @@
                                                     <tr class="">
                                                         <td><?= $i++; ?></td>
                                                         <td><?= $user['number']; ?></td>
+                                                        <td><?= $user['pdf_number_string']; ?></td>
                                                         <td><?= $user['nama_file'] ?></td>
                                                         <td><?= $user['nama_penulis'] ?></td>
                                                         <td><?= $user['created_at'] ?></td>
@@ -68,9 +71,13 @@
                                                                     Upload Pdf
                                                                 </button>
                                                             <?php else : ?>
-                                                                <p>Sudah Upload</p>
+                                                                <button type="button" class="btn btn-success btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['pdf_path']); ?>">
+                                                                    <i class="fa fa-file-pdf-o"></i> Lihat PDF
+                                                                </button>
+                                                                <button type="button" class="btn btn-warning ganti-button" data-bs-toggle="modal" data-bs-target="#modal-left" data-id-pdf="<?= $user['id'] ?>">Ganti PDF</button>
                                                             <?php endif; ?>
                                                         </td>
+                                                        <td>Trial</td>
                                                         <td>
                                                             <?php if ($user['pdf_path'] != null) : ?>
                                                                 <a href="<?= base_url('pdf/setStatusMasspro/' . $user['id']); ?>" class="btn btn-success" onclick="return confirm('Apakah Anda yakin ingin mengubah status menjadi masspro?')">Set Masspro</a>
@@ -92,12 +99,36 @@
             </div>
 
             <!-- modal-->
+            <div class="modal modal-left fade" id="modal-left" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upload Ulang Drawing</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form id="upload-ulang-form">
+                                <input type="hidden" id="id-pdf" name="id_pdf">
+                                <div class="form-group">
+                                    <label class="form-label">Upload Drawing:</label>
+                                    <input class="form-control" type="file" id="pdf_drawing" name="pdf_drawing" required>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer modal-footer-uniform">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="save-ulang-button" class="btn btn-primary float-end">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="modal modal-right fade" id="modal-right" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Upload Drawing</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                         </div>
                         <div class="modal-body">
                             <form id="upload-form">
@@ -180,7 +211,40 @@
             modal.find('#id-pdf').val(idpdf); // Set nilai id_perbaikan di dalam form
         });
 
+        $('#modal-left').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Tombol yang memicu modal
+            var idpdf = button.data('id-pdf'); // Ekstrak informasi dari atribut data-*
+            var modal = $(this);
+            modal.find('#id-pdf').val(idpdf); // Set nilai id_perbaikan di dalam form
+        });
+
         // Event untuk tombol "Save changes"
+        $('#save-ulang-button').on('click', function() {
+            var formData = new FormData($('#upload-ulang-form')[0]);
+            $.ajax({
+                url: baseUrl + 'pdf/update/' + $('#id-pdf').val(),
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        showModal('Data berhasil diperbarui!');
+                        $('#modal-left').modal('hide');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000);
+                    } else {
+                        showModal(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+
         $('#save-button').on('click', function() {
             var form = $('#upload-form')[0];
             var formData = new FormData(form);

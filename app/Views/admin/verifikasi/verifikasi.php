@@ -21,7 +21,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="col-12 col-lg-4">
-                                                    <img src="<?php base_url() ?>assets\images\custom-15.svg" alt="" />
+                                                    <img src="<?= base_url() ?>assets\images\custom-15.svg" alt="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -100,6 +100,7 @@
                                                                 <th>Produksi</th>
                                                                 <th>Revisi</th>
                                                                 <th>File</th>
+                                                                <th>Verifikasi</th>
                                                                 <!-- <th>Verifikasi Admin</th>
                                                                 <th>Status</th> -->
 
@@ -124,18 +125,21 @@
                                                                             } ?>
                                                                         </td>
                                                                         <td>
-
-                                                                            <a class="btn btn-link" href=" <?= base_url('verifikasi/' . $user['id']) ?>">
-                                                                                <i class="mdi mdi-eye"></i> Lihat
+                                                                            <button style="margin: 3px;" type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['pdf_path']); ?>">
+                                                                                <i class="fa fa-file-pdf-o"></i> Lihat PDF
+                                                                            </button>
+                                                                            <a style="margin: 3px;" class="btn btn-link" href=" <?= base_url('verifikasi/' . $user['id']) ?>">
+                                                                                <i class="mdi mdi-eye"></i> Lihat Revisi
                                                                             </a>
                                                                         </td>
-                                                                        <!-- <td>
-                                                                            <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['pdf_path']); ?>">
-                                                                                <i class="fa fa-file-pdf-o"></i> Lihat Drawing
+                                                                        <td>
+                                                                            <button style="margin: 3px;" type="button" class="btn btn-link btn-primary" onclick="ubahHasilVerifikasi(<?php echo $user['id']; ?>)">
+                                                                                <i class="fa fa-check-square-o"><a href="#"></a></i>
+                                                                            </button>
+                                                                            <button style="margin: 3px;" type="button" class="btn btn-link btn-danger" onclick="ubahHasilVerifikasi2(<?php echo $user['id']; ?>)">
+                                                                                <i class="fa fa-close"><a href="#"></a></i>
                                                                             </button>
                                                                         </td>
-                                                                        <td>Sudah Upload</td> -->
-
 
                                                                     </tr>
                                                                 <?php endif; ?>
@@ -167,25 +171,45 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="alertModalLabel">Notif</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" id="modalMessage">
-                            <!-- Message will be inserted here -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                <!-- Confirmation Modal -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Konfirmasi Penolakan</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Yakin menolak drawing ini?</p>
+                                <div class="form-group">
+                                    <label for="feedback">Feedback:</label>
+                                    <textarea id="feedback" class="form-control" rows="4" placeholder="Masukkan feedback..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-primary" id="confirmBtn">Ya, Tolak</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="alertModalLabel">Notif</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="modalMessage">
+                                <!-- Message will be inserted here -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
         </section>
         <!-- /.content -->
@@ -262,15 +286,18 @@
             });
         });
     });
+    const baseUrl = "<?= base_url() ?>";
 
-    function ubahHasilVerifikasi(baseUrl, idpdf) {
+    function ubahHasilVerifikasi(idpdf) {
         $.ajax({
             url: baseUrl + 'admin/updateHasilVerifikasi/' + idpdf,
             type: 'POST',
             success: function(response) {
                 if (response.success === true) {
                     showModal('Berhasil Verifikasi');
-                    window.location.href = baseUrl + 'verifikasi';
+                    setTimeout(function() {
+                        window.location.href = baseUrl + 'verifikasi';
+                    }, 2000);
                 } else {
                     showModal('Gagal mengubah hasil verifikasi!');
                 }
@@ -281,23 +308,42 @@
         });
     }
 
-    function ubahHasilVerifikasi2(baseUrl, idpdf) {
-        $.ajax({
-            url: baseUrl + 'admin/updateHasilVerifikasi2/' + idpdf,
-            type: 'POST',
-            success: function(response) {
-                if (response.success === true) {
-                    showModal('Berhasil Verifikasi');
-                    window.location.href = baseUrl + 'verifikasi';
-                } else {
-                    showModal('Gagal mengubah hasil verifikasi!');
+    function ubahHasilVerifikasi2(idpdf) {
+        // Show the confirmation modal
+        $('#confirmModal').modal('show');
+
+        // Handle the confirm button click
+        $('#confirmBtn').off('click').on('click', function() {
+            // Get the feedback
+            var feedback = $('#feedback').val();
+
+            // Proceed with AJAX request to update verification result
+            $.ajax({
+                url: baseUrl + 'admin/updateHasilVerifikasi2/' + idpdf,
+                type: 'POST',
+                data: {
+                    feedback: feedback
+                },
+                success: function(response) {
+                    if (response.success === true) {
+                        showModal('Berhasil Verifikasi');
+                        setTimeout(function() {
+                            window.location.href = baseUrl + 'verifikasi';
+                        }, 2000);
+                    } else {
+                        showModal('Gagal mengubah hasil verifikasi!');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                },
+                complete: function() {
+                    $('#confirmModal').modal('hide');
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
+            });
         });
     }
+
 
     function filterTable() {
         // Ambil nilai dari setiap filter

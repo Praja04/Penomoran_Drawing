@@ -43,10 +43,24 @@ class Auth extends BaseController
 
             if (!empty($data)) {
                 // Menentukan peran berdasarkan NPK
-                $npk_admin = 3650;
+                $npk_kasi = [2331, 2593, 3651, 4171, 3659];
+                $npk_admin = [3650, 1942];
+                $npk_reader_pce = [3517, 2845, 570];
                 $npk_uploaders = [1028, 1637, 2872, 3399]; // Daftar NPK uploader
 
-                if ($data['npk'] == $npk_admin) {
+                if (in_array($data['npk'], $npk_admin)) {
+                    $role = 'admin';
+                } elseif (in_array($data['npk'], $npk_uploaders)) {
+                    $role = 'uploader';
+                } elseif (in_array($data['npk'], $npk_kasi)) {
+                    $role = 'kasi';
+                } elseif (in_array($data['npk'], $npk_reader_pce)) {
+                    $role = 'reader_pce';
+                } else {
+                    $role = 'reader';
+                }
+
+                if ($role == 'admin') {
                     // Simpan data ke sesi dan tampilkan halaman pemilihan peran
                     $this->session->set([
                         'username' => $data['username'],
@@ -61,12 +75,16 @@ class Auth extends BaseController
                         'id_sub_section' => $data['id_sub_section'],
                         'sub_section' => $data['sub_section'],
                         'kode_jabatan' => $data['kode_jabatan'],
-                        'role' => 'admin',
+                        'role' => $role,
                         'is_login' => true
                     ]);
                     return redirect()->to(base_url('auth/pilih_role'));
                 } elseif (in_array($data['npk'], $npk_uploaders)) {
                     $role = 'uploader';
+                } elseif (in_array($data['npk'], $npk_kasi)) {
+                    $role = 'kasi';
+                } elseif (in_array($data['npk'], $npk_reader_pce)) {
+                    $role = 'reader_pce';
                 } else {
                     $role = 'reader';
                 }
@@ -94,49 +112,8 @@ class Auth extends BaseController
                 // Redirect berdasarkan peran
                 return $this->redirect_based_on_role($role);
             } else {
-                // Jika respons kosong, lakukan pengecekan login dari model lokal
-                $data = $this->users->cek_login($username, $password);
-
-                if (!empty($data)) {
-                    // Menentukan peran berdasarkan NPK
-                    $npk_admin = 3650;
-                    $npk_uploaders = [1028, 1637, 2872, 3399]; // Daftar NPK uploader
-
-                    if ($data['npk'] == $npk_admin) {
-                        $role = 'admin';
-                    } elseif (in_array($data['npk'], $npk_uploaders)) {
-                        $role = 'uploader';
-                    } else {
-                        $role = 'reader';
-                    }
-
-                    // Menyimpan data ke sesi
-                    $session_data = [
-                        'username' => $data['username'],
-                        'nama' => $data['nama'],
-                        'npk' => $data['npk'],
-                        'id_divisi' => $data['id_divisi'],
-                        'divisi' => $data['divisi'],
-                        'id_departement' => $data['id_departement'],
-                        'departement' => $data['departement'],
-                        'id_section' => $data['id_section'],
-                        'section' => $data['section'],
-                        'id_sub_section' => $data['id_sub_section'],
-                        'sub_section' => $data['sub_section'],
-                        'kode_jabatan' => $data['kode_jabatan'],
-                        'role' => $role,
-                        'is_login' => true
-                    ];
-
-                    $this->session->set($session_data);
-
-                    // Redirect berdasarkan peran
-                    return $this->redirect_based_on_role($role);
-                } else {
-                    // Respons dari model lokal juga kosong, kembali ke halaman login
-                    $this->session->setFlashdata('error', 'Username atau password salah.');
-                    return redirect()->to(base_url('/'));
-                }
+                $this->session->setFlashdata('error', 'Username atau password salah.');
+                return redirect()->to(base_url('/'));
             }
         } else {
             // Respons tidak berhasil, tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
@@ -192,7 +169,11 @@ class Auth extends BaseController
         if ($role == 'admin') {
             return redirect()->to(base_url('verifikasi'));
         } elseif ($role == 'uploader') {
-            return redirect()->to(base_url('pdfnumber'));
+            return redirect()->to(base_url('status/order'));
+        } elseif ($role == 'kasi') {
+            return redirect()->to(base_url('dashboard'));
+        } elseif ($role == 'reader_pce') {
+            return redirect()->to(base_url('listpdf'));
         } else {
             return redirect()->to(base_url('listpdf'));
         }

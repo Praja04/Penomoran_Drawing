@@ -47,37 +47,21 @@
                                     <label class="form-label">Nama File :</label>
                                     <input type="text" id="nama_file" name="nama_file" class="form-control" required>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label class="form-label">Nama Penulis :</label>
-                                    <select class="form-select" name="penulis" id="penulis" required>
-                                        <option value="" disabled selected>Pilih Opsi</option>
-                                        <option value="Jajang">Jajang</option>
-                                        <option value="Usep">Usep</option>
-                                        <option value="Aman">Aman</option>
-                                        <option value="Suep">Suep</option>
-                                        <option value="Cecep">Cecep</option>
-                                    </select>
-                                </div> -->
-                                <!-- <div class="form-group">
-                                    <label class="form-label">Penggunaan :</label>
-                                    <select class="form-select" name="group1" id="group1" required>
-                                        <option value="" disabled selected>Pilih Opsi</option>
-                                        <option value="1" data-group1="Prototype">Prototype</option>
-                                    </select>
-                                </div> -->
                                 <div class="form-group">
                                     <label class="form-label">Kategori Drawing :</label>
                                     <select class="form-select" name="group2" id="group2" required>
                                         <option value="" disabled selected>Pilih Opsi</option>
+                                        <option value="0" data-group2="Other">Other</option>
                                         <option value="1" data-group2="Jig & Tools">Jig & Tools</option>
                                         <option value="2" data-group2="Mesin">Mesin</option>
                                         <option value="3" data-group2="Layout">Layout</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="proses-produksi-group">
                                     <label class="form-label">Proses Produksi :</label>
                                     <select class="form-select" name="group3" id="group3" required>
                                         <option value="" disabled selected>Pilih Opsi</option>
+                                        <option value="0" data-type="Other" data-proses="Other">Other</option>
                                         <option value="1" data-type="Produksi 1" data-proses="Lead Part">Lead Part</option>
                                         <option value="2" data-type="Produksi 1" data-proses="Grid Casting">Grid Casting</option>
                                         <option value="3" data-type="Produksi 1" data-proses="Lead Powder Pasting">Lead Powder Pasting</option>
@@ -89,19 +73,19 @@
                                         <option value="9" data-type="Produksi 1" data-proses="Wide Strip & Punch Grid">Wide Strip & Punch Grid</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="sub-proses-produksi-group">
                                     <label class="form-label">Sub Proses Produksi:</label>
                                     <select class="form-select" name="sub_proses" id="sub_proses" required>
                                         <option value="" disabled selected>Pilih Opsi</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="type-sub-proses-produksi-group">
                                     <label class="form-label">Type Sub Proses Produksi:</label>
                                     <select class="form-select" name="type_sub" id="type_sub" required>
                                         <option value="">Pilih Item</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="nomor_mesin">
                                     <label class="form-label">Nomer mesin :</label>
                                     <select class="form-select" name="no_mesin" id="no_mesin" required>
                                         <option value="" disabled selected>Pilih Opsi</option>
@@ -119,6 +103,21 @@
                                         <option value="M(N)" data-mesin="">Nomor Mesin Lainnya</option>
                                     </select>
                                     <div id="additional-input-container"></div>
+                                </div>
+                                <div class="form-group" id="nomor_mesin2">
+                                    <label class="form-label">Nomer mesin :</label>
+                                    <select class="form-select" name="no_mesin2" id="no_mesin2" required>
+                                        <option value="" disabled selected>Pilih Opsi</option>
+                                        <option value="PCE" data-mesin="Proses Eng">Proses Eng</option>
+                                        <option value="PDE" data-mesin="Product Eng">Product Eng</option>
+                                        <option value="QC0" data-mesin="Quality">Quality</option>
+                                        <option value="MTN" data-mesin="Maintenance">Maintenance</option>
+                                        <option value="PR1" data-mesin="Produksi 1">Produksi 1</option>
+                                        <option value="PR2" data-mesin="Produksi 2">Produksi 2</option>
+                                        <option value="GA0" data-mesin="General Affair">General Affair</option>
+                                        <option value="EHS" data-mesin="EHS">EHS</option>
+                                        <option value="000" data-mesin="">Other</option>
+                                    </select>
                                 </div>
                                 <button type="button" class="btn btn-success" id="submitBtn">Submit</button>
                             </div>
@@ -155,7 +154,29 @@
 <script>
     $(document).ready(function() {
         const baseUrl = "<?= base_url() ?>";
+        $('#group2').change(function() {
+            if ($(this).val() == '0') { // 0 adalah nilai untuk "Other"
+                $('#sub-proses-produksi-group').hide();
+                $('#type-sub-proses-produksi-group').hide();
+                $('#nomor_mesin').hide();
+                $('#nomor_mesin2').show();
 
+                $('#sub_proses').prop('required', false);
+                $('#type_sub').prop('required', false);
+                $('#no_mesin').prop('required', false);
+                $('#no_mesin2').prop('required', true);
+            } else {
+                $('#sub-proses-produksi-group').show();
+                $('#type-sub-proses-produksi-group').show();
+                $('#nomor_mesin').show();
+                $('#nomor_mesin2').hide();
+
+                $('#sub_proses').prop('required', true);
+                $('#type_sub').prop('required', true);
+                $('#no_mesin').prop('required', true);
+                $('#no_mesin2').prop('required', false);
+            }
+        });
         initializeDocument(baseUrl);
     });
 
@@ -174,12 +195,12 @@
             const additionalInputContainer = $('#additional-input-container');
 
             if (selectedOption === 'M(N)') {
-                additionalInputContainer.html(`
-                    <div class="form-group">
+                additionalInputContainer.html(
+                    `<div class="form-group">
                         <label class="form-label">Masukkan Nomor Mesin:</label>
                         <input type="text" id="input_no_mesin" name="input_no_mesin" class="form-control" placeholder="Masukkan Nomor Mesin" required>
-                    </div>
-                `);
+                    </div>`
+                );
             } else {
                 additionalInputContainer.empty();
             }
@@ -220,6 +241,13 @@
                     sub_proses.append(option);
                 });
 
+                // Tambahkan opsi 'Other'
+                const otherOption = $('<option></option>')
+                    .val('Other')
+                    .text('Other')
+                    .data('no_subProses', '00');
+                sub_proses.append(otherOption);
+
             },
             error: function(xhr, status, error) {
                 console.error('Error in AJAX request:', status, error);
@@ -259,7 +287,12 @@
                     console.error(response.error);
                     return;
                 }
-
+                // Tambahkan opsi 'Other'
+                const otherOption = $('<option></option>')
+                    .val('Other')
+                    .text('Other')
+                    .data('no_type', '00');
+                type_sub.append(otherOption);
                 response.forEach(function(item) {
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
@@ -267,6 +300,8 @@
                         .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
+
+
 
             },
             error: function(xhr, status, error) {
@@ -293,6 +328,12 @@
                     console.error(response.error);
                     return;
                 }
+                // Tambahkan opsi 'Other'
+                const otherOption = $('<option></option>')
+                    .val('Other')
+                    .text('Other')
+                    .data('no_type', '00');
+                type_sub.append(otherOption);
 
                 response.forEach(function(item) {
                     const option = $('<option></option>')
@@ -301,6 +342,7 @@
                         .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
+
 
             },
             error: function(xhr, status, error) {
@@ -330,18 +372,43 @@
     function submitData(baseUrl) {
         var formData = new FormData();
         formData.append('nama_file', $('#nama_file').val());
-        //formData.append('nama_penulis', $('#penulis').val());
-        formData.append('group2', $('#group2').val());
-        formData.append('group3', $('#group3').val());
-        formData.append('no_mesin', $('#no_mesin').val());
-        formData.append('sub_proses', $('#sub_proses').find(':selected').data('no_subProses'));
-        formData.append('type_sub', $('#type_sub').find(':selected').data('no_type'));
-        formData.append('proses_produksi', $('#group3').find(':selected').data('type'));
-        formData.append('no_mesin-string', $('#no_mesin').find(':selected').data('mesin'));
-        formData.append('group2-string', $('#group2').find(':selected').data('group2'));
-        formData.append('group3-string', $('#group3').find(':selected').data('proses'));
-        formData.append('sub_proses-string', $('#sub_proses').val());
-        formData.append('type_sub-string', $('#type_sub').val());
+        let group2 = $('#group2').val();
+        formData.append('group2', group2);
+
+        let no_mesin_string = '';
+
+        if (group2 == '0') {
+            formData.append('group3', $('#group3').val());
+            formData.append('sub_proses', '00');
+            formData.append('type_sub', '00');
+            formData.append('no_mesin', $('#no_mesin2').val());
+            no_mesin_string = $('#no_mesin2').find(':selected').data('mesin') || '';
+            formData.append('no_mesin-string', no_mesin_string);
+            formData.append('group2-string', $('#group2').find(':selected').data('group2'));
+            formData.append('group3-string', $('#group3').find(':selected').data('proses'));
+            formData.append('sub_proses-string', 'other');
+            formData.append('type_sub-string', 'other');
+
+        } else {
+            formData.append('group3', $('#group3').val());
+            let no_mesin = $('#no_mesin').val();
+            let no_mesin_string = $('#no_mesin').find(':selected').data('mesin');
+
+            if (no_mesin === 'M(N)') {
+                no_mesin = $('#input_no_mesin').val();
+                no_mesin_string = 'Mesin ke ' + no_mesin; // Change this line
+            }
+            formData.append('no_mesin', no_mesin);
+            formData.append('sub_proses', $('#sub_proses').find(':selected').data('no_subProses'));
+            formData.append('type_sub', $('#type_sub').find(':selected').data('no_type'));
+            formData.append('proses_produksi', $('#group3').find(':selected').data('type'));
+
+            formData.append('no_mesin-string', no_mesin_string);
+            formData.append('group2-string', $('#group2').find(':selected').data('group2'));
+            formData.append('group3-string', $('#group3').find(':selected').data('proses'));
+            formData.append('sub_proses-string', $('#sub_proses').val());
+            formData.append('type_sub-string', $('#type_sub').val());
+        }
 
         $.ajax({
             url: baseUrl + 'pdfnumber/generate',

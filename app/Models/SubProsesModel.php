@@ -19,8 +19,9 @@ class SubProsesModel extends Model
             ->findAll();
     }
 
-    public function getAllData(){
+    public function getAllData()
+    {
         return $this->select('sub_proses_produksi.*')
-        ->findAll();
+            ->findAll();
     }
 }

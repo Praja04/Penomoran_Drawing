@@ -15,7 +15,7 @@
                                         <div class="box-body pe-0 ps-lg-50 ps-15 py-0">
                                             <div class="row align-items-center">
                                                 <div class="col-12 col-lg-8">
-                                                    <h1 class="fs-40 text-white">Drawing Published</h1>
+                                                    <h1 class="fs-40 text-white">Drawing Trial</h1>
                                                     <p class="text-white mb-0 fs-20">
                                                         PT.Century Batteries Indonesia
                                                     </p>
@@ -30,7 +30,7 @@
                             </div>
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3>List All Drawing Published</h3>
+                                    <h3>List All Drawing Trial</h3>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -38,93 +38,33 @@
                                             <div class="box-body">
                                                 <div class="table-responsive">
                                                     <div class="row">
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Produksi</label>
-                                                                <select class="form-select" id="filter-select" style="width: 100px; align-items:right">
-                                                                    <option value="">Semua</option>
-                                                                    <option value="Produksi 1">Produksi 1</option>
-                                                                    <option value="Produksi 2">Produksi 2</option>
-                                                                    <!-- Tambahkan opsi lainnya sesuai kebutuhan -->
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Proses</label>
-                                                                <select class="form-select" id="filter-select2" style="width: 100px; align-items:right">
-                                                                    <option value="">Semua</option>
-                                                                    <option value="Lead Part" data-type="Produksi 1" data-proses="Lead Part">Lead Part</option>
-                                                                    <option value="Grid Casting" data-type="Produksi 1" data-proses="Grid Casting">Grid Casting</option>
-                                                                    <option value="Lead Powder Pasting" data-type="Produksi 1" data-proses="Lead Powder Pasting">Lead Powder Pasting</option>
-                                                                    <option value="Formation Drying Charging" data-type="Produksi 1" data-proses="Formation Drying Charging">Formation Drying Charging</option>
-                                                                    <option value="Assembly" data-type="Produksi 2" data-proses="Assembly">Assembly</option>
-                                                                    <option value="Wet" data-type="Produksi 2" data-proses="Wet">Wet</option>
-                                                                    <option value="MCB" data-type="Produksi 2" data-proses="MCB">MCB</option>
-                                                                    <option value="Telecom" data-type="Produksi 2" data-proses="Telecom">Telecom</option>
-                                                                    <option value="Wide Strip & Punch Grid" data-type="Produksi 1" data-proses="Wide Strip & Punch Grid">Wide Strip & Punch Grid</option>
-                                                                    <!-- Tambahkan opsi lainnya sesuai kebutuhan -->
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Sub Proses</label>
-                                                                <select class="form-select" id="filter-select3" style="width: 100px; align-items:right">
-                                                                    <option value="">Semua</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Type Sub Proses</label>
-                                                                <select class="form-select" id="filter-select4" style="width: 100px; align-items:right">
-                                                                    <option value="">Semua</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <button id="reset-button" class="btn btn-secondary mt-2">Reset Filter</button>
-                                                        </div>
+
                                                     </div><br><br>
                                                     <table id="example122" class="table table-bordered table-separated">
                                                         <thead>
                                                             <tr>
                                                                 <th>No</th>
-                                                                <th>Number Drawing</th>
                                                                 <th>Nama Penulis</th>
-                                                                <th>Produksi</th>
-                                                                <th>Path Drawing</th>
-                                                                <th>Revisi ke-</th>
                                                                 <th>Nama Drawing</th>
-                                                                <th>Status</th>
                                                                 <th>File</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="user2">
                                                             <?php $i = 1; ?>
-                                                            <?php foreach ($All as $user) : ?>
-                                                                <?php if ($user['status'] == 'masspro' && $user['verifikasi_admin'] == 1) : ?>
-                                                                    <tr>
-                                                                        <td><?= $i++; ?></td>
-                                                                        <td><?= $user['number']; ?></td>
-                                                                        <td><?= $user['nama_penulis']; ?></td>
-                                                                        <td><?= $user['proses_produksi']; ?></td>
-                                                                        <td><?= $user['pdf_number_string']; ?></td>
-                                                                        <td><?php if ($user['revisi'] == null) {
-                                                                                echo ('Pengajuan Pertama');
-                                                                            } else {
-                                                                                echo ($user['revisi']);
-                                                                            } ?></td>
-                                                                        <td><?= $user['nama_file']; ?></td>
-                                                                        <td><?= $user['status']; ?></td>
-                                                                        <td>
-                                                                            <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['pdf_path']); ?>">
-                                                                                <i class="fa fa-file-pdf-o"></i> Lihat PDF
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php endif; ?>
+                                                            <?php foreach ($data as $user) : ?>
+
+                                                                <tr>
+                                                                    <td><?= $i++; ?></td>
+                                                                    <td><?= $user['nama_drafter']; ?></td>
+                                                                    <td><?= $user['nama_part']; ?></td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/trial/' . $user['drawing_pdf']); ?>">
+                                                                            <i class="fa fa-file-pdf-o"></i> Lihat PDF
+                                                                        </button>
+                                                                    </td>
+
+                                                                </tr>
+
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>

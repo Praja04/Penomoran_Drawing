@@ -10,13 +10,25 @@
 						<li class="treeview">
 							<a href="#">
 								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Order Drawing</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('order/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Drawing</a></li>
+								<li><a href="<?= base_url('status/order') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Status Order Drawing</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
 								<span>Generate & Upload</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="<?= base_url('/pdfnumber') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Penomoran Drawing</a></li>
-								<li><a href="<?= base_url('/insert/pdf') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Upload PDF</a></li>
+								<li><a href="<?= base_url('pdfnumber') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Penomoran Drawing</a></li>
+								<li><a href="<?= base_url('insert/pdf') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Upload PDF</a></li>
 							</ul>
 						</li>
 						<li class="treeview">
@@ -27,12 +39,24 @@
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="<?= base_url('/revisi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Revisi Drawing</a></li>
+								<li><a href="<?= base_url('revisi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Revisi Drawing</a></li>
 
 							</ul>
 						</li>
-					<?php elseif (session()->get('role') == 'admin') : ?>
 
+					<?php elseif (session()->get('role') == 'admin') : ?>
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Dashboard</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('dashboard') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Dashboard</a></li>
+
+							</ul>
+						</li>
 						<li class="treeview">
 							<a href="#">
 								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
@@ -41,19 +65,21 @@
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="<?= base_url('/verifikasi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Verifikasi <span id="notif_verifikasi"></a></li>
-								<li><a href="<?= base_url('/update/subproses/') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Update Sub Proses</a></li>
+								<li><a href="<?= base_url('verifikasi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Verifikasi <span id="notif_verifikasi"></a></li>
+								<li><a href="<?= base_url('update/subproses/') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Update Sub Proses</a></li>
+								<li><a href="<?= base_url('update/typesubproses') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Update Type Sub Proses</a></li>
 							</ul>
 						</li>
 						<li class="treeview">
 							<a href="#">
 								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
-								<span>Drawing Publish</span>
+								<span>Publish & Trial</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="<?= base_url('/publish') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Published</a></li>
+								<li><a href="<?= base_url('publish') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Published</a></li>
+								<li><a href="<?= base_url('drawing/trial') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
 							</ul>
 						</li>
 						<li class="treeview">
@@ -64,7 +90,69 @@
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="<?= base_url('/logbook') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Log Book Drawing</a></li>
+								<li><a href="<?= base_url('logbook') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Log Book Drawing</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Order Drawing</span>
+								<span class="pull-right-container" id="approve">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('order/external') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Eksternal PCE <span id="notif_approve"></a></li>
+								<li><a href="<?= base_url('order/internal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Internal PCE</a></li>
+							</ul>
+						</li>
+					<?php elseif (session()->get('role') == 'kasi') : ?>
+
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Dashboard</span>
+								<span class="pull-right-container" id="verifikasi">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('dashboard') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Dashboard</a></li>
+
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Publish & Trial</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('publish/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Published</a></li>
+								<li><a href="<?= base_url('trial/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Log Book</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('logbooks') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Log Book Drawing</a></li>
+							</ul>
+						</li>
+					<?php elseif (session()->get('role') == 'reader_pce') : ?>
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>View Drawing</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('listpdf') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Publish</a></li>
+								<li><a href="<?= base_url('trial/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
 							</ul>
 						</li>
 					<?php else : ?>
@@ -76,7 +164,7 @@
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="<?= base_url('/listpdf') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Pdf</a></li>
+								<li><a href="<?= base_url('listpdf') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing</a></li>
 							</ul>
 						</li>
 					<?php endif; ?>
@@ -106,6 +194,27 @@
 					} else {
 						$('#verifikasi').removeAttr('id');
 						$('#notif_verifikasi').removeAttr('id');
+
+					}
+
+				},
+				error: function(error) {
+					console.log('Error fetching data:', error);
+				}
+			});
+			$.ajax({
+				url: '<?= base_url() ?>total/approve',
+				type: 'GET',
+				success: function(response) {
+					const data = response.ApproveCount;
+
+					if (data != 0) {
+						$('#approve').html('<i class="si-info si"></i>').css('color', 'red');
+						$('#notif_approve').text(data).css('color', 'red');
+
+					} else {
+						$('#approve').removeAttr('id');
+						$('#notif_approve').removeAttr('id');
 
 					}
 

@@ -15,7 +15,7 @@
                                         <div class="box-body pe-0 ps-lg-50 ps-15 py-0">
                                             <div class="row align-items-center">
                                                 <div class="col-12 col-lg-8">
-                                                    <h1 class="fs-40 text-white">Drawing Pdf</h1>
+                                                    <h1 class="fs-40 text-white">Log Book Drawing</h1>
                                                     <p class="text-white mb-0 fs-20">
                                                         PT.Century Batteries Indonesia
                                                     </p>
@@ -92,38 +92,34 @@
                                                             <tr>
                                                                 <th>No</th>
                                                                 <th>Number Drawing</th>
-                                                                <th>Produksi</th>
-                                                                <th>Path Drawing</th>
-                                                                <th>Revisi ke-</th>
                                                                 <th>Nama Drawing</th>
-                                                                <th>File</th>
+                                                                <th>Nama Penulis</th>
+                                                                <th>Tanggal Pengajuan</th>
+                                                                <th>Path Drawing</th>
+                                                                <th>Produksi</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="user2">
                                                             <?php $i = 1; ?>
-                                                            <?php foreach ($All as $user) : ?>
-                                                                <?php if ($user['status'] == 'masspro' && $user['verifikasi_admin'] == 1) : ?>
-                                                                    <tr>
-                                                                        <td><?= $i++; ?></td>
-                                                                        <td><?= $user['number']; ?></td>
-                                                                        <td><?= $user['proses_produksi']; ?></td>
-                                                                        <td><?= $user['pdf_number_string']; ?></td>
-                                                                        <td><?php if ($user['revisi'] == null) {
-                                                                                echo ('Pengajuan Pertama');
-                                                                            } else {
-                                                                                echo ($user['revisi']);
-                                                                            } ?></td>
-                                                                        <td><?= $user['nama_file']; ?></td>
-                                                                        <td>
-                                                                            <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['pdf_path']); ?>">
-                                                                                <i class="fa fa-file-pdf-o"></i> Lihat PDF
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php endif; ?>
+                                                            <?php foreach ($data as $user) : ?>
+
+                                                                <tr>
+                                                                    <td><?= $i++; ?></td>
+                                                                    <td><?= $user['number']; ?></td>
+                                                                    <td><?= $user['nama_file']; ?></td>
+                                                                    <td><?= $user['nama_penulis']; ?></td>
+                                                                    <td><?= $user['created_at']; ?></td>
+                                                                    <td><?= $user['pdf_number_string']; ?></td>
+                                                                    <td><?= $user['proses_produksi']; ?></td>
+                                                                    <td style="display: flex; gap: 5px;">
+                                                                        <a class="btn btn-primary" href=" <?= base_url('logbooks/' . $user['id']) ?>">
+                                                                            <i class="mdi mdi-eye"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
                                                             <?php endforeach; ?>
                                                         </tbody>
-
                                                     </table>
                                                 </div>
                                             </div>
@@ -140,7 +136,7 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                <h5 class="modal-title" id="pdfModalLabel">Drawing Viewer</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -151,15 +147,40 @@
                 </div>
 
             </div>
+
+            <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="alertModalLabel">Notif</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modalMessage">
+                            <!-- Message will be inserted here -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="modalOk" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
         </section>
         <!-- /.content -->
     </div>
 </div>
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
-    const baseUrl = "<?= base_url() ?>";
-    $(document).ready(function() {
 
+    const baseUrl = "<?= base_url() ?>";
+
+    $(document).ready(function() {
+        $('.btn-pdf-modal').on('click', function() {
+            var pdfUrl = $(this).data('pdf');
+            $('#pdfViewer').attr('src', pdfUrl);
+            $('#pdfModal').modal('show');
+        });
 
         handleProsesChange();
         handleItemChange();
@@ -173,11 +194,8 @@
         $('#reset-button').click(function() {
             resetFilters();
         });
-
-        $('.btn-pdf-modal').on('click', function() {
-            var pdfUrl = $(this).data('pdf');
-            $('#pdfViewer').attr('src', pdfUrl);
-            $('#pdfModal').modal('show');
+        $('#modalOk').click(function() {
+            location.reload();
         });
 
         $('#example122').DataTable({
@@ -188,6 +206,7 @@
             "info": true,
             "autoWidth": false
         });
+
     });
 
     function filterTable() {
@@ -201,10 +220,10 @@
         var rows = $('#user2 tr');
 
         rows.each(function() {
-            var produksi = $(this).find('td:nth-child(3)').text().toLowerCase(); // Kolom Produksi
-            var proses = $(this).find('td:nth-child(4)').text().toLowerCase(); // Kolom Proses
-            var proses3 = $(this).find('td:nth-child(4)').text().toLowerCase(); // Kolom Proses 3
-            var proses4 = $(this).find('td:nth-child(4)').text().toLowerCase();
+            var produksi = $(this).find('td:nth-child(7)').text().toLowerCase(); // Kolom Produksi
+            var proses = $(this).find('td:nth-child(6)').text().toLowerCase(); // Kolom Proses
+            var proses3 = $(this).find('td:nth-child(6)').text().toLowerCase(); // Kolom Proses 3
+            var proses4 = $(this).find('td:nth-child(6)').text().toLowerCase(); // Kolom Proses 4
 
             // Inisialisasi variabel untuk mengecek apakah baris sesuai dengan filter
             var match1 = filter1 === "" || produksi.includes(filter1);
@@ -226,7 +245,7 @@
             const proses = $(this).find('option:selected');
             var selected_sub = proses.data('proses');
             updateSubProses(selected_sub);
-            // console.log($('#nama_file').val());
+            console.log($('#nama_file').val());
         });
     }
 
@@ -253,7 +272,7 @@
                     const option = $('<option></option>')
                         .val(item.jenis_sub_proses)
                         .text(item.jenis_sub_proses)
-                        .data('no_subProses', item.no_sub_proses)
+                        .data('no_subProses', item.no_sub_proses);
                     sub_proses.append(option);
                 });
             },
@@ -300,7 +319,7 @@
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
                         .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
+                        .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
             },
@@ -333,7 +352,7 @@
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
                         .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
+                        .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
             },
@@ -361,7 +380,7 @@
         if (callback) {
             $('#alertModal').on('hidden.bs.modal', function() {
                 callback();
-                $(this).off('hidden.bs.modal'); // Remove the callback to avoid multiple triggers
+                $(this).off('hidden.bs.modal');
             });
         }
     }

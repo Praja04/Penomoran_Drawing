@@ -159,7 +159,7 @@ class PdfNumberController extends BaseController
         $data = $this->pdfNumberModel->find($id);
         return view('user/pdf_upload_form', ['data' => $data]);
     }
-    
+
     public function uploadPdf()
     {
         if (!session()->get('is_login') || session()->get('role') != 'uploader') {
@@ -190,7 +190,7 @@ class PdfNumberController extends BaseController
             return redirect()->back()->with('error', 'Upload PDF gagal. Silahkan coba lagi.');
         }
     }
-   
+
     public function revisePdfNumber($id)
     {
         if (!session()->get('is_login') || session()->get('role') != 'uploader') {
@@ -221,7 +221,7 @@ class PdfNumberController extends BaseController
         $data = [
             'proses_produksi' => $this->request->getPost('proses_produksi'),
             'nama_file' => $this->request->getPost('nama_file'),
-             'nama_penulis' => $nama,
+            'nama_penulis' => $nama,
             'number' => $existingEntry['number'],
             'pdf_path' => $pdf_file_name,
             'pdf_number_string' => $this->request->getPost('pdf_number_string'),
@@ -311,5 +311,4 @@ class PdfNumberController extends BaseController
         $data['data'] = $this->pdfNumberModel->getRowsByNumber($number);
         return view('admin/logbook/logbook_numbers', $data);
     }
-
 }

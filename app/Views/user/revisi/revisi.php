@@ -96,6 +96,7 @@
                                                  <th>Nama Drawing</th>
                                                  <th>Tanggal Pengajuan</th>
                                                  <th>Revisi</th>
+                                                 <th>Feedback Admin</th>
                                                  <th>Verifikasi Admin</th>
                                              </tr>
                                          </thead>
@@ -113,13 +114,22 @@
                                                          <td><?= $user['created_at']; ?></td>
                                                          <td><a class="btn btn-primary" href="<?= base_url('pdf/revise/' . $user['id']) ?>">Revisi</a></td>
                                                          <td>
+                                                             <?php if ($user['feedback_admin'] != null) : ?>
+                                                                 <?= $user['feedback_admin'] ?>
+                                                             <?php else : ?>
+                                                                 -
+                                                             <?php endif; ?>
+                                                         </td>
+
+
+                                                         <td>
                                                              <?php
                                                                 if ($user['verifikasi_admin'] == 0) {
                                                                     echo 'Belum Diverifikasi';
                                                                 } elseif ($user['verifikasi_admin'] == 1) {
-                                                                    echo 'Sudah Verifikasi';
+                                                                    echo '<button class="btn btn-success">Verifikasi Diterima</button>';
                                                                 } else {
-                                                                    echo 'Verifikasi Ditolak';
+                                                                    echo '<button class="btn btn-danger">Verifikasi Ditolak</button>';
                                                                 }
                                                                 ?>
                                                          </td>

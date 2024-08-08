@@ -11,6 +11,12 @@ class TypeSubModel extends Model
 
     protected $allowedFields    = ['no_type', 'proses', 'type_sub_proses', 'sub_proses'];
 
+    public function getAllData()
+    {
+        return $this->select('type_sub_proses.*')
+            ->findAll();
+    }
+
     public function getItemType($proses)
     {
         // Lakukan query untuk mengambil data ITEM berdasarkan nilai SUPPLIER 2024

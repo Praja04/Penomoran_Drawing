@@ -12,7 +12,7 @@
                         <div class="box-body pe-0 ps-lg-50 ps-15 py-0">
                             <div class="row align-items-center">
                                 <div class="col-12 col-lg-8">
-                                    <h1 class="fs-40 text-white">Update Sub Proses</h1>
+                                    <h1 class="fs-40 text-white">Update Type Sub Proses</h1>
                                     <p class="text-white mb-0 fs-20">
                                         PT.Century Batteries Indonesia
                                     </p>
@@ -27,7 +27,7 @@
             </div>
             <div class="box">
                 <div class="box-header with-border">
-                    <h3>Daftar Semua Sub Proses</h3>
+                    <h3>Daftar Semua Type Sub Proses</h3>
                 </div>
 
                 <div class="row">
@@ -39,9 +39,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nomor Sub Proses</th>
-                                                <th>Jenis Sub Proses</th>
+                                                <th>Nomor Type Sub Proses</th>
                                                 <th>Proses</th>
+                                                <th>Type Sub Proses</th>
+                                                <th>Sub Proses</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -50,12 +51,20 @@
                                             foreach ($All as $user) : ?>
                                                 <tr>
                                                     <td><?= $i++; ?></td>
-                                                    <td><?= $user['no_sub_proses']; ?></td>
-                                                    <td><?= $user['jenis_sub_proses'] ?></td>
-                                                    <td><?= $user['proses'] ?></td>
+                                                    <td><?= $user['no_type']; ?></td>
+                                                    <td><?= $user['proses']; ?></td>
+                                                    <td><?= $user['type_sub_proses'] ?></td>
+                                                    <td>
+                                                        <?php if ($user['sub_proses'] == null) : ?>
+                                                            General <?= $user['proses']; ?>
+                                                        <?php else : ?>
+                                                            <?= $user['sub_proses'] ?>
+                                                        <?php endif; ?>
+
+                                                    </td>
                                                     <td>
                                                         <button class="btn btn-danger btn-hapus" data-id="<?= $user['no'] ?>">Hapus</button>
-                                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-left" data-no="<?= $user['no'] ?>" data-sub="<?= $user['jenis_sub_proses'] ?>">Update</button>
+                                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-left" data-no="<?= $user['no'] ?>" data-type="<?= $user['type_sub_proses'] ?>" data-proses="<?= $user['proses'] ?>" data-sub="<?= $user['sub_proses'] ?>">Update</button>
                                                     </td>
                                                 </tr>
                                             <?php endforeach ?>
@@ -72,33 +81,40 @@
                     <!-- Formulir Dasar -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h4 class="box-title">Form Buat Sub Proses Baru</h4><br>
-                            <span>Silakan cek nomor sub proses pada tabel!</span>
+                            <h4 class="box-title">Form Buat Type Sub Proses Baru</h4><br>
+                            <span>Silakan cek nomor type sub proses pada tabel!</span>
                         </div>
                         <!-- /.box-header -->
-                        <form id="updatesubproses" enctype="multipart/form-data">
+                        <form id="updatetypesubproses" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label class="form-label">Nomor Sub Proses :</label>
-                                    <input type="text" id="nomor_sub" name="nomor_sub" class="form-control">
+                                    <label class="form-label">Nomor Type Sub Proses :</label>
+                                    <input type="number" id="no_type" name="no_type" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Jenis Sub Proses :</label>
-                                    <input type="text" id="jenis_sub" name="jenis_sub" class="form-control">
+                                    <label class="form-label">Type Sub Proses :</label>
+                                    <input type="text" id="type_sub_proses" name="type_sub_proses" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Proses :</label>
-                                    <select class="form-select" id="proses" name="proses" required>
+                                    <select class="form-select" id="proses-sub" name="proses" required>
                                         <option value="" disabled selected>Pilih Opsi</option>
-                                        <option value="Lead Part">Lead Part</option>
-                                        <option value="Grid Casting">Grid Casting</option>
-                                        <option value="Lead Powder Pasting">Lead Powder Pasting</option>
-                                        <option value="Formation Drying Charging">Formation Drying Charging</option>
-                                        <option value="Assembly">Assembly</option>
-                                        <option value="Wet">Wet</option>
-                                        <option value="MCB">MCB</option>
-                                        <option value="Telecom">Telecom</option>
-                                        <option value="Wide Strip & Punch Grid">Wide Strip & Punch Grid</option>
+                                        <option value="Other" data-type="Other" data-proses="Other">Other</option>
+                                        <option value="Lead Part" data-type="Produksi 1" data-proses="Lead Part">Lead Part</option>
+                                        <option value="Grid Casting" data-type="Produksi 1" data-proses="Grid Casting">Grid Casting</option>
+                                        <option value="Lead Powder Pasting" data-type="Produksi 1" data-proses="Lead Powder Pasting">Lead Powder Pasting</option>
+                                        <option value="Formation Drying Charging" data-type="Produksi 1" data-proses="Formation Drying Charging">Formation Drying Charging</option>
+                                        <option value="Assembly" data-type="Produksi 2" data-proses="Assembly">Assembly</option>
+                                        <option value="Wet" data-type="Produksi 2" data-proses="Wet">Wet</option>
+                                        <option value="MCB" data-type="Produksi 2" data-proses="MCB">MCB</option>
+                                        <option value="Telecom" data-type="Produksi 2" data-proses="Telecom">Telecom</option>
+                                        <option value="Wide Strip & Punch Grid" data-type="Produksi 1" data-proses="Wide Strip & Punch Grid">Wide Strip & Punch Grid</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Sub Proses:</label>
+                                    <select class="form-select" name="sub_proses" id="sub_proses_input" required>
+                                        <option value="" disabled selected>Pilih Opsi</option>
                                     </select>
                                 </div>
                                 <button type="button" class="btn btn-success" id="submitBtn">Submit</button>
@@ -114,14 +130,22 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Update Sub Proses</h5>
+                            <h5 class="modal-title">Update Type Sub Proses</h5>
                         </div>
                         <div class="modal-body">
                             <form id="update-form">
                                 <input type="hidden" id="no" name="no">
                                 <div class="form-group">
-                                    <label class="form-label">Update :</label>
-                                    <input class="form-control" type="text" id="sub_proses" name="sub_proses" required>
+                                    <label class="form-label">Proses :</label>
+                                    <input type="text" class="form-control" id="proses" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Sub Proses :</label>
+                                    <input type="text" class="form-control" id="sub_proses" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Update Type Sub Proses :</label>
+                                    <input class="form-control" type="text" id="type_sub_proses" name="type_sub_proses" required>
                                 </div>
 
                             </form>
@@ -143,7 +167,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Apakah Anda yakin ingin menghapus sub proses ini?
+                            Apakah Anda yakin ingin menghapus type sub proses ini?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -180,6 +204,7 @@
     let deleteId = null;
 
     $(document).ready(function() {
+        const baseUrl = "<?= base_url() ?>";
         $('#example122').DataTable({
             "paging": true,
             "lengthChange": true,
@@ -189,6 +214,8 @@
             "autoWidth": false
         });
 
+        handleProsesChange(baseUrl);
+
         // Submit untuk Create
         $('#submitBtn').on('click', function() {
             submitData(baseUrl);
@@ -197,17 +224,29 @@
         $('#modal-left').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var no = button.data('no');
+            var type = button.data('type');
+            var proses = button.data('proses');
             var sub = button.data('sub');
+
+
+            // Jika sub null, set sub dengan format 'General ' + proses
+            if (sub == '') {
+                sub = 'General ' + proses;
+            }
+
             var modal = $(this);
-            modal.find('#no').val(no);
-            modal.find('#sub_proses').attr('placeholder', sub);
+            modal.find('#no').val(no); // Mengatur nilai untuk input tersembunyi
+            modal.find('#type_sub_proses').attr('placeholder', type); // Mengatur placeholder untuk type_sub_proses
+            modal.find('#proses').val(proses); // Mengatur nilai untuk input proses
+            modal.find('#sub_proses').val(sub); // Mengatur nilai untuk input sub_proses
         });
+
 
         // Update
         $('#save-update-button').on('click', function() {
             var formData = new FormData($('#update-form')[0]);
             $.ajax({
-                url: baseUrl + 'update/sub_proses',
+                url: baseUrl + 'update/type_sub_proses',
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -240,10 +279,13 @@
     });
 
     function submitData(baseUrl) {
-        var formData = new FormData($('#updatesubproses')[0]);
-
+        var formData = new FormData();
+        formData.append('no_type', $('#no_type').val());
+        formData.append('type_sub_proses', $('#type_sub_proses').val());
+        formData.append('proses', $('#proses-sub').val());
+        formData.append('sub_proses', $('#sub_proses_input').val());
         $.ajax({
-            url: baseUrl + 'create/sub_proses',
+            url: baseUrl + 'create/type_sub_proses',
             type: 'POST',
             data: formData,
             processData: false,
@@ -255,14 +297,17 @@
                 }, 3000);
             },
             error: function(xhr, status, error) {
-                console.error('Error:', error);
+                console.error('Error Status:', status);
+                console.error('Error Message:', error);
+                console.error('Response Text:', xhr.responseText);
             }
         });
     }
 
+
     function deleteSubProses(baseUrl, id) {
         $.ajax({
-            url: baseUrl + 'delete/sub_proses/' + id,
+            url: baseUrl + 'delete/type_sub_proses/' + id,
             type: 'POST',
             success: function(response) {
                 showModal(response.message);
@@ -286,6 +331,54 @@
                 $(this).off('hidden.bs.modal'); // Hapus callback untuk menghindari trigger ganda
             });
         }
+    }
+
+    function handleProsesChange(baseUrl) {
+        $('#proses-sub').on('change', function() {
+            const proses = $(this).find('option:selected');
+            var selected_sub = proses.data('proses');
+            updateSubProses(baseUrl, selected_sub);
+        });
+    }
+
+    function updateSubProses(baseUrl, selected_sub) {
+        if (!selected_sub) return;
+
+        $.ajax({
+            url: baseUrl + 'sub/proses',
+            type: 'GET',
+            data: {
+                proses: selected_sub
+            },
+            success: function(response) {
+                const sub_proses = $('#sub_proses_input');
+                sub_proses.empty();
+                sub_proses.append('<option value="" disabled selected>Pilih Opsi</option>');
+                if (response.error) {
+                    console.error(response.error);
+                    return;
+                }
+
+                response.forEach(function(item) {
+                    const option = $('<option></option>')
+                        .val(item.jenis_sub_proses)
+                        .text(item.jenis_sub_proses)
+                        .data('no_subProses', item.no_sub_proses);
+                    sub_proses.append(option);
+                });
+
+                // Tambahkan opsi 'Other'
+                const otherOption = $('<option></option>')
+                    .val('Other')
+                    .text('Other')
+                    .data('no_subProses', '00');
+                sub_proses.append(otherOption);
+
+            },
+            error: function(xhr, status, error) {
+                console.error('Error in AJAX request:', status, error);
+            }
+        });
     }
 </script>
 
