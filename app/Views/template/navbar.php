@@ -131,7 +131,7 @@
 								<li><a href="<?= base_url('trial/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
 							</ul>
 						</li>
-						<li class="treeview">
+						<!-- <li class="treeview">
 							<a href="#">
 								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
 								<span>Log Book</span>
@@ -140,6 +140,18 @@
 							</a>
 							<ul class="treeview-menu">
 								<li><a href="<?= base_url('logbooks') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Log Book Drawing</a></li>
+							</ul>
+						</li> -->
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Order Drawing</span>
+								<span class="pull-right-container" id="approve">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('order/external') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Eksternal PCE <span id="notif_approve"></a></li>
+								<li><a href="<?= base_url('order/internal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Internal PCE</a></li>
 							</ul>
 						</li>
 					<?php elseif (session()->get('role') == 'reader_pce') : ?>
