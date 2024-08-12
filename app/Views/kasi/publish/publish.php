@@ -94,10 +94,8 @@
                                                                 <th>Number Drawing</th>
                                                                 <th>Nama Penulis</th>
                                                                 <th>Produksi</th>
-                                                                <th>Path Drawing</th>
                                                                 <th>Revisi ke-</th>
                                                                 <th>Nama Drawing</th>
-                                                                <th>Status</th>
                                                                 <th>File</th>
                                                             </tr>
                                                         </thead>
@@ -110,14 +108,12 @@
                                                                         <td><?= $user['number']; ?></td>
                                                                         <td><?= $user['nama_penulis']; ?></td>
                                                                         <td><?= $user['proses_produksi']; ?></td>
-                                                                        <td><?= $user['pdf_number_string']; ?></td>
                                                                         <td><?php if ($user['revisi'] == null) {
-                                                                                echo ('Pengajuan Pertama');
+                                                                                echo ('0');
                                                                             } else {
                                                                                 echo ($user['revisi']);
                                                                             } ?></td>
                                                                         <td><?= $user['nama_file']; ?></td>
-                                                                        <td><?= $user['status']; ?></td>
                                                                         <td>
                                                                             <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['pdf_path']); ?>">
                                                                                 <i class="fa fa-file-pdf-o"></i> Lihat PDF

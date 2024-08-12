@@ -60,7 +60,7 @@
                                                     <td><?= $user['keterangan'] ?></td>
                                                     <td><?= $user['tanggal_order'] ?></td>
                                                     <td><?= $user['tanggal_jatuh_tempo'] ?></td>
-                                                    <td><?=$user['status']?></td>
+                                                    <td><?= $user['status'] ?></td>
                                                     <td>
                                                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-center">
                                                             Ubah Status

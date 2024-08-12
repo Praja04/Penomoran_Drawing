@@ -102,6 +102,23 @@
                                 </div>
                             </a>
                         </div>
+                        <div class="col-6">
+
+                            <a class="box box-link-shadow text-center" href="<?= base_url('status/not/generate') ?>">
+                                <div class="box-body">
+                                    <div class="fs-24">
+                                        <h3>Not Generate</h3>
+                                    </div>
+                                    <br>
+                                    <span>(Tidak Digenerate)</span>
+                                </div>
+                                <div class="box-body bg-dark btsr-0 bter-0">
+                                    <p>
+                                        <span class="mdi mdi-briefcase fs-30"></span>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -157,6 +174,9 @@
                                                             </button>
                                                         <?php elseif ($user['status'] == 'selesai') : ?>
                                                             <button class="btn btn-success">Done</button>
+                                                            <button style="margin: 2px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-center-revert">
+                                                                ubah
+                                                            </button>
                                                         <?php else : ?>
                                                             -
                                                         <?php endif; ?>
@@ -166,16 +186,16 @@
                                                     <td>
                                                         <?php if ($user['status'] == 'selesai' && $user['drawing_pdf'] == null) : ?>
 
-                                                            <button type="button" class="btn btn-primary upload-button" data-bs-toggle="modal" data-bs-target="#modal-right" data-id-pdf="<?= $user['id'] ?>">
+                                                            <button style="margin: 2px;" type="button" class="btn btn-primary upload-button" data-bs-toggle="modal" data-bs-target="#modal-right" data-id-pdf="<?= $user['id'] ?>">
                                                                 Upload Pdf
                                                             </button>
 
                                                         <?php elseif ($user['status'] == 'selesai' && $user['drawing_pdf'] != null) : ?>
 
-                                                            <button type="button" class="btn btn-success btn-pdf-modal" data-pdf="<?= base_url('uploads/trial/' . $user['drawing_pdf']); ?>">
+                                                            <button style="margin: 2px;" type="button" class="btn btn-success btn-pdf-modal" data-pdf="<?= base_url('uploads/trial/' . $user['drawing_pdf']); ?>">
                                                                 <i class="fa fa-file-pdf-o"></i> Lihat PDF
                                                             </button>
-                                                            <button type="button" class="btn btn-warning ganti-button" data-bs-toggle="modal" data-bs-target="#modal-left" data-id-pdf="<?= $user['id'] ?>">Ganti PDF</button>
+                                                            <button style="margin: 2px;" type="button" class="btn btn-warning ganti-button" data-bs-toggle="modal" data-bs-target="#modal-left" data-id-pdf="<?= $user['id'] ?>">Ganti PDF</button>
 
                                                         <?php else : ?>
                                                             -
@@ -183,8 +203,11 @@
                                                     </td>
                                                     <td>
                                                         <?php if ($user['drawing_pdf'] != null && $user['number_pdf'] == null) : ?>
-                                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-generate">
+                                                            <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-generate">
                                                                 Generate
+                                                            </button>
+                                                            <button style="margin: 2px;" type="button" class="btn btn-danger" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-not-generate">
+                                                                Not Generate
                                                             </button>
                                                         <?php else : ?>
                                                             -
@@ -302,6 +325,33 @@
                     </div>
                 </div>
             </div>
+            <div class="modal center-modal fade" id="modal-not-generate" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Generate Number Drawing</h5>
+
+                        </div>
+                        <div class="modal-body">
+                            <form id="form2-content">
+                                <input type="hidden" id="id-order" name="id-order">
+                                <div class="form-group">
+                                    <label class="form-label">Yakin Tidak Generate Drawing ?</label>
+                                    <input type="hidden" id="status" name="status" value="not-generate">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer modal-footer-uniform">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                Batal
+                            </button>
+                            <button type="button" id="save-button-not" class="btn btn-primary float-end">
+                                Iya
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="modal center-modal fade" id="modal-center-proses" tabindex="-1">
                 <div class="modal-dialog">
@@ -358,6 +408,37 @@
                                 Close
                             </button>
                             <button type="button" id="save-button-done" class="btn btn-primary float-end">
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal center-modal fade" id="modal-center-revert" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update Status Order Drawing</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="upload-form-revert">
+                                <input type="hidden" id="id-order" name="id-order">
+                                <div class="form-group">
+                                    <label class="form-label">Status Order Drawing :</label>
+                                    <select class="form-select" name="status" id="status" required>
+                                        <option value="" disabled selected>Pilih Opsi</option>
+                                        <option value="proses">On Progress</option>
+                                        <option value="open">Open</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer modal-footer-uniform">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="button" id="save-button-revert" class="btn btn-primary float-end">
                                 Save changes
                             </button>
                         </div>
@@ -451,7 +532,29 @@
 <script>
     $(document).ready(function() {
         const baseUrl = "<?= base_url() ?>";
+        $('#group2').change(function() {
+            if ($(this).val() == '0') { // 0 adalah nilai untuk "Other"
+                $('#sub-proses-produksi-group').hide();
+                $('#type-sub-proses-produksi-group').hide();
+                $('#nomor_mesin').hide();
+                $('#nomor_mesin2').show();
 
+                $('#sub_proses').prop('required', false);
+                $('#type_sub').prop('required', false);
+                $('#no_mesin').prop('required', false);
+                $('#no_mesin2').prop('required', true);
+            } else {
+                $('#sub-proses-produksi-group').show();
+                $('#type-sub-proses-produksi-group').show();
+                $('#nomor_mesin').show();
+                $('#nomor_mesin2').hide();
+
+                $('#sub_proses').prop('required', true);
+                $('#type_sub').prop('required', true);
+                $('#no_mesin').prop('required', true);
+                $('#no_mesin2').prop('required', false);
+            }
+        });
         // Initialize DataTable with options
         var table = $('#example121').DataTable({
             "paging": true,
@@ -467,6 +570,12 @@
             var modal = $(this);
             modal.find('#id-order').val(idstatus);
         });
+        $('#modal-not-generate').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var idstatus = button.data('id-status');
+            var modal = $(this);
+            modal.find('#id-order').val(idstatus);
+        });
         // Tangkap event saat modal akan ditampilkan
         $('#modal-center-proses').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
@@ -475,6 +584,12 @@
             modal.find('#id-order').val(idstatus);
         });
         $('#modal-center-done').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var idstatus = button.data('id-status');
+            var modal = $(this);
+            modal.find('#id-order').val(idstatus);
+        });
+        $('#modal-center-revert').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var idstatus = button.data('id-status');
             var modal = $(this);
@@ -540,6 +655,64 @@
             });
         });
 
+
+        $('#save-button-not').on('click', function() {
+            var form = $('#form2-content')[0];
+            var formData = new FormData(form);
+            $.ajax({
+                url: baseUrl + 'update/status/number',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.message) {
+                        showModal('Data berhasil diperbarui!');
+                        $('#modal-not-generate').modal('hide');
+
+                    } else if (response.error) {
+                        showModal('Gagal memperbarui data: ' + response.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    showModal('Terjadi kesalahan saat mengirim data.');
+                }
+            });
+            $('#modalok').on('click', function() {
+                location.reload();
+            });
+        });
+
+        $('#save-button-revert').on('click', function() {
+            var form = $('#upload-form-revert')[0];
+            var formData = new FormData(form);
+
+            $.ajax({
+                url: baseUrl + 'update/status',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.message) {
+                        showModal('Data berhasil diperbarui!');
+                        $('#modal-center').modal('hide');
+
+                    } else if (response.error) {
+                        showModal('Gagal memperbarui data: ' + response.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    showModal('Terjadi kesalahan saat mengirim data.');
+                }
+            });
+            $('#modalok').on('click', function() {
+                location.reload();
+            });
+        });
+
         $('.btn-pdf-modal').on('click', function() {
             var pdfUrl = $(this).data('pdf');
             $('#pdfViewer').attr('src', pdfUrl);
@@ -548,10 +721,10 @@
 
         // Tangkap event saat modal akan ditampilkan
         $('#modal-right').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); 
+            var button = $(event.relatedTarget);
             var idpdf = button.data('id-pdf');
             var modal = $(this);
-            modal.find('#id-pdf').val(idpdf); 
+            modal.find('#id-pdf').val(idpdf);
         });
 
         $('#modal-left').on('show.bs.modal', function(event) {
@@ -928,7 +1101,7 @@
         if (callback) {
             $('#alertModal').on('hidden.bs.modal', function() {
                 callback();
-                $(this).off('hidden.bs.modal'); 
+                $(this).off('hidden.bs.modal');
             });
         }
     }

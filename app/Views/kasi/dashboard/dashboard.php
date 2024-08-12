@@ -179,8 +179,8 @@
             // Handle response for orders chart
             var order = orderData[0];
             var donutOptions = {
-                series: [order.proses, order.selesai, order.open, order.overdue],
-                labels: ["In Progress", "Completed", "Open", "Overdue"],
+                series: [order.open, order.selesai, order.proses, order.overdue],
+                labels: ["Open", "Done", "In Progress", "Overdue"],
                 chart: {
                     width: 328,
                     type: "donut",
@@ -209,7 +209,7 @@
                         },
                     },
                 }],
-                colors: ["#ffdd00", "#28a745", "#007bff", "#dc3545"], // Colors for the statuses
+                colors: ["#007bff", "#28a745", "#ffdd00", "#dc3545"], // Colors for the statuses
                 legend: {
                     position: "right",
                     height: 230,
@@ -309,11 +309,11 @@
                         data: openCounts,
                     },
                     {
-                        name: "Selesai",
+                        name: "Done",
                         data: selesaiCounts,
                     },
                     {
-                        name: "Proses",
+                        name: "In Progress",
                         data: prosesCounts,
                     },
                     {
@@ -347,7 +347,7 @@
                     show: true,
                     borderColor: "#f7f7f7",
                 },
-                colors: ["#6993ff", "#ff6f61", "#28a745", "#ffc107"],
+                colors: ["#007bff", "#28a745", "#ffdd00", "#dc3545"],
                 plotOptions: {
                     bar: {
                         horizontal: false,

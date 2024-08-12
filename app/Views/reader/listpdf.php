@@ -93,7 +93,6 @@
                                                                 <th>No</th>
                                                                 <th>Number Drawing</th>
                                                                 <th>Produksi</th>
-                                                                <th>Path Drawing</th>
                                                                 <th>Revisi ke-</th>
                                                                 <th>Nama Drawing</th>
                                                                 <th>File</th>
@@ -107,9 +106,8 @@
                                                                         <td><?= $i++; ?></td>
                                                                         <td><?= $user['number']; ?></td>
                                                                         <td><?= $user['proses_produksi']; ?></td>
-                                                                        <td><?= $user['pdf_number_string']; ?></td>
                                                                         <td><?php if ($user['revisi'] == null) {
-                                                                                echo ('Pengajuan Pertama');
+                                                                                echo ('0');
                                                                             } else {
                                                                                 echo ($user['revisi']);
                                                                             } ?></td>
