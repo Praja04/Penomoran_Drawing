@@ -38,13 +38,26 @@
                                             <div class="box-body">
                                                 <div class="table-responsive">
                                                     <div class="row">
-                                                    
+                                                        <div class="filter-buttons mb-3">
+                                                            <h4>Filter Nama Drafter</h4>
+                                                            <?php
+                                                            // Extract distinct suppliers from the $molds array
+                                                            $distinctdrafter = array_unique(array_column($data, 'nama_drafter'));
+                                                            ?>
+                                                            <select style="margin-top: 9px;" id="drafterFilter" class="form-control">
+                                                                <option value="all">All drafters</option>
+                                                                <?php foreach ($distinctdrafter as $drafter) : ?>
+                                                                    <option value="<?= htmlspecialchars($drafter) ?>"><?= htmlspecialchars($drafter) ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                        </div>
                                                     </div><br><br>
                                                     <table id="example122" class="table table-bordered table-separated">
                                                         <thead>
                                                             <tr>
                                                                 <th>No</th>
                                                                 <th>Nama Penulis</th>
+                                                                <th>Tanggal Order</th>
                                                                 <th>Nama Drawing</th>
                                                                 <th>File</th>
                                                             </tr>
@@ -56,6 +69,7 @@
                                                                 <tr>
                                                                     <td><?= $i++; ?></td>
                                                                     <td><?= $user['nama_drafter']; ?></td>
+                                                                    <td><?= $user['tanggal_order']; ?></td>
                                                                     <td><?= $user['nama_part']; ?></td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/trial/' . $user['drawing_pdf']); ?>">

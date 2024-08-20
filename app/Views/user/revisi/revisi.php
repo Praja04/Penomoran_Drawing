@@ -156,24 +156,7 @@
 
          handleProsesChange(baseUrl);
          handleItemChange(baseUrl);
-
-         // Event listener untuk setiap perubahan pada dropdown
-         $('#filter-select, #filter-select2, #filter-select3, #filter-select4').change(function() {
-             filterTable();
-         });
-
-         // Event listener untuk tombol reset
-         $('#reset-button').click(function() {
-             resetFilters();
-         });
-
-         $('.btn-pdf-modal').on('click', function() {
-             var pdfUrl = $(this).data('pdf');
-             $('#pdfViewer').attr('src', pdfUrl);
-             $('#pdfModal').modal('show');
-         });
-
-         $('#example122').DataTable({
+         var table = $('#example122').DataTable({
              "paging": true,
              "lengthChange": true,
              "searching": true,
@@ -181,38 +164,65 @@
              "info": true,
              "autoWidth": false
          });
+
+         // Handle filter changes
+         $('#filter-select, #filter-select2, #filter-select3, #filter-select4').on('change', function() {
+             filterTable();
+         });
+
+         $('#reset-button').on('click', function() {
+             resetFilters();
+         });
+
+         function filterTable() {
+             const produksi = $('#filter-select').val();
+             const proses = $('#filter-select2').val();
+             const subProses = $('#filter-select3').val();
+             const typeSubProses = $('#filter-select4').val();
+
+             // Filter by Produksi
+             table.column(2).search(produksi ? '^' + produksi + '$' : '', true, false);
+
+             // Filter by Proses, Sub Proses, and Type Sub Proses in Column 4
+             let searchValue = '';
+             if (proses) {
+                 searchValue += `(?=.*${proses})`; // Ensure 'proses' is in the text
+             }
+             if (subProses) {
+                 searchValue += `(?=.*${subProses})`; // Ensure 'subProses' is in the text
+             }
+             if (typeSubProses) {
+                 searchValue += `(?=.*${typeSubProses})`; // Ensure 'typeSubProses' is in the text
+             }
+
+             table.column(4).search(searchValue ? searchValue : '', true, false);
+
+             table.draw();
+         }
+
+
+
+
+         function resetFilters() {
+             $('#filter-select').val('');
+             $('#filter-select2').val('');
+             $('#filter-select3').val('');
+             $('#filter-select4').val('');
+             filterTable();
+         }
+
+         $('.btn-pdf-modal').on('click', function() {
+             var pdfUrl = $(this).data('pdf');
+             $('#pdfViewer').attr('src', pdfUrl);
+             $('#pdfModal').modal('show');
+         });
+
+
+
+
      });
 
-     function filterTable() {
-         // Ambil nilai dari setiap filter
-         var filter1 = $('#filter-select').val().toLowerCase();
-         var filter2 = $('#filter-select2').val().toLowerCase();
-         var filter3 = $('#filter-select3').val().toLowerCase();
-         var filter4 = $('#filter-select4').val().toLowerCase();
 
-         // Ambil semua baris dari tabel
-         var rows = $('#user2 tr');
-
-         rows.each(function() {
-             var produksi = $(this).find('td:nth-child(3)').text().toLowerCase(); // Kolom Produksi
-             var proses = $(this).find('td:nth-child(5)').text().toLowerCase(); // Kolom Proses
-             var proses3 = $(this).find('td:nth-child(5)').text().toLowerCase(); // Kolom Proses 3
-             var proses4 = $(this).find('td:nth-child(5)').text().toLowerCase(); // Kolom Proses 4
-
-             // Inisialisasi variabel untuk mengecek apakah baris sesuai dengan filter
-             var match1 = filter1 === "" || produksi.includes(filter1);
-             var match2 = filter2 === "" || proses.includes(filter2);
-             var match3 = filter3 === "" || proses3.includes(filter3);
-             var match4 = filter4 === "" || proses4.includes(filter4);
-
-             // Hanya tampilkan baris yang sesuai dengan semua filter yang aktif
-             if (match1 && match2 && match3 && match4) {
-                 $(this).show();
-             } else {
-                 $(this).hide();
-             }
-         });
-     }
 
      function handleProsesChange(baseUrl) {
          $('#filter-select2').on('change', function() {
@@ -334,17 +344,6 @@
                  console.error('Error in AJAX request:', status, error);
              }
          });
-     }
-
-     function resetFilters() {
-         // Reset nilai semua dropdown ke default (value "")
-         $('#filter-select').val('');
-         $('#filter-select2').val('');
-         $('#filter-select3').val('');
-         $('#filter-select4').val('');
-
-         // Panggil filterTable untuk menampilkan semua baris
-         filterTable();
      }
  </script>
  <?= $this->endSection() ?>

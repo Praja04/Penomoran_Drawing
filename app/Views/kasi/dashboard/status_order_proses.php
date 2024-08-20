@@ -61,8 +61,8 @@
                                                     <td><?= $user['keterangan'] ?></td>
                                                     <td><?= $user['tanggal_order'] ?></td>
                                                     <td><?= $user['tanggal_jatuh_tempo'] ?></td>
-                                                    <td><?=$user['status']?></td>
-                                                    
+                                                    <td><?= $user['status'] ?></td>
+
                                                 </tr>
                                             <?php endforeach; ?>
 
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-           
+
         </section>
     </div>
 </div>

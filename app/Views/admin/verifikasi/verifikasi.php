@@ -119,7 +119,7 @@
                                                                         <td><?= $user['pdf_number_string']; ?></td>
                                                                         <td><?= $user['proses_produksi']; ?></td>
                                                                         <td><?php if ($user['revisi'] == null) {
-                                                                                echo ('Pengajuan Pertama');
+                                                                                echo ('0');
                                                                             } else {
                                                                                 echo ($user['revisi']);
                                                                             } ?>
@@ -217,41 +217,12 @@
 </div>
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
+    const baseUrl = "<?= base_url() ?>";
     $(document).ready(function() {
         const baseUrl = "<?= base_url() ?>";
-
         handleProsesChange(baseUrl);
         handleItemChange(baseUrl);
-
-        // Event listener untuk setiap perubahan pada dropdown
-        $('#filter-select, #filter-select2, #filter-select3, #filter-select4').change(function() {
-            filterTable();
-        });
-
-        // Event listener untuk tombol reset
-        $('#reset-button').click(function() {
-            resetFilters();
-        });
-
-        $('.btn-pdf-modal').on('click', function() {
-            var pdfUrl = $(this).data('pdf');
-            $('#pdfViewer').attr('src', pdfUrl);
-            $('#pdfModal').modal('show');
-        });
-
-        // Tangkap event saat modal akan ditampilkan
-        $('#modal-right').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var idpdf = button.data('id-pdf');
-            var number = button.data('number');
-            var string = button.data('string');
-            var modal = $(this);
-            modal.find('#id-pdf').val(idpdf);
-            modal.find('#number').val(number);
-            modal.find('#string').val(string);
-        });
-
-        $('#example124').DataTable({
+        const table = $('#example124').DataTable({
             "paging": true,
             "lengthChange": true,
             "searching": true,
@@ -260,64 +231,58 @@
             "autoWidth": false
         });
 
-        $('#save-button').on('click', function() {
-            var form = $('#upload-form')[0];
-            var formData = new FormData(form);
-
-            $.ajax({
-                url: baseUrl + 'admin/updateHasilVerifikasi/', // Sesuaikan URL ini dengan endpoint Anda
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if (response.message) {
-                        showModal('Data berhasil diperbarui!');
-                        $('#modal-right').modal('hide');
-                        location.reload(); // Muat ulang halaman untuk memperbarui tampilan data
-                    } else if (response.error) {
-                        showModal('Gagal memperbarui data: ' + response.error);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                    showModal('Terjadi kesalahan saat mengirim data.');
-                }
-            });
+        // Event listener for filter changes
+        $('#filter-select, #filter-select2, #filter-select3, #filter-select4').on('change', function() {
+            filterTable();
         });
-    });
-    const baseUrl = "<?= base_url() ?>";
 
-    function ubahHasilVerifikasi(idpdf) {
-        $.ajax({
-            url: baseUrl + 'admin/updateHasilVerifikasi/' + idpdf,
-            type: 'POST',
-            success: function(response) {
-                if (response.success === true) {
-                    showModal('Berhasil Verifikasi');
-                    setTimeout(function() {
-                        window.location.href = baseUrl + 'verifikasi';
-                    }, 2000);
-                } else {
-                    showModal('Gagal mengubah hasil verifikasi!');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
+        $('#reset-button').on('click', function() {
+            resetFilters();
+        });
+
+        function filterTable() {
+            const produksi = $('#filter-select').val();
+            const proses = $('#filter-select2').val();
+            const subProses = $('#filter-select3').val();
+            const typeSubProses = $('#filter-select4').val();
+
+            // Filter by Produksi (Column 7)
+            table.column(6).search(produksi ? '^' + produksi + '$' : '', true, false);
+
+            // Combine filters for Proses, Sub Proses, and Type Sub Proses
+            let searchValue = '';
+            if (proses) {
+                searchValue += `(?=.*${proses})`;
             }
+            if (subProses) {
+                searchValue += `(?=.*${subProses})`;
+            }
+            if (typeSubProses) {
+                searchValue += `(?=.*${typeSubProses})`;
+            }
+
+            table.column(5).search(searchValue ? searchValue : '', true, false);
+            table.draw();
+        }
+
+        function resetFilters() {
+            $('#filter-select').val('');
+            $('#filter-select2').val('');
+            $('#filter-select3').val('');
+            $('#filter-select4').val('');
+            filterTable();
+        }
+
+        $('.btn-pdf-modal').on('click', function() {
+            var pdfUrl = $(this).data('pdf');
+            $('#pdfViewer').attr('src', pdfUrl);
+            $('#pdfModal').modal('show');
         });
-    }
 
-    function ubahHasilVerifikasi2(idpdf) {
-        // Show the confirmation modal
-        $('#confirmModal').modal('show');
-
-        // Handle the confirm button click
-        $('#confirmBtn').off('click').on('click', function() {
-            // Get the feedback
+        $('#confirmBtn').on('click', function() {
             var feedback = $('#feedback').val();
+            var idpdf = $(this).data('id'); // Ensure this data attribute is set
 
-            // Proceed with AJAX request to update verification result
             $.ajax({
                 url: baseUrl + 'admin/updateHasilVerifikasi2/' + idpdf,
                 type: 'POST',
@@ -325,7 +290,7 @@
                     feedback: feedback
                 },
                 success: function(response) {
-                    if (response.success === true) {
+                    if (response.success) {
                         showModal('Berhasil Verifikasi');
                         setTimeout(function() {
                             window.location.href = baseUrl + 'verifikasi';
@@ -342,39 +307,10 @@
                 }
             });
         });
-    }
 
 
-    function filterTable() {
-        // Ambil nilai dari setiap filter
-        var filter1 = $('#filter-select').val().toLowerCase();
-        var filter2 = $('#filter-select2').val().toLowerCase();
-        var filter3 = $('#filter-select3').val().toLowerCase();
-        var filter4 = $('#filter-select4').val().toLowerCase();
+    });
 
-        // Ambil semua baris dari tabel
-        var rows = $('#user2 tr');
-
-        rows.each(function() {
-            var produksi = $(this).find('td:nth-child(7)').text().toLowerCase(); // Kolom Produksi
-            var proses = $(this).find('td:nth-child(6)').text().toLowerCase(); // Kolom Proses
-            var proses3 = $(this).find('td:nth-child(6)').text().toLowerCase(); // Kolom Proses 3
-            var proses4 = $(this).find('td:nth-child(6)').text().toLowerCase();
-
-            // Inisialisasi variabel untuk mengecek apakah baris sesuai dengan filter
-            var match1 = filter1 === "" || produksi.includes(filter1);
-            var match2 = filter2 === "" || proses.includes(filter2);
-            var match3 = filter3 === "" || proses3.includes(filter3);
-            var match4 = filter4 === "" || proses4.includes(filter4);
-
-            // Hanya tampilkan baris yang sesuai dengan semua filter yang aktif
-            if (match1 && match2 && match3 && match4) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    }
 
     function handleProsesChange(baseUrl) {
         $('#filter-select2').on('change', function() {
@@ -389,7 +325,7 @@
         if (!selected_sub) return;
 
         $.ajax({
-            url: baseUrl + 'sub/proses',
+            url: baseUrl + '/sub/proses',
             type: 'GET',
             data: {
                 proses: selected_sub
@@ -408,7 +344,7 @@
                     const option = $('<option></option>')
                         .val(item.jenis_sub_proses)
                         .text(item.jenis_sub_proses)
-                        .data('no_subProses', item.no_sub_proses)
+                        .data('no_subProses', item.no_sub_proses);
                     sub_proses.append(option);
                 });
             },
@@ -455,7 +391,7 @@
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
                         .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
+                        .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
             },
@@ -488,7 +424,7 @@
                     const option = $('<option></option>')
                         .val(item.type_sub_proses)
                         .text(item.type_sub_proses)
-                        .data('no_type', item.no_type)
+                        .data('no_type', item.no_type);
                     type_sub.append(option);
                 });
             },
@@ -497,28 +433,6 @@
             }
         });
     }
-
-    function resetFilters() {
-        // Reset nilai semua dropdown ke default (value "")
-        $('#filter-select').val('');
-        $('#filter-select2').val('');
-        $('#filter-select3').val('');
-        $('#filter-select4').val('');
-
-        // Panggil filterTable untuk menampilkan semua baris
-        filterTable();
-    }
-
-    function showModal(message, callback) {
-        $('#modalMessage').text(message);
-        $('#alertModal').modal('show');
-
-        if (callback) {
-            $('#alertModal').on('hidden.bs.modal', function() {
-                callback();
-                $(this).off('hidden.bs.modal'); // Remove the callback to avoid multiple triggers
-            });
-        }
-    }
 </script>
+
 <?= $this->endSection() ?>

@@ -24,7 +24,8 @@
                     </div>
                 </div>
             </div>
-
+            <?php $secretKey = bin2hex(random_bytes(32));
+            echo $secretKey; ?>
             <div class="row">
                 <?php foreach ($courses as $course) : ?>
                     <div class="col-xl-3 col-md-6 col-12">

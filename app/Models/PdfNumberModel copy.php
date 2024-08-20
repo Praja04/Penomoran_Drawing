@@ -11,6 +11,7 @@ class PdfNumberModel extends Model
     protected $table = 'pdf_numbers';
     protected $primaryKey = 'id';
     protected $allowedFields = ['proses_produksi', 'nama_file', 'number', 'pdf_path', 'pdf_number_string', 'verifikasi_admin', 'revisi', 'status', 'nama_penulis'];
+
     public function getRowsByNumber($number)
     {
         return $this->where('number', $number)
@@ -30,7 +31,6 @@ class PdfNumberModel extends Model
     {
         $record = $this->find($id);
         if (!$record) {
-            // Jika tidak ada record dengan ID tersebut, kembalikan false atau lakukan tindakan yang sesuai
             return false;
         }
 
@@ -76,7 +76,7 @@ class PdfNumberModel extends Model
     ";
 
         $query = $this->db->query($sql);
-        return $query->getResultArray(); 
+        return $query->getResultArray();
     }
 
     public function checkNumberRevisions($number)
@@ -88,7 +88,7 @@ class PdfNumberModel extends Model
     {
         return $this->select('number, MAX(id) as id, MAX(nama_file) as nama_file, MAX(pdf_path) as pdf_path, MAX(pdf_number_string) as pdf_number_string, MAX(proses_produksi) as proses_produksi, MAX(verifikasi_admin) as verifikasi_admin, MAX(revisi) as revisi, MAX(status) as status, MAX(created_at) as created_at, MAX(nama_penulis) as nama_penulis')
             ->groupBy('number')
-            ->orderBy('created_at','DESC')
+            ->orderBy('created_at', 'DESC')
             ->findAll();
     }
 

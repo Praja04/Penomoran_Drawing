@@ -39,8 +39,7 @@
         </section>
     </div>
 </div>
-
-<script src="<?= base_url('assets/js/jquery-3.7.1.min.js') ?>" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         $('#submitBtn').on('click', function() {
@@ -61,7 +60,7 @@
             success: function(response) {
                 if (response.status === 'success') {
                     alert(response.message);
-                    window.location.href = '<?= base_url('insert/pdf') ?>';
+                    window.location.href = '<?= base_url('/insert/pdf') ?>';
                 } else {
                     alert(response.message);
                 }

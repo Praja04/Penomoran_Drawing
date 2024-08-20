@@ -105,6 +105,13 @@
 								<li><a href="<?= base_url('order/internal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Internal PCE</a></li>
 							</ul>
 						</li>
+						<li class="header">Mold CBI</li>
+						<li class="">
+							<a href="https://portal3.incoe.astra.co.id/pce-mold-management/public/dashboard-admin">
+								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
+								<span>Mold Management</span>
+							</a>
+						</li>
 					<?php elseif (session()->get('role') == 'kasi') : ?>
 
 						<li class="treeview">

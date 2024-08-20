@@ -165,14 +165,13 @@
                 </div>
             </div>
 
-          
+
         </section>
         <!-- /.content -->
     </div>
 </div>
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
-
     const baseUrl = "<?= base_url() ?>";
 
     $(document).ready(function() {

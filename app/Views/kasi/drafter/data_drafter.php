@@ -70,7 +70,7 @@
                                                 <th>Tanggal Order</th>
                                                 <th>Due Date</th>
                                                 <th>Status</th>
-
+                                                <th>File</th>
                                             </tr>
 
                                         </thead>
@@ -99,6 +99,15 @@
                                                         <?php endif; ?>
 
                                                     </td>
+                                                    <td>
+                                                        <?php if ($user['drawing_pdf'] != null) : ?>
+                                                            <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['drawing_pdf']); ?>">
+                                                                <i class="fa fa-file-pdf-o"></i> Lihat PDF
+                                                            </button>
+                                                        <?php else : ?>
+                                                            Belum Upload
+                                                        <?php endif; ?>
+                                                    </td>
 
                                                 </tr>
                                             <?php endforeach; ?>
@@ -116,12 +125,34 @@
 
         </section>
         <!-- /.content -->
+
+        <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModalLabel">Drawing Viewer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <embed id="pdfViewer" src="" type="application/pdf" width="100%" height="600px">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 
 <script>
+    $(document).ready(function() {
+
+        $('.btn-pdf-modal').on('click', function() {
+            var pdfUrl = $(this).data('pdf');
+            $('#pdfViewer').attr('src', pdfUrl);
+            $('#pdfModal').modal('show');
+        });
+    });
     $(function() {
         "use strict";
 
