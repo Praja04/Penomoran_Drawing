@@ -61,7 +61,19 @@
                                                     <td><?= $user['order_from'] ?></td>
                                                     <td><?= $user['keterangan'] ?></td>
                                                     <td><?= $user['tanggal_order'] ?></td>
-                                                    <td><?= $user['tanggal_jatuh_tempo'] ?></td>
+                                                    <td>
+                                                        <?php
+                                                        $tanggal_jatuh_tempo = strtotime($user['tanggal_jatuh_tempo']);
+                                                        $tanggal_sekarang = strtotime(date('Y-m-d'));
+
+                                                        if ($tanggal_jatuh_tempo < $tanggal_sekarang) : ?>
+                                                            <span style="color: red; font-weight: bold;">
+                                                                <?= $user['tanggal_jatuh_tempo']; ?> - Overdue
+                                                            </span>
+                                                        <?php else : ?>
+                                                            <?= $user['tanggal_jatuh_tempo']; ?>
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <td><?= $user['status'] ?></td>
                                                     <td>
                                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-center">
@@ -116,7 +128,18 @@
                                                     <td><?= $user['order_from'] ?></td>
                                                     <td><?= $user['keterangan'] ?></td>
                                                     <td><?= $user['tanggal_order'] ?></td>
-                                                    <td><?= $user['tanggal_jatuh_tempo'] ?></td>
+                                                    <td> <?php
+                                                            $tanggal_jatuh_tempo = strtotime($user['tanggal_jatuh_tempo']);
+                                                            $tanggal_sekarang = strtotime(date('Y-m-d'));
+
+                                                            if ($tanggal_jatuh_tempo < $tanggal_sekarang && $user['status'] !='selesai' ) : ?>
+                                                            <span style="color: red; font-weight: bold;">
+                                                                <?= $user['tanggal_jatuh_tempo']; ?> - Overdue
+                                                            </span>
+                                                        <?php else : ?>
+                                                            <?= $user['tanggal_jatuh_tempo']; ?>
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <td><?= $user['status'] ?></td>
 
                                                 </tr>

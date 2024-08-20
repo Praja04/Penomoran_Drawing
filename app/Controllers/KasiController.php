@@ -26,7 +26,7 @@ class KasiController extends BaseController
     }
     public function index()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
 
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
@@ -181,7 +181,7 @@ class KasiController extends BaseController
     //grafik
     public function data_order()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
 
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
@@ -193,7 +193,7 @@ class KasiController extends BaseController
     }
     public function data_drawing()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
 
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
@@ -205,7 +205,7 @@ class KasiController extends BaseController
     }
     public function data_drawing_drafters()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
 
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
@@ -218,7 +218,7 @@ class KasiController extends BaseController
 
     public function data_drafter($user_id)
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
 
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {

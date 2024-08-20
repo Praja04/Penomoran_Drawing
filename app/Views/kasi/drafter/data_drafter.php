@@ -84,7 +84,19 @@
                                                     <td><?= $user['order_from'] ?></td>
                                                     <td><?= $user['keterangan'] ?></td>
                                                     <td><?= $user['tanggal_order'] ?></td>
-                                                    <td><?= $user['tanggal_jatuh_tempo'] ?></td>
+                                                    <td>
+                                                        <?php
+                                                        $tanggal_jatuh_tempo = strtotime($user['tanggal_jatuh_tempo']);
+                                                        $tanggal_sekarang = strtotime(date('Y-m-d'));
+
+                                                        if ($tanggal_jatuh_tempo < $tanggal_sekarang && $user['status'] != 'selesai') : ?>
+                                                            <span style="color: red; font-weight: bold;">
+                                                                <?= $user['tanggal_jatuh_tempo']; ?> - Overdue
+                                                            </span>
+                                                        <?php else : ?>
+                                                            <?= $user['tanggal_jatuh_tempo']; ?>
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <td>
                                                         <?php if ($user['status'] == 'open') : ?>
                                                             <button style="margin: 2px;" class="btn btn-info">Open</button>
