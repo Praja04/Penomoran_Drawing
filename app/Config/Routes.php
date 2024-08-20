@@ -62,6 +62,7 @@ $routes->post('pdf/update/(:num)', 'UploaderController::updatePdf/$1');
 //update uploader
 $routes->get('status/order', 'UploaderController::status_order_drawing');
 $routes->get('status/generate', 'UploaderController::status_has_generate');
+$routes->get('status/not/generate', 'UploaderController::status_not_generate');
 $routes->get('status/open', 'UploaderController::status_order_open');
 $routes->get('status/over', 'UploaderController::status_order_over');
 $routes->get('status/proses', 'UploaderController::status_order_proses');

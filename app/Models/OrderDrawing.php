@@ -34,6 +34,14 @@ class OrderDrawing extends Model
             ->orderBy('created_at', 'DESC')
             ->findAll();
     }
+    public function getStatusorderNotGenerate($user_id)
+    {
+        return $this->where('user_id', $user_id)
+            ->where('terima_order', 'yes')
+            ->where('number_pdf', 'not-generate')
+            ->orderBy('created_at', 'DESC')
+            ->findAll();
+    }
     public function getStatusorderGenerate($user_id)
     {
         return $this->where('user_id', $user_id)

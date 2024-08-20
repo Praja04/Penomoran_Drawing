@@ -239,9 +239,12 @@ class AdminController extends BaseController
     public function order_drawing_external()
     {
 
-        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+        $allowed_roles = ['kasi', 'admin'];
+        $user_role = session()->get('role');
+
+        if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
         }
         $Getorders = $this->orderDrawing->getExternalOrders();
         $dataPdf = [
@@ -268,11 +271,12 @@ class AdminController extends BaseController
 
     public function terima_order()
     {
-        // if (!session()->get('is_login') || session()->get('role') != 'admin') {
-        //     return $this->response->setJSON(['error' => ' Anda tidak memiliki izin untuk Approve']);
-        // }
-        if (!session()->get('is_login') || session()->get('npk') != 1942) {
-            return $this->response->setJSON(['error' => ' Anda tidak memiliki izin untuk Approve']);
+        $allowed_roles = ['kasi', 'admin'];
+        $user_role = session()->get('role');
+
+        if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
         }
 
         $id_order = $this->request->getPost('id-order');

@@ -259,6 +259,23 @@ class UploaderController extends BaseController
 
         return view('user/order/hasgenerate', $data);
     }
+    public function status_not_generate()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'uploader') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        $username = session()->get('nama');
+        $user_id = session()->get('npk');
+
+
+        $data = [
+            'status' => $this->orderDrawing->getStatusorderNotGenerate($user_id),
+            'nama' => $username
+        ];
+
+        return view('user/order/not_generate', $data);
+    }
     public function status_order_open()
     {
         if (!session()->get('is_login') || session()->get('role') != 'uploader') {

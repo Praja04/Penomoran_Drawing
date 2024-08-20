@@ -43,9 +43,9 @@ class Auth extends BaseController
 
             if (!empty($data)) {
                 // Menentukan peran berdasarkan NPK
-                $npk_kasi = [2331, 2593, 3651, 4171, 3659];
+                $npk_kasi = [3517, 2331, 2593, 3651, 4171, 3659];
                 $npk_admin = [3650, 1942];
-                $npk_reader_pce = [3517, 2845, 570];
+                $npk_reader_pce = [2845, 570];
                 $npk_uploaders = [1028, 1637, 2872, 3399]; // Daftar NPK uploader
 
                 if (in_array($data['npk'], $npk_admin)) {
@@ -64,6 +64,7 @@ class Auth extends BaseController
                     // Simpan data ke sesi dan tampilkan halaman pemilihan peran
                     $this->session->set([
                         'username' => $data['username'],
+                        'admin_nama' => $data['nama'],
                         'nama' => $data['nama'],
                         'npk' => $data['npk'],
                         'id_divisi' => $data['id_divisi'],
