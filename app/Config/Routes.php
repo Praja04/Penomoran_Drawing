@@ -49,6 +49,10 @@ $routes->get('total/approve', 'AdminController::getTotalapprove');
 $routes->post('update/type_sub_proses', 'AdminController::updateTypeSubProses');
 $routes->post('delete/type_sub_proses/(:num)', 'AdminController::deleteTypeSubProses/$1');
 $routes->post('create/type_sub_proses', 'AdminController::create_typesubproses');
+$routes->get('jenis_project', 'AdminController::JenisProject');
+$routes->post('create/jenisproject', 'AdminController::createProject');
+$routes->post('delete/jenisproject/(:num)', 'AdminController::deletejenisProject/$1');
+$routes->post('update/jenis_project', 'AdminController::updatejenisProject');
 
 
 
@@ -73,6 +77,9 @@ $routes->post('update/status/number', 'UploaderController::updateStatusnumber');
 $routes->get('order/drawing', 'UploaderController::order_drawing');
 $routes->post('trial/update', 'UploaderController::inputPdfTrial');
 $routes->post('trial/pdf/(:num)', 'UploaderController::gantiPdfTrial/$1');
+$routes->post('submit/jenis_project', 'UploaderController::submitProject');
+$routes->post('submit/jenis_workshop', 'UploaderController::submitWorkshop');
+$routes->post('submit/jenis_progress', 'UploaderController::submitProgress');
 
 
 //reader
@@ -94,3 +101,7 @@ $routes->get('data/order', 'KasiController::data_order');
 $routes->get('data/drawing', 'KasiController::data_drawing');
 $routes->get('data/drawing/drafters', 'KasiController::data_drawing_drafters');
 $routes->get('data/drafter/(:num)', 'KasiController::data_drafter/$1');
+
+
+//pengajuan revisi
+$routes->post('pengajuan/revisi/(:num)', 'PdfNumberController::pengajuan_revisi/$1');

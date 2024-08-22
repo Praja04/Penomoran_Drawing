@@ -46,6 +46,7 @@ class KasiController extends BaseController
                 'bg_image' => 'st-1.svg' // You can adjust or vary this as needed
             ];
         }
+        $data['order'] = $this->orderDrawing->getTotalCountForAllUser();
         $data['status'] = $this->orderDrawing->getAllStatusOrderCount();
         $data['nama'] =  session()->get('nama');
         return view('kasi/dashboard/dashboard', $data);

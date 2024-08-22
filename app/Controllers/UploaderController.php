@@ -7,6 +7,8 @@ use App\Models\PdfNumberModel;
 use App\Models\SubProsesModel;
 use App\Models\TypeSubModel;
 use App\Models\OrderDrawing;
+use App\Models\JenisProject;
+use Exception;
 
 class UploaderController extends BaseController
 {
@@ -14,6 +16,7 @@ class UploaderController extends BaseController
     protected $subProsesModel;
     protected $typeSubModel;
     protected $orderDrawing;
+    protected $JenisProject;
 
     public function __construct()
     {
@@ -21,6 +24,7 @@ class UploaderController extends BaseController
         $this->subProsesModel = new SubProsesModel();
         $this->typeSubModel = new TypeSubModel();
         $this->orderDrawing = new OrderDrawing();
+        $this->JenisProject = new JenisProject();
     }
 
     public function index()
@@ -233,6 +237,7 @@ class UploaderController extends BaseController
         $data = [
             'status' => $this->orderDrawing->getStatusOrderCount($user_id),
             'drawing' => $this->orderDrawing->getStatusorder($user_id),
+            'jenis_project' => $this->JenisProject->getAllData(),
             'nama' => $username
         ];
 
@@ -482,5 +487,57 @@ class UploaderController extends BaseController
             'status' => 'error',
             'message' => 'Invalid request.',
         ]);
+    }
+
+    public function submitProject()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'uploader') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        try {
+            $id = $this->request->getPost('id-order');
+            $data = [
+                'project' => $this->request->getPost('nama_project')
+            ];
+            $this->orderDrawing->update($id, $data);
+            return $this->response->setJSON(['message' => 'Berhasil diperbarui!']);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['error' => 'Gagal menyimpan data !']);
+        }
+    }
+    public function submitWorkshop()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'uploader') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        try {
+            $id = $this->request->getPost('id-order');
+            $data = [
+                'workshop' => $this->request->getPost('workshop')
+            ];
+            $this->orderDrawing->update($id, $data);
+            return $this->response->setJSON(['message' => 'Berhasil diperbarui!']);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['error' => 'Gagal menyimpan data !']);
+        }
+    }
+    public function submitProgress()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'uploader') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        try {
+            $id = $this->request->getPost('id-order');
+            $data = [
+                'progress' => $this->request->getPost('progress')
+            ];
+            $this->orderDrawing->update($id, $data);
+            return $this->response->setJSON(['message' => 'Berhasil diperbarui!']);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['error' => 'Gagal menyimpan data !']);
+        }
     }
 }

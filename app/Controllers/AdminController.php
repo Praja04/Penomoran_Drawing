@@ -7,6 +7,7 @@ use App\Models\PdfNumberModel;
 use App\Models\SubProsesModel;
 use App\Models\TypeSubModel;
 use App\Models\OrderDrawing;
+use App\Models\JenisProject;
 
 class AdminController extends BaseController
 {
@@ -14,6 +15,7 @@ class AdminController extends BaseController
     protected $subProsesModel;
     protected $orderDrawing;
     protected $TypesubModel;
+    protected $JenisProject;
 
     public function __construct()
     {
@@ -21,6 +23,7 @@ class AdminController extends BaseController
         $this->subProsesModel = new SubProsesModel();
         $this->orderDrawing = new OrderDrawing();
         $this->TypesubModel = new TypeSubModel();
+        $this->JenisProject = new JenisProject();
     }
 
     public function getTotalMasspro()
@@ -426,6 +429,70 @@ class AdminController extends BaseController
         } catch (\Exception $e) {
             log_message('error', $e->getMessage());
             return $this->response->setJSON(['error' => 'Terjadi kesalahan saat memperbarui data.']);
+        }
+    }
+    // Jenis Project
+    public function JenisProject(){
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        $GetAlljenisProject = $this->JenisProject->getAllData();
+        $dataPdf['All'] = $GetAlljenisProject;
+        return view('admin/update_jenisProject', $dataPdf);
+    }
+    public function createProject()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        try {
+            $data = [
+                'nama_project' => $this->request->getPost('nama_project')
+            ];
+            $this->JenisProject->insert($data);
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil disimpan!']);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['error' => 'Terjadi kesalahan saat memasukan data.']);
+            
+        }
+    }
+
+    public function deletejenisProject($id)
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+        $result = $this->JenisProject->delete($id);
+
+        if ($result) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Deleted successfully']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete data']);
+        }
+    }
+
+    public function updatejenisProject()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'admin') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+
+        $input = $this->request->getPost();
+        $data = [
+            'nama_project' => $input['nama_project']
+        ];
+
+        $result = $this->JenisProject->update($input['id'], $data);
+
+        if ($result) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Jenis Project updated successfully']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to update Jenis Project']);
         }
     }
 }

@@ -6,18 +6,58 @@ use App\Controllers\BaseController;
 use App\Models\PdfNumberModel;
 use App\Models\SubProsesModel;
 use App\Models\TypeSubModel;
+use App\Models\HistoryPengajuanRevisi;
 
 class PdfNumberController extends BaseController
 {
     protected $pdfNumberModel;
     protected $subProsesModel;
     protected $typeSubModel;
+    protected $historyRevisi;
 
     public function __construct()
     {
         $this->pdfNumberModel = new PdfNumberModel();
         $this->subProsesModel = new SubProsesModel();
         $this->typeSubModel = new TypeSubModel();
+        $this->historyRevisi = new HistoryPengajuanRevisi();
+    }
+
+    public function pengajuan_revisi($idpdf)
+    {
+        // Get the komentar and nama from the request
+        $komentar = $this->request->getPost('komentar');
+        $nama = session()->get('nama');
+        $id_nomor_drawing = $idpdf;
+        // Prepare the data for the HistoryPengajuanRevisi model
+        $data = [
+            'nama_pengaju' => $nama,
+            'komentar_pengaju' => $komentar,
+            'id_nomor_drawing' => $id_nomor_drawing
+        ];
+
+        // Save the data and get the ID of the inserted record
+        $result = $this->historyRevisi->save($data);
+        $insertedId = $this->historyRevisi->getInsertID();
+
+        // Prepare response array
+        $response = array();
+
+        if ($result) {
+            // Update the PdfNumberModel with the komentar ID
+            $this->pdfNumberModel->update($idpdf, [
+                'komentar' => $insertedId
+            ]);
+
+            $response['success'] = true;
+            $response['message'] = 'Perubahan berhasil disimpan.';
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Gagal menyimpan perubahan.';
+        }
+
+        // Return the response as JSON
+        return $this->response->setJSON($response);
     }
 
     public function index()
@@ -106,49 +146,100 @@ class PdfNumberController extends BaseController
         $pdfnumber = '';
         $pdfString = '';
 
-        // Cari nomor yang tidak ada di tabel
-        $numberFound = false;
-        for ($uniqueNum = 0; $uniqueNum < 100; $uniqueNum++) {
-            $uniqueNumPadded = str_pad($uniqueNum, 2, '0', STR_PAD_LEFT);
-            $number = "$group2$group3/$subProses/$typeSub/$uniqueNumPadded/$no_mesin";
-            $String = "$group2String-$group3String/$subProsesString/$typeSubString/$uniqueNumPadded/$no_mesinString";
+        $checkNumber = "$group2$group3/$subProses/$typeSub/00/$no_mesin";
+        // Cek apakah data yang sama sudah ada di tabel
+        $existingData = $this->pdfNumberModel->where([
+            'number' => $checkNumber
+        ])->first();
+        if ($existingData) {
+            // Cari nomor yang tidak ada di tabel
+            $numberFound = false;
+            for ($uniqueNum = 0; $uniqueNum < 100; $uniqueNum++) {
+                $uniqueNumPadded = str_pad($uniqueNum, 2, '0', STR_PAD_LEFT);
+                $number = "$group2$group3/$subProses/$typeSub/$uniqueNumPadded/$no_mesin";
+                $String = "$group2String-$group3String/$subProsesString/$typeSubString/$uniqueNumPadded/$no_mesinString";
 
-            // Periksa apakah nomor ini sudah ada di tabel
-            if (!$this->pdfNumberModel->checkNumberExist($number)) {
-                $pdfnumber = $number;
-                $pdfString = $String;
-                $numberFound = true;
-                break;
+                // Periksa apakah nomor ini sudah ada di tabel
+                if (!$this->pdfNumberModel->checkNumberExist($number)) {
+                    $pdfnumber = $number;
+                    $pdfString = $String;
+                    $numberFound = true;
+                    break;
+                }
             }
-        }
 
-        if (!$numberFound) {
+            if (!$numberFound) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Tidak dapat menghasilkan nomor yang unik. Coba lagi.'
+                ]);
+            }
+
+            // Simpan nomor di tabel
+            $dataNumber = [
+                'number' => $pdfnumber,
+                'pdf_number_string' => $pdfString,
+                'nama_file' => $nama_file,
+                'proses_produksi' => $type,
+                'nama_penulis' => $nama,
+                'verifikasi_admin' => 0
+            ];
+            $this->pdfNumberModel->insert($dataNumber);
+
+            // Simpan nomor di session untuk nanti digunakan saat upload PDF
+            session()->set('generated_number', $pdfnumber);
+            session()->set('generated_string', $pdfString);
             return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'Tidak dapat menghasilkan nomor yang unik. Coba lagi.'
+                'status' => 'exists',
+                'message' => '<span style="color: red;"><strong>Data penomoran yang dimasukkan sama dengan data penomoran drawing sebelumnya.</strong></span>  Nomor berhasil digenerate: ' . $pdfnumber,
+                'generated_number' => $pdfnumber
+            ]);
+        }else{
+            // Cari nomor yang tidak ada di tabel
+            $numberFound = false;
+            for ($uniqueNum = 0; $uniqueNum < 100; $uniqueNum++) {
+                $uniqueNumPadded = str_pad($uniqueNum, 2, '0', STR_PAD_LEFT);
+                $number = "$group2$group3/$subProses/$typeSub/$uniqueNumPadded/$no_mesin";
+                $String = "$group2String-$group3String/$subProsesString/$typeSubString/$uniqueNumPadded/$no_mesinString";
+
+                // Periksa apakah nomor ini sudah ada di tabel
+                if (!$this->pdfNumberModel->checkNumberExist($number)) {
+                    $pdfnumber = $number;
+                    $pdfString = $String;
+                    $numberFound = true;
+                    break;
+                }
+            }
+
+            if (!$numberFound) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Tidak dapat menghasilkan nomor yang unik. Coba lagi.'
+                ]);
+            }
+
+            // Simpan nomor di tabel
+            $dataNumber = [
+                'number' => $pdfnumber,
+                'pdf_number_string' => $pdfString,
+                'nama_file' => $nama_file,
+                'proses_produksi' => $type,
+                'nama_penulis' => $nama,
+                'verifikasi_admin' => 0
+            ];
+            $this->pdfNumberModel->insert($dataNumber);
+
+            // Simpan nomor di session untuk nanti digunakan saat upload PDF
+            session()->set('generated_number', $pdfnumber);
+            session()->set('generated_string', $pdfString);
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Nomor berhasil digenerate: ' . $pdfnumber,
+                'generated_number' => $pdfnumber
             ]);
         }
-
-        // Simpan nomor di tabel
-        $dataNumber = [
-            'number' => $pdfnumber,
-            'pdf_number_string' => $pdfString,
-            'nama_file' => $nama_file,
-            'proses_produksi' => $type,
-            'nama_penulis' => $nama,
-            'verifikasi_admin' => 0
-        ];
-        $this->pdfNumberModel->insert($dataNumber);
-
-        // Simpan nomor di session untuk nanti digunakan saat upload PDF
-        session()->set('generated_number', $pdfnumber);
-        session()->set('generated_string', $pdfString);
-
-        return $this->response->setJSON([
-            'status' => 'success',
-            'message' => 'Nomor berhasil digenerate: ' . $pdfnumber,
-            'generated_number' => $pdfnumber
-        ]);
+        
     }
 
 
