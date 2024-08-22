@@ -9,7 +9,7 @@ class OrderDrawing extends Model
     protected $table            = 'order_drawing';
     protected $primaryKey       = 'id';
 
-    protected $allowedFields    = ['user_id', 'nama_drafter', 'nama_part', 'order_from', 'tanggal_order', 'tanggal_jatuh_tempo', 'terima_order', 'status', 'keterangan', 'created_at', 'drawing_pdf', 'number_pdf'];
+    protected $allowedFields    = ['user_id', 'nama_drafter', 'nama_part', 'order_from', 'tanggal_order', 'tanggal_jatuh_tempo', 'terima_order', 'status', 'keterangan', 'created_at', 'drawing_pdf', 'number_pdf','project','workshop','progress','no_pro'];
     public function countApprove()
     {
         return $this
@@ -17,7 +17,7 @@ class OrderDrawing extends Model
             ->where('terima_order', 'no')
             ->countAllResults();
     }
-    //admin APABILA DI SET MASSPRO, BARU HILANG
+    
     public function getTrialDrawing()
     {
         return $this->where('drawing_pdf IS NOT NULL')
@@ -29,7 +29,7 @@ class OrderDrawing extends Model
     public function getStatusorder($user_id)
     {
         return $this->where('user_id', $user_id)
-            ->where('terima_order', 'yes')
+            //->where('terima_order', 'yes')
             ->where('number_pdf', null)
             ->orderBy('created_at', 'DESC')
             ->findAll();
@@ -54,7 +54,7 @@ class OrderDrawing extends Model
     {
         return $this->where('user_id', $user_id)
             ->where('status', 'open')
-            ->where('terima_order', 'yes')
+            //->where('terima_order', 'yes')
             ->findAll();
     }
     public function getStatusorderOver($user_id)
@@ -90,7 +90,7 @@ class OrderDrawing extends Model
                 // Count orders with status 'open' and terima_order 'yes'
                 $count = $this->where('user_id', $user_id)
                     ->where('status', 'open')
-                    ->where('terima_order', 'yes')
+                   // ->where('terima_order', 'yes')
                     ->countAllResults();
             } elseif ($status == 'selesai') {
                 // Count orders with status 'selesai' and number_pdf is null
@@ -273,6 +273,20 @@ class OrderDrawing extends Model
                 ->where('order_from', 'internal')
                 ->countAllResults(),
             'eksternal' => $this->where('user_id', $user_id)
+                ->where('order_from', 'eksternal')
+                ->countAllResults(),
+        ];
+
+        return $result;
+    }
+
+    public function getTotalCountForAllUser()
+    {
+        $result = [
+            'internal' => $this
+                ->where('order_from', 'internal')
+                ->countAllResults(),
+            'eksternal' => $this
                 ->where('order_from', 'eksternal')
                 ->countAllResults(),
         ];

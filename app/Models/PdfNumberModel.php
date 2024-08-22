@@ -48,7 +48,7 @@ class PdfNumberModel extends Model
         // Update status and verifikasi_admin for all records with the same number except the one with the given ID
         $this->where('number', $number)
             ->where('id ', $id)
-            ->set(['status' => null, 'verifikasi_admin' => 0])
+            ->set(['status' => null,'feedback_admin' => null,  'verifikasi_admin' => 0])
             ->update();
 
         // Set status 'masspro' for the selected record
@@ -114,8 +114,9 @@ class PdfNumberModel extends Model
 
     public function getAll()
     {
-        return $this->orderBy('created_at', 'DESC')
-            ->findAll();
+        return $this->select('pdf_numbers.*, history_pengajuan_revisi.komentar_pengaju, history_pengajuan_revisi.nama_pengaju')
+        ->join('history_pengajuan_revisi', 'pdf_numbers.komentar = history_pengajuan_revisi.id', 'left')
+        ->findAll();
     }
 
     public function getReader()
@@ -153,5 +154,13 @@ class PdfNumberModel extends Model
             ->where('revisi IS NULL')
             ->where('status IS NULL')
             ->findAll();
+    }
+
+    public function getAllPdfNumbersWithComments()
+    {
+        // Perform a join between pdf_numbers and history_pengajuan_revisi
+        return $this->select('pdf_numbers.*, history_pengajuan_revisi.komentar_pengaju, history_pengajuan_revisi.nama_pengaju')
+        ->join('history_pengajuan_revisi', 'pdf_numbers.komentar = history_pengajuan_revisi.id', 'left')
+        ->findAll();
     }
 }
