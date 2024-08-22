@@ -44,6 +44,7 @@
                                                 <th>Keterangan </th>
                                                 <th>Tanggal Order</th>
                                                 <th>Due Date</th>
+                                                <th>Status Approved</th>
                                                 <th>Upload</th>
                                                 <th>Generate Number Drawing</th>
                                             </tr>
@@ -61,19 +62,23 @@
                                                     <td><?= $user['tanggal_order'] ?></td>
                                                     <td><?= $user['tanggal_jatuh_tempo'] ?></td>
                                                     <td>
-                                                        <?php if ($user['status'] == 'selesai' && $user['drawing_pdf'] == null) : ?>
+                                                        <?= $user['terima_order'] != 'no' ? '<span class="badge badge-success">Approved</span>' : '<span class="badge badge-danger">Not Approved</span>'; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if ($user['status'] == 'selesai' && $user['drawing_pdf'] == null && $user['terima_order'] != 'no') : ?>
 
                                                             <button type="button" class="btn btn-primary upload-button" data-bs-toggle="modal" data-bs-target="#modal-right" data-id-pdf="<?= $user['id'] ?>">
                                                                 Upload Pdf
                                                             </button>
 
-                                                        <?php elseif ($user['status'] == 'selesai' && $user['drawing_pdf'] != null) : ?>
+                                                        <?php elseif ($user['status'] == 'selesai' && $user['drawing_pdf'] != null && $user['terima_order'] != 'no') : ?>
 
                                                             <button type="button" class="btn btn-success btn-pdf-modal" data-pdf="<?= base_url('uploads/trial/' . $user['drawing_pdf']); ?>">
                                                                 <i class="fa fa-file-pdf-o"></i> Lihat PDF
                                                             </button>
                                                             <button type="button" class="btn btn-warning ganti-button" data-bs-toggle="modal" data-bs-target="#modal-left" data-id-pdf="<?= $user['id'] ?>">Ganti PDF</button>
-
+                                                        <?php elseif ($user['status'] == 'selesai' &&  $user['terima_order'] == 'no') : ?>
+                                                            <span class="badge badge-danger">Not Approved</span>
                                                         <?php else : ?>
                                                             -
                                                         <?php endif; ?>

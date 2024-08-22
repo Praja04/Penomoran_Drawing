@@ -139,12 +139,16 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama Part Drawing</th>
+                                                <th>Project</th>
                                                 <th>Order From </th>
                                                 <th>Keterangan </th>
                                                 <th>Tanggal Order</th>
                                                 <th>Due Date</th>
-                                                <th>Status</th>
+                                                <th>Status Drawing</th>
+                                                <th>Status Approve</th>
                                                 <th>Upload</th>
+                                                <th>Workshop</th>
+                                                <th>Progress</th>
                                                 <th>Generate Number Drawing</th>
 
                                             </tr>
@@ -157,6 +161,19 @@
                                                 <tr class="">
                                                     <td><?= $i++; ?></td>
                                                     <td><?= $user['nama_part']; ?></td>
+                                                    <td>
+                                                        <?php if ($user['project'] != null) : ?>
+                                                            <span class="badge badge-info" style="margin: 3px;"><?= $user['project'] ?></span>
+                                                            <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-project">
+                                                                ubah
+                                                            </button>
+                                                        <?php else : ?>
+                                                            <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-project">
+                                                                <span class="mdi mdi-application"></span>
+                                                            </button>
+                                                        <?php endif; ?>
+
+                                                    </td>
                                                     <td><?= $user['order_from'] ?></td>
                                                     <td><?= $user['keterangan'] ?></td>
                                                     <td><?= $user['tanggal_order'] ?></td>
@@ -182,27 +199,54 @@
                                                         <?php endif; ?>
 
                                                     </td>
-
                                                     <td>
-                                                        <?php if ($user['status'] == 'selesai' && $user['drawing_pdf'] == null) : ?>
+                                                        <?= $user['terima_order'] != 'no' ? '<span class="badge badge-success">Approved</span>' : '<span class="badge badge-danger">Not Approved</span>'; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if ($user['status'] == 'selesai' && $user['drawing_pdf'] == null && $user['terima_order'] != 'no') : ?>
 
                                                             <button style="margin: 2px;" type="button" class="btn btn-primary upload-button" data-bs-toggle="modal" data-bs-target="#modal-right" data-id-pdf="<?= $user['id'] ?>">
                                                                 Upload Pdf
                                                             </button>
 
-                                                        <?php elseif ($user['status'] == 'selesai' && $user['drawing_pdf'] != null) : ?>
+                                                        <?php elseif ($user['status'] == 'selesai' && $user['drawing_pdf'] != null && $user['terima_order'] != 'no') : ?>
 
                                                             <button style="margin: 2px;" type="button" class="btn btn-success btn-pdf-modal" data-pdf="<?= base_url('uploads/trial/' . $user['drawing_pdf']); ?>">
                                                                 <i class="fa fa-file-pdf-o"></i> Lihat PDF
                                                             </button>
                                                             <button style="margin: 2px;" type="button" class="btn btn-warning ganti-button" data-bs-toggle="modal" data-bs-target="#modal-left" data-id-pdf="<?= $user['id'] ?>">Ganti PDF</button>
-
+                                                        <?php elseif ($user['status'] == 'selesai' && $user['terima_order'] == 'no') : ?>
+                                                            <span class="badge badge-danger">Not Approved</span>
                                                         <?php else : ?>
                                                             -
                                                         <?php endif; ?>
                                                     </td>
                                                     <td>
-                                                        <?php if ($user['drawing_pdf'] != null && $user['number_pdf'] == null) : ?>
+                                                        <?php if ($user['workshop'] != null) : ?>
+                                                            <span class="badge badge-info" style="margin: 3px;"><?= $user['workshop'] ?></span>
+                                                            <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-workshop">
+                                                                ubah
+                                                            </button>
+                                                        <?php else : ?>
+                                                            <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-workshop">
+                                                                <span class="mdi mdi-application"></span>
+                                                            </button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if ($user['progress'] != null) : ?>
+                                                            <span class="badge badge-info" style="margin: 3px;"><?= $user['progress'] ?></span>
+                                                            <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-progress">
+                                                                ubah
+                                                            </button>
+                                                        <?php else : ?>
+                                                            <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-progress">
+                                                                <span class="mdi mdi-application"></span>
+                                                            </button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if ($user['drawing_pdf'] != null && $user['number_pdf'] == null && $user['progress']=='Massprod') : ?>
                                                             <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-generate">
                                                                 Generate
                                                             </button>
@@ -229,6 +273,110 @@
             </div>
 
             <!-- modal-->
+            <div class="modal center-modal fade" id="modal-project" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Project</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-project">
+                                <div class="box-body">
+                                    <input type="hidden" id="id-order" name="id-order">
+                                    <div class="form-group">
+                                        <label class="form-label">Nama Project :</label>
+                                        <select class="form-select" name="nama_project" id="nama_project" required>
+                                            <option value="" disabled selected>Pilih Opsi</option>
+                                            <option value="">Other</option>
+                                            <?php foreach ($jenis_project as $project) : ?>
+                                                <option value="<?= $project['nama_project']; ?>">
+                                                    <?= htmlspecialchars($project['nama_project']) ?>
+                                                </option>
+                                            <?php endforeach; ?>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="other-project-group" style="display: none;">
+                                        <label class="form-label">Nama Project (Jika Other) :</label>
+                                        <input type="text" class="form-control" name="other_project_name" id="other_project_name">
+                                    </div>
+                                    <button type="button" class="btn btn-success" id="submitBtn-project">Submit</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal center-modal fade" id="modal-workshop" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Workshop</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-workshop">
+                                <div class="box-body">
+                                    <input type="hidden" id="id-order" name="id-order">
+                                    <div class="form-group">
+                                        <label class="form-label">Jenis Workshop :</label>
+                                        <select class="form-select" name="workshop" id="workshop" required>
+                                            <option value="" disabled selected>Pilih Opsi</option>
+                                            <option value="">Other</option>
+                                            <option value="CBI">CBI</option>
+                                            <option value="Subcount">Subcount</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="other-workshop-group" style="display: none;">
+                                        <label class="form-label">Jenis Workshop (Jika Other) :</label>
+                                        <input type="text" class="form-control" name="other_workshop" id="other_workshop">
+                                    </div>
+                                    <button type="button" class="btn btn-success" id="submitBtn-workshop">Submit</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal center-modal fade" id="modal-progress" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Progress</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-progress">
+                                <div class="box-body">
+                                    <input type="hidden" id="id-order" name="id-order">
+                                    <div class="form-group">
+                                        <label class="form-label">Pilih Progress :</label>
+                                        <select class="form-select" name="progress" id="progress" required>
+                                            <option value="" disabled selected>Pilih Opsi</option>
+                                            <option value="Waiting Price">Waiting Price</option>
+                                            <option value="Waiting Approval">Waiting Approval</option>
+                                            <option value="PO Process">PO Process</option>
+                                            <option value="Manufactur Process">Manufactur Process</option>
+                                            <option value="Trial">Trial</option>
+                                            <option value="Massprod">Massprod</option>
+                                        </select>
+                                    </div>
+
+                                    <button type="button" class="btn btn-success" id="submitBtn-progress">Submit</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <div class="modal center-modal fade" id="modal-generate" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -532,6 +680,112 @@
 <script>
     $(document).ready(function() {
         const baseUrl = "<?= base_url() ?>";
+
+        $('#workshop').on('change', function() {
+            if ($(this).val() === '') {
+                $('#other-workshop-group').show(); // Tampilkan input tambahan jika 'Other' dipilih
+            } else {
+                $('#other-workshop-group').hide(); // Sembunyikan input tambahan jika opsi lain dipilih
+            }
+        });
+        $('#nama_project').on('change', function() {
+            if ($(this).val() === '') {
+                $('#other-project-group').show(); // Tampilkan input tambahan jika 'Other' dipilih
+            } else {
+                $('#other-project-group').hide(); // Sembunyikan input tambahan jika opsi lain dipilih
+            }
+        });
+
+        $('#submitBtn-project').on('click', function() {
+            var namaProject = $('#nama_project').val();
+
+            // Jika 'Other' dipilih, gunakan nilai dari input tambahan
+            if (namaProject === '') {
+                namaProject = $('#other_project_name').val();
+            }
+
+            var formData = new FormData($('#form-project')[0]);
+            formData.set('nama_project', namaProject); // Atur nama_project dengan nilai yang sesuai
+
+            $.ajax({
+                url: baseUrl + 'submit/jenis_project',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#modal-project').modal('hide');
+                    showModal(response.message);
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    showModal('Terjadi kesalahan saat mengirim data.');
+                }
+            });
+        });
+
+        $('#submitBtn-workshop').on('click', function() {
+            var workshop = $('#workshop').val();
+
+            // Jika 'Other' dipilih, gunakan nilai dari input tambahan
+            if (workshop === '') {
+                workshop = $('#other_workshop').val();
+            }
+
+            var formData = new FormData($('#form-workshop')[0]);
+            formData.set('workshop', workshop); // Atur nama_project dengan nilai yang sesuai
+
+            $.ajax({
+                url: baseUrl + 'submit/jenis_workshop',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#modal-workshop').modal('hide');
+                    showModal(response.message);
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    showModal('Terjadi kesalahan saat mengirim data.');
+                }
+            });
+        });
+
+        $('#submitBtn-progress').on('click', function() {
+            var progress = $('#progress').val();
+
+            // Jika 'Other' dipilih, gunakan nilai dari input tambahan
+            if (progress === '') {
+                progress = $('#other_progress').val();
+            }
+
+            var formData = new FormData($('#form-progress')[0]);
+            formData.set('progress', progress); // Atur nama_project dengan nilai yang sesuai
+
+            $.ajax({
+                url: baseUrl + 'submit/jenis_progress',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#modal-progress').modal('hide');
+                    showModal(response.message);
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    showModal('Terjadi kesalahan saat mengirim data.');
+                }
+            });
+        });
+
         $('#group2').change(function() {
             if ($(this).val() == '0') { // 0 adalah nilai untuk "Other"
                 $('#sub-proses-produksi-group').hide();
@@ -565,6 +819,24 @@
             "autoWidth": false,
         });
         $('#modal-generate').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var idstatus = button.data('id-status');
+            var modal = $(this);
+            modal.find('#id-order').val(idstatus);
+        });
+        $('#modal-project').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var idstatus = button.data('id-status');
+            var modal = $(this);
+            modal.find('#id-order').val(idstatus);
+        });
+        $('#modal-workshop').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var idstatus = button.data('id-status');
+            var modal = $(this);
+            modal.find('#id-order').val(idstatus);
+        });
+        $('#modal-progress').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var idstatus = button.data('id-status');
             var modal = $(this);

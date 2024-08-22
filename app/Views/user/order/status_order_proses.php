@@ -44,7 +44,8 @@
                                                 <th>Keterangan </th>
                                                 <th>Tanggal Order</th>
                                                 <th>Due Date</th>
-                                                <th>Status</th>
+                                                <th>Status Drawing</th>
+                                                <th>Status Approved</th>
                                                 <th>Action</th>
                                             </tr>
 
@@ -61,6 +62,9 @@
                                                     <td><?= $user['tanggal_order'] ?></td>
                                                     <td><?= $user['tanggal_jatuh_tempo'] ?></td>
                                                     <td><?= $user['status'] ?></td>
+                                                    <td>
+                                                        <?= $user['terima_order'] != 'no' ? '<span class="badge badge-success">Approved</span>' : '<span class="badge badge-danger">Not Approved</span>'; ?>
+                                                    </td>
                                                     <td>
                                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-center">
                                                             Ubah Status

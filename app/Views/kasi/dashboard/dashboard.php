@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-12 col-12">
+                <div class="col-xl-8 col-12">
                     <div class="box">
                         <div class="box-body">
                             <p class="text-fade">Progress</p>
@@ -85,6 +85,17 @@
                                 PCE Drafters
                             </h3>
                             <div id="charts_widget_3_chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <p class="text-fade">Order Drawing</p>
+                            <h3 class="mt-0 mb-20">
+                               All PCE Drafters
+                            </h3>
+                            <div id="charts_widget_4_chart"></div>
                         </div>
                     </div>
                 </div>
@@ -391,7 +402,60 @@
         });
     });
 </script>
+<script>
+    $(function() {
+        "use strict";
 
+        // Data from PHP
+        var orderData = <?= json_encode($order) ?>;
+
+        // Donut chart options
+        var options = {
+            series: [orderData.internal, orderData.eksternal],
+            chart: {
+                type: 'donut',
+                height: 300,
+            },
+            labels: ['Internal', 'Eksternal'],
+            colors: ['#ffc107', '#28a745'], // Customize colors
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '60%',
+                        labels: {
+                            show: true,
+                            name: {
+                                fontSize: '16px',
+                                fontFamily: 'Helvetica, Arial, sans-serif',
+                                color: '#666',
+                                offsetY: -10,
+                            },
+                            value: {
+                                fontSize: '14px',
+                                fontFamily: 'Helvetica, Arial, sans-serif',
+                                color: '#333',
+                                offsetY: 10,
+                                formatter: function(val) {
+                                    return val;
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            legend: {
+                show: true,
+                position: 'bottom',
+            },
+        };
+
+        var chart = new ApexCharts(
+            document.querySelector("#charts_widget_4_chart"),
+            options
+        );
+        chart.render();
+    });
+</script>
 
 
 <?= $this->endSection() ?>

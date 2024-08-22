@@ -80,6 +80,7 @@
 								<li><a href="<?= base_url('verifikasi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Verifikasi <span id="notif_verifikasi"></a></li>
 								<li><a href="<?= base_url('update/subproses/') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Update Sub Proses</a></li>
 								<li><a href="<?= base_url('update/typesubproses') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Update Type Sub Proses</a></li>
+								<li><a href="<?= base_url('jenis_project') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Update Jenis Project</a></li>
 							</ul>
 						</li>
 						<li class="treeview">
@@ -119,7 +120,7 @@
 						</li>
 						<li class="header">Mold CBI</li>
 						<li class="">
-							<a href="https://portal3.incoe.astra.co.id/pce-mold-management/public/dashboard-admin">
+							<a target="_blank" href="https://portal3.incoe.astra.co.id/pce-mold-management/public/dashboard-admin">
 								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
 								<span>Mold Management</span>
 							</a>
@@ -175,7 +176,7 @@
 						</li>
 						<li class="header">Mold CBI</li>
 						<li class="">
-							<a href="https://portal3.incoe.astra.co.id/pce-mold-management/public/dashboard-admin">
+							<a target="blank" href="https://portal3.incoe.astra.co.id/pce-mold-management/public/dashboard-admin">
 								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
 								<span>Mold Management</span>
 							</a>

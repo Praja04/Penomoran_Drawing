@@ -87,7 +87,7 @@
                                                             <button id="reset-button" class="btn btn-secondary mt-2">Reset Filter</button>
                                                         </div>
                                                     </div><br><br>
-                                                    <table id="example122" class="table table-bordered table-separated">
+                                                    <table id="example122" class="table table-bordered table-separated text-center">
                                                         <thead>
                                                             <tr>
                                                                 <th>No</th>
@@ -97,6 +97,7 @@
                                                                 <th>Revisi ke-</th>
                                                                 <th>Nama Drawing</th>
                                                                 <th>File</th>
+                                                                <th>Pengajuan Revisi</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="user2">
@@ -118,6 +119,16 @@
                                                                             <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['pdf_path']); ?>">
                                                                                 <i class="fa fa-file-pdf-o"></i> Lihat PDF
                                                                             </button>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php if ($user['komentar'] != null) : ?>
+                                                                                <p>'<?= $user['komentar_pengaju'] ?>' dari <?=$user['nama_pengaju']?></p>
+                                                                            <?php else : ?>
+                                                                                <button style="margin: 3px;" type="button" class="btn btn-link btn-primary" onclick="PengajuanRevisi(<?php echo $user['id']; ?>)">
+                                                                                    <i class="fa fa-commenting"></i>
+                                                                                </button>
+                                                                            <?php endif; ?>
+
                                                                         </td>
                                                                     </tr>
                                                                 <?php endif; ?>
@@ -144,6 +155,46 @@
                             </div>
                             <div class="modal-body">
                                 <embed id="pdfViewer" src="" type="application/pdf" width="100%" height="600px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Konfirmasi Pengajuan Revisi</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Apa alasan untuk revisi drawing ini?</p>
+                                <div class="form-group">
+                                    <label for="omentar">Komentar:</label>
+                                    <textarea id="komentar" class="form-control" rows="4" placeholder="Masukkan alasan..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <p>nama anda akan otomatis tercatat sebagai pengaju revisi !</p>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-primary" id="confirmBtn">Ya, Tolak</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="alertModalLabel">Notif</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="modalMessage">
+                                <!-- Message will be inserted here -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                             </div>
                         </div>
                     </div>
@@ -355,6 +406,55 @@
                 $(this).hide();
             }
         });
+    }
+
+
+    function PengajuanRevisi(idpdf) {
+        // Show the confirmation modal
+        $('#confirmModal').modal('show');
+
+        // Handle the confirm button click
+        $('#confirmBtn').off('click').on('click', function() {
+            // Get the feedback
+            var komentar = $('#komentar').val();
+
+            // Proceed with AJAX request to update verification result
+            $.ajax({
+                url: baseUrl + 'pengajuan/revisi/' + idpdf,
+                type: 'POST',
+                data: {
+                    komentar: komentar
+                },
+                success: function(response) {
+                    if (response.success === true) {
+                        showModal('Berhasil diajukan');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        showModal('Gagal mengubah hasil verifikasi!');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                },
+                complete: function() {
+                    $('#confirmModal').modal('hide');
+                }
+            });
+        });
+    }
+
+    function showModal(message, callback) {
+        $('#modalMessage').text(message);
+        $('#alertModal').modal('show');
+
+        if (callback) {
+            $('#alertModal').on('hidden.bs.modal', function() {
+                callback();
+                $(this).off('hidden.bs.modal'); // Remove the callback to avoid multiple triggers
+            });
+        }
     }
 </script>
 

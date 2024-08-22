@@ -431,7 +431,7 @@
     }
 
     function showModal(message, callback) {
-        $('#modalMessage').text(message);
+        $('#modalMessage').html(message);
         $('#alertModal').modal('show');
 
         if (callback) {

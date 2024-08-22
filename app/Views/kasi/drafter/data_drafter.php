@@ -113,7 +113,7 @@
                                                     </td>
                                                     <td>
                                                         <?php if ($user['drawing_pdf'] != null) : ?>
-                                                            <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['drawing_pdf']); ?>">
+                                                            <button type="button" class="btn btn-link btn-pdf-modal" data-pdf="<?= base_url('uploads/trial/' . $user['drawing_pdf']); ?>">
                                                                 <i class="fa fa-file-pdf-o"></i> Lihat PDF
                                                             </button>
                                                         <?php else : ?>

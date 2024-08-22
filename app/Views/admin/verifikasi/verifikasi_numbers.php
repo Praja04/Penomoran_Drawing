@@ -70,10 +70,10 @@
 
                                                          <?php if ($user['verifikasi_admin'] == 0 && $user['status'] == 'masspro') : ?>
                                                              <button type="button" class="btn btn-link btn-primary" onclick="ubahHasilVerifikasi(<?php echo $user['id']; ?>)">
-                                                                 <i class="fa fa-check-square-o"><a href="#"></a></i>
+                                                                 <i class="fa fa-check-square-o"></i>
                                                              </button>
-                                                             <button type="button" class="btn btn-link btn-danger" onclick="ubahHasilVerifikasi2(<?php echo $user['id']; ?>)">
-                                                                 <i class="fa fa-close"><a href="#"></a></i>
+                                                             <button style="margin: 3px;" type="button" class="btn btn-link btn-danger" onclick="ubahHasilVerifikasi2(<?php echo $user['id']; ?>)">
+                                                                 <i class="fa fa-close"></i>
                                                              </button>
                                                          <?php elseif ($user['status'] != 'masspro') : ?>
                                                              <p>not masspro</p>
@@ -104,6 +104,28 @@
                      </div>
                  </div>
              </div>
+             <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title" id="confirmModalLabel">Konfirmasi Penolakan</h5>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                             <p>Yakin menolak drawing ini?</p>
+                             <div class="form-group">
+                                 <label for="feedback">Feedback:</label>
+                                 <textarea id="feedback" class="form-control" rows="4" placeholder="Masukkan feedback..."></textarea>
+                             </div>
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                             <button type="button" class="btn btn-primary" id="confirmBtn">Ya, Tolak</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
 
              <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
                  <div class="modal-dialog">
@@ -168,22 +190,38 @@
      }
 
      function ubahHasilVerifikasi2(idpdf) {
-         $.ajax({
-             url: baseUrl + 'admin/updateHasilVerifikasi2/' + idpdf,
-             type: 'POST',
-             success: function(response) {
-                 if (response.success === true) {
-                     showModal('Berhasil Verifikasi');
-                     setTimeout(function() {
-                         window.location.href = baseUrl + 'verifikasi';
-                     }, 4000);
-                 } else {
-                     showModal('Gagal mengubah hasil verifikasi!');
+         // Show the confirmation modal
+         $('#confirmModal').modal('show');
+
+         // Handle the confirm button click
+         $('#confirmBtn').off('click').on('click', function() {
+             // Get the feedback
+             var feedback = $('#feedback').val();
+
+             // Proceed with AJAX request to update verification result
+             $.ajax({
+                 url: baseUrl + 'admin/updateHasilVerifikasi2/' + idpdf,
+                 type: 'POST',
+                 data: {
+                     feedback: feedback
+                 },
+                 success: function(response) {
+                     if (response.success === true) {
+                         showModal('Berhasil Verifikasi');
+                         setTimeout(function() {
+                             window.location.href = baseUrl + 'verifikasi';
+                         }, 2000);
+                     } else {
+                         showModal('Gagal mengubah hasil verifikasi!');
+                     }
+                 },
+                 error: function(xhr, status, error) {
+                     console.error(xhr.responseText);
+                 },
+                 complete: function() {
+                     $('#confirmModal').modal('hide');
                  }
-             },
-             error: function(xhr, status, error) {
-                 console.error(xhr.responseText);
-             }
+             });
          });
      }
 
