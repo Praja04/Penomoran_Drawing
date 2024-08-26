@@ -523,6 +523,23 @@ class UploaderController extends BaseController
             return $this->response->setJSON(['error' => 'Gagal menyimpan data !']);
         }
     }
+    public function submitNoPR()
+    {
+        if (!session()->get('is_login') || session()->get('role') != 'uploader') {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
+        try {
+            $id = $this->request->getPost('id-order');
+            $data = [
+                'no_pro' => $this->request->getPost('no_pro')
+            ];
+            $this->orderDrawing->update($id, $data);
+            return $this->response->setJSON(['message' => 'Berhasil diperbarui!']);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['error' => 'Gagal menyimpan data !']);
+        }
+    }
     public function submitProgress()
     {
         if (!session()->get('is_login') || session()->get('role') != 'uploader') {

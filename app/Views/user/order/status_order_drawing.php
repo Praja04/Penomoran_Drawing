@@ -149,8 +149,8 @@
                                                 <th>Upload</th>
                                                 <th>Workshop</th>
                                                 <th>Progress</th>
+                                                <th>No PR</th>
                                                 <th>Generate Number Drawing</th>
-
                                             </tr>
 
                                         </thead>
@@ -222,31 +222,48 @@
                                                         <?php endif; ?>
                                                     </td>
                                                     <td>
-                                                        <?php if ($user['workshop'] != null) : ?>
+                                                        <?php if ($user['status'] == 'selesai' && $user['workshop'] != null) : ?>
                                                             <span class="badge badge-info" style="margin: 3px;"><?= $user['workshop'] ?></span>
                                                             <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-workshop">
                                                                 ubah
                                                             </button>
-                                                        <?php else : ?>
+                                                        <?php elseif ($user['status'] == 'selesai' && $user['workshop'] == null) : ?>
                                                             <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-workshop">
                                                                 <span class="mdi mdi-application"></span>
                                                             </button>
+                                                        <?php else : ?>
+                                                            -
                                                         <?php endif; ?>
                                                     </td>
                                                     <td>
-                                                        <?php if ($user['progress'] != null) : ?>
+                                                        <?php if ($user['workshop'] != null && $user['progress'] != null) : ?>
                                                             <span class="badge badge-info" style="margin: 3px;"><?= $user['progress'] ?></span>
                                                             <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-progress">
                                                                 ubah
                                                             </button>
-                                                        <?php else : ?>
+
+                                                        <?php elseif ($user['workshop'] != null && $user['progress'] == null) : ?>
                                                             <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-progress">
+                                                                <span class="mdi mdi-application"></span>
+                                                            </button>
+                                                        <?php else : ?>
+                                                            -
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if ($user['no_pro'] != null && $user['progress'] != null) : ?>
+                                                            <span class="badge badge-info" style="margin: 3px;"><?= $user['no_pro'] ?></span>
+                                                            <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-no-pro">
+                                                                ubah
+                                                            </button>
+                                                        <?php else : ?>
+                                                            <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-no-pro">
                                                                 <span class="mdi mdi-application"></span>
                                                             </button>
                                                         <?php endif; ?>
                                                     </td>
                                                     <td>
-                                                        <?php if ($user['drawing_pdf'] != null && $user['number_pdf'] == null && $user['progress']=='Massprod') : ?>
+                                                        <?php if ($user['drawing_pdf'] != null && $user['number_pdf'] == null && $user['progress'] == 'Massprod') : ?>
                                                             <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-generate">
                                                                 Generate
                                                             </button>
@@ -343,6 +360,33 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal center-modal fade" id="modal-no-pro" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">No PR</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-no-pro">
+                                <div class="box-body">
+                                    <input type="hidden" id="id-order" name="id-order">
+                                    <div class="form-group">
+                                        <label class="form-label">Masukan NO PR :</label>
+                                        <input type="text" class="form-control" name="no_pro" id="no_pro">
+                                    </div>
+
+                                    <button type="button" class="btn btn-success" id="submitBtn-no-pro">Submit</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <div class="modal center-modal fade" id="modal-progress" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -755,6 +799,30 @@
                 }
             });
         });
+        $('#submitBtn-no-pro').on('click', function() {
+            var no_pro = $('#no_pro').val();
+
+            var formData = new FormData($('#form-no-pro')[0]);
+            formData.set('no_pro', no_pro);
+            $.ajax({
+                url: baseUrl + 'submit/jenis_no_pro',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#modal-no-pro').modal('hide');
+                    showModal(response.message);
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    showModal('Terjadi kesalahan saat mengirim data.');
+                }
+            });
+        });
+
 
         $('#submitBtn-progress').on('click', function() {
             var progress = $('#progress').val();
@@ -831,6 +899,12 @@
             modal.find('#id-order').val(idstatus);
         });
         $('#modal-workshop').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var idstatus = button.data('id-status');
+            var modal = $(this);
+            modal.find('#id-order').val(idstatus);
+        });
+        $('#modal-no-pro').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var idstatus = button.data('id-status');
             var modal = $(this);

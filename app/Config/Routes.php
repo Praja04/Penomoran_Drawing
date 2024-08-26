@@ -80,6 +80,7 @@ $routes->post('trial/pdf/(:num)', 'UploaderController::gantiPdfTrial/$1');
 $routes->post('submit/jenis_project', 'UploaderController::submitProject');
 $routes->post('submit/jenis_workshop', 'UploaderController::submitWorkshop');
 $routes->post('submit/jenis_progress', 'UploaderController::submitProgress');
+$routes->post('submit/jenis_no_pro', 'UploaderController::submitNoPR');
 
 
 //reader
