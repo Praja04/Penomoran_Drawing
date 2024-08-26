@@ -251,7 +251,7 @@
                                                         <?php endif; ?>
                                                     </td>
                                                     <td>
-                                                        <?php if ($user['no_pro'] != null && $user['progress'] != null) : ?>
+                                                        <?php if ($user['no_pro'] != null ) : ?>
                                                             <span class="badge badge-info" style="margin: 3px;"><?= $user['no_pro'] ?></span>
                                                             <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-no-pro">
                                                                 ubah
