@@ -163,7 +163,7 @@
                                                     <td><?= $user['nama_part']; ?></td>
                                                     <td>
                                                         <?php if ($user['project'] != null) : ?>
-                                                            <span class="badge badge-info" style="margin: 3px;"><?= $user['project'] ?></span>
+                                                            <span class="badge badge-info" style="margin: 3px;font-size: 16px;"><?= $user['project'] ?></span>
                                                             <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-project">
                                                                 ubah
                                                             </button>
@@ -200,7 +200,7 @@
 
                                                     </td>
                                                     <td>
-                                                        <?= $user['terima_order'] != 'no' ? '<span class="badge badge-success">Approved</span>' : '<span class="badge badge-danger">Not Approved</span>'; ?>
+                                                        <?= $user['terima_order'] != 'no' ? '<span class="badge badge-success" style="font-size: 16px;">Approved</span>' : '<span class="badge badge-danger" style="font-size: 16px;">Not Approved</span>'; ?>
                                                     </td>
                                                     <td>
                                                         <?php if ($user['status'] == 'selesai' && $user['drawing_pdf'] == null && $user['terima_order'] != 'no') : ?>
@@ -216,14 +216,14 @@
                                                             </button>
                                                             <button style="margin: 2px;" type="button" class="btn btn-warning ganti-button" data-bs-toggle="modal" data-bs-target="#modal-left" data-id-pdf="<?= $user['id'] ?>">Ganti PDF</button>
                                                         <?php elseif ($user['status'] == 'selesai' && $user['terima_order'] == 'no') : ?>
-                                                            <span class="badge badge-danger">Not Approved</span>
+                                                            <span class="badge badge-danger" style="font-size: 16px;">Not Approved</span>
                                                         <?php else : ?>
                                                             -
                                                         <?php endif; ?>
                                                     </td>
                                                     <td>
                                                         <?php if ($user['status'] == 'selesai' && $user['workshop'] != null) : ?>
-                                                            <span class="badge badge-info" style="margin: 3px;"><?= $user['workshop'] ?></span>
+                                                            <span class="badge badge-info" style="margin: 3px;font-size: 16px;"><?= $user['workshop'] ?></span>
                                                             <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-workshop">
                                                                 ubah
                                                             </button>
@@ -237,7 +237,7 @@
                                                     </td>
                                                     <td>
                                                         <?php if ($user['workshop'] != null && $user['progress'] != null) : ?>
-                                                            <span class="badge badge-info" style="margin: 3px;"><?= $user['progress'] ?></span>
+                                                            <span class="badge badge-info" style="margin: 3px; font-size: 16px;"><?= $user['progress'] ?></span>
                                                             <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-progress">
                                                                 ubah
                                                             </button>
@@ -251,8 +251,8 @@
                                                         <?php endif; ?>
                                                     </td>
                                                     <td>
-                                                        <?php if ($user['no_pro'] != null ) : ?>
-                                                            <span class="badge badge-info" style="margin: 3px;"><?= $user['no_pro'] ?></span>
+                                                        <?php if ($user['no_pro'] != null) : ?>
+                                                            <span class="badge badge-info" style="margin: 3px;font-size: 16px;"><?= $user['no_pro'] ?></span>
                                                             <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-no-pro">
                                                                 ubah
                                                             </button>
@@ -879,12 +879,29 @@
         });
         // Initialize DataTable with options
         var table = $('#example121').DataTable({
+            scrollY: '600px', // Tinggi area scroll
+            scrollX: true,
+            scrollCollapse: true,
             "paging": true,
             "lengthChange": true,
             "searching": true,
             "ordering": true,
             "info": true,
-            "autoWidth": false,
+            autoWidth: false, // Menonaktifkan auto-lebar
+            columnDefs: [{
+                    width: '10%',
+                    targets: 0
+                }, // Sesuaikan lebar setiap kolom jika diperlukan
+                {
+                    width: '20%',
+                    targets: 1
+                },
+                {
+                    width: '15%',
+                    targets: 2
+                },
+                // Tambahkan pengaturan kolom lain sesuai kebutuhan
+            ]
         });
         $('#modal-generate').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);

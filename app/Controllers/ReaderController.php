@@ -19,7 +19,7 @@ class ReaderController extends BaseController
 
     public function listpdf()
     {
-        $allowed_roles = ['reader', 'reader_pce'];
+        $allowed_roles = ['reader', 'reader_pce','uploader'];
         $user_role = session()->get('role');
 
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {

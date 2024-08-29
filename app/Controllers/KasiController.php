@@ -102,7 +102,7 @@ class KasiController extends BaseController
     }
     public function trial()
     {
-        $allowed_roles = ['kasi', 'admin', 'reader_pce'];
+        $allowed_roles = ['kasi', 'admin', 'reader_pce','uploader'];
         $user_role = session()->get('role');
 
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {

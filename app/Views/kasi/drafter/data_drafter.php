@@ -71,6 +71,7 @@
                                                 <th>Due Date</th>
                                                 <th>Status</th>
                                                 <th>File</th>
+                                                <th>Progress Drawing</th>
                                             </tr>
 
                                         </thead>
@@ -120,7 +121,13 @@
                                                             Belum Upload
                                                         <?php endif; ?>
                                                     </td>
-
+                                                    <td>
+                                                        <?php if ($user['progress'] != null) : ?>
+                                                            <?= $user['progress'] ?>
+                                                        <?php else : ?>
+                                                            <span class="badge badge-danger">Belum input</span>
+                                                        <?php endif; ?>
+                                                    </td>
                                                 </tr>
                                             <?php endforeach; ?>
 
@@ -158,7 +165,16 @@
 
 <script>
     $(document).ready(function() {
-
+        var table = $('#example121').DataTable({
+            scrollY: '400px', // Tinggi area scroll
+            scrollCollapse: true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
         $('.btn-pdf-modal').on('click', function() {
             var pdfUrl = $(this).data('pdf');
             $('#pdfViewer').attr('src', pdfUrl);

@@ -143,7 +143,7 @@
             handleSubmit(baseUrl);
         });
         $('#modalok').on('click', function() {
-            location.reload();
+           window.location.href = '<?=base_url('status/order')?>'
         });
     }
 
