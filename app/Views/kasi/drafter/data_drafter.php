@@ -60,7 +60,7 @@
                         <div class="box">
                             <div class="box-body">
                                 <div class="table-responsive">
-                                    <table id="example121" class="table text-center table-bordered table-separated">
+                                    <table id="example121" class="table mt-0 table-hover no-wrap  text-center">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -164,22 +164,27 @@
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 
 <script>
+    $(document).on('click', '.btn-pdf-modal', function() {
+        var pdfUrl = $(this).data('pdf');
+        $('#pdfViewer').attr('src', pdfUrl);
+        $('#pdfModal').modal('show');
+        console.log(pdfUrl);
+    });
+
     $(document).ready(function() {
         var table = $('#example121').DataTable({
-            scrollY: '400px', // Tinggi area scroll
-            scrollCollapse: true,
             "paging": true,
             "lengthChange": true,
             "searching": true,
             "ordering": true,
             "info": true,
-            "autoWidth": false,
+            "autoWidth": false
         });
-        $('.btn-pdf-modal').on('click', function() {
-            var pdfUrl = $(this).data('pdf');
-            $('#pdfViewer').attr('src', pdfUrl);
-            $('#pdfModal').modal('show');
-        });
+        // $('.btn-pdf-modal').on('click', function() {
+        //     var pdfUrl = $(this).data('pdf');
+        //     $('#pdfViewer').attr('src', pdfUrl);
+        //     $('#pdfModal').modal('show');
+        // });
     });
     $(function() {
         "use strict";
@@ -268,7 +273,7 @@
             series: [orderData.internal, orderData.eksternal],
             chart: {
                 type: 'donut',
-                height: 300,
+                height: 250,
             },
             labels: ['Internal', 'Eksternal'],
             colors: ['#ffc107', '#28a745'], // Customize colors

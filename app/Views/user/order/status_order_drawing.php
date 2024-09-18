@@ -134,7 +134,7 @@
                         <div class="box">
                             <div class="box-body">
                                 <div class="table-responsive">
-                                    <table id="example121" class="table text-center table-bordered table-separated">
+                                    <table id="example121" class="table mt-0 table-hover no-wrap  text-center">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -162,11 +162,13 @@
                                                     <td><?= $i++; ?></td>
                                                     <td><?= $user['nama_part']; ?></td>
                                                     <td>
-                                                        <?php if ($user['project'] != null) : ?>
+                                                        <?php if ($user['project'] != null && $user['keterangan'] != 'Project Internal') : ?>
                                                             <span class="badge badge-info" style="margin: 3px;font-size: 16px;"><?= $user['project'] ?></span>
                                                             <button style="margin: 3px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-project">
                                                                 ubah
                                                             </button>
+                                                        <?php elseif ($user['project'] != null && $user['keterangan'] == 'Project Internal') : ?>
+                                                            <span class="badge badge-info" style="margin: 3px;font-size: 16px;"><?= $user['project'] ?></span>
                                                         <?php else : ?>
                                                             <button style="margin: 2px;" type="button" class="btn btn-success" data-bs-toggle="modal" data-id-status="<?= $user['id'] ?>" data-bs-target="#modal-project">
                                                                 <span class="mdi mdi-application"></span>
@@ -214,6 +216,7 @@
                                                             <button style="margin: 2px;" type="button" class="btn btn-success btn-pdf-modal" data-pdf="<?= base_url('uploads/trial/' . $user['drawing_pdf']); ?>">
                                                                 <i class="fa fa-file-pdf-o"></i> Lihat PDF
                                                             </button>
+
                                                             <button style="margin: 2px;" type="button" class="btn btn-warning ganti-button" data-bs-toggle="modal" data-bs-target="#modal-left" data-id-pdf="<?= $user['id'] ?>">Ganti PDF</button>
                                                         <?php elseif ($user['status'] == 'selesai' && $user['terima_order'] == 'no') : ?>
                                                             <span class="badge badge-danger" style="font-size: 16px;">Not Approved</span>
@@ -722,6 +725,13 @@
 
 <script src="<?= base_url() ?>assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
+    $(document).on('click', '.btn-pdf-modal', function() {
+        var pdfUrl = $(this).data('pdf');
+        $('#pdfViewer').attr('src', pdfUrl);
+        $('#pdfModal').modal('show');
+        console.log(pdfUrl);
+    });
+
     $(document).ready(function() {
         const baseUrl = "<?= base_url() ?>";
 
@@ -877,31 +887,14 @@
                 $('#no_mesin2').prop('required', false);
             }
         });
-        // Initialize DataTable with options
+        // // Initialize DataTable with options
         var table = $('#example121').DataTable({
-            scrollY: '600px', // Tinggi area scroll
-            scrollX: true,
-            scrollCollapse: true,
             "paging": true,
             "lengthChange": true,
             "searching": true,
             "ordering": true,
             "info": true,
-            autoWidth: false, // Menonaktifkan auto-lebar
-            columnDefs: [{
-                    width: '10%',
-                    targets: 0
-                }, // Sesuaikan lebar setiap kolom jika diperlukan
-                {
-                    width: '20%',
-                    targets: 1
-                },
-                {
-                    width: '15%',
-                    targets: 2
-                },
-                // Tambahkan pengaturan kolom lain sesuai kebutuhan
-            ]
+            "autoWidth": false
         });
         $('#modal-generate').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
@@ -1074,12 +1067,6 @@
             $('#modalok').on('click', function() {
                 location.reload();
             });
-        });
-
-        $('.btn-pdf-modal').on('click', function() {
-            var pdfUrl = $(this).data('pdf');
-            $('#pdfViewer').attr('src', pdfUrl);
-            $('#pdfModal').modal('show');
         });
 
         // Tangkap event saat modal akan ditampilkan
