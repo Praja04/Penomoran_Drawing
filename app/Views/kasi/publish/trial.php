@@ -120,7 +120,9 @@
 
         handleProsesChange();
         handleItemChange();
-
+        $('#drafterFilter').on('change', function() {
+            filterTableuser(); // Panggil fungsi filterTable setiap kali filter berubah
+        });
         // Event listener untuk setiap perubahan pada dropdown
         $('#filter-select, #filter-select2, #filter-select3, #filter-select4').change(function() {
             filterTable();
@@ -282,6 +284,26 @@
 
         // Panggil filterTable untuk menampilkan semua baris
         filterTable();
+    }
+
+    function filterTableuser() {
+        var filterDrafter = $('#drafterFilter').val().toLowerCase();
+
+        var rows = $('#user2 tr');
+
+        rows.each(function() {
+            var drafterName = $(this).find('td:nth-child(2)').text().toLowerCase(); // Kolom Nama Drafter
+
+            // Cek apakah nilai drafter sesuai dengan filter
+            var matchDrafter = filterDrafter === "all" || drafterName.includes(filterDrafter);
+
+            // Tampilkan atau sembunyikan baris berdasarkan hasil filter
+            if (matchDrafter) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
     }
 
     function filterTable() {
