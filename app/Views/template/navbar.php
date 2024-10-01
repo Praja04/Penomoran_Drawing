@@ -21,7 +21,7 @@
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-message-bulleted"><span class="path1"></span><span class="path2"></span></i>
 								<span>Order Drawing</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
@@ -33,7 +33,7 @@
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-file-multiple"><span class="path1"></span><span class="path2"></span></i>
 								<span>Generate & Upload</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
@@ -45,7 +45,7 @@
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-book-multiple"><span class="path1"></span><span class="path2"></span></i>
 								<span>Log Book </span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
@@ -57,7 +57,7 @@
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-publish"><span class="path1"></span><span class="path2"></span></i>
 								<span>Publish & Trial</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
@@ -82,7 +82,7 @@
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-verified"><span class="path1"></span><span class="path2"></span></i>
 								<span>Verification Admin</span>
 								<span class="pull-right-container" id="verifikasi">
 									<i class="fa fa-angle-right pull-right"></i>
@@ -96,19 +96,19 @@
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-publish"><span class="path1"></span><span class="path2"></span></i>
 								<span>Publish & Trial</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
 								<li><a href="<?= base_url('publish') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Published</a></li>
-								<li><a href="<?= base_url('drawing/trial') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
+								<li><a href="<?= base_url('trial/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
 							</ul>
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-book-multiple"><span class="path1"></span><span class="path2"></span></i>
 								<span>Log Book</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
@@ -119,7 +119,7 @@
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-message-bulleted"><span class="path1"></span><span class="path2"></span></i>
 								<span>Order Drawing</span>
 								<span class="pull-right-container" id="approve">
 									<i class="fa fa-angle-right pull-right"></i>
@@ -127,6 +127,17 @@
 							<ul class="treeview-menu">
 								<li><a href="<?= base_url('order/external') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Eksternal PCE <span id="notif_approve"></a></li>
 								<li><a href="<?= base_url('order/internal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Internal PCE</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Project</span>
+								<span class="pull-right-container" id="approve">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('listproject') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Project<span id="notif_approve"></a></li>
 							</ul>
 						</li>
 						<li class="header">Mold CBI</li>
@@ -162,17 +173,6 @@
 								<li><a href="<?= base_url('trial/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
 							</ul>
 						</li>
-						<!-- <li class="treeview">
-							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
-								<span>Log Book</span>
-								<span class="pull-right-container">
-									<i class="fa fa-angle-right pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="<?= base_url('logbooks') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Log Book Drawing</a></li>
-							</ul>
-						</li> -->
 						<li class="treeview">
 							<a href="#">
 								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
@@ -183,6 +183,18 @@
 							<ul class="treeview-menu">
 								<li><a href="<?= base_url('order/external') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Eksternal PCE <span id="notif_approve"></a></li>
 								<li><a href="<?= base_url('order/internal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Internal PCE</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<span>Project</span>
+								<span class="pull-right-container" id="approve">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('create/project') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Create Project<span id="notif_approve"></a></li>
+								<li><a href="<?= base_url('list/project') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Project<span id="notif_approve"></a></li>
 							</ul>
 						</li>
 						<li class="header">Mold CBI</li>

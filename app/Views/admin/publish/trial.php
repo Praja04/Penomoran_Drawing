@@ -146,7 +146,17 @@
             "autoWidth": false
         });
 
+        $('#drafterFilter').on('change', function() {
+            var filterValue = $(this).val();
 
+            if (filterValue === 'all') {
+                // Show all rows
+                table.column(1).search('').draw(); // Column 2 for Supplier
+            } else {
+                // Filter rows by selected supplier
+                table.column(1).search('^' + filterValue + '$', true, false).draw(); // Column 2 for Supplier
+            }
+        });
 
 
     });
