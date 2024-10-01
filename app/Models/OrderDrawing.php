@@ -10,6 +10,24 @@ class OrderDrawing extends Model
     protected $primaryKey       = 'id';
 
     protected $allowedFields    = ['user_id', 'nama_drafter', 'nama_part', 'order_from', 'tanggal_order', 'tanggal_jatuh_tempo', 'terima_order', 'status', 'keterangan', 'created_at', 'drawing_pdf', 'number_pdf','project','workshop','progress','no_pro'];
+
+    public function deleteByFields($nama_part, $nama_project, $id_drafter)
+    {
+        return $this->where('nama_part', $nama_part)
+            ->where('project', $nama_project)
+            ->where('user_id', $id_drafter)
+            ->delete();
+    }
+    public function updatedetailforProject($id_drafter, $nama_project, $old_nama_part, $new_nama_part, $due_date_new)
+    {
+        return $this->where('user_id', $id_drafter)
+            ->where('project', $nama_project)
+            ->where('nama_part', $old_nama_part)
+            ->set('nama_part', $new_nama_part)
+            ->set('tanggal_jatuh_tempo', $due_date_new)
+            ->update();
+    }
+
     public function countApprove()
     {
         return $this
