@@ -60,15 +60,6 @@ class PdfNumberController extends BaseController
         return $this->response->setJSON($response);
     }
 
-    public function index()
-    {
-        if (!session()->get('is_login') || session()->get('role') != 'uploader') {
-            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
-            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
-        }
-        return view('user/pdf_number_form');
-    }
-
     public function getsubProses()
     {
         $Proses = $this->request->getGet('proses');
@@ -241,8 +232,6 @@ class PdfNumberController extends BaseController
         }
         
     }
-
-
 
     public function uploadForm($id)
     {
