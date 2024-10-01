@@ -103,6 +103,17 @@ $routes->get('data/drawing', 'KasiController::data_drawing');
 $routes->get('data/drawing/drafters', 'KasiController::data_drawing_drafters');
 $routes->get('data/drafter/(:num)', 'KasiController::data_drafter/$1');
 
+//Project Controller
+$routes->get('listproject', 'ProjectController::list_project');
+$routes->post('create/saveProject', 'ProjectController::saveProject');
+$routes->get('project/detail/(:num)', 'ProjectController::detail_project/$1');
+$routes->post('submit/detail/project', 'ProjectController::submit_detail');
+$routes->post('submit/dokumen/project', 'ProjectController::submit_dokumen');
+$routes->post('delete/drafter', 'ProjectController::delete_drafter');
+$routes->post('delete/dokumen', 'ProjectController::delete_dokumen');
+$routes->post('update/detail', 'ProjectController::updatedetail_Project');
+$routes->post('delete/all/project', 'ProjectController::delete_Project');
+
 
 //pengajuan revisi
 $routes->post('pengajuan/revisi/(:num)', 'PdfNumberController::pengajuan_revisi/$1');
