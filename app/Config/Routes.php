@@ -113,6 +113,7 @@ $routes->post('delete/drafter', 'ProjectController::delete_drafter');
 $routes->post('delete/dokumen', 'ProjectController::delete_dokumen');
 $routes->post('update/detail', 'ProjectController::updatedetail_Project');
 $routes->post('delete/all/project', 'ProjectController::delete_Project');
+$routes->post('add/drafter', 'ProjectController::AddDrafter');
 
 
 //pengajuan revisi

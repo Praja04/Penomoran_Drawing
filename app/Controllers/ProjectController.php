@@ -38,7 +38,7 @@ class ProjectController extends BaseController
     }
     public function list_project()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -59,7 +59,7 @@ class ProjectController extends BaseController
     }
     public function detail_project($id_project)
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -101,7 +101,7 @@ class ProjectController extends BaseController
 
     public function saveProject()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -133,9 +133,43 @@ class ProjectController extends BaseController
         }
     }
 
+    public function AddDrafter()
+    {
+        $allowed_roles = ['kasi', 'admin', 'uploader', 'reader_pce'];
+        $user_role = session()->get('role');
+        if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/'));
+        }
+        // Ambil data dari form
+        try {
+            $nama_drafter = $this->request->getPost('nama_drafter');
+            $npk_drafter = $this->request->getPost('npk_drafter');
+            $role = $this->request->getPost('role');
+            $email_drafter = $this->request->getPost('email_drafter');
+
+            // Siapkan data untuk disimpan
+            $data = [
+                'nama' => $nama_drafter,
+                'npk' => $npk_drafter,
+                'role' => $role,
+                'email'=> $email_drafter
+            ];
+
+
+            // Simpan data ke database
+            $this->UserModel->save($data);
+
+            // Redirect atau tampilkan pesan sukses
+            return $this->response->setJSON(['message' => 'Add Drafter Berhasil !']);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['error' => 'Data yang anda masukan tidak valid ! Silahkan coba lagi']);
+        }
+    }
+
     public function submit_detail()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -227,7 +261,7 @@ class ProjectController extends BaseController
 
     public function submit_dokumen()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -260,7 +294,7 @@ class ProjectController extends BaseController
 
     public function delete_drafter()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -283,7 +317,7 @@ class ProjectController extends BaseController
 
     public function delete_dokumen()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -325,7 +359,7 @@ class ProjectController extends BaseController
 
     public function updatedetail_Project()
     {
-        $allowed_roles = ['kasi', 'admin'];
+        $allowed_roles = ['kasi', 'admin','uploader','reader_pce'];
         $user_role = session()->get('role');
         if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
             session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');

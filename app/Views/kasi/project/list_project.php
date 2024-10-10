@@ -38,7 +38,8 @@
                              </h6>
                          </div>
                          <div>
-                             <a data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary mt-10 d-block col-lg-12">+ Add New Project</a>
+                             <a data-bs-toggle="modal" data-bs-target="#addDrafterModal" class="btn btn-info me-10 mt-10 d-inline-block ">+ Add New Drafter</a>
+                             <a data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary me-10 mt-10 d-inline-block ">+ Add New Project</a>
                          </div>
                      </div>
                      <div class="box-body p-15">
@@ -119,6 +120,53 @@
                      <div class="modal-footer">
                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                          <button type="submit" id="submitBtn" class="btn btn-success">Save Project</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+         <div class="modal fade" id="addDrafterModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title" id="modalLabel">Add New Drafter</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                         <!-- Form untuk menambahkan drafter -->
+                         <form id="form2-content" enctype="multipart/form-data">
+                             <div class=" box-body">
+
+                                 <div class="form-group">
+                                     <label class="form-label">Nama :</label>
+                                     <input type="text" id="nama_drafter" name="nama_drafter" class="form-control" required>
+                                 </div>
+
+                                 <div class="form-group">
+                                     <label class="form-label">NPK :</label>
+                                     <input type="number" id="npk_drafter" name="npk_drafter" class="form-control" required>
+                                 </div>
+
+                                 <div class="form-group">
+                                     <label class="form-label">Role :</label>
+                                     <select class="form-select" name="role" id="role">
+                                         <option value="" disabled selected>Pilih</option>
+                                         <option value="kasi">Kasi</option>
+                                         <option value="staff">Staff</option>
+                                     </select>
+                                 </div>
+
+                                 <div class="form-group">
+                                     <label class="form-label">Email :</label>
+                                     <input type="email" id="email_drafter" name="email_drafter" class="form-control" required>
+                                 </div>
+                             </div>
+
+                         </form>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                         <button type="submit" id="submitBtn_addDrafter" class="btn btn-success">Save Project</button>
                      </div>
                  </div>
              </div>
@@ -238,6 +286,24 @@
              }
          });
 
+         $('#submitBtn_addDrafter').on('click', function() {
+             const inputs = $('#form2-content').find('input, select');
+             let isValid = true;
+
+             inputs.each(function() {
+                 if ($(this).prop('required') && !$(this).val()) {
+                     showModal('Semua inputan harus diisi.');
+                     $(this).focus();
+                     isValid = false;
+                     return false;
+                 }
+             });
+
+             if (isValid) {
+                 submitData_addDrafter(baseUrl);
+             }
+         });
+
          function submitData(baseUrl) {
              var formData = new FormData();
              formData.append('nama_pengaju', $('#nama_pengaju').val());
@@ -251,6 +317,33 @@
                  processData: false,
                  contentType: false,
                  success: function(response) {
+                     $('#modalok').on('click', function() {
+                         location.reload();
+                     });
+                     showModal(response.message, function() {});
+                 },
+                 error: function(xhr, status, error) {
+                     console.error('Error:', error);
+                     showModal('Terjadi kesalahan saat mengirim data.');
+                 }
+             });
+         }
+
+         function submitData_addDrafter(baseUrl) {
+             var formData = new FormData();
+             formData.append('nama_drafter', $('#nama_drafter').val());
+             formData.append('npk_drafter', $('#npk_drafter').val());
+             formData.append('role', $('#role').val());
+             formData.append('email_drafter', $('#email_drafter').val());
+
+             $.ajax({
+                 url: baseUrl + 'add/drafter',
+                 type: 'POST',
+                 data: formData,
+                 processData: false,
+                 contentType: false,
+                 success: function(response) {
+                     $('#addDrafterModal').modal('hide');
                      $('#modalok').on('click', function() {
                          location.reload();
                      });

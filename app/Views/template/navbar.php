@@ -67,6 +67,17 @@
 								<li><a href="<?= base_url('trial/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
 							</ul>
 						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="mdi mdi-clipboard-check"><span class="path1"></span><span class="path2"></span></i>
+								<span>Project</span>
+								<span class="pull-right-container" id="approve">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('listproject') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Project<span id="notif_approve"></a></li>
+							</ul>
+						</li>
 					<?php elseif (session()->get('role') == 'admin') : ?>
 						<li class="treeview">
 							<a href="#">
@@ -131,7 +142,7 @@
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-clipboard-check"><span class="path1"></span><span class="path2"></span></i>
 								<span>Project</span>
 								<span class="pull-right-container" id="approve">
 									<i class="fa fa-angle-right pull-right"></i>
@@ -227,6 +238,17 @@
 							<ul class="treeview-menu">
 								<li><a href="<?= base_url('listpdf') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Publish</a></li>
 								<li><a href="<?= base_url('trial/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="mdi mdi-clipboard-check"><span class="path1"></span><span class="path2"></span></i>
+								<span>Project</span>
+								<span class="pull-right-container" id="approve">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('listproject') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Project<span id="notif_approve"></a></li>
 							</ul>
 						</li>
 					<?php else : ?>
