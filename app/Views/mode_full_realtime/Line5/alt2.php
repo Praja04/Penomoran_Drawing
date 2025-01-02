@@ -286,7 +286,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6 col-12">
-                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                             </div>
                                             <div class="col-xl-6 col-12">
                                                 <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center" id="cp_cell2"></span>
@@ -313,7 +313,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6 col-12">
-                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                             </div>
                                             <div class="col-xl-6 col-12">
                                                 <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center" id="cp_cell4"></span>
@@ -340,7 +340,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6 col-12">
-                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                             </div>
                                             <div class="col-xl-6 col-12">
                                                 <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center" id="cp_cell6"></span>
@@ -691,7 +691,7 @@
         $('#shift').text('Shift 3');
     }
     // Variabel untuk ketiga chart
-    let chart, chart3, chart5,chartresult2,chartresult4,chartresult6 ;
+    let chart, chart3, chart5, chartresult2, chartresult4, chartresult6;
     const updateInterval = 100000;
 
     // Fungsi untuk cell1

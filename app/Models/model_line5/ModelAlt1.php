@@ -27,6 +27,7 @@ class ModelAlt1 extends Model
         'waktu'
     ];
 
+
     public function getDataResult_Cell1()
     {
         return $this->select('L5_ALT1_RESULT_CELL1,waktu')
@@ -49,73 +50,6 @@ class ModelAlt1 extends Model
             ->find();
     }
 
-    //filter data
-    public function getDataResultcell1ByDate($date)
-    {
-        $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
-
-        return $this->select('L5_ALT1_RESULT_CELL1,waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)
-            ->findAll();
-    }
-    public function getDataResultcell3ByDate($date)
-    {
-        $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
-
-        return $this->select('L5_ALT1_RESULT_CELL3,waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)
-            ->findAll();
-    }
-    public function getDataResultcell5ByDate($date)
-    {
-        $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
-
-        return $this->select('L5_ALT1_RESULT_CELL5,waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)
-            ->findAll();
-    }
-
-    //by weeek
-    public function getDataResultcell1ByWeek($date1, $date2)
-    {
-        $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
-
-        return $this->select('L5_ALT1_RESULT_CELL1,waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)
-            ->findAll();
-    }
-
-    public function getDataResultcell3ByWeek($date1, $date2)
-    {
-        $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
-
-        return $this->select('L5_ALT1_RESULT_CELL3,waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)->findAll();
-    }
-    public function getDataResultcell5ByWeek($date1, $date2)
-    {
-        $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
-        return $this->select('L5_ALT1_RESULT_CELL5,waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)->findAll();
-    }
     public function getDataActual_Cell1()
     {
         return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL1,waktu')
@@ -139,116 +73,222 @@ class ModelAlt1 extends Model
             ->find();
     }
 
+    //filter data
+    public function getDataResultcell1ByDate($date)
+    {
+        // Format waktu awal dan akhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+
+        return $this->select('L5_ALT1_RESULT_CELL1, waktu')
+            ->orderBy('waktu', 'DESC')
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu di SQL Server
+            ->findAll();
+    }
+
+    public function getDataResultcell3ByDate($date)
+    {
+        // Format waktu awal dan akhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+
+        return $this->select('L5_ALT1_RESULT_CELL3, waktu')
+            ->orderBy('waktu', 'DESC')
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu di SQL Server
+            ->findAll();
+    }
+
+    public function getDataResultcell5ByDate($date)
+    {
+        // Format waktu awal dan akhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+
+        return $this->select('L5_ALT1_RESULT_CELL5, waktu')
+            ->orderBy('waktu', 'DESC')
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu di SQL Server
+            ->findAll();
+    }
+
+
+    //by weeek
+    public function getDataResultcell1ByWeek($date1, $date2)
+    {
+        // Format waktu awal dan akhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+        return $this->select('L5_ALT1_RESULT_CELL1, waktu')
+            ->orderBy('waktu', 'DESC')
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu di SQL Server
+            ->findAll();
+    }
+
+
+    public function getDataResultcell3ByWeek($date1, $date2)
+    {
+        // Format waktu awal dan akhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+
+        return $this->select('L5_ALT1_RESULT_CELL3, waktu')
+            ->orderBy('waktu', 'DESC')
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu di SQL Server
+            ->findAll();
+    }
+
+    public function getDataResultcell5ByWeek($date1, $date2)
+    {
+        // Format waktu awal dan akhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+
+        return $this->select('L5_ALT1_RESULT_CELL5, waktu')
+            ->orderBy('waktu', 'DESC')
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu di SQL Server
+            ->findAll();
+    }
+
+
+
+
+
     //Distinction
     public function getDistinctResult_Cell1()
-    { // Mengambil tanggal hari ini
+    {
+        // Mengambil tanggal hari ini
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = date('Y-m-d H:i:s', strtotime($today . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:59'));
+
         return $this->select('L5_ALT1_RESULT_CELL1, COUNT(L5_ALT1_RESULT_CELL1) as count')
             ->groupBy('L5_ALT1_RESULT_CELL1')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <', $endTime)
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu di SQL Server
             ->orderBy('count', 'DESC')
             ->findAll();
     }
+
 
     public function getDistinctResult_Cell3()
     {
         // Mengambil tanggal hari ini
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = date('Y-m-d H:i:s', strtotime($today . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:59'));
+
         return $this->select('L5_ALT1_RESULT_CELL3, COUNT(L5_ALT1_RESULT_CELL3) as count')
             ->groupBy('L5_ALT1_RESULT_CELL3')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <', $endTime)
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu di SQL Server
             ->orderBy('count', 'DESC')
             ->findAll();
     }
+
 
     public function getDistinctResult_Cell5()
     {
         // Mengambil tanggal hari ini
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = date('Y-m-d H:i:s', strtotime($today . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:59'));
+
         return $this->select('L5_ALT1_RESULT_CELL5, COUNT(L5_ALT1_RESULT_CELL5) as count')
             ->groupBy('L5_ALT1_RESULT_CELL5')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <', $endTime)
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu di SQL Server
+            ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu di SQL Server
             ->orderBy('count', 'DESC')
             ->findAll();
     }
+
 
     //get distinct by date
     public function getDistinctResult_Cell1byDate($date)
     {
-
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
+        // Menentukan waktu mulai dan waktu berakhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
         return $this->select('L5_ALT1_RESULT_CELL1, COUNT(L5_ALT1_RESULT_CELL1) as count')
             ->groupBy('L5_ALT1_RESULT_CELL1')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <', $endTime)
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu
             ->orderBy('count', 'DESC')
             ->findAll();
     }
+
     public function getDistinctResult_Cell3byDate($date)
     {
+        // Menentukan waktu mulai dan waktu berakhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
 
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
         return $this->select('L5_ALT1_RESULT_CELL3, COUNT(L5_ALT1_RESULT_CELL3) as count')
             ->groupBy('L5_ALT1_RESULT_CELL3')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <', $endTime)
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu
             ->orderBy('count', 'DESC')
             ->findAll();
     }
+
     public function getDistinctResult_Cell5byDate($date)
     {
+        // Menentukan waktu mulai dan waktu berakhir
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
 
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
         return $this->select('L5_ALT1_RESULT_CELL5, COUNT(L5_ALT1_RESULT_CELL5) as count')
             ->groupBy('L5_ALT1_RESULT_CELL5')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <', $endTime)
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu
             ->orderBy('count', 'DESC')
             ->findAll();
     }
+
+
 
     //filter data
     public function getDataActualcell1ByDate($date)
     {
-        $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+
         return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL1,waktu')
             ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)->findAll();
-    }
-    public function getDataActualcell3ByDate($date)
-    {
-        $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
-        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL3,waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)->findAll();
-    }
-    public function getDataActualcell5ByDate($date)
-    {
-        $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
-        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL5,waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)->findAll();
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu
+            ->findAll();
     }
 
-    //get parameter mode
+    public function getDataActualcell3ByDate($date)
+    {
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+
+        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL3,waktu')
+            ->orderBy('waktu', 'DESC')
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu
+            ->findAll();
+    }
+
+    public function getDataActualcell5ByDate($date)
+    {
+        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+
+        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL5,waktu')
+            ->orderBy('waktu', 'DESC')
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Menggunakan CAST untuk perbandingan waktu
+            ->findAll();
+    }
+
+
 
     public function getDataParameter()
     {
@@ -259,8 +299,6 @@ class ModelAlt1 extends Model
     public function getDataToday()
     {
         $today = date('Y-m-d');
-
-        // Define the time ranges for shifts
         $shifts = [
             [
                 'start' => '07:30:01',
@@ -268,10 +306,10 @@ class ModelAlt1 extends Model
             ],
             [
                 'start' => '16:30:01',
-                'end' => '23:59:59' // Adjusted end time for the first shift
+                'end' => '23:59:59'
             ],
             [
-                'start' => '00:00:00', // Start of the second shift
+                'start' => '00:00:00',
                 'end' => '07:30:00'
             ]
         ];
@@ -279,9 +317,9 @@ class ModelAlt1 extends Model
         $totalCount = [];
 
         foreach ($shifts as $key => $shift) {
-            $count = $this->where('DATE(waktu)', $today)
-                ->where('TIME(waktu) >=', $shift['start'])
-                ->where('TIME(waktu) <=', $shift['end'])
+            $count = $this->where("CAST(waktu AS DATE) = '$today'") // Menggunakan CAST untuk tanggal
+                ->where("CAST(waktu AS TIME) >= '{$shift['start']}'") // Menggunakan CAST untuk waktu
+                ->where("CAST(waktu AS TIME) <= '{$shift['end']}'") // Menggunakan CAST untuk waktu
                 ->countAllResults();
 
             $totalCount[$key] = $count;
@@ -289,11 +327,11 @@ class ModelAlt1 extends Model
 
         return $totalCount;
     }
+
+
     public function getDataOKToday()
     {
         $today = date('Y-m-d');
-
-        // Define the time ranges for shifts
         $shifts = [
             [
                 'start' => '07:30:01',
@@ -301,10 +339,10 @@ class ModelAlt1 extends Model
             ],
             [
                 'start' => '16:30:01',
-                'end' => '23:59:59' // Adjusted end time for the first shift
+                'end' => '23:59:59'
             ],
             [
-                'start' => '00:00:00', // Start of the second shift
+                'start' => '00:00:00',
                 'end' => '07:30:00'
             ]
         ];
@@ -312,10 +350,10 @@ class ModelAlt1 extends Model
         $totalCount = [];
 
         foreach ($shifts as $key => $shift) {
-            $count = $this->where('DATE(waktu)', $today)
+            $count = $this->where("CAST(waktu AS DATE) = '$today'") // Menggunakan CAST untuk tanggal
                 ->where('status', 'OK')
-                ->where('TIME(waktu) >=', $shift['start'])
-                ->where('TIME(waktu) <=', $shift['end'])
+                ->where("CAST(waktu AS TIME) >= '{$shift['start']}'") // Menggunakan CAST untuk waktu
+                ->where("CAST(waktu AS TIME) <= '{$shift['end']}'") // Menggunakan CAST untuk waktu
                 ->countAllResults();
 
             $totalCount[$key] = $count;
@@ -323,11 +361,10 @@ class ModelAlt1 extends Model
 
         return $totalCount;
     }
+
     public function getDataNGToday()
     {
         $today = date('Y-m-d');
-
-        // Define the time ranges for shifts
         $shifts = [
             [
                 'start' => '07:30:01',
@@ -335,10 +372,10 @@ class ModelAlt1 extends Model
             ],
             [
                 'start' => '16:30:01',
-                'end' => '23:59:59' // Adjusted end time for the first shift
+                'end' => '23:59:59'
             ],
             [
-                'start' => '00:00:00', // Start of the second shift
+                'start' => '00:00:00',
                 'end' => '07:30:00'
             ]
         ];
@@ -346,10 +383,10 @@ class ModelAlt1 extends Model
         $totalCount = [];
 
         foreach ($shifts as $key => $shift) {
-            $count = $this->where('DATE(waktu)', $today)
+            $count = $this->where("CAST(waktu AS DATE) = '$today'") // Menggunakan CAST untuk tanggal
                 ->where('status', 'NG')
-                ->where('TIME(waktu) >=', $shift['start'])
-                ->where('TIME(waktu) <=', $shift['end'])
+                ->where("CAST(waktu AS TIME) >= '{$shift['start']}'") // Menggunakan CAST untuk waktu
+                ->where("CAST(waktu AS TIME) <= '{$shift['end']}'") // Menggunakan CAST untuk waktu
                 ->countAllResults();
 
             $totalCount[$key] = $count;
@@ -357,6 +394,7 @@ class ModelAlt1 extends Model
 
         return $totalCount;
     }
+
 
     public function getdataNGdetailToday()
     {
@@ -367,10 +405,12 @@ class ModelAlt1 extends Model
         return $this->select('line5_data_alt1.*')
             ->orderBy('waktu', 'DESC')
             ->where('status', 'NG')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <', $endTime)
+            ->where("CAST(waktu AS DATE) = '$today'") // Menggunakan CAST untuk tanggal
+            ->where("CAST(waktu AS TIME) >= '07:30:00'") // Menggunakan CAST untuk waktu
+            ->where("CAST(waktu AS TIME) <= '23:59:59'") // Menggunakan CAST untuk waktu
             ->findAll();
     }
+
     public function getdataNGdetailTodaybyDate($date)
     {
         $startTime = $date . ' 07:30:00';
@@ -379,41 +419,50 @@ class ModelAlt1 extends Model
         return $this->select('line5_data_alt1.*')
             ->orderBy('waktu', 'DESC')
             ->where('status', 'NG')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)
+            ->where("CAST(waktu AS DATE) = '$date'") // Menggunakan CAST untuk tanggal
+            ->where("CAST(waktu AS TIME) >= '07:30:00'") // Menggunakan CAST untuk waktu
+            ->where("CAST(waktu AS TIME) <= '23:59:59'") // Menggunakan CAST untuk waktu
             ->findAll();
     }
+
+
+
+
 
     //by weeek
     public function getDataActualcell1ByWeek($date1, $date2)
     {
-        $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
+        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
 
-        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL1,waktu')
+        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL1, waktu')
             ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)
+            ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Gunakan CAST untuk perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) <= CAST('$endTime' AS DATETIME)") // Gunakan CAST untuk perbandingan waktu
             ->findAll();
     }
 
+
     public function getDataActualcell3ByWeek($date1, $date2)
     {
-        $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
+        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
 
-        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL3,waktu')
+        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL3, waktu')
             ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)->findAll();
+            ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Gunakan CAST untuk perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) <= CAST('$endTime' AS DATETIME)") // Gunakan CAST untuk perbandingan waktu
+            ->findAll();
     }
+
     public function getDataActualcell5ByWeek($date1, $date2)
     {
-        $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
-        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL5,waktu')
+        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
+        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+        return $this->select('L5_ALT1_ACTUAL_PRESSURE_CELL5, waktu')
             ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)->findAll();
+            ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Gunakan CAST untuk perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) <= CAST('$endTime' AS DATETIME)") // Gunakan CAST untuk perbandingan waktu
+            ->findAll();
     }
 }

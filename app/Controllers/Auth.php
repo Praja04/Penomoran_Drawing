@@ -43,7 +43,7 @@ class Auth extends BaseController
 
             if (!empty($data)) {
                 // Menentukan peran berdasarkan NPK
-                $npk_kasi = [ 2331, 2593, 3651, 4171, 3659];
+                $npk_kasi = [2331, 2593, 3651, 4171, 3659];
                 $npk_admin = [3650, 1942];
                 $npk_reader_pce = [3517, 2845, 570];
                 $npk_uploaders = [1028, 1637, 2872, 3399]; // Daftar NPK uploader
@@ -112,7 +112,56 @@ class Auth extends BaseController
 
                 // Redirect berdasarkan peran
                 return $this->redirect_based_on_role($role);
-            } else {
+            } elseif ($username == 'user_pce' & $password == 'user_pce') {
+                // Menyimpan data ke sesi
+                $role = 'uploader_pce';
+                $session_data = [
+                    'username' => 'user_pce',
+                    'nama' => 'uploader Engineering',
+                    'npk' => '0012',
+                    'id_divisi' => '3',
+                    'divisi' => 'Engineering',
+                    'id_departement' => '3',
+                    'departement' => 'Proses',
+                    'id_section' => '132',
+                    'section' => 'staff',
+                    'id_sub_section' => '0',
+                    'sub_section' => '0',
+                    'kode_jabatan' => '0',
+                    'role' => $role,
+                    'is_login' => true
+                ];
+
+                $this->session->set($session_data);
+
+                // Redirect berdasarkan peran
+                return $this->redirect_based_on_role($role);
+            }elseif($username == 'pce_reader' & $password == 'pce_reader'){
+                // Menyimpan data ke sesi
+                $role = 'pce_reader';
+                $session_data = [
+                    'username' => 'pce_reader',
+                    'nama' => 'Engineering',
+                    'npk' => '0012',
+                    'id_divisi' => '3',
+                    'divisi' => 'Engineering',
+                    'id_departement' => '3',
+                    'departement' => 'Proses',
+                    'id_section' => '132',
+                    'section' => 'staff',
+                    'id_sub_section' => '0',
+                    'sub_section' => '0',
+                    'kode_jabatan' => '0',
+                    'role' => $role,
+                    'is_login' => true
+                ];
+
+                $this->session->set($session_data);
+
+                // Redirect berdasarkan peran
+                return $this->redirect_based_on_role($role);
+            }
+             else {
                 $this->session->setFlashdata('error', 'Username atau password salah.');
                 return redirect()->to(base_url('/'));
             }
@@ -175,6 +224,12 @@ class Auth extends BaseController
             return redirect()->to(base_url('dashboard'));
         } elseif ($role == 'reader_pce') {
             return redirect()->to(base_url('listpdf'));
+        } elseif ($role == 'uploader_pce') {
+            return redirect()->to(base_url('uploader/dashboard'));
+        } elseif ($role == 'pce_reader') {
+            return redirect()->to(base_url('reader/dashboard'));
+        } elseif ($role == 'admin_pce') {
+            return redirect()->to(base_url('dashboard/adminpce'));
         } else {
             return redirect()->to(base_url('listpdf'));
         }

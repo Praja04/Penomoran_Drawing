@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Last Dandori Time" disabled>
                         </div>
-                        <div class="form-group" style="background-color: #fff;">
+                        <div class="form-group" style="background-color:#fff;">
                             <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">Date Now</span>
                         </div>
 
@@ -80,7 +80,7 @@
                             <!-- <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center" id="tanggal_now"></span> -->
                         </div>
 
-                        <h5 style="color: #fff;" id="battery_now"></h5>
+                        <h5 style="color:#fff;" id="battery_now"></h5>
                     </div>
                     <div class="col-md-1-5">
                         <div class="form-group">
@@ -97,10 +97,10 @@
                     </div>
                     <div class="col-md-1-5">
                         <div class="form-group">
-                            <input type="text" class="form-control" disabled>
+                            <input id="type3" type="text" class="form-control" disabled>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" disabled>
+                            <input id="dandori3" type="text" class="form-control" disabled>
                         </div>
                         <div class="form-group">
                             <a data-bs-toggle="modal" data-bs-target="#modal-center5" title="Menu Line 5" class="waves-effect waves-light btn btn-success btn-flat mb-5 btn-sm">
@@ -130,7 +130,7 @@
                             <div class="form-group">
                                 <div class="card text-center"> <!-- Menggunakan card untuk kotak -->
                                     <div class="card-body small-card-body">
-                                        <h5 class="card-title">Output Battery APB Line 5</h5> <!-- Teks di tengah -->
+                                        <h5 class="card-title">Output Battery APB Line 6</h5> <!-- Teks di tengah -->
                                         <h4 id="total_alt"></h4>
                                     </div>
                                 </div>
@@ -188,7 +188,7 @@
     <!-- Main content -->
     <div class="row align-items-start">
         <div class="col-xl-3 col-12" style="background-color:#03346E;">
-            <section class="content">
+            <section class=" content">
                 <div class="row">
                     <div class="col-lg-12 col-12 ">
                         <div class="box" style="background-color:#fff;">
@@ -214,12 +214,12 @@
                                             <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
                                                 <h4>Standar</h4>
                                             </label>
-                                            <input type="text" id="standar_temp_right" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_temp_left" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_cooling_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_first_dipping_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_weld_head_down_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_flame_waiting_time" class="form-control mb-3" disabled style="width:80px;">
+                                            <input type="text" id="standar_temp_right" class="form-control mb-3" disabled style="width:100px;">
+                                            <input type="text" id="standar_temp_left" class="form-control mb-3" disabled style="width:100px;">
+                                            <input type="text" id="standar_cooling_time" class="form-control mb-3" disabled style="width:100px;">
+                                            <input type="text" id="standar_first_dipping_time" class="form-control mb-3" disabled style="width:100px;">
+                                            <input type="text" id="standar_weld_head_down_time" class="form-control mb-3" disabled style="width:100px;">
+                                            <input type="text" id="standar_flame_waiting_time" class="form-control mb-3" disabled style="width:100px;">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -313,7 +313,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-12">
-                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                     </div>
                                     <div class="col-xl-6 col-12">
                                         <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">1</span>
@@ -340,7 +340,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-12">
-                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                     </div>
                                     <div class="col-xl-6 col-12">
                                         <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">1</span>
@@ -386,6 +386,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="modal center-modal fade" id="modal-center5" tabindex="-1">
     <div class="modal-dialog col-12 col-lg-12 ">
@@ -557,7 +558,6 @@
     // Variabel untuk ketiga chart
     let chart, chart3;
     const updateInterval = 100000;
-
     // Fungsi untuk right
     const fetchDataRight1 = () => {
         $.ajax({
@@ -599,18 +599,19 @@
 
                 // Ambil label untuk sumbu x dari data yang difilter
                 const filteredLabels = filteredData.map(item => item.waktu.split(' ')[1]); // Jam saja
+
                 const labels = data.data.map(item => item.waktu);
                 const valuesSet = data.data.map(item => parseFloat(item.L5_APB2_TEMP_RIGHT_SETTING));
                 const valuesRight = data.data.map(item => parseFloat(item.L5_APB2_TEMP_RIGHT_ACTUAL));
                 const valuesStandardMinimal = data.data.map(item => 25); // Konversi ke angka
                 const valuesStandardMaksimal = data.data.map(item => 50); // Konversi ke angka
 
-                updateOrCreateChart(valuesStandardMinimal, valuesStandardMaksimal, 'container', chart, 'APB2 - TEMP RIGHT Actual', labels, valuesSet, 'L5_APB2_TEMP_RIGHT_SETTING', valuesRight, 'L5_APB2_TEMP_RIGHT_ACTUAL', (newChart) => {
+                updateOrCreateChart2(valuesStandardMinimal, valuesStandardMaksimal, 'container', chart, 'APB2 - TEMP RIGHT Actual', labels, valuesSet, 'L5_APB2_TEMP_RIGHT_SETTING', valuesRight, 'L5_APB2_TEMP_RIGHT_ACTUAL', (newChart) => {
                     chart = newChart;
                 }, filteredLabels, data.data.map(item => item.waktu.split(' ')[1]));
             },
             error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for temp right apb2:', textStatus, errorThrown);
+                console.error('Error fetching data for temp right apb1:', textStatus, errorThrown);
             }
         });
     };
@@ -656,13 +657,14 @@
 
                 // Ambil label untuk sumbu x dari data yang difilter
                 const filteredLabels = filteredData.map(item => item.waktu.split(' ')[1]); // Jam saja
+
                 const labels = data.data.map(item => item.waktu);
                 const valuesSet = data.data.map(item => parseFloat(item.L5_APB2_TEMP_LEFT_SETTING));
                 const valuesLeft = data.data.map(item => parseFloat(item.L5_APB2_TEMP_LEFT_ACTUAL));
                 const valuesStandardMinimal = data.data.map(item => 25); // Konversi ke angka
                 const valuesStandardMaksimal = data.data.map(item => 50); // Konversi ke angka
 
-                updateOrCreateChart(valuesStandardMinimal, valuesStandardMaksimal, 'container2', chart3, 'APB2 - TEMP LEFT Actual', labels, valuesSet, 'L5_APB2_TEMP_LEFT_SETTING', valuesLeft, 'L5_APB2_TEMP_LEFT_ACTUAL', (newChart) => {
+                updateOrCreateChart2(valuesStandardMinimal, valuesStandardMaksimal, 'container2', chart3, 'APB2 - TEMP LEFT Actual', labels, valuesSet, 'L5_APB2_TEMP_LEFT_SETTING', valuesLeft, 'L5_APB2_TEMP_LEFT_ACTUAL', (newChart) => {
                     chart3 = newChart;
                 }, filteredLabels, data.data.map(item => item.waktu.split(' ')[1]));
             },
@@ -671,8 +673,6 @@
             }
         });
     };
-
-    // Fungsi untuk cell5
 
     // Fungsi untuk mengambil data berdasarkan tanggal
     const fetchDataByDate = (date) => {
@@ -716,13 +716,14 @@
 
                 // Ambil label untuk sumbu x dari data yang difilter
                 const filteredLabels = filteredData.map(item => item.waktu.split(' ')[1]); // Jam saja
+
                 const labels = data.data.map(item => item.waktu);
                 const valuesSet = data.data.map(item => parseFloat(item.L5_APB2_TEMP_RIGHT_SETTING));
                 const valuesRight = data.data.map(item => parseFloat(item.L5_APB2_TEMP_RIGHT_ACTUAL));
                 const valuesStandardMinimal = data.data.map(item => 25); // Konversi ke angka
                 const valuesStandardMaksimal = data.data.map(item => 50); // Konversi ke angka
 
-                updateOrCreateChart(valuesStandardMinimal, valuesStandardMaksimal, 'container', chart, 'APB2 - TEMP RIGHT Actual', labels, valuesSet, 'L5_APB2_TEMP_RIGHT_SETTING', valuesRight, 'L5_APB2_TEMP_RIGHT_ACTUAL', (newChart) => {
+                updateOrCreateChart2(valuesStandardMinimal, valuesStandardMaksimal, 'container', chart, 'APB2 - TEMP RIGHT Actual', labels, valuesSet, 'L5_APB2_TEMP_RIGHT_SETTING', valuesRight, 'L5_APB2_TEMP_RIGHT_ACTUAL', (newChart) => {
                     chart = newChart;
                 }, filteredLabels, data.data.map(item => item.waktu.split(' ')[1]));
             },
@@ -771,13 +772,14 @@
 
                 // Ambil label untuk sumbu x dari data yang difilter
                 const filteredLabels = filteredData.map(item => item.waktu.split(' ')[1]); // Jam saja
+
                 const labels = data.data.map(item => item.waktu);
                 const valuesSet = data.data.map(item => parseFloat(item.L5_APB2_TEMP_LEFT_SETTING));
                 const valuesLeft = data.data.map(item => parseFloat(item.L5_APB2_TEMP_LEFT_ACTUAL));
                 const valuesStandardMinimal = data.data.map(item => 25); // Konversi ke angka
                 const valuesStandardMaksimal = data.data.map(item => 50); // Konversi ke angka
 
-                updateOrCreateChart(valuesStandardMinimal, valuesStandardMaksimal, 'container2', chart3, 'APB2 - TEMP LEFT Actual', labels, valuesSet, 'L5_APB2_TEMP_LEFT_SETTING', valuesLeft, 'L5_APB2_TEMP_LEFT_ACTUAL', (newChart) => {
+                updateOrCreateChart2(valuesStandardMinimal, valuesStandardMaksimal, 'container2', chart3, 'APB2 - TEMP LEFT Actual', labels, valuesSet, 'L5_APB2_TEMP_LEFT_SETTING', valuesLeft, 'L5_APB2_TEMP_LEFT_ACTUAL', (newChart) => {
                     chart3 = newChart;
                 }, filteredLabels, data.data.map(item => item.waktu.split(' ')[1]));
             },
@@ -787,9 +789,9 @@
         });
 
     };
-    
+
     // Fungsi helper untuk membuat/update chart
-    const updateOrCreateChart = (valuesStandardMinimalTemp, valuesStandardMaksimalTemp, containerId, chartInstance, title, labels, valuesSet, seriesName, valuesTemp, SeriesTemp, setChart, filteredLabels, originalLabels) => {
+    const updateOrCreateChart2 = (valuesStandardMinimalTemp, valuesStandardMaksimalTemp, containerId, chartInstance, title, labels, valuesSet, seriesName, valuesTemp, SeriesTemp, setChart, filteredLabels, originalLabels) => {
         const plotLines = filteredLabels.map(time => {
             const timeIndex = originalLabels.findIndex(label => label === time); // Find the index of the time in the original labels
             let shift = '';
@@ -1083,7 +1085,7 @@
     };
 
 
-    // Fungsi update untuk realtime
+
     const updateCharts = () => {
         const selectedSource = $('#data-source').val();
         if (selectedSource === 'realtime') {
@@ -1093,22 +1095,29 @@
         }
     };
 
-    // Event listener untuk dropdown
     $('#data-source').on('change', function() {
         const selectedSource = $(this).val();
         if (selectedSource === 'date') {
             $('#date-input').show();
             $('#fetch-data').show();
             $('#tanggal').show();
+            $('#date-input-week').hide();
+            $('#tanggal-week').hide();
+            $('#date-input-week2').hide();
+            $('#tanggal-week2').hide();
+            $('#fetch-data-week').hide();
             // Reset charts
-            chart = chart3 = chart5 = null;
+            chart = chart3 = chart5 = chartresult1 = chartresult3 = chartresult5 = null;
         } else if (selectedSource === 'week') {
+            $('#date-input').hide();
+            $('#fetch-data').hide();
+            $('#tanggal').hide();
             $('#date-input-week').show();
             $('#tanggal-week').show();
             $('#date-input-week2').show();
             $('#tanggal-week2').show();
             $('#fetch-data-week').show();
-            chart = chart3 = chart5 = null;
+            chart = chart3 = chart5 = chartresult1 = chartresult3 = chartresult5 = null;
         } else {
             $('#date-input').hide();
             $('#fetch-data').hide();
@@ -1122,16 +1131,6 @@
         }
     });
 
-    $('#fetch-data-week').on('click', function() {
-        const selectedDate = $('#date-input-week').val();
-        const selectedDate2 = $('#date-input-week2').val();
-        if (selectedDate < selectedDate2) {
-            fetchDataByWeek(selectedDate, selectedDate2);
-        } else {
-            alert('Pilih tanggal awal dan akhir dengan benar');
-        }
-
-    });
 
     // Event listener untuk tombol fetch
     $('#fetch-data').on('click', function() {
@@ -1142,7 +1141,16 @@
             alert('Please select a date.');
         }
     });
+    $('#fetch-data-week').on('click', function() {
+        const selectedDate = $('#date-input-week').val();
+        const selectedDate2 = $('#date-input-week2').val();
+        if (selectedDate && selectedDate2) {
+            fetchDataByWeek(selectedDate, selectedDate2);
+        } else {
+            alert('Please select a date.');
+        }
 
+    });
     // Inisialisasi awal
     fetchDataRight1();
     fetchDataLeft1();
@@ -1365,7 +1373,7 @@
             $('[id^="actual_"]').val(randomNum); // Update semua elemen dengan ID yang diawali dengan "actual-"
             if (Date.now() >= endTime) {
                 clearInterval(intervalId); // Hentikan animasi angka acak
-                setTimeout(fetchData, 10000); // Tunggu 1 detik sebelum memanggil fetchData lagi
+                setTimeout(fetchData, 1000); // Tunggu 1 detik sebelum memanggil fetchData lagi
             }
         }, 100); // Update setiap 100ms
         //fetchData();
@@ -1378,29 +1386,6 @@
 
 <!-- getdataToday -->
 <script>
-    const now = new Date();
-    const formattedDate = now.toLocaleString('id-ID', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour12: false
-    });
-    const formattedSeconds = now.toLocaleString('id-ID', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-    });
-    $('#tanggal_now').val(formattedDate);
-    $('#jam_now').val(formattedSeconds + ' WIB');
-    if (formattedSeconds > '07.30.00' && formattedSeconds < '16.30.00') {
-        // Tambahkan kode yang ingin dijalankan jika waktu kurang dari 07.30.00
-        $('#shift').text('Shift 1');
-    } else if (formattedSeconds > '16.30.00' && formattedSeconds < '23.59.00') {
-        $('#shift').text('Shift 2');
-    } else if (formattedSeconds > '23.59.00' && formattedSeconds < '07.30.00') {
-        $('#shift').text('Shift 3');
-    }
     // Inisialisasi variabel untuk menyimpan total
     let totalData1 = 0;
     let totalData2 = 0;
@@ -1416,9 +1401,22 @@
         url: '<?= base_url('apbline5/get/total/data/1') ?>',
         method: 'GET',
         success: function(response) {
-            console.log(response.data);
-
-            totalData1 = response.data; // Simpan hasil data1
+            var dataArray = response.data; // Ambil data dari response
+            const now = new Date();
+            const formattedSeconds = now.toLocaleString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            if (formattedSeconds > '07.30.00' && formattedSeconds < '16.30.00') {
+                // Tambahkan kode yang ingin dijalankan jika waktu kurang dari 07.30.00
+                totalData1 = dataArray[0];
+            } else if (formattedSeconds > '16.30.00' && formattedSeconds < '23.59.00') {
+                totalData1 = dataArray[1];
+            } else if (formattedSeconds > '00.00.00' && formattedSeconds < '07.29.00') {
+                totalData1 = dataArray[2];
+            }
             updateTotal(); // Update total setelah mendapatkan data1
         },
         error: function(error) {
@@ -1431,10 +1429,93 @@
         url: '<?= base_url('apbline5/get/total/data/2') ?>',
         method: 'GET',
         success: function(response) {
-            console.log(response.data);
-            $('#total_pcs').val(response.data);
-            totalData2 = response.data; // Simpan hasil data2
+            var dataArray = response.data; // Ambil data dari response
+            const now = new Date();
+            const formattedSeconds = now.toLocaleString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            if (formattedSeconds > '07.30.00' && formattedSeconds < '16.30.00') {
+                // Tambahkan kode yang ingin dijalankan jika waktu kurang dari 07.30.00
+                totalData2 = dataArray[0];
+            } else if (formattedSeconds > '16.30.00' && formattedSeconds < '23.59.00') {
+                totalData2 = dataArray[1];
+            } else if (formattedSeconds > '00.00.00' && formattedSeconds < '07.29.00') {
+                totalData2 = dataArray[2];
+            }
+            $('#total_pcs').val(totalData2);
             updateTotal(); // Update total setelah mendapatkan data2
+        },
+        error: function(error) {
+            console.error('Ada masalah dengan pengambilan data:', error);
+        }
+    });
+</script>
+
+<!-- parameter -->
+<script>
+    $.ajax({
+        url: '<?= base_url('hsmline6/get/type/2') ?>',
+        method: 'GET',
+        success: function(response) {
+            // Filter data untuk tipe 1 dan 2
+            const filteredData = response.data.filter(item =>
+                item.L5_HSM2_TYPE_BATTERY === "0" || item.L5_HSM2_TYPE_BATTERY === "1" || item.L5_HSM2_TYPE_BATTERY === "2"
+            );
+
+            // Define the types and their corresponding input IDs
+            const types = [{
+                    type: 'N70LC375,LC238,LC300',
+                    inputId: 'dandori1'
+                },
+                {
+                    type: 'N70 MF',
+
+                    inputId: 'dandori2'
+                },
+                {
+                    type: 'N70LC375,LC238,LC300',
+                    inputId: 'dandori3'
+                }
+            ];
+
+            // Clear all input fields initially
+            types.forEach(type => {
+                $(`#${type.inputId}`).val('');
+            });
+
+            // Loop through filteredData and populate the inputs
+            filteredData.forEach((item, index) => {
+                if (index < types.length) {
+                    $(`#type${index + 1}`).val(types[index].type);
+                    $(`#${types[index].inputId}`).val(item.waktu);
+                }
+            });
+            const now = new Date();
+            const formattedDate = now.toLocaleString('id-ID', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour12: false
+            });
+            const formattedSeconds = now.toLocaleString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            $('#tanggal_now').val(formattedDate);
+            $('#jam_now').val(formattedSeconds + ' WIB');
+            if (formattedSeconds < '07.30.00' && formattedSeconds > '00.30.00') {
+                // Tambahkan kode yang ingin dijalankan jika waktu kurang dari 07.30.00
+                $('#shift').text('Shift 3');
+            } else if (formattedSeconds < '16.30.00' && formattedSeconds > '07.30.00') {
+                $('#shift').text('Shift 1');
+            } else if (formattedSeconds > '16.30.00' && formattedSeconds < '00.30.00') {
+                $('#shift').text('Shift 2');
+            }
         },
         error: function(error) {
             console.error('Ada masalah dengan pengambilan data:', error);

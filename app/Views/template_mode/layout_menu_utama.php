@@ -66,7 +66,7 @@
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed" style="background-image:url(<?= base_url('assets/images/digitalization.jpg') ?>); background-repeat: no-repeat; background-size: cover; background-position: center;">
 
-   
+
     <div class="wrapper">
         <?= $this->renderSection('content') ?>
     </div>

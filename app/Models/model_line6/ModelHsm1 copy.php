@@ -50,24 +50,25 @@ class ModelHsm1 extends Model
     }
 
     //get data melting
-    public function getDataLidHolderMelting_HSM1(){
+    public function getDataLidHolderMelting_HSM1()
+    {
         return $this->select('L6_HSM1_LID_HOLDER_MELTING_POS,L6_HSM1_LID_HOLDER_ACTUAL_POS,waktu')
-        ->orderBy('waktu', 'DESC')
+            ->orderBy('waktu', 'DESC')
             ->limit(50)
             ->find();
     }
     public function getDataBoxLifterMelting_HSM1()
     {
         return $this->select('L6_HSM1_BOX_LIFTER_ACTUAL_POS,L6_HSM1_BOX_LIFTER_MELTING_POS,waktu')
-        ->orderBy('waktu', 'DESC')
-        ->limit(50)
+            ->orderBy('waktu', 'DESC')
+            ->limit(50)
             ->find();
     }
     public function getDataMirrorPos_HSM1()
     {
         return $this->select('L6_HSM1_MIRROR_ACTUAL_POS,L6_HSM1_MIRROR_MELTING_POS,waktu')
-        ->orderBy('waktu', 'DESC')
-        ->limit(50)
+            ->orderBy('waktu', 'DESC')
+            ->limit(50)
             ->find();
     }
 
@@ -126,8 +127,9 @@ class ModelHsm1 extends Model
             ->findAll();
     }
     //get distinct by date
-    public function getDistinctTempLeftbyDate($date){
-        
+    public function getDistinctTempLeftbyDate($date)
+    {
+
         $startTime = $date . ' 07:30:00.000';
         $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
         return $this->select("CASE 
@@ -152,7 +154,8 @@ class ModelHsm1 extends Model
             ->findAll();
     }
 
-    public function getDistinctTempRightbyDate($date){
+    public function getDistinctTempRightbyDate($date)
+    {
 
         $startTime = $date . ' 07:30:00.000';
         $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
@@ -236,7 +239,7 @@ class ModelHsm1 extends Model
 
         // Ambil data dari database
         $data = $this->select('L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_RIGHT, L6_HSM1_TEMP_SET_VALUE, waktu')
-        ->where('waktu >=', $startTime)
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
@@ -280,10 +283,10 @@ class ModelHsm1 extends Model
 
         // Ambil data dari database
         return $this->select('L6_HSM1_LID_HOLDER_MELTING_POS,L6_HSM1_LID_HOLDER_ACTUAL_POS,waktu')
-        ->where('waktu >=', $startTime)
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
-            ->findAll();     
+            ->findAll();
     }
     public function getDataBoxLifterMeltingByDate($date)
     {
@@ -293,10 +296,10 @@ class ModelHsm1 extends Model
 
         // Ambil data dari database
         return $this->select('L6_HSM1_BOX_LIFTER_ACTUAL_POS,L6_HSM1_BOX_LIFTER_MELTING_POS,waktu')
-        ->where('waktu >=', $startTime)
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
-            ->findAll();     
+            ->findAll();
     }
     public function getDataMirrorPosByDate($date)
     {
@@ -306,10 +309,10 @@ class ModelHsm1 extends Model
 
         // Ambil data dari database
         return $this->select('L6_HSM1_MIRROR_ACTUAL_POS,L6_HSM1_MIRROR_MELTING_POS,waktu')
-        ->where('waktu >=', $startTime)
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
-            ->findAll();     
+            ->findAll();
     }
 
 

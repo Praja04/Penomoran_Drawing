@@ -75,109 +75,169 @@ class ModelHsm1 extends Model
     public function getDistinctTempLeft()
     {
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = $today . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+
         return $this->select("CASE 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
-                                ELSE 'OTHER' 
-                            END AS TEMP_LEFT_RANGE, 
-                            COUNT(*) AS count")
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            ELSE 'OTHER' 
+                        END AS TEMP_LEFT_RANGE, 
+                        COUNT(*) AS count")
             ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
-            ->groupBy('TEMP_LEFT_RANGE')
-            ->orderBy('count', 'DESC') // Aktifkan kembali jika ingin mengurutkan
+            ->groupBy("CASE 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            ELSE 'OTHER' 
+                        END")
+            ->orderBy('count', 'DESC') // Aktifkan jika ingin mengurutkan berdasarkan count
             ->findAll();
     }
+
 
     public function getDistinctTempRight()
     {
         // Mengambil tanggal hari ini
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($today . ' +1 day 07:29:00'));
+        // Format start dan end time tanpa milidetik
+        $startTime = $today . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+
+        // Menggunakan ekspresi CASE langsung di GROUP BY
         return $this->select("CASE 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 390 AND 399.9 THEN '390-399.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 400 AND 409.9 THEN '400-409.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 410 AND 419.9 THEN '410-419.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 420 AND 429.9 THEN '420-429.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 430 AND 439.9 THEN '430-439.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
-                                ELSE 'OTHER' 
-                            END AS TEMP_RIGHT_RANGE, 
-                            COUNT(*) AS count")
-            ->groupBy('TEMP_RIGHT_RANGE')
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            ELSE 'OTHER' 
+                        END AS TEMP_RIGHT_RANGE, 
+                        COUNT(*) AS count")
             ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
-            //  ->orderBy('count', 'DESC')
+            // Menambahkan ekspresi CASE juga di GROUP BY, bukan alias TEMP_RIGHT_RANGE
+            ->groupBy("CASE 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                    ELSE 'OTHER' 
+                END")
+            ->orderBy('count', 'DESC') // Aktifkan jika ingin mengurutkan berdasarkan count
             ->findAll();
     }
+
+
     //get distinct by date
     public function getDistinctTempLeftbyDate($date)
     {
+        $startTime = $date . ' 07:30:00.000'; // Format timestamp dengan milidetik
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format dengan milidetik
 
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
         return $this->select("CASE 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
-                                WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
-                                ELSE 'OTHER' 
-                            END AS TEMP_LEFT_RANGE, 
-                            COUNT(*) AS count")
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            ELSE 'OTHER' 
+                        END AS TEMP_LEFT_RANGE, 
+                        COUNT(*) AS count")
             ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
-            ->groupBy('TEMP_LEFT_RANGE')
-            ->orderBy('count', 'DESC') // Aktifkan kembali jika ingin mengurutkan
+            ->groupBy("CASE 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                    ELSE 'OTHER' 
+                END")
+            ->orderBy('count', 'DESC') // Aktifkan kembali jika ingin mengurutkan berdasarkan count
             ->findAll();
     }
 
+
     public function getDistinctTempRightbyDate($date)
     {
+        $startTime = $date . ' 07:30:00.000'; // Format timestamp dengan milidetik
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format dengan milidetik
 
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
         return $this->select("CASE 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 390 AND 399.9 THEN '390-399.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 400 AND 409.9 THEN '400-409.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 410 AND 419.9 THEN '410-419.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 420 AND 429.9 THEN '420-429.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 430 AND 439.9 THEN '430-439.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
-                                WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
-                                ELSE 'OTHER' 
-                            END AS TEMP_RIGHT_RANGE, 
-                            COUNT(*) AS count")
-            ->groupBy('TEMP_RIGHT_RANGE')
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            ELSE 'OTHER' 
+                        END AS TEMP_RIGHT_RANGE, 
+                        COUNT(*) AS count")
             ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
-            //  ->orderBy('count', 'DESC')
+            ->groupBy("CASE 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                    ELSE 'OTHER' 
+                END")
             ->findAll();
     }
 
@@ -186,8 +246,8 @@ class ModelHsm1 extends Model
     public function getDataTempLeftByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
+        $startTime = $date . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
 
         // Query SQL dengan kondisi untuk mengambil data dari database
         $sql = "SELECT L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_LEFT, L6_HSM1_TEMP_SET_VALUE, waktu
@@ -231,11 +291,12 @@ class ModelHsm1 extends Model
         return $filteredData;
     }
 
+
     public function getDataTempRightByDate($date)
     {
-
-        $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
+        // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
+        $startTime = $date . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
 
         // Ambil data dari database
         $data = $this->select('L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_RIGHT, L6_HSM1_TEMP_SET_VALUE, waktu')
@@ -270,50 +331,54 @@ class ModelHsm1 extends Model
             $filteredData[] = $row;
         }
 
-        // Kembalikan data yang difilter
+        // Kembalikan data yang sudah difilter
         return $filteredData;
     }
+
 
     //data melting by date
     public function getDataLidHolderMeltingByDate($date)
     {
-
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
+        // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
+        $startTime = $date . ' 07:30:00.000'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
 
         // Ambil data dari database
-        return $this->select('L6_HSM1_LID_HOLDER_MELTING_POS,L6_HSM1_LID_HOLDER_ACTUAL_POS,waktu')
+        return $this->select('L6_HSM1_LID_HOLDER_MELTING_POS, L6_HSM1_LID_HOLDER_ACTUAL_POS, waktu')
             ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
     }
+
     public function getDataBoxLifterMeltingByDate($date)
     {
-
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
+        // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
+        $startTime = $date . ' 07:30:00.000'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
 
         // Ambil data dari database
-        return $this->select('L6_HSM1_BOX_LIFTER_ACTUAL_POS,L6_HSM1_BOX_LIFTER_MELTING_POS,waktu')
+        return $this->select('L6_HSM1_BOX_LIFTER_ACTUAL_POS, L6_HSM1_BOX_LIFTER_MELTING_POS, waktu')
             ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
     }
+
     public function getDataMirrorPosByDate($date)
     {
-
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
+        // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
+        $startTime = $date . ' 07:30:00.000'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
 
         // Ambil data dari database
-        return $this->select('L6_HSM1_MIRROR_ACTUAL_POS,L6_HSM1_MIRROR_MELTING_POS,waktu')
+        return $this->select('L6_HSM1_MIRROR_ACTUAL_POS, L6_HSM1_MIRROR_MELTING_POS, waktu')
             ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
     }
+
 
 
 
@@ -324,10 +389,12 @@ class ModelHsm1 extends Model
         $today = date('Y-m-d');
 
         return $this->where('L6_HSM1_TYPE_BATTERY', $batteryType)
-            ->where('DATE(waktu)', $today)
+            // Menggunakan CONVERT untuk membandingkan hanya tanggal
+            ->where("CONVERT(date, waktu) =", $today)
             ->orderBy('waktu', 'ASC')
             ->findAll();
     }
+
 
     public function getBatteryTypeByDateFirst($batteryType)
     {
@@ -336,69 +403,47 @@ class ModelHsm1 extends Model
 
         return $this->select('L6_HSM1_TYPE_BATTERY, waktu')
             ->where('L6_HSM1_TYPE_BATTERY', $batteryType)
-            ->where('DATE(waktu)', $today)
+            // Menggunakan CONVERT untuk membandingkan hanya tanggal
+            ->where("CONVERT(date, waktu) =", $today)
             ->orderBy('waktu', 'ASC')
             ->first();
     }
 
+
     public function getLastBatteryTypeTime()
     {
-        // $query = $this->db->query("
-        //     WITH BatteryChanges AS (
-        //         SELECT 
-        //             L6_HSM1_TYPE_BATTERY, 
-        //             waktu, 
-        //             ROW_NUMBER() OVER (PARTITION BY L6_HSM1_TYPE_BATTERY ORDER BY waktu DESC) AS rn 
-        //         FROM (
-        //             SELECT 
-        //                 L6_HSM1_TYPE_BATTERY, 
-        //                 waktu, 
-        //                 LAG(L6_HSM1_TYPE_BATTERY) OVER (ORDER BY waktu) AS previous_battery_type 
-        //             FROM 
-        //                 line6_data_hsm1
-        //         ) AS changes 
-        //         WHERE 
-        //             L6_HSM1_TYPE_BATTERY <> previous_battery_type 
-        //             OR previous_battery_type IS NULL
-        //     )
-        //     SELECT 
-        //         waktu, 
-        //         L6_HSM1_TYPE_BATTERY 
-        //     FROM 
-        //         BatteryChanges 
-        //     WHERE 
-        //         rn = 1
-        // ");
         $query = $this->db->query("
-           WITH BatteryChanges AS (
-    SELECT 
-        CASE 
-            WHEN L6_HSM1_TYPE_BATTERY IN ('0', '2') THEN '0'  -- Treat '0' and '2' as the same
-            ELSE L6_HSM1_TYPE_BATTERY 
-        END AS normalized_battery_type,
-        waktu, 
-        ROW_NUMBER() OVER (PARTITION BY CASE 
-                                            WHEN L6_HSM1_TYPE_BATTERY IN ('0', '2') THEN '0' 
-                                            ELSE L6_HSM1_TYPE_BATTERY 
-                                         END 
-                           ORDER BY waktu DESC) AS rn
-    FROM (
+       WITH BatteryChanges AS (
+            SELECT 
+                CASE 
+                    WHEN L6_HSM1_TYPE_BATTERY IN ('0', '2') THEN '0'  -- Treat '0' and '2' as the same
+                    ELSE L6_HSM1_TYPE_BATTERY 
+                END AS normalized_battery_type,
+                waktu, 
+                ROW_NUMBER() OVER (PARTITION BY CASE 
+                                                WHEN L6_HSM1_TYPE_BATTERY IN ('0', '2') THEN '0' 
+                                                ELSE L6_HSM1_TYPE_BATTERY 
+                                             END 
+                               ORDER BY waktu DESC) AS rn
+            FROM (
+                SELECT 
+                    L6_HSM1_TYPE_BATTERY, 
+                    waktu, 
+                    LAG(L6_HSM1_TYPE_BATTERY) OVER (ORDER BY waktu) AS previous_battery_type 
+                FROM line6_data_hsm1 
+            ) AS changes 
+            WHERE L6_HSM1_TYPE_BATTERY <> previous_battery_type OR previous_battery_type IS NULL
+        ) 
         SELECT 
-            L6_HSM1_TYPE_BATTERY, 
             waktu, 
-            LAG(L6_HSM1_TYPE_BATTERY) OVER (ORDER BY waktu) AS previous_battery_type 
-        FROM line6_data_hsm1 
-    ) AS changes 
-    WHERE L6_HSM1_TYPE_BATTERY <> previous_battery_type OR previous_battery_type IS NULL
-) 
-SELECT 
-    waktu, 
-    normalized_battery_type AS L6_HSM1_TYPE_BATTERY 
-FROM BatteryChanges 
-WHERE rn = 1;");
+            normalized_battery_type AS L6_HSM1_TYPE_BATTERY 
+        FROM BatteryChanges     
+        WHERE rn = 1;
+    ");
 
         return $query->getResultArray();
     }
+
 
     public function getDataByCurrentShift()
     {
@@ -457,6 +502,7 @@ WHERE rn = 1;");
         }
     }
 
+
     public function getDataToday()
     {
         $today = date('Y-m-d');
@@ -480,9 +526,10 @@ WHERE rn = 1;");
         $totalCount = [];
 
         foreach ($shifts as $key => $shift) {
-            $count = $this->where('DATE(waktu)', $today)
-                ->where('TIME(waktu) >=', $shift['start'])
-                ->where('TIME(waktu) <=', $shift['end'])
+            // Gunakan CONVERT untuk mendapatkan bagian tanggal dan waktu
+            $count = $this->where("CONVERT(DATE, waktu) = ", $today) // Mengambil tanggal dari kolom waktu
+                ->where("CONVERT(TIME, waktu) >= ", $shift['start']) // Mengambil waktu dari kolom waktu
+                ->where("CONVERT(TIME, waktu) <= ", $shift['end'])
                 ->countAllResults();
 
             $totalCount[$key] = $count;
@@ -516,13 +563,14 @@ WHERE rn = 1;");
 
         // Loop through each shift and count the results
         foreach ($shifts as $key => $shift) {
-            $count = $this->where('DATE(waktu)', $today)
+            // Gunakan CONVERT untuk mengubah waktu ke format tanggal
+            $count = $this->where("CONVERT(DATE, waktu) = ", $today) // Mengambil bagian tanggal dari kolom waktu
                 ->where('L6_HSM1_TEMP_LEFT <', '435')
                 ->where('L6_HSM1_TEMP_LEFT >', '415')
                 ->where('L6_HSM1_TEMP_RIGHT <', '435')
                 ->where('L6_HSM1_TEMP_RIGHT >', '415')
-                ->where('TIME(waktu) >=', $shift['start'])
-                ->where('TIME(waktu) <=', $shift['end'])
+                ->where("CONVERT(TIME, waktu) >= ", $shift['start']) // Menggunakan CONVERT untuk waktu
+                ->where("CONVERT(TIME, waktu) <= ", $shift['end'])
                 ->countAllResults();
 
             $shiftCounts[$key] = $count; // Store the count for each shift
@@ -530,6 +578,8 @@ WHERE rn = 1;");
 
         return $shiftCounts;
     }
+
+
     public function getDataYellow()
     {
         $today = date('Y-m-d');
@@ -554,11 +604,12 @@ WHERE rn = 1;");
 
         // Loop through each shift and count the results
         foreach ($shifts as $key => $shift) {
-            $count = $this->where('DATE(waktu)', $today)
+            // Gunakan CONVERT untuk mengubah waktu ke format tanggal
+            $count = $this->where("CONVERT(DATE, waktu) = ", $today)
                 ->where('L6_HSM1_TEMP_LEFT <', '440')
                 ->where('L6_HSM1_TEMP_RIGHT <', '440')
-                ->where('TIME(waktu) >=', $shift['start'])
-                ->where('TIME(waktu) <=', $shift['end'])
+                ->where("CONVERT(TIME, waktu) >= ", $shift['start']) // Menggunakan CONVERT untuk waktu
+                ->where("CONVERT(TIME, waktu) <= ", $shift['end'])
                 ->countAllResults();
 
             $shiftCounts[$key] = $count; // Store the count for each shift
@@ -566,6 +617,7 @@ WHERE rn = 1;");
 
         return $shiftCounts;
     }
+
 
     //get data for parameter
 
@@ -577,16 +629,16 @@ WHERE rn = 1;");
 
     public function getDataTempRightByWeek($date1, $date2)
     {
-
+        // Format waktu untuk SQL Server
         $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
 
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));
         // Ambil data dari database
         $data = $this->select('L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_RIGHT, L6_HSM1_TEMP_SET_VALUE, waktu')
-        ->where('waktu >=', $startTime)
-        ->where('waktu <', $endTime)
-        ->orderBy('waktu', 'DESC')
-        ->findAll();
+            ->where('waktu >=', $startTime)
+            ->where('waktu <', $endTime)
+            ->orderBy('waktu', 'DESC')
+            ->findAll();
 
         // Array untuk menyimpan data yang difilter
         $filteredData = [];
@@ -620,13 +672,13 @@ WHERE rn = 1;");
 
     public function getDataTempLeftByWeek($date1, $date2)
     {
-
+        // Format waktu untuk SQL Server
         $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
 
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));
         // Ambil data dari database
         $data = $this->select('L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_LEFT, L6_HSM1_TEMP_SET_VALUE, waktu')
-        ->where('waktu >=', $startTime)
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
@@ -635,7 +687,7 @@ WHERE rn = 1;");
         $filteredData = [];
         foreach ($data as $row) {
             $batteryType = $row['L6_HSM1_TYPE_BATTERY'];
-            $tempRight = $row['L6_HSM1_TEMP_LEFT'];
+            $tempLeft = $row['L6_HSM1_TEMP_LEFT'];
 
             // Tentukan batas berdasarkan tipe baterai
             if ($batteryType == 2 || $batteryType == 0) {
@@ -661,41 +713,45 @@ WHERE rn = 1;");
         return $filteredData;
     }
 
-    public function getDataLidHolderMeltingByWeek($date1,$date2)
-    {
 
+    public function getDataLidHolderMeltingByWeek($date1, $date2)
+    {
+        // Format waktu untuk SQL Server
         $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
 
         // Ambil data dari database
-        return $this->select('L6_HSM1_LID_HOLDER_MELTING_POS,L6_HSM1_LID_HOLDER_ACTUAL_POS,waktu')
-        ->where('waktu >=', $startTime)
+        return $this->select('L6_HSM1_LID_HOLDER_MELTING_POS, L6_HSM1_LID_HOLDER_ACTUAL_POS, waktu')
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
     }
-    public function getDataBoxLifterMeltingByWeek($date1,$date2)
-    {
 
+    public function getDataBoxLifterMeltingByWeek($date1, $date2)
+
+    {
+        // Format waktu untuk SQL Server
         $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
 
         // Ambil data dari database
-        return $this->select('L6_HSM1_BOX_LIFTER_ACTUAL_POS,L6_HSM1_BOX_LIFTER_MELTING_POS,waktu')
-        ->where('waktu >=', $startTime)
+        return $this->select('L6_HSM1_BOX_LIFTER_ACTUAL_POS, L6_HSM1_BOX_LIFTER_MELTING_POS, waktu')
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
     }
-    public function getDataMirrorPosByWeek($date1,$date2)
-    {
 
+    public function getDataMirrorPosByWeek($date1, $date2)
+    {
+        // Format waktu untuk SQL Server
         $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));
+        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
 
         // Ambil data dari database
-        return $this->select('L6_HSM1_MIRROR_ACTUAL_POS,L6_HSM1_MIRROR_MELTING_POS,waktu')
-        ->where('waktu >=', $startTime)
+        return $this->select('L6_HSM1_MIRROR_ACTUAL_POS, L6_HSM1_MIRROR_MELTING_POS, waktu')
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();

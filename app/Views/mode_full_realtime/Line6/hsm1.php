@@ -48,6 +48,7 @@
         /* Jarak antar teks */
     }
 </style>
+
 <?= $this->endSection() ?>
 <?= $this->section('content'); ?>
 <div class="content-wrapper" style="margin-left:0px;margin-top:10px; background-color:#03346E;">
@@ -191,98 +192,146 @@
             <section class="content">
 
                 <div class="row">
-                    <div class="col-lg-12 col-12 ">
-                        <div class="box" style="background-color:#fff;">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black; ">
-                                                <h4>Parameter</h4>
-                                            </label>
-                                            <input type="text" value="Temp Left" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Temp Right" class="form-control mb-3" disabled style="width:110px;">
-                                            <label for="">LID HOLDER </label>
-                                            <input type="text" value="Melting Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Sealing Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <label for="">BOX LIFTER </label>
-                                            <input type="text" value="Melting Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Sealing Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <label for="">MIRROR</label>
-                                            <input type="text" value="Melting Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <label for="">TIME</label>
-                                            <input type="text" value="Lid Melting (s)" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Box Melting (s)" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Sealing (s)" class="form-control mb-3" disabled style="width:110px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>Standar</h4>
-                                            </label>
-                                            <input type="text" id="set_val_left" class="form-control mb-3" disabled style="width:100px;">
-                                            <input type="text" id="set_val_right" class="form-control mb-3" disabled style="width:100px;">
-                                            <label for=""></label>
-                                            <input type="text" class="form-control mb-3" disabled style="visibility:hidden;">
-                                            <input type="text" class="form-control mb-3" disabled style="visibility:hidden;">
-                                            <label for=""></label>
-                                            <input type="text" class="form-control mb-3" disabled style="visibility:hidden;">
-                                            <input type="text" class="form-control mb-3" disabled style="visibility:hidden;">
-                                            <label for=""></label>
-                                            <input type="text" class="form-control mb-3" disabled style="visibility:hidden;">
-                                            <label for=""></label>
-                                            <input type="text" id="standar_lid_melting_time" class="form-control mb-3" disabled style="width:100px;">
-                                            <input type="text" id="standar_box_melting_time" class="form-control mb-3" disabled style="width:100px;">
-                                            <input type="text" id="standar_sealing_time" class="form-control mb-3" disabled style="width:100px;">
+                    <div class="col-lg-12 col-12">
+                        <div class="box">
+                            <div class="box-body py-0">
+                                <div class="table-responsive">
+                                    <table class="table no-border mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-600">Parameter</td>
+                                                <td class="fw-600">Standar</td>
+                                                <td class="fw-600">Set Val</td>
+                                                <td class="fw-600">Actual</td>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>SetVal</h4>
-                                            </label>
-                                            <input type="text" id="set_value1" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="set_value2" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="standar_lid_holder_melting_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="standar_lid_holder_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="standar_box_lifter_melting_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="standar_box_lifter_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="standar_mirror_melting_pos" class="form-control mb-3" disabled style="width:60px;">
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Temp Left</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="set_val_left" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="set_value1" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="temp_left1" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Temp Right</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="set_val_right" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="set_value2" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="temp_right1" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-900"> <span class="badge badge-sm  badge-warning me-10">Lid Holder</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Melting Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_lid_holder_melting_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_lid_holder_melting_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Sealing Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_lid_holder_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_lid_holder_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-1000"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-900"> <span class="badge badge-sm  badge-warning me-10">Box Lifter</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Melting Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_box_lifter_melting_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_box_lifter_melting_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Sealing Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_box_lifter_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_box_lifter_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-900"> <span class="badge badge-sm  badge-warning me-10">Mirror</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Melting Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_mirror_melting_pos" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_mirror_melting_pos" class="form-control mb-3" disabled style="width:60px;">
 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>Actual</h4>
-                                            </label>
-                                            <input type="text" id="temp_left1" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="temp_right1" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="actual_lid_holder_melting_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="actual_lid_holder_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="actual_box_lifter_melting_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="actual_box_lifter_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="actual_mirror_melting_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="actual_lid_melting_time" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="actual_box_melting_time" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="actual_sealing_time" class="form-control mb-3" disabled style="width:60px;">
-
-                                        </div>
-                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-900"> <span class="badge badge-sm  badge-warning me-10">Time</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Lid Melting</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600"></td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_lid_melting_time" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Box Melting</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600"></td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_box_melting_time" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Sealing</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600"></td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_sealing_time" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-
                             </div>
                         </div>
-                        <!-- /.box -->
                     </div>
                 </div>
             </section>
@@ -356,7 +405,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-12">
-                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                     </div>
                                     <div class="col-xl-6 col-12">
                                         <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">1</span>
@@ -383,7 +432,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-12">
-                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                     </div>
                                     <div class="col-xl-6 col-12">
                                         <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">1</span>

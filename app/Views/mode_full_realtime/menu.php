@@ -6,11 +6,10 @@
 
     <!-- Main content -->
     <section class="content" style="margin-top: 10%;">
-
         <div class="row">
             <h1 class="text-center" style="color:white; margin-bottom:5%;">Digitalisasi Parameter Proses Battery</h1>
-            <div class="col-12 col-lg-2 pull-up"></div>
-            <div class="col-12 col-lg-3 pull-up">
+            <!-- <div class="col-12 col-lg-2 pull-up"></div> -->
+            <div class="col-12 col-lg-4 pull-up" style="background: transparent;">
                 <div class="box ribbon-box" style="width:400px;">
                     <div class="box-header no-border p-5 text-center">
                         <a href="<?= base_url('produksi1') ?>">
@@ -24,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3 pull-up">
+            <div class="col-12 col-lg-4 pull-up">
                 <div class="box ribbon-box" style="width:400px;">
                     <div class="box-header no-border p-5 text-center">
                         <a href="<?= base_url('produksi2') ?>">
@@ -38,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3 pull-up">
+            <div class="col-12 col-lg-4 pull-up">
                 <div class="box ribbon-box" style="width:400px;">
                     <div class="box-header no-border p-5 text-center">
                         <a href="<?= base_url('charging') ?>">

@@ -287,7 +287,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6 col-12">
-                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                             </div>
                                             <div class="col-xl-6 col-12">
                                                 <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center" id="cp_cell1"></span>
@@ -314,7 +314,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6 col-12">
-                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                             </div>
                                             <div class="col-xl-6 col-12">
                                                 <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center" id="cp_cell3"></span>
@@ -341,7 +341,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6 col-12">
-                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                                <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                             </div>
                                             <div class="col-xl-6 col-12">
                                                 <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center" id="cp_cell5"></span>
@@ -2465,7 +2465,7 @@
     });
 </script>
 
-<!-- cpp/cpk -->
+<!-- CP/cpk -->
 <script>
     $(document).ready(function() {
 
@@ -2563,5 +2563,3 @@
 
 
 <?= $this->endSection() ?>
-
-

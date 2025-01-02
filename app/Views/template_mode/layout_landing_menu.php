@@ -85,7 +85,7 @@
                 <h4>PCE</h4>
                 <p>Department</p>
             </div>
-            <a href="<?= base_url('menu/utama')?>" style="display: flex; align-items: center; text-decoration: none; ">
+            <a href="<?= base_url('menu/utama') ?>" style="display: flex; align-items: center; text-decoration: none; ">
                 <span class="glyphicon glyphicon-chevron-left" style="margin-right: 10px; font-size: 24px;"></span>
                 Back
             </a>

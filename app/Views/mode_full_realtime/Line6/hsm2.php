@@ -358,7 +358,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-12">
-                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                     </div>
                                     <div class="col-xl-6 col-12">
                                         <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">1</span>
@@ -385,7 +385,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-12">
-                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CPP/PP</span>
+                                        <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">CP/PP</span>
                                     </div>
                                     <div class="col-xl-6 col-12">
                                         <span class="waves-effect waves-light btn btn-outline btn-dark mb-5 w-140 d-block text-center">1</span>
@@ -2159,7 +2159,7 @@
     };
 
     // Event listener for dropdown
-  
+
     // Event listener for fetch button
     $('#fetch-data').on('click', function() {
         const selectedDate = $('#date-input').val();

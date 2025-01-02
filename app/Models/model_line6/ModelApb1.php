@@ -29,8 +29,8 @@ class ModelApb1 extends Model
     {
         // Get today's date
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = $today . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
 
         $sql = "
         SELECT '10-20.9' AS TEMP_Actual_LEFT_RANGE, COUNT(*) AS count
@@ -93,18 +93,19 @@ class ModelApb1 extends Model
         FROM line6_data_apb1
         WHERE L6_APB1_TEMP_LEFT_ACTUAL >= 91
         AND waktu BETWEEN '$startTime' AND '$endTime'
-    ";
+        ";
 
         // Execute the query and return the results
         return $this->db->query($sql)->getResult();
     }
 
+
     public function getDistinctTempRightActual()
     {
         // Get today's date
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = $today . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
 
         $sql = "
         SELECT '10-20.9' AS TEMP_Actual_RIGHT_RANGE, COUNT(*) AS count
@@ -167,17 +168,19 @@ class ModelApb1 extends Model
         FROM line6_data_apb1
         WHERE L6_APB1_TEMP_RIGHT_ACTUAL >= 91
         AND waktu BETWEEN '$startTime' AND '$endTime'
-    ";
+        ";
 
         // Execute the query and return the results
         return $this->db->query($sql)->getResult();
     }
 
+
     //get distinct by date
     public function getDistinctTempLeftActualbyDate($date)
     {
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
+        // Format waktu start dan end
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:00'));
 
         $sql = "
         SELECT '10-20.9' AS TEMP_Actual_LEFT_RANGE, COUNT(*) AS count
@@ -240,15 +243,17 @@ class ModelApb1 extends Model
         FROM line6_data_apb1
         WHERE L6_APB1_TEMP_LEFT_ACTUAL >= 91
         AND waktu BETWEEN '$startTime' AND '$endTime'
-    ";
+        ";
 
         // Execute the query and return the results
         return $this->db->query($sql)->getResult();
     }
+
     public function getDistinctTempRightActualbyDate($date)
     {
-        $startTime = $date . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00'));
+        // Format waktu start dan end
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:00'));
 
         $sql = "
         SELECT '10-20.9' AS TEMP_Actual_RIGHT_RANGE, COUNT(*) AS count
@@ -322,27 +327,31 @@ class ModelApb1 extends Model
     //apb1
     public function getDataTempLeftByDate($date)
     {
+        // Menentukan waktu mulai dan selesai dengan format yang sesuai
         $startTime = $date . ' 07:30:00';
         $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
 
         return $this->select('L6_APB1_TEMP_LEFT_SETTING, L6_APB1_TEMP_LEFT_ACTUAL, waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
+        ->orderBy('waktu', 'DESC')
+        ->where('waktu >=', $startTime)
             ->where('waktu <=', $endTime)
             ->findAll();
     }
 
+
     public function getDataTempRightByDate($date)
     {
+        // Menentukan waktu mulai dan selesai dengan format yang sesuai
         $startTime = $date . ' 07:30:00';
         $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
 
         return $this->select('L6_APB1_TEMP_RIGHT_SETTING, L6_APB1_TEMP_RIGHT_ACTUAL, waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
+        ->orderBy('waktu', 'DESC')
+        ->where('waktu >=', $startTime)
             ->where('waktu <=', $endTime)
             ->findAll();
     }
+
 
 
     public function getDataParameter()
@@ -363,10 +372,10 @@ class ModelApb1 extends Model
             ],
             [
                 'start' => '16:30:01',
-                'end' => '23:59:59' // Adjusted end time for the first shift
+                'end' => '23:59:59'
             ],
             [
-                'start' => '00:00:00', // Start of the second shift
+                'start' => '00:00:00',
                 'end' => '07:30:00'
             ]
         ];
@@ -374,10 +383,10 @@ class ModelApb1 extends Model
         $totalCount = [];
 
         foreach ($shifts as $key => $shift) {
-            $count = $this->where('DATE(waktu)', $today)
-                ->where('TIME(waktu) >=', $shift['start'])
-                ->where('TIME(waktu) <=', $shift['end'])
-                ->countAllResults();
+            $count = $this->where("CAST(waktu AS DATE) = '$today'") // Extract date part from datetime
+            ->where("CONVERT(TIME, waktu) >= CONVERT(TIME, '{$shift['start']}')")
+            ->where("CONVERT(TIME, waktu) <= CONVERT(TIME, '{$shift['end']}')")
+            ->countAllResults();
 
             $totalCount[$key] = $count;
         }
@@ -386,28 +395,33 @@ class ModelApb1 extends Model
     }
 
 
+
     //by week
     public function getDataTempLeftByWeek($date1, $date2)
     {
+        // Format waktu awal dan akhir
         $startTime = $date1 . ' 07:30:00';
         $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
 
         return $this->select('L6_APB1_TEMP_LEFT_SETTING, L6_APB1_TEMP_LEFT_ACTUAL, waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)
-            ->findAll();
+        ->orderBy('waktu', 'DESC')
+        ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Untuk SQL Server, pastikan format waktu sesuai
+        ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Pastikan perbandingan waktu sesuai dengan format DATETIME
+        ->findAll();
     }
+
 
     public function getDataTempRightByWeek($date1, $date2)
     {
+        // Format waktu awal dan akhir
         $startTime = $date1 . ' 07:30:00';
         $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
 
         return $this->select('L6_APB1_TEMP_RIGHT_SETTING, L6_APB1_TEMP_RIGHT_ACTUAL, waktu')
-            ->orderBy('waktu', 'DESC')
-            ->where('waktu >=', $startTime)
-            ->where('waktu <=', $endTime)
-            ->findAll();
+        ->orderBy('waktu', 'DESC')
+        ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Untuk SQL Server, pastikan format waktu sesuai
+        ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Pastikan perbandingan waktu sesuai dengan format DATETIME
+        ->findAll();
     }
+
 }
