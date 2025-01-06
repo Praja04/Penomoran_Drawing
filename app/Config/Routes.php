@@ -534,3 +534,11 @@ $routes->group("api/line6", function ($routes) {
     $routes->post('apb1', 'APILine6Controller::insert_apb1');
     $routes->post('apb2', 'APILine6Controller::insert_apb2');
 });
+
+//Produksi 1
+
+//Ballmil/4/
+$routes->group("ballmill", function ($routes) {
+    $routes->get('dashboard/4', 'DashboardBallmill::dashboard_ballmill4');
+    $routes->get('dashboard/3', 'DashboardBallmill::dashboard_ballmill3');
+});
