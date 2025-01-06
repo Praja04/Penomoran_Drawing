@@ -345,7 +345,7 @@ class APILine6Controller extends BaseController
             'L6_APB1_WELD_HEAD_DOWN_TIME' => $data['L6_APB1_WELD_HEAD_DOWN_TIME'] ?? null,
             'L6_APB1_COOLING_TIME' => $data['L6_APB1_COOLING_TIME'] ?? null,
             'L6_APB1_FLAME_WAITING_TIME' => $data['L6_APB1_FLAME_WAITING_TIME'] ?? null,
-            'waktu' => date('Y-m-d H:i:s') // Atau ambil dari data jika ada
+           // 'waktu' => date('Y-m-d H:i:s') // Atau ambil dari data jika ada
         ];
 
         // Use try-catch block for handling errors during database insertion
@@ -414,7 +414,7 @@ class APILine6Controller extends BaseController
             'L6_APB2_WELD_HEAD_DOWN_TIME' => $data['L6_APB2_WELD_HEAD_DOWN_TIME'] ?? null,
             'L6_APB2_COOLING_TIME' => $data['L6_APB2_COOLING_TIME'] ?? null,
             'L6_APB2_FLAME_WAITING_TIME' => $data['L6_APB2_FLAME_WAITING_TIME'] ?? null,
-            'waktu' => date('Y-m-d H:i:s') // Atau ambil dari data jika ada
+            //'waktu' => date('Y-m-d H:i:s') // Atau ambil dari data jika ada
         ];
 
         // Use try-catch block for handling errors during database insertion
