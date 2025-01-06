@@ -2240,9 +2240,22 @@
         url: '<?= base_url('hsmline5/get/total/data1') ?>',
         method: 'GET',
         success: function(response) {
-            console.log(response.data);
-
-            totalData1 = response.data; // Simpan hasil data1
+            var dataArray = response.data; // Ambil data dari response
+            const now = new Date();
+            const formattedSeconds = now.toLocaleString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            if (formattedSeconds > '07.30.00' && formattedSeconds < '16.30.00') {
+                // Tambahkan kode yang ingin dijalankan jika waktu kurang dari 07.30.00
+                totalData1 = dataArray[0];
+            } else if (formattedSeconds > '16.30.00' && formattedSeconds < '23.59.00') {
+                totalData1 = dataArray[1];
+            } else if (formattedSeconds > '00.00.00' && formattedSeconds < '07.29.00') {
+                totalData1 = dataArray[2];
+            }
             updateTotal(); // Update total setelah mendapatkan data1
         },
         error: function(error) {
@@ -2255,9 +2268,23 @@
         url: '<?= base_url('hsmline5/get/total/data2') ?>',
         method: 'GET',
         success: function(response) {
-            console.log(response.data);
-            $('#total_pcs').val(response.data);
-            totalData2 = response.data; // Simpan hasil data2
+            var dataArray = response.data; // Ambil data dari response
+            const now = new Date();
+            const formattedSeconds = now.toLocaleString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            if (formattedSeconds > '07.30.00' && formattedSeconds < '16.30.00') {
+                // Tambahkan kode yang ingin dijalankan jika waktu kurang dari 07.30.00
+                totalData2 = dataArray[0];
+            } else if (formattedSeconds > '16.30.00' && formattedSeconds < '23.59.00') {
+                totalData2 = dataArray[1];
+            } else if (formattedSeconds > '00.00.00' && formattedSeconds < '07.29.00') {
+                totalData2 = dataArray[2];
+            }
+            $('#total_pcs').val(totalData2);
             updateTotal(); // Update total setelah mendapatkan data2
         },
         error: function(error) {
