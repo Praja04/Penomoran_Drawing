@@ -16,7 +16,7 @@ class Mode extends BaseController
         $this->hsm2 = new ModelHsm2();
     }
     public function menu_utama(){
-        return view('mode_full_realtime/menu');
+        return view('mode_full_realtime/menu-utama');
     }
     public function hsm1_line6()
     {
