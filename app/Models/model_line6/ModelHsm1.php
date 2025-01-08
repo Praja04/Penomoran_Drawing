@@ -75,8 +75,10 @@ class ModelHsm1 extends Model
     public function getDistinctTempLeft()
     {
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+        // $startTime = $today . ' 07:30:00';
+        // $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = $today . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         return $this->select("CASE 
                             WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
@@ -119,8 +121,10 @@ class ModelHsm1 extends Model
         // Mengambil tanggal hari ini
         $today = date('Y-m-d');
         // Format start dan end time tanpa milidetik
-        $startTime = $today . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+        // $startTime = $today . ' 07:30:00';
+        // $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = $today . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Menggunakan ekspresi CASE langsung di GROUP BY
         return $this->select("CASE 
@@ -163,8 +167,8 @@ class ModelHsm1 extends Model
     //get distinct by date
     public function getDistinctTempLeftbyDate($date)
     {
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp dengan milidetik
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format dengan milidetik
+        $startTime = $date . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         return $this->select("CASE 
                             WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
@@ -204,8 +208,8 @@ class ModelHsm1 extends Model
 
     public function getDistinctTempRightbyDate($date)
     {
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp dengan milidetik
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format dengan milidetik
+        $startTime = $date . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         return $this->select("CASE 
                             WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
@@ -247,7 +251,7 @@ class ModelHsm1 extends Model
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
         $startTime = $date . ' 07:30:00'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Query SQL dengan kondisi untuk mengambil data dari database
         $sql = "SELECT L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_LEFT, L6_HSM1_TEMP_SET_VALUE, waktu
@@ -296,11 +300,11 @@ class ModelHsm1 extends Model
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
         $startTime = $date . ' 07:30:00'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         $data = $this->select('L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_RIGHT, L6_HSM1_TEMP_SET_VALUE, waktu')
-            ->where('waktu >=', $startTime)
+        ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
@@ -336,12 +340,15 @@ class ModelHsm1 extends Model
     }
 
 
+
     //data melting by date
     public function getDataLidHolderMeltingByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
+        // $startTime = $date . ' 07:30:00.000'; // Format timestamp
+        // $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
+        $startTime = $date . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         return $this->select('L6_HSM1_LID_HOLDER_MELTING_POS, L6_HSM1_LID_HOLDER_ACTUAL_POS, waktu')
@@ -354,8 +361,10 @@ class ModelHsm1 extends Model
     public function getDataBoxLifterMeltingByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
+        // $startTime = $date . ' 07:30:00.000'; // Format timestamp
+        // $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
+        $startTime = $date . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         return $this->select('L6_HSM1_BOX_LIFTER_ACTUAL_POS, L6_HSM1_BOX_LIFTER_MELTING_POS, waktu')
@@ -368,8 +377,10 @@ class ModelHsm1 extends Model
     public function getDataMirrorPosByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
+        // $startTime = $date . ' 07:30:00.000'; // Format timestamp
+        // $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
+        $startTime = $date . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         return $this->select('L6_HSM1_MIRROR_ACTUAL_POS, L6_HSM1_MIRROR_MELTING_POS, waktu')
@@ -630,8 +641,10 @@ class ModelHsm1 extends Model
     public function getDataTempRightByWeek($date1, $date2)
     {
         // Format waktu untuk SQL Server
-        $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        // $startTime = $date1 . ' 07:30:00';
+        // $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        $startTime = $date1 . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         $data = $this->select('L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_RIGHT, L6_HSM1_TEMP_SET_VALUE, waktu')
@@ -673,8 +686,10 @@ class ModelHsm1 extends Model
     public function getDataTempLeftByWeek($date1, $date2)
     {
         // Format waktu untuk SQL Server
-        $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        // $startTime = $date1 . ' 07:30:00';
+        // $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        $startTime = $date1 . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         $data = $this->select('L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_LEFT, L6_HSM1_TEMP_SET_VALUE, waktu')
@@ -717,8 +732,10 @@ class ModelHsm1 extends Model
     public function getDataLidHolderMeltingByWeek($date1, $date2)
     {
         // Format waktu untuk SQL Server
-        $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        // $startTime = $date1 . ' 07:30:00.000';
+        // $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        $startTime = $date1 . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         return $this->select('L6_HSM1_LID_HOLDER_MELTING_POS, L6_HSM1_LID_HOLDER_ACTUAL_POS, waktu')
@@ -732,8 +749,10 @@ class ModelHsm1 extends Model
 
     {
         // Format waktu untuk SQL Server
-        $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        // $startTime = $date1 . ' 07:30:00.000';
+        // $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        $startTime = $date1 . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         return $this->select('L6_HSM1_BOX_LIFTER_ACTUAL_POS, L6_HSM1_BOX_LIFTER_MELTING_POS, waktu')
@@ -746,8 +765,10 @@ class ModelHsm1 extends Model
     public function getDataMirrorPosByWeek($date1, $date2)
     {
         // Format waktu untuk SQL Server
-        $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        // $startTime = $date1 . ' 07:30:00.000';
+        // $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
+        $startTime = $date1 . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         // Ambil data dari database
         return $this->select('L6_HSM1_MIRROR_ACTUAL_POS, L6_HSM1_MIRROR_MELTING_POS, waktu')

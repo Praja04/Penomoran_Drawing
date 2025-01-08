@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="<?= base_url() . 'assets/images/favicons/favicon-192x192.png' ?>">
     <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() . 'assets/images/favicons/apple-touch-icon-180x180.png' ?>">
     <!-- END Icons -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/menu-utama.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/menu-utama.css">
 
 </head>
 

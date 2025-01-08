@@ -76,8 +76,7 @@ class ModelHsm2 extends Model
     {
         $today = date('Y-m-d');
         $startTime = $today . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
-
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00'));
         return $this->select("CASE 
                             WHEN L5_HSM2_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
                             WHEN L5_HSM2_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
@@ -120,7 +119,7 @@ class ModelHsm2 extends Model
         $today = date('Y-m-d');
         // Format start dan end time tanpa milidetik
         $startTime = $today . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00'));
 
         // Menggunakan ekspresi CASE langsung di GROUP BY
         return $this->select("CASE 
@@ -163,9 +162,8 @@ class ModelHsm2 extends Model
     //get distinct by date
     public function getDistinctTempLeftbyDate($date)
     {
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp dengan milidetik
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format dengan milidetik
-
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         return $this->select("CASE 
                             WHEN L5_HSM2_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
                             WHEN L5_HSM2_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
@@ -204,9 +202,8 @@ class ModelHsm2 extends Model
 
     public function getDistinctTempRightbyDate($date)
     {
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp dengan milidetik
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format dengan milidetik
-
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         return $this->select("CASE 
                             WHEN L5_HSM2_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
                             WHEN L5_HSM2_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
@@ -246,9 +243,8 @@ class ModelHsm2 extends Model
     public function getDataTempLeftByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
-
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         // Query SQL dengan kondisi untuk mengambil data dari database
         $sql = "SELECT L5_HSM2_TYPE_BATTERY, L5_HSM2_TEMP_LEFT, L5_HSM2_TEMP_SET_VALUE, waktu
             FROM line5_data_hsm2
@@ -295,9 +291,8 @@ class ModelHsm2 extends Model
     public function getDataTempRightByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
-
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         // Ambil data dari database
         $data = $this->select('L5_HSM2_TYPE_BATTERY, L5_HSM2_TEMP_RIGHT, L5_HSM2_TEMP_SET_VALUE, waktu')
             ->where('waktu >=', $startTime)
@@ -340,9 +335,8 @@ class ModelHsm2 extends Model
     public function getDataLidHolderMeltingByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
-
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         // Ambil data dari database
         return $this->select('L5_HSM2_LID_HOLDER_MELTING_POS, L5_HSM2_LID_HOLDER_ACTUAL_POS, waktu')
             ->where('waktu >=', $startTime)
@@ -354,9 +348,8 @@ class ModelHsm2 extends Model
     public function getDataBoxLifterMeltingByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
-
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         // Ambil data dari database
         return $this->select('L5_HSM2_BOX_LIFTER_ACTUAL_POS, L5_HSM2_BOX_LIFTER_MELTING_POS, waktu')
             ->where('waktu >=', $startTime)
@@ -368,9 +361,8 @@ class ModelHsm2 extends Model
     public function getDataMirrorPosByDate($date)
     {
         // Tentukan waktu mulai dan waktu akhir berdasarkan parameter tanggal
-        $startTime = $date . ' 07:30:00.000'; // Format timestamp
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan milidetik
-
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         // Ambil data dari database
         return $this->select('L5_HSM2_MIRROR_ACTUAL_POS, L5_HSM2_MIRROR_MELTING_POS, waktu')
             ->where('waktu >=', $startTime)
@@ -674,8 +666,7 @@ class ModelHsm2 extends Model
     {
         // Format waktu untuk SQL Server
         $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
-
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
         // Ambil data dari database
         $data = $this->select('L5_HSM2_TYPE_BATTERY, L5_HSM2_TEMP_LEFT, L5_HSM2_TEMP_SET_VALUE, waktu')
             ->where('waktu >=', $startTime)
@@ -717,9 +708,8 @@ class ModelHsm2 extends Model
     public function getDataLidHolderMeltingByWeek($date1, $date2)
     {
         // Format waktu untuk SQL Server
-        $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
-
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
         // Ambil data dari database
         return $this->select('L5_HSM2_LID_HOLDER_MELTING_POS, L5_HSM2_LID_HOLDER_ACTUAL_POS, waktu')
             ->where('waktu >=', $startTime)
@@ -732,9 +722,8 @@ class ModelHsm2 extends Model
 
     {
         // Format waktu untuk SQL Server
-        $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
-
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
         // Ambil data dari database
         return $this->select('L5_HSM2_BOX_LIFTER_ACTUAL_POS, L5_HSM2_BOX_LIFTER_MELTING_POS, waktu')
             ->where('waktu >=', $startTime)
@@ -746,9 +735,8 @@ class ModelHsm2 extends Model
     public function getDataMirrorPosByWeek($date1, $date2)
     {
         // Format waktu untuk SQL Server
-        $startTime = $date1 . ' 07:30:00.000';
-        $endTime = date('Y-m-d H:i:s.u', strtotime($date2 . ' +1 day 07:29:00'));  // Format datetime untuk SQL Server
-
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
         // Ambil data dari database
         return $this->select('L5_HSM2_MIRROR_ACTUAL_POS, L5_HSM2_MIRROR_MELTING_POS, waktu')
             ->where('waktu >=', $startTime)

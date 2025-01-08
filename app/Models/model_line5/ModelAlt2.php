@@ -74,8 +74,8 @@ class ModelAlt2 extends Model
     //filter data
     public function getDataResultcell2ByDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL2, waktu')
             ->orderBy('waktu', 'DESC')
@@ -86,8 +86,8 @@ class ModelAlt2 extends Model
 
     public function getDataResultcell4ByDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL4, waktu')
             ->orderBy('waktu', 'DESC')
@@ -98,8 +98,8 @@ class ModelAlt2 extends Model
 
     public function getDataResultcell6ByDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL6, waktu')
             ->orderBy('waktu', 'DESC')
@@ -111,8 +111,8 @@ class ModelAlt2 extends Model
     //week
     public function getDataResultcell2ByWeek($date1, $date2)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL2, waktu')
             ->orderBy('waktu', 'DESC')
@@ -123,9 +123,8 @@ class ModelAlt2 extends Model
 
     public function getDataResultcell4ByWeek($date1, $date2)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
-
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
         return $this->select('L5_ALT2_RESULT_CELL4, waktu')
             ->orderBy('waktu', 'DESC')
             ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
@@ -135,8 +134,8 @@ class ModelAlt2 extends Model
 
     public function getDataResultcell6ByWeek($date1, $date2)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL6, waktu')
             ->orderBy('waktu', 'DESC')
@@ -153,8 +152,8 @@ class ModelAlt2 extends Model
     {
         // Mengambil tanggal hari ini
         $today = date('Y-m-d');
-        $startTime = date('Y-m-d H:i:s', strtotime($today . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:59'));
+        $startTime = $today . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL2, COUNT(L5_ALT2_RESULT_CELL2) as count')
             ->groupBy('L5_ALT2_RESULT_CELL2')
@@ -169,8 +168,8 @@ class ModelAlt2 extends Model
     {
         // Mengambil tanggal hari ini
         $today = date('Y-m-d');
-        $startTime = date('Y-m-d H:i:s', strtotime($today . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:59'));
+        $startTime = $today . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL4, COUNT(L5_ALT2_RESULT_CELL4) as count')
             ->groupBy('L5_ALT2_RESULT_CELL4')
@@ -185,8 +184,8 @@ class ModelAlt2 extends Model
     {
         // Mengambil tanggal hari ini
         $today = date('Y-m-d');
-        $startTime = date('Y-m-d H:i:s', strtotime($today . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:59'));
+        $startTime = $today . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL6, COUNT(L5_ALT2_RESULT_CELL6) as count')
             ->groupBy('L5_ALT2_RESULT_CELL6')
@@ -199,8 +198,8 @@ class ModelAlt2 extends Model
 
     public function getDistinctResult_Cell2byDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         return $this->select('L5_ALT2_RESULT_CELL2, COUNT(L5_ALT2_RESULT_CELL2) as count')
             ->groupBy('L5_ALT2_RESULT_CELL2')
             ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
@@ -211,8 +210,8 @@ class ModelAlt2 extends Model
 
     public function getDistinctResult_Cell4byDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL4, COUNT(L5_ALT2_RESULT_CELL4) as count')
             ->groupBy('L5_ALT2_RESULT_CELL4')
@@ -224,8 +223,8 @@ class ModelAlt2 extends Model
 
     public function getDistinctResult_Cell6byDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_RESULT_CELL6, COUNT(L5_ALT2_RESULT_CELL6) as count')
             ->groupBy('L5_ALT2_RESULT_CELL6')
@@ -240,8 +239,8 @@ class ModelAlt2 extends Model
     //filter data
     public function getDataActualcell2ByDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_ACTUAL_PRESSURE_CELL2, waktu')
             ->orderBy('waktu', 'DESC')
@@ -252,8 +251,8 @@ class ModelAlt2 extends Model
 
     public function getDataActualcell4ByDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         return $this->select('L5_ALT2_ACTUAL_PRESSURE_CELL4, waktu')
             ->orderBy('waktu', 'DESC')
             ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
@@ -263,8 +262,8 @@ class ModelAlt2 extends Model
 
     public function getDataActualcell6ByDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         return $this->select('L5_ALT2_ACTUAL_PRESSURE_CELL6, waktu')
             ->orderBy('waktu', 'DESC')
             ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
@@ -388,8 +387,8 @@ class ModelAlt2 extends Model
     public function getdataNGdetailToday()
     {
         $today = date('Y-m-d');
-        $startTime = date('Y-m-d H:i:s', strtotime($today . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:59'));
+        $startTime = $today . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00'));
 
         return $this->select('line5_data_alt2.*')
             ->orderBy('waktu', 'DESC')
@@ -401,8 +400,8 @@ class ModelAlt2 extends Model
 
     public function getdataNGdetailTodaybyDate($date)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:59'));
+        $startTime = $date . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('line5_data_alt2.*')
             ->orderBy('waktu', 'DESC')
@@ -417,8 +416,8 @@ class ModelAlt2 extends Model
     //week
     public function getDataActualcell2ByWeek($date1, $date2)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_ACTUAL_PRESSURE_CELL2,waktu')
             ->orderBy('waktu', 'DESC')
@@ -429,8 +428,8 @@ class ModelAlt2 extends Model
 
     public function getDataActualcell4ByWeek($date1, $date2)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_ACTUAL_PRESSURE_CELL4,waktu')
             ->orderBy('waktu', 'DESC')
@@ -441,8 +440,8 @@ class ModelAlt2 extends Model
 
     public function getDataActualcell6ByWeek($date1, $date2)
     {
-        $startTime = date('Y-m-d H:i:s', strtotime($date1 . ' 07:30:00'));
-        $endTime = date('Y-m-d H:i:s', strtotime($date2 . ' +1 day 07:29:59'));
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
 
         return $this->select('L5_ALT2_ACTUAL_PRESSURE_CELL6,waktu')
             ->orderBy('waktu', 'DESC')
