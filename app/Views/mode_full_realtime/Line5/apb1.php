@@ -686,7 +686,25 @@
             method: 'GET',
             dataType: 'json',
             success: (data) => {
-                const time = data.data.map(item => item.waktu);
+                if (!data.data || data.data.length === 0) {
+                    alert('Data Kosong tanggal : ' + date);
+                    console.log('No data received or data is empty');
+                    updateOrCreateChart2(
+                        [], [], 'container', chart, 'APB1 - TEMP RIGHT Actual',
+                        [], [], 'L5_APB1_TEMP_RIGHT_SETTING',
+                        [], 'L5_APB1_TEMP_RIGHT_ACTUAL',
+                        (newChart) => {
+                            chart = newChart;
+                        },
+                        [], []
+                    );
+                    return;
+                }
+
+                // Filter data yang valid
+                const validData = data.data.filter(item => item && item.waktu);
+
+                const time = validData.map(item => item.waktu);
                 const targets = ['07:30', '16:30', '00:30']; // Target waktu
 
                 // Fungsi untuk mencari waktu paling dekat dengan target
@@ -695,7 +713,8 @@
                     let closestDiff = Infinity;
 
                     data.forEach(item => {
-                        const itemTime = item.waktu.split(' ')[1]; // Ambil bagian jam
+                        if (!item || !item.waktu) return;
+                        const itemTime = item.waktu.split(' ')[1];
                         const diff = Math.abs(
                             timeToMinutes(itemTime) - timeToMinutes(target)
                         );
@@ -716,10 +735,11 @@
                 };
 
                 // Ambil data dengan waktu terdekat untuk setiap target
-                const filteredData = targets.map(target => findClosestTime(data.data, target));
+                const filteredData = targets.map(target => findClosestTime(validData, target));
 
                 // Ambil label untuk sumbu x dari data yang difilter
-                const filteredLabels = filteredData.map(item => item.waktu.split(' ')[1]); // Jam saja
+                const filteredLabels = filteredData.map(item => item?.waktu?.split(' ')[1] || 'N/A'); // Jam saja
+
 
                 const labels = data.data.map(item => item.waktu);
                 const valuesSet = data.data.map(item => parseFloat(item.L5_APB1_TEMP_RIGHT_SETTING));
@@ -742,7 +762,25 @@
             method: 'GET',
             dataType: 'json',
             success: (data) => {
-                const time = data.data.map(item => item.waktu);
+                if (!data.data || data.data.length === 0) {
+
+                    console.log('No data received or data is empty');
+                    updateOrCreateChart2(
+                        [], [], 'container2', chart3, 'APB1 - TEMP LEFT Actual',
+                        [], [], 'L5_APB1_TEMP_LEFT_SETTING',
+                        [], 'L5_APB1_TEMP_LEFT_ACTUAL',
+                        (newChart) => {
+                            chart3 = newChart;
+                        },
+                        [], []
+                    );
+                    return;
+                }
+
+                // Filter data yang valid
+                const validData = data.data.filter(item => item && item.waktu);
+
+                const time = validData.map(item => item.waktu);
                 const targets = ['07:30', '16:30', '00:30']; // Target waktu
 
                 // Fungsi untuk mencari waktu paling dekat dengan target
@@ -751,7 +789,8 @@
                     let closestDiff = Infinity;
 
                     data.forEach(item => {
-                        const itemTime = item.waktu.split(' ')[1]; // Ambil bagian jam
+                        if (!item || !item.waktu) return;
+                        const itemTime = item.waktu.split(' ')[1];
                         const diff = Math.abs(
                             timeToMinutes(itemTime) - timeToMinutes(target)
                         );
@@ -772,10 +811,10 @@
                 };
 
                 // Ambil data dengan waktu terdekat untuk setiap target
-                const filteredData = targets.map(target => findClosestTime(data.data, target));
+                const filteredData = targets.map(target => findClosestTime(validData, target));
 
                 // Ambil label untuk sumbu x dari data yang difilter
-                const filteredLabels = filteredData.map(item => item.waktu.split(' ')[1]); // Jam saja
+                const filteredLabels = filteredData.map(item => item?.waktu?.split(' ')[1] || 'N/A'); // Jam saja
 
                 const labels = data.data.map(item => item.waktu);
                 const valuesSet = data.data.map(item => parseFloat(item.L5_APB1_TEMP_LEFT_SETTING));
@@ -977,7 +1016,25 @@
             processData: false,
             contentType: false,
             success: function(data) {
-                const time = data.data.map(item => item.waktu);
+                if (!data.data || data.data.length === 0) {
+                    alert('Data Kosong tanggal : ' + selectedDate + ' s/d ' + selectedDate2);
+                    console.log('No data received or data is empty');
+                    updateOrCreateChartweek(
+                        [], [], 'container2', chart3, 'APB1 - TEMP LEFT Actual',
+                        [], [], 'L5_APB1_TEMP_LEFT_SETTING',
+                        [], 'L5_APB1_TEMP_LEFT_ACTUAL',
+                        (newChart) => {
+                            chart3 = newChart;
+                        },
+                        [], []
+                    );
+                    return;
+                }
+
+                // Filter data yang valid
+                const validData = data.data.filter(item => item && item.waktu);
+
+                const time = validData.map(item => item.waktu);
                 const targets = ['07:30', '16:30', '00:30']; // Target waktu
 
                 // Fungsi untuk mencari waktu paling dekat dengan target
@@ -986,7 +1043,8 @@
                     let closestDiff = Infinity;
 
                     data.forEach(item => {
-                        const itemTime = item.waktu.split(' ')[1]; // Ambil bagian jam
+                        if (!item || !item.waktu) return;
+                        const itemTime = item.waktu.split(' ')[1];
                         const diff = Math.abs(
                             timeToMinutes(itemTime) - timeToMinutes(target)
                         );
@@ -1007,10 +1065,10 @@
                 };
 
                 // Ambil data dengan waktu terdekat untuk setiap target
-                const filteredData = targets.map(target => findClosestTime(data.data, target));
+                const filteredData = targets.map(target => findClosestTime(validData, target));
 
                 // Ambil label untuk sumbu x dari data yang difilter
-                const filteredLabels = filteredData.map(item => item.waktu.split(' ')[1]); // Jam saja
+                const filteredLabels = filteredData.map(item => item?.waktu?.split(' ')[1] || 'N/A'); // Jam saja
 
                 const labels = data.data.map(item => item.waktu);
                 const valuesSet = data.data.map(item => parseFloat(item.L5_APB1_TEMP_LEFT_SETTING));
@@ -1034,7 +1092,25 @@
             processData: false,
             contentType: false,
             success: function(data) {
-                const time = data.data.map(item => item.waktu);
+                if (!data.data || data.data.length === 0) {
+
+                    console.log('No data received or data is empty');
+                    updateOrCreateChartweek(
+                        [], [], 'container', chart, 'APB1 - TEMP RIGHT Actual',
+                        [], [], 'L5_APB1_TEMP_RIGHT_SETTING',
+                        [], 'L5_APB1_TEMP_RIGHT_ACTUAL',
+                        (newChart) => {
+                            chart = newChart;
+                        },
+                        [], []
+                    );
+                    return;
+                }
+
+                // Filter data yang valid
+                const validData = data.data.filter(item => item && item.waktu);
+
+                const time = validData.map(item => item.waktu);
                 const targets = ['07:30', '16:30', '00:30']; // Target waktu
 
                 // Fungsi untuk mencari waktu paling dekat dengan target
@@ -1043,7 +1119,8 @@
                     let closestDiff = Infinity;
 
                     data.forEach(item => {
-                        const itemTime = item.waktu.split(' ')[1]; // Ambil bagian jam
+                        if (!item || !item.waktu) return;
+                        const itemTime = item.waktu.split(' ')[1];
                         const diff = Math.abs(
                             timeToMinutes(itemTime) - timeToMinutes(target)
                         );
@@ -1064,10 +1141,10 @@
                 };
 
                 // Ambil data dengan waktu terdekat untuk setiap target
-                const filteredData = targets.map(target => findClosestTime(data.data, target));
+                const filteredData = targets.map(target => findClosestTime(validData, target));
 
                 // Ambil label untuk sumbu x dari data yang difilter
-                const filteredLabels = filteredData.map(item => item.waktu.split(' ')[1]); // Jam saja
+                const filteredLabels = filteredData.map(item => item?.waktu?.split(' ')[1] || 'N/A'); // Jam saja
 
                 const labels = data.data.map(item => item.waktu);
                 const valuesSet = data.data.map(item => parseFloat(item.L5_APB1_TEMP_RIGHT_SETTING));

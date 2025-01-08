@@ -29,8 +29,9 @@ class ModelApb2 extends Model
     {
         // Get today's date
         $today = date('Y-m-d');
-        $startTime = $today . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+        $startTime = $today . ' 07:30:00'; 
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00'));
+
 
         $sql = "
         SELECT '10-20.9' AS TEMP_Actual_LEFT_RANGE, COUNT(*) AS count
@@ -105,7 +106,7 @@ class ModelApb2 extends Model
         // Get today's date
         $today = date('Y-m-d');
         $startTime = $today . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($today . ' +1 day 07:29:00'));
+        $endTime = date('Y-m-d H:i:s.v', strtotime($today . ' +1 day 07:29:00'));
 
         $sql = "
         SELECT '10-20.9' AS TEMP_Actual_RIGHT_RANGE, COUNT(*) AS count
@@ -180,7 +181,7 @@ class ModelApb2 extends Model
     {
         // Format waktu start dan end
         $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:00'));
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         $sql = "
         SELECT '10-20.9' AS TEMP_Actual_LEFT_RANGE, COUNT(*) AS count
@@ -253,8 +254,7 @@ class ModelApb2 extends Model
     {
         // Format waktu start dan end
         $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d H:i:s', strtotime($date . ' +1 day 07:29:00'));
-
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
         $sql = "
         SELECT '10-20.9' AS TEMP_Actual_RIGHT_RANGE, COUNT(*) AS count
         FROM line6_data_apb2
@@ -329,7 +329,7 @@ class ModelApb2 extends Model
     {
         // Menentukan waktu mulai dan selesai dengan format yang sesuai
         $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('L6_APB2_TEMP_LEFT_SETTING, L6_APB2_TEMP_LEFT_ACTUAL, waktu')
             ->orderBy('waktu', 'DESC')
@@ -343,7 +343,7 @@ class ModelApb2 extends Model
     {
         // Menentukan waktu mulai dan selesai dengan format yang sesuai
         $startTime = $date . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date . ' +1 day')) . ' 07:29:59';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00'));
 
         return $this->select('L6_APB2_TEMP_RIGHT_SETTING, L6_APB2_TEMP_RIGHT_ACTUAL, waktu')
             ->orderBy('waktu', 'DESC')
@@ -401,7 +401,7 @@ class ModelApb2 extends Model
     {
         // Format waktu awal dan akhir
         $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
 
         return $this->select('L6_APB2_TEMP_LEFT_SETTING, L6_APB2_TEMP_LEFT_ACTUAL, waktu')
             ->orderBy('waktu', 'DESC')
@@ -415,7 +415,7 @@ class ModelApb2 extends Model
     {
         // Format waktu awal dan akhir
         $startTime = $date1 . ' 07:30:00';
-        $endTime = date('Y-m-d', strtotime($date2 . ' +1 day')) . ' 07:29:59';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
 
         return $this->select('L6_APB2_TEMP_RIGHT_SETTING, L6_APB2_TEMP_RIGHT_ACTUAL, waktu')
             ->orderBy('waktu', 'DESC')

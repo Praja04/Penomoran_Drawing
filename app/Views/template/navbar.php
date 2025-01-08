@@ -78,6 +78,13 @@
 								<li><a href="<?= base_url('listproject') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Project<span id="notif_approve"></a></li>
 							</ul>
 						</li>
+						<li class="header">Parameter Proses</li>
+						<li class="">
+							<a target="blank" href="<?= base_url() ?>menu/utama">
+								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
+								<span>Parameter Proses</span>
+							</a>
+						</li>
 					<?php elseif (session()->get('role') == 'admin') : ?>
 						<li class="treeview">
 							<a href="#">
@@ -158,6 +165,13 @@
 								<span>Mold Management</span>
 							</a>
 						</li>
+						<li class="header">Parameter Proses</li>
+						<li class="">
+							<a target="blank" href="<?= base_url() ?>menu/utama">
+								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
+								<span>Parameter Proses</span>
+							</a>
+						</li>
 					<?php elseif (session()->get('role') == 'kasi') : ?>
 
 						<li class="treeview">
@@ -215,6 +229,13 @@
 								<span>Mold Management</span>
 							</a>
 						</li>
+						<li class="header">Parameter Proses</li>
+						<li class="">
+							<a target="blank" href="<?= base_url() ?>menu/utama">
+								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
+								<span>Parameter Proses</span>
+							</a>
+						</li>
 					<?php elseif (session()->get('role') == 'reader_pce') : ?>
 						<li class="treeview">
 							<a href="#">
@@ -251,6 +272,13 @@
 								<li><a href="<?= base_url('listproject') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Project<span id="notif_approve"></a></li>
 							</ul>
 						</li>
+						<li class="header">Parameter Proses</li>
+						<li class="">
+							<a target="blank" href="<?= base_url() ?>menu/utama">
+								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
+								<span>Parameter Proses</span>
+							</a>
+						</li>
 					<?php else : ?>
 						<li class="treeview">
 							<a href="#">
@@ -262,6 +290,13 @@
 							<ul class="treeview-menu">
 								<li><a href="<?= base_url('listpdf') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing</a></li>
 							</ul>
+						</li>
+						<li class="header">Parameter Proses</li>
+						<li class="">
+							<a target="blank" href="<?= base_url() ?>menu/utama">
+								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
+								<span>Parameter Proses</span>
+							</a>
 						</li>
 					<?php endif; ?>
 					</li>
