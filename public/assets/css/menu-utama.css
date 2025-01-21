@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 
 /* Global Styles */
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
 html, body {
     width: 100%;
@@ -13,6 +13,9 @@ html, body {
     overflow: hidden;
     font-family: 'Exo', sans-serif;
     background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Context Section */
@@ -191,4 +194,63 @@ a {
 
 a:hover {
     text-decoration: none; /* Pastikan hover juga tidak menampilkan underline */
+}
+
+
+/* Penyesuaian untuk berbagai perangkat */
+@media (max-width: 576px) { /* Smartphone */
+    body {
+        padding: 10px; /* Memberi padding agar elemen tidak terlalu menempel ke tepi layar */
+        flex-direction: column; /* Tampilan vertikal untuk smartphone */
+    }
+    .context {
+        padding: 10px; /* Memberi ruang pada konten agar terlihat rapi */
+    }
+    .container {
+        flex-direction: column; /* Semua kartu disusun vertikal */
+    }
+    .card {
+    position: relative;
+    width: 213px;
+    height: 292px;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+    margin: 12px;
+}
+    .card .slide.slide2 .content h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-left: -32px;
+}
+}
+
+@media (min-width: 577px) and (max-width: 768px) { /* Tablet */
+    body {
+        padding: 20px; /* Sedikit lebih lebar dibanding smartphone */
+    }
+    .context {
+        padding: 15px; /* Sesuaikan ruang konten */
+    }
+    .container {
+        flex-direction: row; /* Kartu disusun horizontal */
+        flex-wrap: wrap; /* Membungkus elemen agar rapi */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) { /* Laptop Kecil */
+    body {
+        padding: 30px; /* Tambahkan lebih banyak ruang */
+    }
+    .context {
+        padding: 20px; /* Sesuaikan ruang untuk konten utama */
+    }
+    .container {
+        flex-direction: row; /* Tetap horizontal */
+        justify-content: space-around; /* Sebar kartu dengan rata */
+    }
+}
+
+@media (min-width: 993px) { /* Desktop Besar */
+  
 }

@@ -128,6 +128,7 @@ class ModelHsm1 extends Model
 
         // Menggunakan ekspresi CASE langsung di GROUP BY
         return $this->select("CASE 
+                            WHEN L6_HSM1_TEMP_RIGHT < 360 THEN 'TEMP<360'   
                             WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
                             WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
                             WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
@@ -139,13 +140,13 @@ class ModelHsm1 extends Model
                             WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
                             WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
                             WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
-                            ELSE 'OTHER' 
+                            WHEN L6_HSM1_TEMP_RIGHT > 470.9 THEN 'Temp>471'  
                         END AS TEMP_RIGHT_RANGE, 
                         COUNT(*) AS count")
-            ->where('waktu >=', $startTime)
-            ->where('waktu <', $endTime)
-            // Menambahkan ekspresi CASE juga di GROUP BY, bukan alias TEMP_RIGHT_RANGE
-            ->groupBy("CASE 
+        ->where('waktu >=', $startTime)
+        ->where('waktu <', $endTime)
+        ->groupBy("CASE 
+              WHEN L6_HSM1_TEMP_RIGHT < 360 THEN 'TEMP<360'   
                     WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
                     WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
                     WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
@@ -157,11 +158,10 @@ class ModelHsm1 extends Model
                     WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
                     WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
                     WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
-                    ELSE 'OTHER' 
+                   WHEN L6_HSM1_TEMP_RIGHT > 470.9 THEN 'Temp>471'
                 END")
-            ->orderBy('count', 'DESC') // Aktifkan jika ingin mengurutkan berdasarkan count
-            ->findAll();
-    }
+        ->orderBy('count', 'DESC')
+        ->findAll();  }
 
 
     //get distinct by date
@@ -171,6 +171,7 @@ class ModelHsm1 extends Model
         $endTime = date('Y-m-d H:i:s.v', strtotime($date . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
 
         return $this->select("CASE 
+                            WHEN L6_HSM1_TEMP_LEFT < 360 THEN 'TEMP<360' 
                             WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
                             WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
                             WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
@@ -182,26 +183,27 @@ class ModelHsm1 extends Model
                             WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
                             WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
                             WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
-                            ELSE 'OTHER' 
+                            WHEN L6_HSM1_TEMP_LEFT > 470.9 THEN 'TEMP>471' 
                         END AS TEMP_LEFT_RANGE, 
                         COUNT(*) AS count")
-            ->where('waktu >=', $startTime)
+        ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->groupBy("CASE 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
-                    WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
-                    ELSE 'OTHER' 
+                   WHEN L6_HSM1_TEMP_LEFT < 360 THEN 'TEMP<360' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            WHEN L6_HSM1_TEMP_LEFT > 470.9 THEN 'TEMP>471' 
                 END")
-            ->orderBy('count', 'DESC') // Aktifkan kembali jika ingin mengurutkan berdasarkan count
+            ->orderBy('count', 'DESC')
             ->findAll();
     }
 
@@ -304,7 +306,7 @@ class ModelHsm1 extends Model
 
         // Ambil data dari database
         $data = $this->select('L6_HSM1_TYPE_BATTERY, L6_HSM1_TEMP_RIGHT, L6_HSM1_TEMP_SET_VALUE, waktu')
-        ->where('waktu >=', $startTime)
+            ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
             ->findAll();
@@ -775,6 +777,91 @@ class ModelHsm1 extends Model
             ->where('waktu >=', $startTime)
             ->where('waktu <', $endTime)
             ->orderBy('waktu', 'DESC')
+            ->findAll();
+    }
+
+    public function getDistinctTempLeftbyWeek($date1, $date2)
+    {
+        $startTime = $date1 . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
+
+        return $this->select("CASE 
+                            WHEN L6_HSM1_TEMP_LEFT < 360 THEN 'TEMP<360' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            WHEN L6_HSM1_TEMP_LEFT > 470.9 THEN 'TEMP>471' 
+                        END AS TEMP_LEFT_RANGE, 
+                        COUNT(*) AS count")
+            ->where('waktu >=', $startTime)
+            ->where('waktu <', $endTime)
+            ->groupBy("CASE 
+                   WHEN L6_HSM1_TEMP_LEFT < 360 THEN 'TEMP<360' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_LEFT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            WHEN L6_HSM1_TEMP_LEFT > 470.9 THEN 'TEMP>471' 
+                END")
+            ->orderBy('count', 'DESC') 
+            ->findAll();
+    }
+
+
+    public function getDistinctTempRightbyWeek($date1, $date2)
+    {
+        $startTime = $date1 . ' 07:30:00'; // Format timestamp
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00')); // Format timestamp dengan tiga digit milidetik
+
+        return $this->select("CASE 
+                            WHEN L6_HSM1_TEMP_RIGHT < 360 THEN 'TEMP<360'   
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                            WHEN L6_HSM1_TEMP_RIGHT > 470.9 THEN 'Temp>471'  
+                        END AS TEMP_RIGHT_RANGE, 
+                        COUNT(*) AS count")
+            ->where('waktu >=', $startTime)
+            ->where('waktu <', $endTime)
+            ->groupBy("CASE 
+              WHEN L6_HSM1_TEMP_RIGHT < 360 THEN 'TEMP<360'   
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 360 AND 369.9 THEN '360-369.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 370 AND 379.9 THEN '370-379.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 380 AND 389.9 THEN '380-389.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 390 AND 399.9 THEN '390-399.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 400 AND 409.9 THEN '400-409.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 410 AND 419.9 THEN '410-419.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 420 AND 429.9 THEN '420-429.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 430 AND 439.9 THEN '430-439.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 440 AND 449.9 THEN '440-449.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 450 AND 459.9 THEN '450-459.9' 
+                    WHEN L6_HSM1_TEMP_RIGHT BETWEEN 460 AND 470.9 THEN '460-470.9' 
+                   WHEN L6_HSM1_TEMP_RIGHT > 470.9 THEN 'Temp>471'
+                END")
+            ->orderBy('count', 'DESC')
             ->findAll();
     }
 }
