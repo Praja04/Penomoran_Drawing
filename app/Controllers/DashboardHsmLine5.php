@@ -361,4 +361,33 @@ class DashboardHsmLine5 extends BaseController
         return $this->response->setJSON(['data' => $data]);
     }
 
+    public function getDistinct_HSM2_tempLeftbyWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->hsm2->getDistinctTempLeftbyWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+    public function getDistinct_HSM2_tempRightbyWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->hsm2->getDistinctTempRightbyWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+
+    public function getDistinct_HSM1_tempLeftbyWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->hsm1->getDistinctTempLeftbyWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+    public function getDistinct_HSM1_tempRightbyWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->hsm1->getDistinctTempRightbyWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
 }

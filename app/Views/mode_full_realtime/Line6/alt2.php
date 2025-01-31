@@ -54,6 +54,148 @@
         margin-right: 10px;
         /* Jarak antar teks */
     }
+
+    table tr {
+        font-size: smaller;
+    }
+
+    /* HP (Smartphone) - Portrait Mode (<= 576px) */
+    @media (max-width: 576px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: fit-content;
+
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+
+    }
+
+    /* Tablet (Landscape & Portrait) - (> 576px and <= 768px) */
+    @media (min-width: 577px) and (max-width: 768px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: fit-content;
+
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+    }
+
+    /* Laptop & Small Desktop (> 768px and <= 992px) */
+    @media (min-width: 769px) and (max-width: 992px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+
+        .head3 {
+            width: max-content;
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 37.08%;
+        }
+    }
 </style>
 <?= $this->endSection() ?>
 <?= $this->section('content'); ?>
@@ -63,7 +205,7 @@
 
             <div class="col-xl-12 col-12" style="background-color:#03346E;">
                 <div class="row d-flex flex-row" style="margin: 10px;">
-                    <div class="col-md-1">
+                    <div class="col-md-1 head1">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Tipe Battery" disabled>
                         </div>
@@ -75,7 +217,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type1" type="text" class="form-control" disabled>
                         </div>
@@ -89,7 +231,7 @@
 
                         <h5 style="color:#fff;" id="battery_now"></h5>
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type2" type="text" class="form-control" disabled>
                         </div>
@@ -102,7 +244,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type3" type="text" class="form-control" disabled>
                         </div>
@@ -118,7 +260,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 head3">
                         <div class="box-body" style="background-color:#F2EFE5; ">
                             <div class="form-group status-container">
                                 <div class="status-text">
@@ -145,7 +287,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-3-5">
+                    <div class="col-md-3-5 head3-5">
                         <div class="box-body" style="background-color:#F2EFE5;">
                             <h5 class="text-center">ALT 2 Line 6 Detail</h5>
                             <div class="row d-flex flex-row">
@@ -196,7 +338,72 @@
     <div class="row align-items-start">
         <div class="col-xl-3 col-12" style="background-color:#03346E;">
             <section class="content">
-                <div class="row">
+                <div class="row table1">
+                    <div class="col-lg-12 col-12 table2">
+                        <div class="box table3">
+                            <div class="box-body py-0">
+                                <div class="table-responsive">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-600">Parameter</td>
+                                                <td class="fw-600">Standar</td>
+                                                <td class="fw-600">Actual</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Fill Pressure</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_fill_pressure" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_fill_pressure" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Test Pressure</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_test_pressure" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_test_pressure" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Fill Failure Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_fill_failure_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_fill_failure_time" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Stabilization Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_stabilization_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_stabilization_time" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Test Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_test_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_leak_pressure" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row">
                     <div class="col-lg-12 col-12 ">
                         <div class="box" style="background-color:#fff;">
                             <div class="box-body">
@@ -245,9 +452,8 @@
 
                             </div>
                         </div>
-                        <!-- /.box -->
-                    </div>
-                </div>
+                         </div>
+                            </div> -->
             </section>
         </div>
         <div class="col-xl-9 col-12" style="background-color:#03346E; border-radius:10px;">
@@ -415,70 +621,72 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="background-color:#03346E;">
-                        <div class="col-xl-12 col-12">
-                            <div class="box">
-                                <div class=" box-header with-border">
 
-                                </div>
-                                <div class="box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container2" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container3" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container4" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container5" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container6" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
         </div>
+        <div class="row" style="background-color:#03346E;">
+            <div class="col-xl-12 col-12" style=" padding: 20px;">
+                <div class="box">
+                    <div class=" box-header with-border">
+
+                    </div>
+                    <div class="box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style=" padding: 20px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container2" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style=" padding: 20px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container3" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style=" padding: 20px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container4" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style=" padding: 20px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container5" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style=" padding: 20px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container6" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 
@@ -666,10 +874,11 @@
 <?= $this->section('script'); ?>
 <script>
     // Variabel untuk ketiga chart
-    let chart, chart3, chart5, chartresult2, chartresult4, chartresult6;
+    let chart, chart3, chart5, chartresult2, chartresult4, chartresult6, chart_cell2, chart_cell4, chart_cell6;
+    let maxCount = 0;
     const updateInterval = 100000;
 
-    // Fungsi untuk cell1
+    // Fungsi untuk cell2
     const fetchDataCell2 = () => {
         $.ajax({
             url: '<?= base_url('altline6/get/all/cell2') ?>',
@@ -723,7 +932,7 @@
         });
     };
 
-    // Fungsi untuk cell3
+    // Fungsi untuk cell4
     const fetchDataCell4 = () => {
         $.ajax({
             url: '<?= base_url('altline6/get/all/cell4') ?>',
@@ -1422,6 +1631,48 @@
             }
         });
 
+        //distinct
+        $.ajax({
+            url: `<?= base_url('altline6/get/distinct/cell2/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                createChart(`result_cell2`, `<?= base_url('altline6/get/distinct/cell2/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL2', 'Result Cell 2');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for Cell2:', textStatus, errorThrown);
+            }
+        });
+
+        // Fetch untuk cell3
+        $.ajax({
+            url: `<?= base_url('altline6/get/distinct/cell4/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                createChart(`result_cell4`, `<?= base_url('altline6/get/distinct/cell4/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL4', 'Result Cell 4');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for Cell4:', textStatus, errorThrown);
+            }
+        });
+
+        // Fetch untuk cell5
+        $.ajax({
+            url: `<?= base_url('altline6/get/distinct/cell6/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                createChart(`result_cell6`, `<?= base_url('altline6/get/distinct/cell6/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL6', 'Result Cell 6');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for Cell6:', textStatus, errorThrown);
+            }
+        });
+
     };
 
     // Fungsi helper untuk membuat/update chart
@@ -2034,96 +2285,138 @@
             }
         });
 
+        //distinct
+        $.ajax({
+            url: `<?= base_url('altline6/distinct/cell2/week') ?>`,
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                const processedData = data.data.map(item => ({
+                    category: parseFloat(item['L6_ALT2_RESULT_CELL2']), // Ubah kategori menjadi float
+                    count: parseInt(item.count)
+                }));
+
+                // Mengurutkan berdasarkan kategori
+                processedData.sort((a, b) => a.category - b.category);
+
+                // Mendapatkan kategori dan jumlah terurut
+                const categories = processedData.map(item => item.category);
+                const counts = processedData.map(item => item.count);
+
+                // Update nilai maksimum
+                const currentMaxCount = Math.max(...counts);
+                const currentMaxsumbuX = Math.max(...categories);
+                const currentMinCategories = 0;
+                const currentMaxCategories = 3;
+                if (currentMaxCount > maxCount) {
+                    maxCount = currentMaxCount;
+                }
+
+                // Menyimpan data grafik untuk kemudian digunakan
+                const chartData = {
+                    containerId: 'result_cell2',
+                    categories: categories,
+                    counts: counts,
+                    result: 'Result Cell 2',
+
+                };
+                drawChart(chartData);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for cell 2 distinct:', textStatus, errorThrown);
+            }
+        });
+        $.ajax({
+            url: `<?= base_url('altline6/distinct/cell4/week') ?>`,
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                const processedData = data.data.map(item => ({
+                    category: parseFloat(item['L6_ALT2_RESULT_CELL4']), // Ubah kategori menjadi float
+                    count: parseInt(item.count)
+                }));
+
+                // Mengurutkan berdasarkan kategori
+                processedData.sort((a, b) => a.category - b.category);
+
+                // Mendapatkan kategori dan jumlah terurut
+                const categories = processedData.map(item => item.category);
+                const counts = processedData.map(item => item.count);
+
+                // Update nilai maksimum
+                const currentMaxCount = Math.max(...counts);
+                const currentMaxsumbuX = Math.max(...categories);
+                const currentMinCategories = 0;
+                const currentMaxCategories = 3;
+                if (currentMaxCount > maxCount) {
+                    maxCount = currentMaxCount;
+                }
+
+                // Menyimpan data grafik untuk kemudian digunakan
+                const chartData = {
+                    containerId: 'result_cell4',
+                    categories: categories,
+                    counts: counts,
+                    result: 'Result Cell 4',
+
+                };
+                drawChart(chartData);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for cell 4 distinct:', textStatus, errorThrown);
+            }
+        });
+        $.ajax({
+            url: `<?= base_url('altline6/distinct/cell6/week') ?>`,
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                const processedData = data.data.map(item => ({
+                    category: parseFloat(item['L6_ALT2_RESULT_CELL6']), // Ubah kategori menjadi float
+                    count: parseInt(item.count)
+                }));
+
+                // Mengurutkan berdasarkan kategori
+                processedData.sort((a, b) => a.category - b.category);
+
+                // Mendapatkan kategori dan jumlah terurut
+                const categories = processedData.map(item => item.category);
+                const counts = processedData.map(item => item.count);
+
+                // Update nilai maksimum
+                const currentMaxCount = Math.max(...counts);
+                const currentMaxsumbuX = Math.max(...categories);
+                const currentMinCategories = 0;
+                const currentMaxCategories = 3;
+                if (currentMaxCount > maxCount) {
+                    maxCount = currentMaxCount;
+                }
+
+                // Menyimpan data grafik untuk kemudian digunakan
+                const chartData = {
+                    containerId: 'result_cell6',
+                    categories: categories,
+                    counts: counts,
+                    result: 'Result Cell 6',
+
+                };
+                drawChart(chartData);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for cell 6 distinct:', textStatus, errorThrown);
+            }
+        });
+
     };
 
-
-    // Fungsi update untuk realtime
-    const updateCharts = () => {
-        const selectedSource = $('#data-source').val();
-        if (selectedSource === 'realtime') {
-            fetchDataCell2();
-            fetchDataCell4();
-            fetchDataCell6();
-            fetchDataResultCell2();
-            fetchDataResultCell4();
-            fetchDataResultCell6();
-            setTimeout(updateCharts, updateInterval);
-        }
-    };
-
-    // Event listener untuk dropdown
-    $('#data-source').on('change', function() {
-        const selectedSource = $(this).val();
-        if (selectedSource === 'date') {
-            $('#date-input').show();
-            $('#fetch-data').show();
-            $('#tanggal').show();
-            $('#date-input-week').hide();
-            $('#tanggal-week').hide();
-            $('#date-input-week2').hide();
-            $('#tanggal-week2').hide();
-            $('#fetch-data-week').hide();
-            // Reset charts
-            chart = chart3 = chart5 = chartresult2 = chartresult4 = chartresult6 = null;
-        } else if (selectedSource === 'week') {
-            $('#date-input').hide();
-            $('#fetch-data').hide();
-            $('#tanggal').hide();
-            $('#date-input-week').show();
-            $('#tanggal-week').show();
-            $('#date-input-week2').show();
-            $('#tanggal-week2').show();
-            $('#fetch-data-week').show();
-            chart = chart3 = chart5 = chartresult2 = chartresult4 = chartresult6 = null;
-        } else {
-            $('#date-input').hide();
-            $('#fetch-data').hide();
-            $('#tanggal').hide();
-            $('#date-input-week').hide();
-            $('#tanggal-week').hide();
-            $('#date-input-week2').hide();
-            $('#tanggal-week2').hide();
-            $('#fetch-data-week').hide();
-            updateCharts();
-        }
-    });
-
-    // Event listener untuk tombol fetch
-    $('#fetch-data').on('click', function() {
-        const selectedDate = $('#date-input').val();
-        if (selectedDate) {
-            fetchDataByDate(selectedDate);
-        } else {
-            alert('Please select a date.');
-        }
-    });
-
-    $('#fetch-data-week').on('click', function() {
-        const selectedDate = $('#date-input-week').val();
-        const selectedDate2 = $('#date-input-week2').val();
-        if (selectedDate && selectedDate2) {
-            fetchDataByWeek(selectedDate, selectedDate2);
-        } else {
-            alert('Please select a date.');
-        }
-
-    });
-    // Inisialisasi awal
-    fetchDataCell2();
-    fetchDataCell4();
-    fetchDataCell6();
-    fetchDataResultCell2();
-    fetchDataResultCell4();
-    fetchDataResultCell6();
-    updateCharts();
-</script>
-
-<script>
-    let chart_cell2, chart_cell4, chart_cell6;
-    let maxCount = 0; // Variabel untuk menyimpan nilai maksimum
-    // let maxsumbuX = 0;
-
-    const fetchDataresultCell2 = () => {
+    //distinct
+    const fetchdistinctDataresultCell2 = () => {
         $.ajax({
             url: '<?= base_url('altline6/get/distinct/cell2') ?>',
             method: 'GET',
@@ -2137,7 +2430,7 @@
         });
     };
 
-    const fetchDataresultCell4 = () => {
+    const fetchdistinctDataresultCell4 = () => {
         $.ajax({
             url: '<?= base_url('altline6/get/distinct/cell4') ?>',
             method: 'GET',
@@ -2151,57 +2444,13 @@
         });
     };
 
-    const fetchDataresultCell6 = () => {
+    const fetchdistinctDataresultCell6 = () => {
         $.ajax({
             url: '<?= base_url('altline6/get/distinct/cell6') ?>',
             method: 'GET',
             dataType: 'json',
             success: (data) => {
                 createChart('result_cell6', '<?= base_url('altline6/get/distinct/cell6') ?>', 'L6_ALT2_RESULT_CELL6', 'Result Cell 6');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for Cell6:', textStatus, errorThrown);
-            }
-        });
-    };
-
-    const fetchDataresultByDate = (date) => {
-        // Fetch untuk cell1
-        $.ajax({
-            url: `<?= base_url('altline6/get/distinct/cell2/date/') ?>${date}`,
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                console.log(data);
-                createChart(`result_cell2`, `<?= base_url('altline6/get/distinct/cell2/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL2', 'Result Cell 2');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for Cell2:', textStatus, errorThrown);
-            }
-        });
-
-        // Fetch untuk cell3
-        $.ajax({
-            url: `<?= base_url('altline6/get/distinct/cell4/date/') ?>${date}`,
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                console.log(data);
-                createChart(`result_cell4`, `<?= base_url('altline6/get/distinct/cell4/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL4', 'Result Cell 4');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for Cell4:', textStatus, errorThrown);
-            }
-        });
-
-        // Fetch untuk cell5
-        $.ajax({
-            url: `<?= base_url('altline6/get/distinct/cell6/date/') ?>${date}`,
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                console.log(data);
-                createChart(`result_cell6`, `<?= base_url('altline6/get/distinct/cell6/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL6', 'Result Cell 6');
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.error('Error fetching data for Cell6:', textStatus, errorThrown);
@@ -2301,13 +2550,21 @@
             }]
         });
     }
-    const updateCharts2 = () => {
+    //end distinct
+    // Fungsi update untuk realtime
+    const updateCharts = () => {
         const selectedSource = $('#data-source').val();
         if (selectedSource === 'realtime') {
-            fetchDataresultCell2();
-            fetchDataresultCell4();
-            fetchDataresultCell6();
-
+            fetchDataCell2();
+            fetchDataCell4();
+            fetchDataCell6();
+            fetchDataResultCell2();
+            fetchDataResultCell4();
+            fetchDataResultCell6();
+            fetchdistinctDataresultCell2();
+            fetchdistinctDataresultCell4();
+            fetchdistinctDataresultCell6();
+            setTimeout(updateCharts, updateInterval);
         }
     };
 
@@ -2317,12 +2574,34 @@
         if (selectedSource === 'date') {
             $('#date-input').show();
             $('#fetch-data').show();
+            $('#tanggal').show();
+            $('#date-input-week').hide();
+            $('#tanggal-week').hide();
+            $('#date-input-week2').hide();
+            $('#tanggal-week2').hide();
+            $('#fetch-data-week').hide();
             // Reset charts
-            chart_cell1 = chart_cell4 = chart_cell6 = null;
+            chart = chart3 = chart5 = chartresult2 = chartresult4 = chartresult6 = chart_cell2 = chart_cell4 = chart_cell6 = null;
+        } else if (selectedSource === 'week') {
+            $('#date-input').hide();
+            $('#fetch-data').hide();
+            $('#tanggal').hide();
+            $('#date-input-week').show();
+            $('#tanggal-week').show();
+            $('#date-input-week2').show();
+            $('#tanggal-week2').show();
+            $('#fetch-data-week').show();
+            chart = chart3 = chart5 = chartresult2 = chartresult4 = chartresult6 = chart_cell2 = chart_cell4 = chart_cell6 = null;
         } else {
             $('#date-input').hide();
             $('#fetch-data').hide();
-            updateCharts2();
+            $('#tanggal').hide();
+            $('#date-input-week').hide();
+            $('#tanggal-week').hide();
+            $('#date-input-week2').hide();
+            $('#tanggal-week2').hide();
+            $('#fetch-data-week').hide();
+            updateCharts();
         }
     });
 
@@ -2330,17 +2609,33 @@
     $('#fetch-data').on('click', function() {
         const selectedDate = $('#date-input').val();
         if (selectedDate) {
-            fetchDataresultByDate(selectedDate);
+            fetchDataByDate(selectedDate);
         } else {
             alert('Please select a date.');
         }
     });
 
+    $('#fetch-data-week').on('click', function() {
+        const selectedDate = $('#date-input-week').val();
+        const selectedDate2 = $('#date-input-week2').val();
+        if (selectedDate && selectedDate2) {
+            fetchDataByWeek(selectedDate, selectedDate2);
+        } else {
+            alert('Please select a date.');
+        }
+
+    });
     // Inisialisasi awal
-    fetchDataresultCell2();
-    fetchDataresultCell4();
-    fetchDataresultCell6();
-    updateCharts2();
+    fetchDataCell2();
+    fetchDataCell4();
+    fetchDataCell6();
+    fetchdistinctDataresultCell2();
+    fetchdistinctDataresultCell4();
+    fetchdistinctDataresultCell6();
+    fetchDataResultCell2();
+    fetchDataResultCell4();
+    fetchDataResultCell6();
+    updateCharts();
 </script>
 
 <!-- parameter data -->
@@ -2616,7 +2911,7 @@
         success: function(response) {
             // Filter data untuk tipe 1 dan 2
             const filteredData = response.data.filter(item =>
-                item.L6_HSM1_TYPE_BATTERY === "0" || item.L6_HSM1_TYPE_BATTERY === "1" || item.L6_HSM1_TYPE_BATTERY === "2"
+                item.L6_HSM1_TYPE_BATTERY === 0 || item.L6_HSM1_TYPE_BATTERY === 1 || item.L6_HSM1_TYPE_BATTERY === 2
             );
 
             // Define the types and their corresponding input IDs

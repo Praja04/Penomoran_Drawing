@@ -423,4 +423,150 @@ class ModelApb1 extends Model
             ->where("CAST(waktu AS DATETIME) <= '$endTime'")    // Pastikan perbandingan waktu sesuai dengan format DATETIME
             ->findAll();
     }
+
+    public function getDistinctTempLeftActualbyWeek($date1, $date2)
+    {
+        // Format waktu start dan end
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
+
+        $sql = "
+        SELECT '10-20.9' AS TEMP_Actual_LEFT_RANGE, COUNT(*) AS count
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 10 AND L5_APB1_TEMP_LEFT_ACTUAL < 21
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '21-30.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 21 AND L5_APB1_TEMP_LEFT_ACTUAL < 31
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '31-40.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 31 AND L5_APB1_TEMP_LEFT_ACTUAL < 41
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '41-50.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 41 AND L5_APB1_TEMP_LEFT_ACTUAL < 51
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '51-60.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 51 AND L5_APB1_TEMP_LEFT_ACTUAL < 61
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '61-70.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 61 AND L5_APB1_TEMP_LEFT_ACTUAL < 71
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '71-80.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 71 AND L5_APB1_TEMP_LEFT_ACTUAL < 81
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '81-90.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 81 AND L5_APB1_TEMP_LEFT_ACTUAL < 91
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '91+', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_LEFT_ACTUAL >= 91
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+        ";
+
+        // Execute the query and return the results
+        return $this->db->query($sql)->getResult();
+    }
+
+    public function getDistinctTempRightActualbyWeek($date1, $date2)
+    {
+        // Format waktu start dan end
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
+
+        $sql = "
+        SELECT '10-20.9' AS TEMP_Actual_RIGHT_RANGE, COUNT(*) AS count
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 10 AND L5_APB1_TEMP_RIGHT_ACTUAL < 21
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '21-30.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 21 AND L5_APB1_TEMP_RIGHT_ACTUAL < 31
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '31-40.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 31 AND L5_APB1_TEMP_RIGHT_ACTUAL < 41
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '41-50.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 41 AND L5_APB1_TEMP_RIGHT_ACTUAL < 51
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '51-60.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 51 AND L5_APB1_TEMP_RIGHT_ACTUAL < 61
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '61-70.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 61 AND L5_APB1_TEMP_RIGHT_ACTUAL < 71
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '71-80.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 71 AND L5_APB1_TEMP_RIGHT_ACTUAL < 81
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '81-90.9', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 81 AND L5_APB1_TEMP_RIGHT_ACTUAL < 91
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+
+        UNION ALL
+
+        SELECT '91+', COUNT(*)
+        FROM line5_data_apb1
+        WHERE L5_APB1_TEMP_RIGHT_ACTUAL >= 91
+        AND waktu BETWEEN '$startTime' AND '$endTime'
+        ";
+
+        // Execute the query and return the results
+        return $this->db->query($sql)->getResult();
+    }
 }

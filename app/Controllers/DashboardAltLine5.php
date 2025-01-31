@@ -392,4 +392,50 @@ class DashboardAltLine5 extends BaseController
         $data = $this->alt2->getDataResultcell6ByDate($date);
         return $this->response->setJSON(['data' => $data]);
     }
+
+    //AlT 1 distinct date
+    public function getDistinct_ALT1_cell1byWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->alt1->getDistinctResult_Cell1byWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+    public function getDistinct_ALT1_cell3byWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->alt1->getDistinctResult_Cell3byWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+    public function getDistinct_ALT1_cell5byWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->alt1->getDistinctResult_Cell5byWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+    //ALT 2 distinct with date
+    public function getDistinct_ALT2_cell2byWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->alt2->getDistinctResult_Cell2byWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+
+    public function getDistinct_ALT2_cell4byWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->alt2->getDistinctResult_Cell4byWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+    public function getDistinct_ALT2_cell6byWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->alt2->getDistinctResult_Cell6byWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
 }

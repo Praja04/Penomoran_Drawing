@@ -179,4 +179,38 @@ class DashboardApbLine6 extends BaseController
         $data = $this->apb2->getDataTempRightByWeek($date1, $date2);
         return $this->response->setJSON(['data' => $data]);
     }
+
+
+    //by week distinct apb1
+    public function getDistinct_APB1_tempLeftActualbyWeek()
+    { 
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->apb1->getDistinctTempLeftActualbyWeek($date1,$date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+    public function getDistinct_APB1_tempRightActualbyWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->apb1->getDistinctTempRightActualbyWeek($date1,$date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+
+    //by week distinct apb2
+    public function getDistinct_APB2_tempLeftActualbyWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->apb2->getDistinctTempLeftActualbyWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+    public function getDistinct_APB2_tempRightActualbyWeek()
+    {
+        $date1 = $this->request->getPost('date1');
+        $date2 = $this->request->getPost('date2');
+        $data = $this->apb2->getDistinctTempRightActualbyWeek($date1, $date2);
+        return $this->response->setJSON(['data' => $data]);
+    }
+
 }

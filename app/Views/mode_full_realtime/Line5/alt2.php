@@ -54,16 +54,157 @@
         margin-right: 10px;
         /* Jarak antar teks */
     }
+
+    table tr {
+        font-size: smaller;
+    }
+
+    /* HP (Smartphone) - Portrait Mode (<= 576px) */
+    @media (max-width: 576px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: fit-content;
+
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+
+    }
+
+    /* Tablet (Landscape & Portrait) - (> 576px and <= 768px) */
+    @media (min-width: 577px) and (max-width: 768px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: fit-content;
+
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+    }
+
+    /* Laptop & Small Desktop (> 768px and <= 992px) */
+    @media (min-width: 769px) and (max-width: 992px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+
+        .head3 {
+            width: max-content;
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 37.08%;
+        }
+    }
 </style>
 <?= $this->endSection() ?>
 <?= $this->section('content'); ?>
 <div class="content-wrapper" style="margin-left:0px;margin-top:10px; background-color:#03346E;">
     <div class="container-full">
         <div class="row align-items-start">
-
             <div class="col-xl-12 col-12" style="background-color:#03346E;">
                 <div class="row d-flex flex-row" style="margin: 10px;">
-                    <div class="col-md-1">
+                    <div class="col-md-1 head1">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Tipe Battery" disabled>
                         </div>
@@ -75,7 +216,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type1" type="text" class="form-control" disabled>
                         </div>
@@ -89,7 +230,7 @@
 
                         <h5 style="color: #fff;" id="battery_now"></h5>
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type2" type="text" class="form-control" disabled>
                         </div>
@@ -102,7 +243,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input type="text" class="form-control" disabled>
                         </div>
@@ -118,7 +259,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 head3">
                         <div class="box-body" style="background-color:#F2EFE5; ">
                             <div class="form-group status-container">
                                 <div class="status-text">
@@ -145,7 +286,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-3-5">
+                    <div class="col-md-3-5 head3-5">
                         <div class="box-body" style="background-color:#F2EFE5;">
                             <h5 class="text-center">ALT 2 Line 5 Detail</h5>
                             <div class="row d-flex flex-row">
@@ -196,56 +337,68 @@
     <div class="row align-items-start">
         <div class="col-xl-3 col-12" style="background-color:#03346E;">
             <section class="content">
-                <div class="row">
-                    <div class="col-lg-12 col-12 ">
-                        <div class="box" style="background-color:#fff;">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black; ">
-                                                <h4>Parameter</h4>
-                                            </label>
-                                            <input type="text" value="Fill Pressure" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Test Pressure" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Fill Failure Time" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Stabilization Time" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Test Time" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Leak Pressure" class="form-control mb-3" disabled style="width:120px;">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>Standar</h4>
-                                            </label>
-                                            <input type="text" id="standar_fill_pressure" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_test_pressure" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_fill_failure_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_stabilization_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_test_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_leak_pressure" class="form-control mb-3" disabled style="width:80px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>Actual</h4>
-                                            </label>
-                                            <input type="text" id="actual_fill_pressure" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_test_pressure" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_fill_failure_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_stabilization_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_test_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_leak_pressure" class="form-control mb-3" disabled style="width:80px;">
-                                        </div>
-                                    </div>
+                <div class="row table1">
+                    <div class="col-lg-12 col-12 table2">
+                        <div class="box table3">
+                            <div class="box-body py-0">
+                                <div class="table-responsive">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-600">Parameter</td>
+                                                <td class="fw-600">Standar</td>
+                                                <td class="fw-600">Actual</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Fill Pressure</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_fill_pressure" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_fill_pressure" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Test Pressure</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_test_pressure" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_test_pressure" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Fill Failure Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_fill_failure_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_fill_failure_time" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Stabilization Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_stabilization_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_stabilization_time" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Test Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_test_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_leak_pressure" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-
                             </div>
                         </div>
-                        <!-- /.box -->
                     </div>
                 </div>
             </section>
@@ -415,69 +568,67 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-xl-12 col-12">
-                            <div class="box">
-                                <div class=" box-header with-border">
-
-                                </div>
-                                <div class="box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container2" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container3" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container4" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container5" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container6" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class="box">
+                    <div class=" box-header with-border">
 
+                    </div>
+                    <div class="box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container2" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container3" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container4" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container5" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container6" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -691,7 +842,8 @@
         $('#shift').text('Shift 3');
     }
     // Variabel untuk ketiga chart
-    let chart, chart3, chart5, chartresult2, chartresult4, chartresult6;
+    let chart, chart3, chart5, chartresult2, chartresult4, chartresult6, chart_cell2, chart_cell4, chart_cell6;
+    let maxCount = 0;
     const updateInterval = 100000;
 
     // Fungsi untuk cell1
@@ -1445,6 +1597,47 @@
             }
         });
 
+        //distinct
+        $.ajax({
+            url: `<?= base_url('altline6/get/distinct/cell2/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                createChart(`result_cell2`, `<?= base_url('altline6/get/distinct/cell2/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL2', 'Result Cell 2');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for Cell2:', textStatus, errorThrown);
+            }
+        });
+
+        // Fetch untuk cell3
+        $.ajax({
+            url: `<?= base_url('altline6/get/distinct/cell4/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                createChart(`result_cell4`, `<?= base_url('altline6/get/distinct/cell4/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL4', 'Result Cell 4');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for Cell4:', textStatus, errorThrown);
+            }
+        });
+
+        // Fetch untuk cell5
+        $.ajax({ 
+            url: `<?= base_url('altline6/get/distinct/cell6/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                createChart(`result_cell6`, `<?= base_url('altline6/get/distinct/cell6/date/') ?>${date}`, 'L6_ALT2_RESULT_CELL6', 'Result Cell 6');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for Cell6:', textStatus, errorThrown);
+            }
+        });
     };
 
     // Fungsi helper untuk membuat/update chart
@@ -2143,7 +2336,7 @@
     updateCharts();
 </script>
 
-<script>
+<!-- <script>
     let chart_cell2, chart_cell4, chart_cell6;
     let maxCount = 0; // Variabel untuk menyimpan nilai maksimum
     // let maxsumbuX = 0;
@@ -2366,7 +2559,7 @@
     fetchDataresultCell4();
     fetchDataresultCell6();
     updateCharts2();
-</script>
+</script> -->
 
 <!-- parameter data -->
 <script>
