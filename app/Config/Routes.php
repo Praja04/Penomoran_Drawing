@@ -146,6 +146,11 @@ $routes->group("apbline6",  function ($routes) {
     //byweek
     $routes->post('data/temp/left1/week', 'DashboardApbLine6::getDataByWeek_APB1_tempLeft');
     $routes->post('data/temp/right1/week', 'DashboardApbLine6::getDataByWeek_APB1_tempRight');
+    //distinct week
+    $routes->post('distinct/left1/week', 'DashboardApbLine6::getDistinct_APB1_tempLeftActualbyWeek');
+    $routes->post('distinct/right1/week', 'DashboardApbLine6::getDistinct_APB1_tempRightActualbyWeek');
+   
+
     //APB2
     $routes->get('dashboard/2', 'DashboardApbLine6::dashboard_apb2');
     $routes->get('get/temp/left2', 'DashboardApbLine6::getData_APB2_tempLeftActual');
@@ -163,6 +168,10 @@ $routes->group("apbline6",  function ($routes) {
     //byweek
     $routes->post('data/temp/left2/week', 'DashboardApbLine6::getDataByWeek_APB2_tempLeft');
     $routes->post('data/temp/right2/week', 'DashboardApbLine6::getDataByWeek_APB2_tempRight');
+    //distinct week
+    $routes->post('distinct/left2/week', 'DashboardApbLine6::getDistinct_APB2_tempLeftActualbyWeek');
+    $routes->post('distinct/right2/week', 'DashboardApbLine6::getDistinct_APB2_tempRightActualbyWeek');
+   
 });
 
 $routes->group("hsmline6",  function ($routes) {
@@ -198,6 +207,10 @@ $routes->group("hsmline6",  function ($routes) {
     $routes->post('data/lid_holder1/pos/week', 'DashboardHsmLine6::getData_HSM1_LidHolderMeltingByWeek');
     $routes->post('data/box_lifter1/pos/week', 'DashboardHsmLine6::getData_HSM1_BoxLifterMeltingByWeek');
     $routes->post('data/mirror1/pos/week', 'DashboardHsmLine6::getData_HSM1_MirrorPosByWeek');
+    //getdistinct by week
+    $routes->post('distinct/left1/week', 'DashboardHsmLine6::getDistinct_HSM1_tempLeftbyWeek');
+    $routes->post('distinct/right1/week', 'DashboardHsmLine6::getDistinct_HSM1_tempRightbyWeek');
+
 
     //HSM2
     $routes->get('dashboard/2', 'DashboardHsmLine6::dashboard_hsm2');
@@ -230,6 +243,8 @@ $routes->group("hsmline6",  function ($routes) {
     $routes->post('data/lid_holder2/pos/week', 'DashboardHsmLine6::getData_HSM2_LidHolderMeltingByWeek');
     $routes->post('data/box_lifter2/pos/week', 'DashboardHsmLine6::getData_HSM2_BoxLifterMeltingByWeek');
     $routes->post('data/mirror2/pos/week', 'DashboardHsmLine6::getData_HSM2_MirrorPosByWeek');
+    $routes->post('distinct/left2/week', 'DashboardHsmLine6::getDistinct_HSM2_tempLeftbyWeek');
+    $routes->post('distinct/right2/week', 'DashboardHsmLine6::getDistinct_HSM2_tempRightbyWeek');
 });
 
 $routes->group("altline6", function ($routes) {
@@ -271,6 +286,11 @@ $routes->group("altline6", function ($routes) {
     $routes->post('data/result/cell1/week', 'DashboardAltLine6::getDataResultCell1ByWeek');
     $routes->post('data/result/cell3/week', 'DashboardAltLine6::getDataResultCell3ByWeek');
     $routes->post('data/result/cell5/week', 'DashboardAltLine6::getDataResultCell5ByWeek');
+    //distinctalt1week
+    $routes->post('distinct/cell1/week', 'DashboardAltLine6::getDistinct_ALT1_cell1byWeek');
+    $routes->post('distinct/cell3/week', 'DashboardAltLine6::getDistinct_ALT1_cell3byWeek');
+    $routes->post('distinct/cell5/week', 'DashboardAltLine6::getDistinct_ALT1_cell5byWeek');
+   
 
     //ALT2
     $routes->get('dashboard/2', 'DashboardAltLine6::dashboard_alt2');
@@ -310,6 +330,11 @@ $routes->group("altline6", function ($routes) {
     $routes->post('data/result/cell2/week', 'DashboardAltLine6::getDataResultCell2ByWeek');
     $routes->post('data/result/cell4/week', 'DashboardAltLine6::getDataResultCell4ByWeek');
     $routes->post('data/result/cell6/week', 'DashboardAltLine6::getDataResultCell6ByWeek');
+    //distinct data with week
+    $routes->post('distinct/cell2/week', 'DashboardAltLine6::getDistinct_ALT2_cell2byWeek');
+    $routes->post('distinct/cell4/week', 'DashboardAltLine6::getDistinct_ALT2_cell4byWeek');
+    $routes->post('distinct/cell6/week', 'DashboardAltLine6::getDistinct_ALT2_cell6byWeek');
+   
 });
 
 
@@ -333,6 +358,9 @@ $routes->group("apbline5",  function ($routes) {
     //byweek
     $routes->post('data/temp/left1/week', 'DashboardApbLine5::getDataByWeek_APB1_tempLeft');
     $routes->post('data/temp/right1/week', 'DashboardApbLine5::getDataByWeek_APB1_tempRight');
+    //distinct week
+    $routes->post('distinct/left1/week', 'DashboardApbLine5::getDistinct_APB1_tempLeftActualbyWeek');
+    $routes->post('distinct/right1/week', 'DashboardApbLine5::getDistinct_APB1_tempRightActualbyWeek');
     //APB2
     $routes->get('dashboard/2', 'DashboardApbLine5::dashboard_apb2');
     $routes->get('get/temp/left2', 'DashboardApbLine5::getData_APB2_tempLeftActual');
@@ -350,6 +378,9 @@ $routes->group("apbline5",  function ($routes) {
     //byweek
     $routes->post('data/temp/left2/week', 'DashboardApbLine5::getDataByWeek_APB2_tempLeft');
     $routes->post('data/temp/right2/week', 'DashboardApbLine5::getDataByWeek_APB2_tempRight');
+    //distinct week
+    $routes->post('distinct/left2/week', 'DashboardApbLine5::getDistinct_APB2_tempLeftActualbyWeek');
+    $routes->post('distinct/right2/week', 'DashboardApbLine5::getDistinct_APB2_tempRightActualbyWeek');
 });
 
 $routes->group("hsmline5",  function ($routes) {
@@ -383,6 +414,9 @@ $routes->group("hsmline5",  function ($routes) {
     $routes->post('data/lid_holder1/pos/week', 'DashboardHsmLine5::getData_HSM1_LidHolderMeltingByWeek');
     $routes->post('data/box_lifter1/pos/week', 'DashboardHsmLine5::getData_HSM1_BoxLifterMeltingByWeek');
     $routes->post('data/mirror1/pos/week', 'DashboardHsmLine5::getData_HSM1_MirrorPosByWeek');
+    //getdistinct by week
+    $routes->post('distinct/left1/week', 'DashboardHsmLine5::getDistinct_HSM1_tempLeftbyWeek');
+    $routes->post('distinct/right1/week', 'DashboardHsmLine5::getDistinct_HSM1_tempRightbyWeek');
 
 
 
@@ -417,6 +451,8 @@ $routes->group("hsmline5",  function ($routes) {
     $routes->post('data/lid_holder2/pos/week', 'DashboardHsmLine5::getData_HSM2_LidHolderMeltingByWeek');
     $routes->post('data/box_lifter2/pos/week', 'DashboardHsmLine5::getData_HSM2_BoxLifterMeltingByWeek');
     $routes->post('data/mirror2/pos/week', 'DashboardHsmLine5::getData_HSM2_MirrorPosByWeek');
+    $routes->post('distinct/left2/week', 'DashboardHsmLine5::getDistinct_HSM2_tempLeftbyWeek');
+    $routes->post('distinct/right2/week', 'DashboardHsmLine5::getDistinct_HSM2_tempRightbyWeek');
 });
 
 $routes->group("altline5", function ($routes) {
@@ -459,6 +495,10 @@ $routes->group("altline5", function ($routes) {
     $routes->post('data/result/cell1/week', 'DashboardAltLine5::getDataResultCell1ByWeek');
     $routes->post('data/result/cell3/week', 'DashboardAltLine5::getDataResultCell3ByWeek');
     $routes->post('data/result/cell5/week', 'DashboardAltLine5::getDataResultCell5ByWeek');
+    //distinctalt1week
+    $routes->post('distinct/cell1/week', 'DashboardAltLine5::getDistinct_ALT1_cell1byWeek');
+    $routes->post('distinct/cell3/week', 'DashboardAltLine5::getDistinct_ALT1_cell3byWeek');
+    $routes->post('distinct/cell5/week', 'DashboardAltLine5::getDistinct_ALT1_cell5byWeek');
 
 
 
@@ -500,6 +540,10 @@ $routes->group("altline5", function ($routes) {
     $routes->post('data/result/cell2/week', 'DashboardAltLine5::getDataResultCell2ByWeek');
     $routes->post('data/result/cell4/week', 'DashboardAltLine5::getDataResultCell4ByWeek');
     $routes->post('data/result/cell6/week', 'DashboardAltLine5::getDataResultCell6ByWeek');
+    //distinct data with week
+    $routes->post('distinct/cell2/week', 'DashboardAltLine5::getDistinct_ALT2_cell2byWeek');
+    $routes->post('distinct/cell4/week', 'DashboardAltLine5::getDistinct_ALT2_cell4byWeek');
+    $routes->post('distinct/cell6/week', 'DashboardAltLine5::getDistinct_ALT2_cell6byWeek');
 });
 
 $routes->group("mode/line6", function ($routes) {

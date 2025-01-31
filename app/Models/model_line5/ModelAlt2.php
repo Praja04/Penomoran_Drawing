@@ -449,4 +449,43 @@ class ModelAlt2 extends Model
             ->where("CAST(waktu AS DATETIME) <= CAST('$endTime' AS DATETIME)")   // Menggunakan CAST untuk perbandingan datetime
             ->findAll();
     }
+
+
+    public function getDistinctResult_Cell2byWeek($date1, $date2)
+    {
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
+        return $this->select('L5_ALT2_RESULT_CELL2, COUNT(L5_ALT2_RESULT_CELL2) as count')
+        ->groupBy('L5_ALT2_RESULT_CELL2')
+        ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
+        ->where("CAST(waktu AS DATETIME) < CAST('$endTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
+        ->orderBy('count', 'DESC')
+        ->findAll();
+    }
+
+    public function getDistinctResult_Cell4byWeek($date1, $date2)
+    {
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
+
+        return $this->select('L5_ALT2_RESULT_CELL4, COUNT(L5_ALT2_RESULT_CELL4) as count')
+        ->groupBy('L5_ALT2_RESULT_CELL4')
+        ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
+        ->where("CAST(waktu AS DATETIME) < CAST('$endTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
+        ->orderBy('count', 'DESC')
+        ->findAll();
+    }
+
+    public function getDistinctResult_Cell6byWeek($date1, $date2)
+    {
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
+
+        return $this->select('L5_ALT2_RESULT_CELL6, COUNT(L5_ALT2_RESULT_CELL6) as count')
+        ->groupBy('L5_ALT2_RESULT_CELL6')
+        ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
+        ->where("CAST(waktu AS DATETIME) < CAST('$endTime' AS DATETIME)") // Menggunakan CAST untuk perbandingan waktu
+        ->orderBy('count', 'DESC')
+        ->findAll();
+    }
 }

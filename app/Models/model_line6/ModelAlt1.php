@@ -242,7 +242,7 @@ class ModelAlt1 extends Model
 
         return $this->select('L6_ALT1_RESULT_CELL5, COUNT(L6_ALT1_RESULT_CELL5) as count')
             ->groupBy('L6_ALT1_RESULT_CELL5')
-            ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu
+            ->where("CAST(waktu AS DATETIME) >= '$startTime'") 
             ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu
             ->orderBy('count', 'DESC')
             ->findAll();
@@ -463,5 +463,46 @@ class ModelAlt1 extends Model
             ->where("CAST(waktu AS DATETIME) >= CAST('$startTime' AS DATETIME)") // Gunakan CAST untuk perbandingan waktu
             ->where("CAST(waktu AS DATETIME) <= CAST('$endTime' AS DATETIME)") // Gunakan CAST untuk perbandingan waktu
             ->findAll();
+    }
+
+    public function getDistinctResult_Cell1byWeek($date1,$date2)
+    {
+        // Menentukan waktu mulai dan waktu berakhir
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
+        return $this->select('L6_ALT1_RESULT_CELL1, COUNT(L6_ALT1_RESULT_CELL1) as count')
+        ->groupBy('L6_ALT1_RESULT_CELL1')
+        ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu
+        ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu
+        ->orderBy('count', 'DESC')
+        ->findAll();
+    }
+
+    public function getDistinctResult_Cell3byWeek($date1,$date2)
+    {
+        // Menentukan waktu mulai dan waktu berakhir
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
+
+        return $this->select('L6_ALT1_RESULT_CELL3, COUNT(L6_ALT1_RESULT_CELL3) as count')
+        ->groupBy('L6_ALT1_RESULT_CELL3')
+        ->where("CAST(waktu AS DATETIME) >= '$startTime'")  // Menggunakan CAST untuk memastikan perbandingan waktu
+        ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu
+        ->orderBy('count', 'DESC')
+        ->findAll();
+    }
+
+    public function getDistinctResult_Cell5byWeek($date1,$date2)
+    {
+        // Menentukan waktu mulai dan waktu berakhir
+        $startTime = $date1 . ' 07:30:00';
+        $endTime = date('Y-m-d H:i:s.v', strtotime($date2 . ' +1 day 07:29:00'));
+
+        return $this->select('L6_ALT1_RESULT_CELL5, COUNT(L6_ALT1_RESULT_CELL5) as count')
+        ->groupBy('L6_ALT1_RESULT_CELL5')
+        ->where("CAST(waktu AS DATETIME) >= '$startTime'")
+        ->where("CAST(waktu AS DATETIME) < '$endTime'")     // Menggunakan CAST untuk perbandingan waktu
+        ->orderBy('count', 'DESC')
+        ->findAll();
     }
 }

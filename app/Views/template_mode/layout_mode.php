@@ -95,7 +95,7 @@
     <script src="<?= base_url() ?>assets/template/main/js/pages/data-table.js"></script>
     <script src="<?= base_url() ?>assets/template/main/js/pages/advanced-form-element.js"></script>
     <script src="<?= base_url() ?>assets/template/main/js/pages/advanced-form-element.js"></script>
-    <script src="<?= base_url() ?>assets/template/main/js/jquery-3.7.1.js"></script>
+    <script src="<?= base_url() ?>assets/template/main/js/jquery-3.7.1.min.js"></script>
     <script src="<?= base_url() ?>assets/template/main/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>assets/template/main/js/dataTables.editor.min.js"></script>
     <script src="<?= base_url() ?>assets/js/highcharts/highcharts.js"></script>

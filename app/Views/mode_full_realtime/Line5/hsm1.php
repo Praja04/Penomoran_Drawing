@@ -47,6 +47,148 @@
         margin-right: 10px;
         /* Jarak antar teks */
     }
+
+    table tr {
+        font-size: smaller;
+    }
+
+    /* HP (Smartphone) - Portrait Mode (<= 576px) */
+    @media (max-width: 576px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: fit-content;
+
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+
+    }
+
+    /* Tablet (Landscape & Portrait) - (> 576px and <= 768px) */
+    @media (min-width: 577px) and (max-width: 768px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: fit-content;
+
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+    }
+
+    /* Laptop & Small Desktop (> 768px and <= 992px) */
+    @media (min-width: 769px) and (max-width: 992px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+
+        .head3 {
+            width: max-content;
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 37.08%;
+        }
+    }
 </style>
 <?= $this->endSection() ?>
 <?= $this->section('content'); ?>
@@ -56,7 +198,7 @@
 
             <div class="col-xl-12 col-12" style="background-color:#03346E;">
                 <div class="row d-flex flex-row" style="margin: 10px;">
-                    <div class="col-md-1">
+                    <div class="col-md-1 head1">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Tipe Battery" disabled>
                         </div>
@@ -68,7 +210,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type1" type="text" class="form-control" disabled>
                         </div>
@@ -82,7 +224,7 @@
 
                         <h5 style="color: #fff;" id="battery_now"></h5>
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type2" type="text" class="form-control" disabled>
                         </div>
@@ -95,7 +237,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type3" type="text" class="form-control" disabled>
                         </div>
@@ -111,7 +253,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 head3">
                         <div class="box-body" style="background-color:#F2EFE5; ">
                             <div class="form-group status-container">
                                 <div class="status-text">
@@ -138,7 +280,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-3-5">
+                    <div class="col-md-3-5 head3-5">
                         <div class="box-body" style="background-color:#F2EFE5;">
                             <h5 class="text-center">HSM 1 Line 5 Detail</h5>
                             <div class="row d-flex flex-row">
@@ -190,92 +332,147 @@
         <div class="col-xl-3 col-12" style="background-color:#03346E;">
             <section class="content">
 
-                <div class="row">
-                    <div class="col-lg-12 col-12 ">
-                        <div class="box" style="background-color:#fff;">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black; ">
-                                                <h4>Parameter</h4>
-                                            </label>
-                                            <input type="text" value="Temp Left" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Temp Right" class="form-control mb-3" disabled style="width:110px;">
-                                            <label for="">LID HOLDER </label>
-                                            <input type="text" value="Melting Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Sealing Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <label for="">BOX LIFTER </label>
-                                            <input type="text" value="Melting Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Sealing Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <label for="">MIRROR</label>
-                                            <input type="text" value="Melting Pos" class="form-control mb-3" disabled style="width:110px;">
-                                            <label for="">TIME</label>
-                                            <input type="text" value="Lid Melting (s)" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Box Melting (s)" class="form-control mb-3" disabled style="width:110px;">
-                                            <input type="text" value="Sealing (s)" class="form-control mb-3" disabled style="width:110px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>Standar</h4>
-                                            </label>
-                                            <input type="text" id="set_val_left" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="set_val_right" class="form-control mb-3" disabled style="width:80px;">
-                                            <label for=""></label>
-                                            <input type="text" id="standar_lid_holder_melting_pos" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_lid_holder_sealing_pos" class="form-control mb-3" disabled style="width:80px;">
-                                            <label for=""></label>
-                                            <input type="text" id="standar_box_lifter_melting_pos" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_box_lifter_sealing_pos" class="form-control mb-3" disabled style="width:80px;">
-                                            <label for=""></label>
-                                            <input type="text" id="standar_mirror_melting_pos" class="form-control mb-3" disabled style="width:80px;">
-                                            <label for=""></label>
-                                            <input type="text" id="standar_lid_melting_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_box_melting_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="standar_sealing_time" class="form-control mb-3" disabled style="width:80px;">
+                <div class="row table1">
+                    <div class="col-lg-12 col-12 table2">
+                        <div class="box table3">
+                            <div class="box-body py-0">
+                                <div class="table-responsive">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-600">Parameter</td>
+                                                <td class="fw-600">Standar</td>
+                                                <td class="fw-600">Set Val</td>
+                                                <td class="fw-600">Actual</td>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>SetVal</h4>
-                                            </label>
-                                            <input type="text" id="set_value1" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="set_value2" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Temp Left</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="set_val_left" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="set_value1" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="temp_left1" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Temp Right</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="set_val_right" class="form-control mb-3" disabled style="width:60px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="set_value2" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="temp_right1" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-900"> <span class="badge badge-sm  badge-warning me-10">Lid Holder</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Melting Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_lid_holder_melting_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_lid_holder_melting_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Sealing Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_lid_holder_sealing_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_lid_holder_sealing_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-1000"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-900"> <span class="badge badge-sm  badge-warning me-10">Box Lifter</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Melting Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_box_lifter_melting_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_box_lifter_melting_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Sealing Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_box_lifter_sealing_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_box_lifter_sealing_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-900"> <span class="badge badge-sm  badge-warning me-10">Mirror</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Melting Pos</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_mirror_melting_pos" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_mirror_melting_pos" class="form-control mb-3" disabled style="width:50px;">
 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>Actual</h4>
-                                            </label>
-                                            <input type="text" id="temp_left1" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="temp_right1" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="actual_lid_holder_melting_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="actual_lid_holder_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="actual_box_lifter_melting_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="actual_box_lifter_sealing_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="actual_mirror_melting_pos" class="form-control mb-3" disabled style="width:60px;">
-                                            <label for=""></label>
-                                            <input type="text" id="actual_lid_melting_time" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="actual_box_melting_time" class="form-control mb-3" disabled style="width:60px;">
-                                            <input type="text" id="actual_sealing_time" class="form-control mb-3" disabled style="width:60px;">
-
-                                        </div>
-                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-900"> <span class="badge badge-sm  badge-warning me-10">Time</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Lid Melting</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600"></td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_lid_melting_time" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Box Melting</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600"></td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_box_melting_time" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Sealing</td>
+                                                <td class="fw-600">
+                                                </td>
+                                                <td class="fw-600"></td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_sealing_time" class="form-control mb-3" disabled style="width:50px;">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-
                             </div>
                         </div>
-                        <!-- /.box -->
                     </div>
                 </div>
             </section>
@@ -393,75 +590,58 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="background-color:#03346E;">
-                        <div class="col-xl-12 col-12">
-                            <div class="box">
-                                <div class=" box-header with-border">
-                                    <!-- <h4 class="box-title">Real Time Temperatur HSM 1</h4>
-                                    <div class="row">
-                                        <label for="data-source">Select Data Source:</label>
-                                        <div class="col-xl-3 col-12">
-                                            <select id="data-source" class="form-select">
-                                                <option value="realtime">Real-time</option>
-                                                <option value="date">By Date</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xl-3 col-12">
-                                            <input type="date" id="date-input" class="form-control" style="display: none;" />
-                                        </div>
-                                        <div class="col-xl-3 col-12">
-                                            <button class="btn btn-primary" id="fetch-data" style="display: none;">Fetch Data</button>
-                                        </div>
 
-                                    </div> -->
-                                </div>
-                                <div class="box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container2" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="lidholder" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="boxlifter" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="mirrorpos" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
-
+        </div>
+        <div class="row" style="background-color:#03346E;">
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class="box">
+                    <div class=" box-header with-border">
+                    </div>
+                    <div class="box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container2" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="lidholder" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="boxlifter" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="mirrorpos" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -631,7 +811,8 @@
 
 <?= $this->section('script'); ?>
 <script>
-    let chart, chart3, chart_lidholder, chart_boxlifter, chart_mirror;
+    let chart, chart3, chart_lidholder, chart_boxlifter, chart_mirror, chart_tempLeft, chart_tempRight;
+    let maxCount = 0;
     const updateInterval = 100000;
 
     // Fungsi helper untuk membuat atau memperbarui chart
@@ -1580,6 +1761,33 @@
             }
         });
 
+        //distinct
+        // Fetch for right temperature
+        $.ajax({
+            url: `<?= base_url('hsmline5/distinct/right1/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                createChart('temp_right', `<?= base_url('hsmline5/distinct/right1/date/') ?>${date}`, 'TEMP_RIGHT_RANGE', 'Temperatur Right');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp right hsm 1:', textStatus, errorThrown);
+            }
+        });
+
+        // Fetch for left temperature
+        $.ajax({
+            url: `<?= base_url('hsmline5/distinct/left1/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                createChart('temp_left', `<?= base_url('hsmline5/distinct/left1/date/') ?>${date}`, 'TEMP_LEFT_RANGE', 'Temperatur Left');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp left hsm 1:', textStatus, errorThrown);
+            }
+        });
+        //end distinct
     };
 
     // Fungsi untuk right
@@ -1719,6 +1927,103 @@
         });
     };
 
+    //distinct
+    const fetchData_tempLeft = () => {
+        $.ajax({
+            url: '<?= base_url('hsmline5/distinct/left1') ?>',
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                createChart('temp_left', '<?= base_url('hsmline5/distinct/left1') ?>', 'TEMP_LEFT_RANGE', 'Temperatur Left');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp left hsm1:', textStatus, errorThrown);
+            }
+        });
+    };
+
+    const fetchData_tempRight = () => {
+        $.ajax({
+            url: '<?= base_url('hsmline5/distinct/right1') ?>',
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                createChart('temp_right', '<?= base_url('hsmline6/distinct/right1') ?>', 'TEMP_RIGHT_RANGE', 'Temperatur Right');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp right hsm1:', textStatus, errorThrown);
+            }
+        });
+    };
+
+    function createChart(containerId, apiUrl, xAxisLabel, titlegrafik) {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Process data for categories and counts
+                const processedData = data.data.map(item => ({
+                    category: item[xAxisLabel],
+                    count: parseInt(item.count)
+                }));
+
+                // Get categories and counts
+                const categories = processedData.map(item => item.category);
+                const counts = processedData.map(item => item.count);
+
+                // Update maximum count
+                const currentMaxCount = Math.max(...counts);
+                if (currentMaxCount > maxCount) {
+                    maxCount = currentMaxCount;
+                }
+
+                // Prepare chart data
+                const chartData = {
+                    containerId: containerId,
+                    categories: categories,
+                    counts: counts,
+                    result: titlegrafik
+                };
+
+                drawChart(chartData);
+            })
+            .catch(error => console.error(`Error fetching data for ${containerId}:`, error));
+    }
+
+    function drawChart({
+        containerId,
+        categories,
+        counts,
+        result
+    }) {
+        Highcharts.chart(containerId, {
+            chart: {
+                type: 'column',
+                height: 400
+            },
+            title: {
+                text: `Grafik Bar ${result}`
+            },
+            xAxis: {
+                categories: categories,
+                title: {
+                    text: result
+                }
+            },
+            yAxis: {
+                min: 0,
+                max: maxCount, // Set maximum Y-axis value
+                title: {
+                    text: 'Jumlah'
+                }
+            },
+            series: [{
+                name: 'Jumlah',
+                data: counts
+            }]
+        });
+    }
+    //end distinct
+
     // Fungsi update untuk realtime
     const updateCharts = () => {
         const selectedSource = $('#data-source').val();
@@ -1728,6 +2033,8 @@
             fetchDataLidHolder();
             fetchDataBoxLifter();
             fetchDataMirrorPos();
+            fetchData_tempLeft();
+            fetchData_tempRight();
             setTimeout(updateCharts, updateInterval);
         }
     };
@@ -2121,6 +2428,81 @@
             }
         });
 
+        //distinct
+        $.ajax({
+            url: `<?= base_url('hsmline5/distinct/left1/week') ?>`,
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+
+                const processedData = data.data.map(item => ({
+                    category: item['TEMP_LEFT_RANGE'],
+                    count: parseInt(item.count)
+                }));
+
+                // Get categories and counts
+                const categories = processedData.map(item => item.category);
+                const counts = processedData.map(item => item.count);
+
+                // Update maximum count
+                const currentMaxCount = Math.max(...counts);
+                if (currentMaxCount > maxCount) {
+                    maxCount = currentMaxCount;
+                }
+
+                // Prepare chart data
+                const chartData = {
+                    containerId: 'temp_left',
+                    categories: categories,
+                    counts: counts,
+                    result: 'Temperatur LEFT'
+                };
+
+                drawChart(chartData);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp left hsm 1 distinct:', textStatus, errorThrown);
+            }
+        });
+        $.ajax({
+            url: `<?= base_url('hsmline5/distinct/right1/week') ?>`,
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                const processedData = data.data.map(item => ({
+                    category: item['TEMP_RIGHT_RANGE'],
+                    count: parseInt(item.count)
+                }));
+
+                // Get categories and counts
+                const categories = processedData.map(item => item.category);
+                const counts = processedData.map(item => item.count);
+
+                // Update maximum count
+                const currentMaxCount = Math.max(...counts);
+                if (currentMaxCount > maxCount) {
+                    maxCount = currentMaxCount;
+                }
+
+                // Prepare chart data
+
+                const chartData = {
+                    containerId: 'temp_right',
+                    categories: categories,
+                    counts: counts,
+                    result: 'Temperatur RIGHT'
+                };
+
+                drawChart(chartData);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp right hsm 1 distinct:', textStatus, errorThrown);
+            }
+        });
     };
 
 
@@ -2132,14 +2514,14 @@
             $('#fetch-data').show();
             $('#tanggal').show();
             // Reset charts
-            chart = chart3 = chart5 = null;
+            chart = chart3 = chart5 = chartresult1 = chartresult3 = chartresult5 = chart_tempLeft = chart_tempRight = null;
         } else if (selectedSource === 'week') {
             $('#date-input-week').show();
             $('#tanggal-week').show();
             $('#date-input-week2').show();
             $('#tanggal-week2').show();
             $('#fetch-data-week').show();
-            chart = chart3 = chart5 = null;
+            chart = chart3 = chart5 = chartresult1 = chartresult3 = chartresult5 = chart_tempLeft = chart_tempRight = null;
         } else {
             $('#date-input').hide();
             $('#fetch-data').hide();
@@ -2182,180 +2564,11 @@
     fetchDataLidHolder();
     fetchDataBoxLifter();
     fetchDataMirrorPos();
+    fetchData_tempLeft();
+    fetchData_tempRight();
     updateCharts();
 </script>
 
-
-<!-- distinct temp -->
-<script>
-    let chart_tempLeft, chart_tempRight;
-    let maxCount = 0; // Variable to store maximum count
-
-    const fetchData_tempLeft = () => {
-        $.ajax({
-            url: '<?= base_url('hsmline5/distinct/left1') ?>',
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                createChart('temp_left', '<?= base_url('hsmline5/distinct/left1') ?>', 'TEMP_LEFT_RANGE', 'Temperatur Left');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for temp left hsm1:', textStatus, errorThrown);
-            }
-        });
-    };
-
-    const fetchData_tempRight = () => {
-        $.ajax({
-            url: '<?= base_url('hsmline5/distinct/right1') ?>',
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                createChart('temp_right', '<?= base_url('hsmline5/distinct/right1') ?>', 'TEMP_RIGHT_RANGE', 'Temperatur Right');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for temp right hsm1:', textStatus, errorThrown);
-            }
-        });
-    };
-
-    // Function to fetch data by date
-    const fetchData_tempByDate = (date) => {
-        // Fetch for right temperature
-        $.ajax({
-            url: `<?= base_url('hsmline5/distinct/right1/date/') ?>${date}`,
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                createChart('temp_right', `<?= base_url('hsmline5/distinct/right1/date/') ?>${date}`, 'TEMP_RIGHT_RANGE', 'Temperatur Right');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for temp right hsm 1:', textStatus, errorThrown);
-            }
-        });
-
-        // Fetch for left temperature
-        $.ajax({
-            url: `<?= base_url('hsmline5/distinct/left1/date/') ?>${date}`,
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                createChart('temp_left', `<?= base_url('hsmline5/distinct/left1/date/') ?>${date}`, 'TEMP_LEFT_RANGE', 'Temperatur Left');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for temp left hsm 1:', textStatus, errorThrown);
-            }
-        });
-    };
-
-    function createChart(containerId, apiUrl, xAxisLabel, titlegrafik) {
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                // Process data for categories and counts
-                const processedData = data.data.map(item => ({
-                    category: item[xAxisLabel],
-                    count: parseInt(item.count)
-                }));
-
-                // Get categories and counts
-                const categories = processedData.map(item => item.category);
-                const counts = processedData.map(item => item.count);
-
-                // Update maximum count
-                const currentMaxCount = Math.max(...counts);
-                if (currentMaxCount > maxCount) {
-                    maxCount = currentMaxCount;
-                }
-
-                // Prepare chart data
-                const chartData = {
-                    containerId: containerId,
-                    categories: categories,
-                    counts: counts,
-                    result: titlegrafik
-                };
-
-                drawChart(chartData);
-            })
-            .catch(error => console.error(`Error fetching data for ${containerId}:`, error));
-    }
-
-    function drawChart({
-        containerId,
-        categories,
-        counts,
-        result
-    }) {
-        Highcharts.chart(containerId, {
-            chart: {
-                type: 'column',
-                height: 300
-            },
-            title: {
-                text: `Grafik Bar ${result}`
-            },
-            xAxis: {
-                categories: categories,
-                title: {
-                    text: result
-                }
-            },
-            yAxis: {
-                min: 0,
-                max: maxCount, // Set maximum Y-axis value
-                title: {
-                    text: 'Jumlah'
-                }
-            },
-            series: [{
-                name: 'Jumlah',
-                data: counts
-            }]
-        });
-    }
-
-    // Function for real-time updates
-    const updateCharts2 = () => {
-        const selectedSource = $('#data-source').val();
-        if (selectedSource === 'realtime') {
-            fetchData_tempLeft();
-            fetchData_tempRight();
-        }
-    };
-
-    // Event listener for dropdown
-    $('#data-source').on('change', function() {
-        const selectedSource = $(this).val();
-        if (selectedSource === 'date') {
-            $('#date-input').show();
-            $('#fetch-data').show();
-            $('#tanggal').show();
-            // Reset charts
-            chart_tempLeft = chart_tempRight = null;
-        } else {
-            $('#date-input').hide();
-            $('#fetch-data').hide();
-            $('#tanggal').hide();
-            updateCharts2();
-        }
-    });
-
-    // Event listener for fetch button
-    $('#fetch-data').on('click', function() {
-        const selectedDate = $('#date-input').val();
-        if (selectedDate) {
-            fetchData_tempByDate(selectedDate);
-        } else {
-            alert('Please select a date.');
-        }
-    });
-
-    // Initial data fetch
-    fetchData_tempLeft();
-    fetchData_tempRight();
-    updateCharts2();
-</script>
 
 <script>
     //belum digunakan karena data typenya belum ditarik

@@ -47,6 +47,148 @@
         margin-right: 10px;
         /* Jarak antar teks */
     }
+
+    table tr {
+        font-size: smaller;
+    }
+
+    /* HP (Smartphone) - Portrait Mode (<= 576px) */
+    @media (max-width: 576px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: fit-content;
+
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+
+    }
+
+    /* Tablet (Landscape & Portrait) - (> 576px and <= 768px) */
+    @media (min-width: 577px) and (max-width: 768px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: fit-content;
+
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+    }
+
+    /* Laptop & Small Desktop (> 768px and <= 992px) */
+    @media (min-width: 769px) and (max-width: 992px) {
+        .table1 {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .table2 {
+            display: flex;
+            /* Aktifkan Flexbox di dalam box (opsional) */
+            justify-content: center;
+            /* Tengahkan konten dalam box secara horizontal */
+            align-items: center;
+            /* Tengahkan konten dalam box secara vertikal */
+            text-align: center;
+        }
+
+        .table3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+        }
+
+        .head1-5 {
+            display: none;
+        }
+
+        .head1 {
+            display: none;
+        }
+
+        .head3 {
+            width: max-content;
+        }
+
+        .head3-5 {
+            flex: 0 0 100%;
+            max-width: 37.08%;
+        }
+    }
 </style>
 <?= $this->endSection() ?>
 <?= $this->section('content'); ?>
@@ -56,7 +198,7 @@
 
             <div class="col-xl-12 col-12" style="background-color:#03346E;">
                 <div class="row d-flex flex-row" style="margin: 10px;">
-                    <div class="col-md-1">
+                    <div class="col-md-1 head1">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Tipe Battery" disabled>
                         </div>
@@ -68,7 +210,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type1" type="text" class="form-control" disabled>
                         </div>
@@ -82,7 +224,7 @@
 
                         <h5 style="color:#fff;" id="battery_now"></h5>
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type2" type="text" class="form-control" disabled>
                         </div>
@@ -95,7 +237,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-1-5">
+                    <div class="col-md-1-5 head1-5">
                         <div class="form-group">
                             <input id="type3" type="text" class="form-control" disabled>
                         </div>
@@ -111,7 +253,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 head3">
                         <div class="box-body" style="background-color:#F2EFE5; ">
                             <div class="form-group status-container">
                                 <div class="status-text">
@@ -138,7 +280,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-3-5">
+                    <div class="col-md-3-5 head3-5">
                         <div class="box-body" style="background-color:#F2EFE5;">
                             <h5 class="text-center">APB 2 Line 5 Detail</h5>
                             <div class="row d-flex flex-row">
@@ -189,56 +331,79 @@
     <div class="row align-items-start">
         <div class="col-xl-3 col-12" style="background-color:#03346E;">
             <section class=" content">
-                <div class="row">
-                    <div class="col-lg-12 col-12 ">
-                        <div class="box" style="background-color:#fff;">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black; ">
-                                                <h4>Parameter</h4>
-                                            </label>
-                                            <input type="text" value="Right Temp" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Left Temp" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Cooling Time" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="First Dipping Time" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Weld Head Down Time" class="form-control mb-3" disabled style="width:120px;">
-                                            <input type="text" value="Flame Waiting Time" class="form-control mb-3" disabled style="width:120px;">
+                <div class="row table1">
+                    <div class="col-lg-12 col-12 table2">
+                        <div class="box table3">
+                            <div class="box-body py-0">
+                                <div class="table-responsive">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-600">Parameter</td>
+                                                <td class="fw-600">Standar</td>
+                                                <td class="fw-600">Actual</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Right Temp</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_temp_right" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_temp_right" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Left Temp</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_temp_left" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_temp_left" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Cooling Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_cooling_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_cooling_time" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">First Dipping Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_first_dipping_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_first_dipping_time" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Weld Head Down Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_weld_head_down_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_weld_head_down_time" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-800">Flame Waiting Time</td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="standar_flame_waiting_time" class="form-control mb-3" disabled style="width:65px;">
+                                                </td>
+                                                <td class="fw-600">
+                                                    <input type="text" id="actual_flame_waiting_time" class="form-control mb-3" disabled style="width:55px;">
+                                                </td>
+                                            </tr>
 
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>Standar</h4>
-                                            </label>
-                                            <input type="text" id="standar_temp_right" class="form-control mb-3" disabled style="width:100px;">
-                                            <input type="text" id="standar_temp_left" class="form-control mb-3" disabled style="width:100px;">
-                                            <input type="text" id="standar_cooling_time" class="form-control mb-3" disabled style="width:100px;">
-                                            <input type="text" id="standar_first_dipping_time" class="form-control mb-3" disabled style="width:100px;">
-                                            <input type="text" id="standar_weld_head_down_time" class="form-control mb-3" disabled style="width:100px;">
-                                            <input type="text" id="standar_flame_waiting_time" class="form-control mb-3" disabled style="width:100px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="form-label" style="display: flex;align-items: center;justify-content: center;color:black;">
-                                                <h4>Actual</h4>
-                                            </label>
-                                            <input type="text" id="actual_temp_right" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_temp_left" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_cooling_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_first_dipping_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_weld_head_down_time" class="form-control mb-3" disabled style="width:80px;">
-                                            <input type="text" id="actual_flame_waiting_time" class="form-control mb-3" disabled style="width:80px;">
-                                        </div>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
-
                             </div>
                         </div>
+
                         <!-- /.box -->
                     </div>
                 </div>
@@ -357,32 +522,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="background-color:#03346E;">
-                        <div class="col-xl-12 col-12">
-                            <div class="box">
-                                <div class=" box-header with-border">
 
-                                </div>
-                                <div class="box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-12">
-                            <div class=" box">
-                                <div class=" box-body">
-                                    <!-- <div id="interactive" style="height: 300px;"></div> -->
-                                    <div id="container2" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
+        </div>
+        <div class="row" style="background-color:#03346E;">
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class="box">
+                    <div class=" box-header with-border">
 
+                    </div>
+                    <div class="box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" style="margin: 10px;">
+                <div class=" box">
+                    <div class=" box-body">
+                        <!-- <div id="interactive" style="height: 300px;"></div> -->
+                        <div id="container2" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.box-body-->
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -556,7 +721,8 @@
 <!-- temp left and right -->
 <script>
     // Variabel untuk ketiga chart
-    let chart, chart3;
+    let chart, chart3, chart_tempLeft, chart_tempRight;
+    let maxCount = 0;
     const updateInterval = 100000;
     // Fungsi untuk right
     const fetchDataRight1 = () => {
@@ -825,6 +991,33 @@
             }
         });
 
+        //distinct
+        // Fetch for right temperature
+        $.ajax({
+            url: `<?= base_url('apbline5/distinct/right2/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                createChart('temp_right', `<?= base_url('apbline5/distinct/right2/date/') ?>${date}`, 'TEMP_Actual_RIGHT_RANGE', 'Temperatur Right');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp right apb 2:', textStatus, errorThrown);
+            }
+        });
+
+        // Fetch for left temperature
+        $.ajax({
+            url: `<?= base_url('apbline5/distinct/left2/date/') ?>${date}`,
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                createChart('temp_left', `<?= base_url('apbline5/distinct/left2/date/') ?>${date}`, 'TEMP_Actual_LEFT_RANGE', 'Temperatur Left');
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp left apb 2:', textStatus, errorThrown);
+            }
+        });
+        //end distinct
     };
 
     // Fungsi helper untuk membuat/update chart
@@ -1157,86 +1350,91 @@
             }
         });
 
+        //distinct
+        $.ajax({
+            url: `<?= base_url('apbline5/distinct/right2/week') ?>`,
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                // Memproses data untuk kategori dan hitungan
+                const processedData = data.data.map(item => ({
+                    category: item['TEMP_Actual_RIGHT_RANGE'],
+                    count: parseInt(item.count)
+                }));
 
+                // Mengurutkan berdasarkan kategori
+                processedData.sort((a, b) => a.category - b.category);
 
+                // Mendapatkan kategori dan jumlah terurut
+                const categories = processedData.map(item => item.category);
+                const counts = processedData.map(item => item.count);
+
+                // Update nilai maksimum
+                const currentMaxCount = Math.max(...counts);
+                if (currentMaxCount > maxCount) {
+                    maxCount = currentMaxCount;
+                }
+
+                // Menyimpan data grafik untuk kemudian digunakan
+                const chartData = {
+                    containerId: 'temp_right',
+                    categories: categories,
+                    counts: counts,
+                    result: 'Temperatur Right'
+                };
+
+                drawChart(chartData);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp right apb 2 distinct:', textStatus, errorThrown);
+            }
+        });
+        $.ajax({
+            url: `<?= base_url('apbline5/distinct/left2/week') ?>`,
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                // Memproses data untuk kategori dan hitungan
+                const processedData = data.data.map(item => ({
+                    category: item['TEMP_Actual_LEFT_RANGE'],
+                    count: parseInt(item.count)
+                }));
+
+                // Mengurutkan berdasarkan kategori
+                processedData.sort((a, b) => a.category - b.category);
+
+                // Mendapatkan kategori dan jumlah terurut
+                const categories = processedData.map(item => item.category);
+                const counts = processedData.map(item => item.count);
+
+                // Update nilai maksimum
+                const currentMaxCount = Math.max(...counts);
+                if (currentMaxCount > maxCount) {
+                    maxCount = currentMaxCount;
+                }
+
+                // Menyimpan data grafik untuk kemudian digunakan
+                const chartData = {
+                    containerId: 'temp_left',
+                    categories: categories,
+                    counts: counts,
+                    result: 'Temperatur Left'
+                };
+
+                drawChart(chartData);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error('Error fetching data for temp right apb 2 distinct:', textStatus, errorThrown);
+            }
+        });
+        //end distinct
     };
 
-
-
-    const updateCharts = () => {
-        const selectedSource = $('#data-source').val();
-        if (selectedSource === 'realtime') {
-            fetchDataRight1();
-            fetchDataLeft1();
-            setTimeout(updateCharts, updateInterval);
-        }
-    };
-
-    $('#data-source').on('change', function() {
-        const selectedSource = $(this).val();
-        if (selectedSource === 'date') {
-            $('#date-input').show();
-            $('#fetch-data').show();
-            $('#tanggal').show();
-            $('#date-input-week').hide();
-            $('#tanggal-week').hide();
-            $('#date-input-week2').hide();
-            $('#tanggal-week2').hide();
-            $('#fetch-data-week').hide();
-            // Reset charts
-            chart = chart3 = chart5 = chartresult1 = chartresult3 = chartresult5 = null;
-        } else if (selectedSource === 'week') {
-            $('#date-input').hide();
-            $('#fetch-data').hide();
-            $('#tanggal').hide();
-            $('#date-input-week').show();
-            $('#tanggal-week').show();
-            $('#date-input-week2').show();
-            $('#tanggal-week2').show();
-            $('#fetch-data-week').show();
-            chart = chart3 = chart5 = chartresult1 = chartresult3 = chartresult5 = null;
-        } else {
-            $('#date-input').hide();
-            $('#fetch-data').hide();
-            $('#tanggal').hide();
-            $('#date-input-week').hide();
-            $('#tanggal-week').hide();
-            $('#date-input-week2').hide();
-            $('#tanggal-week2').hide();
-            $('#fetch-data-week').hide();
-            updateCharts();
-        }
-    });
-
-
-    // Event listener untuk tombol fetch
-    $('#fetch-data').on('click', function() {
-        const selectedDate = $('#date-input').val();
-        if (selectedDate) {
-            fetchDataByDate(selectedDate);
-        } else {
-            alert('Please select a date.');
-        }
-    });
-    $('#fetch-data-week').on('click', function() {
-        const selectedDate = $('#date-input-week').val();
-        const selectedDate2 = $('#date-input-week2').val();
-        if (selectedDate && selectedDate2) {
-            fetchDataByWeek(selectedDate, selectedDate2);
-        } else {
-            alert('Please select a date.');
-        }
-
-    });
-    // Inisialisasi awal
-    fetchDataRight1();
-    fetchDataLeft1();
-    updateCharts();
-</script>
-<!-- distinct temp -->
-<script>
-    let chart_tempLeft, chart_tempRight;
-    let maxCount = 0; // Variabel untuk menyimpan nilai maksimum
+    //distinct
     const fetchData_tempLeft = () => {
         $.ajax({
             url: '<?= base_url('apbline5/distinct/left2') ?>',
@@ -1261,35 +1459,6 @@
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.error('Error fetching data for temp right apb2:', textStatus, errorThrown);
-            }
-        });
-    };
-
-    // Function to fetch data by date
-    const fetchData_tempByDate = (date) => {
-        // Fetch for right temperature
-        $.ajax({
-            url: `<?= base_url('apbline5/distinct/right2/date/') ?>${date}`,
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                createChart('temp_right', `<?= base_url('apbline5/distinct/right2/date/') ?>${date}`, 'TEMP_Actual_RIGHT_RANGE', 'Temperatur Right');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for temp right apb 2:', textStatus, errorThrown);
-            }
-        });
-
-        // Fetch for left temperature
-        $.ajax({
-            url: `<?= base_url('apbline5/distinct/left2/date/') ?>${date}`,
-            method: 'GET',
-            dataType: 'json',
-            success: (data) => {
-                createChart('temp_left', `<?= base_url('apbline5/distinct/left2/date/') ?>${date}`, 'TEMP_Actual_LEFT_RANGE', 'Temperatur Left');
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Error fetching data for temp left apb 2:', textStatus, errorThrown);
             }
         });
     };
@@ -1364,46 +1533,81 @@
         });
     }
 
-    const updateCharts2 = () => {
+    //end distinct
+
+    const updateCharts = () => {
         const selectedSource = $('#data-source').val();
         if (selectedSource === 'realtime') {
+            fetchDataRight1();
+            fetchDataLeft1();
             fetchData_tempLeft();
             fetchData_tempRight();
+            setTimeout(updateCharts, updateInterval);
         }
     };
 
-    // Event listener for dropdown
     $('#data-source').on('change', function() {
         const selectedSource = $(this).val();
         if (selectedSource === 'date') {
             $('#date-input').show();
             $('#fetch-data').show();
             $('#tanggal').show();
+            $('#date-input-week').hide();
+            $('#tanggal-week').hide();
+            $('#date-input-week2').hide();
+            $('#tanggal-week2').hide();
+            $('#fetch-data-week').hide();
             // Reset charts
-            chart_tempLeft = chart_tempRight = null;
+            chart = chart3 = chart5 = chartresult1 = chartresult3 = chartresult5 = chart_tempLeft = chart_tempRight = null;
+        } else if (selectedSource === 'week') {
+            $('#date-input').hide();
+            $('#fetch-data').hide();
+            $('#tanggal').hide();
+            $('#date-input-week').show();
+            $('#tanggal-week').show();
+            $('#date-input-week2').show();
+            $('#tanggal-week2').show();
+            $('#fetch-data-week').show();
+            chart = chart3 = chart5 = chartresult1 = chartresult3 = chartresult5 =chart_tempLeft = chart_tempRight = null;
         } else {
             $('#date-input').hide();
             $('#fetch-data').hide();
             $('#tanggal').hide();
-            updateCharts2();
+            $('#date-input-week').hide();
+            $('#tanggal-week').hide();
+            $('#date-input-week2').hide();
+            $('#tanggal-week2').hide();
+            $('#fetch-data-week').hide();
+            updateCharts();
         }
     });
-
-    // Event listener for fetch button
+    // Event listener untuk tombol fetch
     $('#fetch-data').on('click', function() {
         const selectedDate = $('#date-input').val();
         if (selectedDate) {
-            fetchData_tempByDate(selectedDate);
+            fetchDataByDate(selectedDate);
         } else {
             alert('Please select a date.');
         }
     });
+    $('#fetch-data-week').on('click', function() {
+        const selectedDate = $('#date-input-week').val();
+        const selectedDate2 = $('#date-input-week2').val();
+        if (selectedDate && selectedDate2) {
+            fetchDataByWeek(selectedDate, selectedDate2);
+        } else {
+            alert('Please select a date.');
+        }
 
-    // Initial data fetch
+    });
+    // Inisialisasi awal
+    fetchDataRight1();
+    fetchDataLeft1();
     fetchData_tempLeft();
     fetchData_tempRight();
-    updateCharts2();
+    updateCharts();
 </script>
+
 <!-- parameter data -->
 <script>
     let intervalId; // Untuk menyimpan ID interval
@@ -1459,7 +1663,6 @@
     // Panggil fetchData untuk pertama kali saat halaman dimuat
     fetchData();
 </script>
-
 
 <!-- getdataToday -->
 <script>
